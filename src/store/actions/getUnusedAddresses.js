@@ -22,6 +22,8 @@ export const getUnusedAddresses = async (
           })
           .wallet.getUnusedAddress()
 
+        console.log('TACA getUnusedAddresses ==> asset = ', asset)
+        console.log('TACA getUnusedAddresses ==> result = ', result)
         const address = isEthereumChain(asset) ? result.address.replace('0x', '') : result.address // TODO: Should not require removing 0x
         let updatedAddresses = []
         if (account.chain === ChainId.Bitcoin) {

@@ -32,6 +32,7 @@ store.subscribe(async ({ type, payload }, state) => {
       break
 
     case 'UNLOCK_WALLET':
+      console.log('TACA ===> background.js, UNLOCK_WALLET')
       dispatch('trackAnalytics', {
         event: 'Unlock wallet',
         properties: {

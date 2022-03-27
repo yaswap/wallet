@@ -26,7 +26,7 @@
     "@liquality/bitcoin-esplora-batch-api-provider": "1.13.9",
     "@liquality/bitcoin-esplora-swap-find-provider": "1.13.9",
     "@liquality/bitcoin-fee-api-provider": "1.13.9",
-    "@liquality/bitcoin-js-wallet-provider": "1.13.9",
+    "@liquality/bitcoin-js-wallet-provider": "file:/home/chaunguyen/project/yacoin/chainabstractionlayer/packages/bitcoin-js-wallet-provider",
     "@liquality/bitcoin-ledger-provider": "1.13.9",
     "@liquality/bitcoin-networks": "1.13.9",
     "@liquality/bitcoin-rpc-fee-provider": "1.13.9",

@@ -53,6 +53,15 @@ function createBtcClient(network, mnemonic, accountType, derivationPath) {
   const esploraApi = buildConfig.exploraApis[network]
   const batchEsploraApi = buildConfig.batchEsploraApis[network]
 
+  console.log('TACA createBtcClient, isTestnet = ', isTestnet)
+  console.log('TACA createBtcClient, bitcoinNetwork = ', bitcoinNetwork)
+  console.log('TACA createBtcClient, esploraApi = ', esploraApi)
+  console.log('TACA createBtcClient, batchEsploraApi = ', batchEsploraApi)
+  console.log('TACA createBtcClient, network = ', network)
+  console.log('TACA createBtcClient, mnemonic = ', mnemonic)
+  console.log('TACA createBtcClient, accountType = ', accountType)
+  console.log('TACA createBtcClient, derivationPath = ', derivationPath)
+
   const btcClient = new Client()
   btcClient.addProvider(
     new BitcoinEsploraBatchApiProvider({

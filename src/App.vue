@@ -52,6 +52,7 @@ export default {
     }
   },
   async created() {
+    console.log('TACA ==> created App.vue')
     await this.initializeAnalytics()
   }
 }
