@@ -3,7 +3,7 @@ import { createHistoryNotification } from '../../broker/notification'
 import BN from 'bignumber.js'
 
 export const sendTransaction = async (
-  { dispatch, commit, getters },
+  { dispatch, commit, getters }, // context object
   { network, walletId, accountId, asset, to, amount, data, fee, gas, feeLabel, fiatRate }
 ) => {
   const client = getters.client({

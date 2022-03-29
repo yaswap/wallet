@@ -22,7 +22,8 @@ export default {
       'ARBETH',
       'FISH',
       'LUNA',
-      'UST'
+      'UST',
+      'YAC'
     ],
     testnet: [
       'BTC',
@@ -37,15 +38,20 @@ export default {
       'ARBETH',
       'SOL',
       'LUNA',
-      'UST'
+      'UST',
+      'YAC'
     ]
   },
   infuraApiKey: 'da99ebc8c0964bb8bb757b6f8cc40f1f',
-  exploraApis: {
+  yacoinExploraApis: {
+    testnet: 'http://localhost:3001/api',
+    mainnet: 'http://localhost:3001/api'
+  },
+  bitcoinExploraApis: {
     testnet: 'https://electrs-testnet-api.liq-chainhub.net/',
     mainnet: 'https://electrs-mainnet-api.liq-chainhub.net/'
   },
-  batchEsploraApis: {
+  bitcoinBatchEsploraApis: {
     testnet: 'https://electrs-batch-testnet-api.liq-chainhub.net/',
     mainnet: 'https://electrs-batch-mainnet-api.liq-chainhub.net/'
   },
@@ -163,6 +169,6 @@ export default {
   },
   discordUrl: 'https://discord.gg/Xsqw7PW8wk',
   networks: ['mainnet', 'testnet'],
-  chains: ['bitcoin', 'ethereum', 'rsk', 'bsc', 'near', 'polygon', 'arbitrum', 'terra', 'fuse'],
+  chains: ['bitcoin', 'ethereum', 'rsk', 'bsc', 'near', 'polygon', 'arbitrum', 'terra', 'fuse', 'yacoin'],
   supportedBridgeAssets: ['MATIC', 'RBTC']
 }

@@ -50,12 +50,12 @@ import { ChainNetworks } from '@/utils/networks'
 function createBtcClient(network, mnemonic, accountType, derivationPath) {
   const isTestnet = network === 'testnet'
   const bitcoinNetwork = ChainNetworks.bitcoin[network]
-  const esploraApi = buildConfig.exploraApis[network]
-  const batchEsploraApi = buildConfig.batchEsploraApis[network]
+  const bitcoinExploraApis = buildConfig.exploraApis[network]
+  const batchEsploraApi = buildConfig.bitcoinBatchEsploraApis[network]
 
   console.log('TACA createBtcClient, isTestnet = ', isTestnet)
   console.log('TACA createBtcClient, bitcoinNetwork = ', bitcoinNetwork)
-  console.log('TACA createBtcClient, esploraApi = ', esploraApi)
+  console.log('TACA createBtcClient, bitcoinExploraApis = ', bitcoinExploraApis)
   console.log('TACA createBtcClient, batchEsploraApi = ', batchEsploraApi)
   console.log('TACA createBtcClient, network = ', network)
   console.log('TACA createBtcClient, mnemonic = ', mnemonic)
@@ -66,7 +66,7 @@ function createBtcClient(network, mnemonic, accountType, derivationPath) {
   btcClient.addProvider(
     new BitcoinEsploraBatchApiProvider({
       batchUrl: batchEsploraApi,
-      url: esploraApi,
+      url: bitcoinExploraApis,
       network: bitcoinNetwork,
       numberOfBlockConfirmation: 2
     })
@@ -96,7 +96,7 @@ function createBtcClient(network, mnemonic, accountType, derivationPath) {
   }
 
   btcClient.addProvider(new BitcoinSwapProvider({ network: bitcoinNetwork }))
-  btcClient.addProvider(new BitcoinEsploraSwapFindProvider(esploraApi))
+  btcClient.addProvider(new BitcoinEsploraSwapFindProvider(bitcoinExploraApis))
   if (isTestnet) btcClient.addProvider(new BitcoinRpcFeeProvider())
   else
     btcClient.addProvider(
