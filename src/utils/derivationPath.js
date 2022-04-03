@@ -21,6 +21,10 @@ const derivationPaths = {
     const bitcoinNetwork = ChainNetworks[ChainId.Bitcoin][network]
     return getBitcoinDerivationPath(accountType, bitcoinNetwork.coinType, index)
   },
+  [ChainId.Yacoin]: (network, index) => {
+    const yacoinNetwork = ChainNetworks[ChainId.Yacoin][network]
+    return `84'/${yacoinNetwork.coinType}'/${index}'`
+  },
   [ChainId.Ethereum]: (network, index) => {
     const ethNetwork = ChainNetworks[ChainId.Ethereum][network]
     return getEthereumBasedDerivationPath(ethNetwork.coinType, index)
