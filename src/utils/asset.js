@@ -105,6 +105,16 @@ const EXPLORERS = {
       tx: 'https://explorer.fuse.io/tx/0x{hash}',
       address: 'https://explorer.fuse.io/address/{hash}'
     }
+  },
+  yacoin: {
+    testnet: {
+      tx: 'http://localhost:3001/api/tx/{hash}',
+      address: 'http://localhost:3001/api/address/{hash}'
+    },
+    mainnet: {
+      tx: 'http://localhost:3001/api/tx/{hash}',
+      address: 'http://localhost:3001/api/address/{hash}'
+    }
   }
 }
 
