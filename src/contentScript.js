@@ -8,7 +8,8 @@ import {
   nearProvider,
   paymentUriHandler,
   solanaProvider,
-  terraProvider
+  terraProvider,
+  yacoinProvider
 } from './inject'
 import buildConfig from './build.config'
 import { ChainNetworks } from '@/utils/networks'
@@ -48,6 +49,7 @@ function injectEthereum(state, chain) {
 function injectProviders(state) {
   inject(providerManager())
   inject(bitcoinProvider())
+  inject(yacoinProvider())
   inject(nearProvider())
   inject(solanaProvider())
 

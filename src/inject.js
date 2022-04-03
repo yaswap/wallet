@@ -287,6 +287,41 @@ window.bitcoin = {
 }
 `
 
+const yacoinProvider = () => `
+const REQUEST_MAP = {
+  wallet_getConnectedNetwork: 'wallet.getConnectedNetwork',
+  wallet_getAddresses: 'wallet.getAddresses',
+  wallet_signMessage: 'wallet.signMessage',
+  wallet_sendTransaction: 'chain.sendTransaction',
+}
+
+async function handleRequest (req) {
+  const yac = window.providerManager.getProviderFor('YAC')
+  if (req.method === 'wallet_sendTransaction') {
+    const to = req.params[0].to
+    const value = req.params[0].value.toString(16)
+    return yac.getMethod('chain.sendTransaction')({ to, value })
+  }
+  const method = REQUEST_MAP[req.method] || req.method
+  return yac.getMethod(method)(...req.params)
+}
+
+window.yacoin = {
+  enable: async () => {
+    const { accepted } = await window.providerManager.enable('yacoin')
+    if (!accepted) throw new Error('User rejected')
+    const yac = window.providerManager.getProviderFor('YAC')
+    return yac.getMethod('wallet.getAddresses')()
+  },
+  request: async (req) => {
+    const params = req.params || []
+    return handleRequest({
+      method: req.method, params
+    })
+  }
+}
+`
+
 const nearProvider = () => `
 const REQUEST_MAP = {
   wallet_getConnectedNetwork: 'wallet.getConnectedNetwork',
@@ -399,5 +434,6 @@ export {
   nearProvider,
   paymentUriHandler,
   solanaProvider,
-  terraProvider
+  terraProvider,
+  yacoinProvider
 }
