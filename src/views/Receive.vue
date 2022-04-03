@@ -111,7 +111,8 @@ export default {
         bsc: 'ethereum',
         polyon: 'ethereum',
         terra: 'terra',
-        fuse: 'ethereum'
+        fuse: 'ethereum',
+        yacoin: 'yacoin'
       }[cryptoassets[this.asset].chain]
     },
     faucet() {
