@@ -9,6 +9,7 @@ import { BitcoinRpcFeeProvider } from '@liquality/bitcoin-rpc-fee-provider'
 
 import { YacoinEsploraApiProvider } from '@liquality/yacoin-esplora-api-provider'
 import { YacoinJsWalletProvider } from '@liquality/yacoin-js-wallet-provider'
+import { YacoinRpcFeeProvider } from '@liquality/yacoin-rpc-fee-provider'
 
 import { EthereumRpcProvider } from '@liquality/ethereum-rpc-provider'
 import { EthereumJsWalletProvider } from '@liquality/ethereum-js-wallet-provider'
@@ -139,6 +140,7 @@ function createYacClient(network, mnemonic, accountType, derivationPath) {
     })
   )
 
+  yacClient.addProvider(new YacoinRpcFeeProvider())
   // yacClient.addProvider(new YacoinSwapProvider({ network: yacoinNetwork }))
   // yacClient.addProvider(new YacoinEsploraSwapFindProvider(yacoinExploraApis))
   // if (isTestnet) yacClient.addProvider(new YacoinRpcFeeProvider())

@@ -37,6 +37,7 @@
     "@liquality/yacoin-networks": "file:/home/chaunguyen/project/yacoin/chainabstractionlayer/packages/yacoin-networks",
     "@liquality/yacoin-utils": "file:/home/chaunguyen/project/yacoin/chainabstractionlayer/packages/yacoin-utils",
     "@liquality/yacoin-wallet-provider": "file:/home/chaunguyen/project/yacoin/chainabstractionlayer/packages/yacoin-wallet-provider",
+    "@liquality/yacoin-rpc-fee-provider": "file:/home/chaunguyen/project/yacoin/chainabstractionlayer/packages/yacoin-rpc-fee-provider",
     "@liquality/client": "1.13.9",
     "@liquality/crypto": "1.13.9",
     "@liquality/cryptoassets": "file:/home/chaunguyen/project/yacoin/cryptoassets",
