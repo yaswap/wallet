@@ -7,6 +7,9 @@ import { BitcoinEsploraSwapFindProvider } from '@liquality/bitcoin-esplora-swap-
 import { BitcoinFeeApiProvider } from '@liquality/bitcoin-fee-api-provider'
 import { BitcoinRpcFeeProvider } from '@liquality/bitcoin-rpc-fee-provider'
 
+import { YacoinEsploraApiProvider } from '@liquality/yacoin-esplora-api-provider'
+import { YacoinJsWalletProvider } from '@liquality/yacoin-js-wallet-provider'
+
 import { EthereumRpcProvider } from '@liquality/ethereum-rpc-provider'
 import { EthereumJsWalletProvider } from '@liquality/ethereum-js-wallet-provider'
 import { EthereumSwapProvider } from '@liquality/ethereum-swap-provider'
@@ -50,7 +53,7 @@ import { ChainNetworks } from '@/utils/networks'
 function createBtcClient(network, mnemonic, accountType, derivationPath) {
   const isTestnet = network === 'testnet'
   const bitcoinNetwork = ChainNetworks.bitcoin[network]
-  const bitcoinExploraApis = buildConfig.exploraApis[network]
+  const bitcoinExploraApis = buildConfig.bitcoinExploraApis[network]
   const batchEsploraApi = buildConfig.bitcoinBatchEsploraApis[network]
 
   console.log('TACA createBtcClient, isTestnet = ', isTestnet)
@@ -104,6 +107,47 @@ function createBtcClient(network, mnemonic, accountType, derivationPath) {
     )
 
   return btcClient
+}
+
+function createYacClient(network, mnemonic, accountType, derivationPath) {
+  const isTestnet = network === 'testnet'
+  const yacoinNetwork = ChainNetworks.yacoin[network]
+  const yacoinExploraApis = buildConfig.yacoinExploraApis[network]
+
+  console.log('TACA createYacClient, isTestnet = ', isTestnet)
+  console.log('TACA createYacClient, yacoinNetwork = ', yacoinNetwork)
+  console.log('TACA createYacClient, yacoinExploraApis = ', yacoinExploraApis)
+  console.log('TACA createYacClient, network = ', network)
+  console.log('TACA createYacClient, mnemonic = ', mnemonic)
+  console.log('TACA createYacClient, accountType = ', accountType)
+  console.log('TACA createYacClient, derivationPath = ', derivationPath)
+
+  const yacClient = new Client()
+  yacClient.addProvider(
+    new YacoinEsploraApiProvider({
+      url: yacoinExploraApis,
+      network: yacoinNetwork,
+      numberOfBlockConfirmation: 1
+    })
+  )
+
+  yacClient.addProvider(
+    new YacoinJsWalletProvider({
+      network: yacoinNetwork,
+      mnemonic,
+      baseDerivationPath: derivationPath
+    })
+  )
+
+  // yacClient.addProvider(new YacoinSwapProvider({ network: yacoinNetwork }))
+  // yacClient.addProvider(new YacoinEsploraSwapFindProvider(yacoinExploraApis))
+  // if (isTestnet) yacClient.addProvider(new YacoinRpcFeeProvider())
+  // else
+  //   yacClient.addProvider(
+  //     new YacoinFeeApiProvider('https://liquality.io/swap/mempool/v1/fees/recommended')
+  //   )
+
+  return yacClient
 }
 
 function createEthereumClient(
@@ -417,6 +461,8 @@ export const createClient = (asset, network, mnemonic, accountType, derivationPa
 
   if (assetData.chain === 'bitcoin')
     return createBtcClient(network, mnemonic, accountType, derivationPath)
+  if (assetData.chain === 'yacoin')
+    return createYacClient(network, mnemonic, accountType, derivationPath)
   if (assetData.chain === 'rsk')
     return createRskClient(asset, network, mnemonic, accountType, derivationPath)
   if (assetData.chain === 'bsc') return createBSCClient(asset, network, mnemonic, derivationPath)
