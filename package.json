@@ -39,7 +39,7 @@
     "@liquality/yacoin-wallet-provider": "file:/home/chaunguyen/project/yacoin/chainabstractionlayer/packages/yacoin-wallet-provider",
     "@liquality/client": "1.13.9",
     "@liquality/crypto": "1.13.9",
-    "@liquality/cryptoassets": "1.10.0",
+    "@liquality/cryptoassets": "file:/home/chaunguyen/project/yacoin/cryptoassets",
     "@liquality/ethereum-eip1559-fee-provider": "1.13.9",
     "@liquality/ethereum-erc20-provider": "1.13.9",
     "@liquality/ethereum-erc20-scraper-swap-find-provider": "1.13.9",

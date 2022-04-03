@@ -3,6 +3,7 @@ import { EthereumNetworks } from '@liquality/ethereum-networks'
 import { NearNetworks } from '@liquality/near-networks'
 import { SolanaNetworks } from '@liquality/solana-networks'
 import { TerraNetworks } from '@liquality/terra-networks'
+import { YacoinNetworks } from '@liquality/yacoin-networks'
 
 export const Networks = ['mainnet', 'testnet']
 
@@ -52,5 +53,9 @@ export const ChainNetworks = {
       isTestnet: true
     }, // TODO: change to EthereumNetworks.fuse_testnet after chainabstractionlayer/pull/491 is merged
     mainnet: EthereumNetworks.fuse_mainnet
+  },
+  yacoin: {
+    testnet: YacoinNetworks.yacoin_testnet,
+    mainnet: YacoinNetworks.yacoin
   }
 }
