@@ -15,7 +15,8 @@ const SEND_FEE_UNITS = {
   ARBETH: 620000,
   LUNA: 100000,
   UST: 100000,
-  FUSE: 21000
+  FUSE: 21000,
+  YAC: 10
 }
 
 const FEE_OPTIONS = {
