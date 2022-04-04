@@ -9,6 +9,7 @@ async function waitForConfirmations({ getters, dispatch }, { transaction, networ
   })
   try {
     const tx = await client.chain.getTransactionByHash(transaction.txHash)
+    console.log("TACA ===> waitForConfirmations, tx = ", tx)
     if (tx && tx.confirmations > 0) {
       dispatch('updateBalances', {
         network,

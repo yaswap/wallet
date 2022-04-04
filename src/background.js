@@ -167,6 +167,7 @@ store.subscribe(async ({ type, payload }, state) => {
       })
       break
     case 'UPDATE_HISTORY':
+      console.log("TACA ===> background.js, UPDATE_HISTORY")
       // eslint-disable-next-line
       const item = getters.historyItemById(payload.network, payload.walletId, payload.id);
       if (item.type === 'SWAP' && payload.updates) {
