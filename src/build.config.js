@@ -170,16 +170,10 @@ export default {
   discordUrl: 'https://discord.gg/Xsqw7PW8wk',
   networks: ['mainnet', 'testnet'],
   chains: [
+    'yacoin',
     'bitcoin',
     'ethereum',
-    'rsk',
-    'bsc',
-    'near',
-    'polygon',
-    'arbitrum',
-    'terra',
-    'fuse',
-    'yacoin'
+    'bsc'
   ],
   supportedBridgeAssets: ['MATIC', 'RBTC']
 }
