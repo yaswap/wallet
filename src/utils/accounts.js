@@ -79,7 +79,8 @@ export const getAccountIcon = (chain) => {
     polygon: getAssetIcon('polygon_account'),
     arbitrum: getAssetIcon('ARBITRUM'),
     terra: getAssetIcon('TERRA'),
-    fuse: getAssetIcon('FUSE')
+    fuse: getAssetIcon('FUSE'),
+    yacoin: getAssetIcon('YAC')
   }[chain]
 }
 
@@ -94,7 +95,8 @@ export const getChainIcon = (chainId) => {
     polygon: getAssetIcon(`${chainId}_chain`),
     arbitrum: getAssetIcon('ARBITRUM'),
     terra: getAssetIcon(`${chainId}_chain`),
-    fuse: getAssetIcon('FUSE')
+    fuse: getAssetIcon('FUSE'),
+    yacoin: getAssetIcon('YAC')
   }[chainId]
 }
 
