@@ -108,12 +108,12 @@ const EXPLORERS = {
   },
   yacoin: {
     testnet: {
-      tx: 'http://localhost:3001/tx/{hash}',
-      address: 'http://localhost:3001/address/{hash}'
+      tx: 'http://73.43.56.247:3001/tx/{hash}',
+      address: 'http://73.43.56.247:3001/address/{hash}'
     },
     mainnet: {
-      tx: 'http://localhost:3001/tx/{hash}',
-      address: 'http://localhost:3001/address/{hash}'
+      tx: 'http://73.43.56.247:3001/tx/{hash}',
+      address: 'http://73.43.56.247:3001/address/{hash}'
     }
   }
 }

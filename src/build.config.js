@@ -44,8 +44,8 @@ export default {
   },
   infuraApiKey: 'da99ebc8c0964bb8bb757b6f8cc40f1f',
   yacoinExploraApis: {
-    testnet: 'http://localhost:3001/api',
-    mainnet: 'http://localhost:3001/api'
+    testnet: 'http://73.43.56.247:3001/api',
+    mainnet: 'http://73.43.56.247:3001/api'
   },
   bitcoinExploraApis: {
     testnet: 'https://electrs-testnet-api.liq-chainhub.net/',
@@ -169,11 +169,6 @@ export default {
   },
   discordUrl: 'https://discord.gg/Xsqw7PW8wk',
   networks: ['mainnet', 'testnet'],
-  chains: [
-    'yacoin',
-    'bitcoin',
-    'ethereum',
-    'bsc'
-  ],
+  chains: ['yacoin', 'bitcoin', 'ethereum', 'bsc'],
   supportedBridgeAssets: ['MATIC', 'RBTC']
 }
