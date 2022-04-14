@@ -176,7 +176,6 @@ export default {
       )
     },
     status() {
-      console.log("TACA ===> TransactionDetails.vue, this.item = ", this.item)
       return getStatusLabel(this.item)
     },
     feeUnit() {
@@ -265,7 +264,6 @@ export default {
       })
       const transaction =
         (await client.chain.getTransactionByHash(this.item.txHash)) || this.item.tx
-      console.log("TACA ===> TransactionDetails.vue, updateTransaction, transaction = ", transaction)
       this.tx = transaction
     },
     goBack() {

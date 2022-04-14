@@ -93,7 +93,6 @@ export const shouldApplyRskLegacyDerivation = async (accounts, mnemonic, indexPa
     const client = new Client()
       .addProvider(new EthereumRpcProvider({ uri: 'https://public-node.rsk.co' }))
       .addProvider(new EthereumErc20Provider(asset.contractAddress))
-
     return client.chain.getBalance(addresses)
   })
 

@@ -108,7 +108,6 @@ export default {
       }
     },
     getDetailsUrl(item) {
-      console.log("TACA ===> TransactionList.vue, item = ", item)
       return {
         SEND: `/details/transaction/${item.id}`,
         SWAP: `/details/swap/${item.id}`

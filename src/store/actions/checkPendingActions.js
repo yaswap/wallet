@@ -7,7 +7,6 @@ export const checkPendingActions = async ({ state, dispatch }, { walletId }) => 
     const history = state.history[network]?.[walletId]
     if (!history) return
     history.forEach((item) => {
-      console.log("TACA ===> checkPendingActions, item = ", item)
       // if (item.error) return
 
       if (!COMPLETED_STATES.includes(item.status)) {

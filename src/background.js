@@ -32,7 +32,6 @@ store.subscribe(async ({ type, payload }, state) => {
       break
 
     case 'UNLOCK_WALLET':
-      console.log('TACA ===> background.js, UNLOCK_WALLET')
       dispatch('trackAnalytics', {
         event: 'Unlock wallet',
         properties: {
@@ -167,7 +166,6 @@ store.subscribe(async ({ type, payload }, state) => {
       })
       break
     case 'UPDATE_HISTORY':
-      console.log("TACA ===> background.js, UPDATE_HISTORY")
       // eslint-disable-next-line
       const item = getters.historyItemById(payload.network, payload.walletId, payload.id);
       if (item.type === 'SWAP' && payload.updates) {

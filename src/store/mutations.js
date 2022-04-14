@@ -37,10 +37,6 @@ export default {
     state.encryptedWallets = encryptedWallets
     state.keySalt = keySalt
     state.wallets = [wallet]
-    console.log('TACA CREATE_WALLET ===> state.key = ', state.key)
-    console.log('TACA CREATE_WALLET ===> state.keySalt = ', state.keySalt)
-    console.log('TACA CREATE_WALLET ===> state.encryptedWallets = ', state.encryptedWallets)
-    console.log('TACA CREATE_WALLET ===> state.wallets = ', state.wallets)
     if (!state.accounts[wallet.id]) {
       Vue.set(state.accounts, wallet.id, {
         mainnet: [],

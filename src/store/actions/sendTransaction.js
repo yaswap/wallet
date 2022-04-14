@@ -51,7 +51,6 @@ export const sendTransaction = async (
     fiatRate
   }
 
-  console.log("TACA ===> sendTransaction.js, transaction = ", transaction)
   commit('NEW_TRASACTION', {
     network,
     walletId,

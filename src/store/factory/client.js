@@ -57,15 +57,6 @@ function createBtcClient(network, mnemonic, accountType, derivationPath) {
   const bitcoinExploraApis = buildConfig.bitcoinExploraApis[network]
   const batchEsploraApi = buildConfig.bitcoinBatchEsploraApis[network]
 
-  console.log('TACA createBtcClient, isTestnet = ', isTestnet)
-  console.log('TACA createBtcClient, bitcoinNetwork = ', bitcoinNetwork)
-  console.log('TACA createBtcClient, bitcoinExploraApis = ', bitcoinExploraApis)
-  console.log('TACA createBtcClient, batchEsploraApi = ', batchEsploraApi)
-  console.log('TACA createBtcClient, network = ', network)
-  console.log('TACA createBtcClient, mnemonic = ', mnemonic)
-  console.log('TACA createBtcClient, accountType = ', accountType)
-  console.log('TACA createBtcClient, derivationPath = ', derivationPath)
-
   const btcClient = new Client()
   btcClient.addProvider(
     new BitcoinEsploraBatchApiProvider({
@@ -111,17 +102,8 @@ function createBtcClient(network, mnemonic, accountType, derivationPath) {
 }
 
 function createYacClient(network, mnemonic, accountType, derivationPath) {
-  const isTestnet = network === 'testnet'
   const yacoinNetwork = ChainNetworks.yacoin[network]
   const yacoinExploraApis = buildConfig.yacoinExploraApis[network]
-
-  console.log('TACA createYacClient, isTestnet = ', isTestnet)
-  console.log('TACA createYacClient, yacoinNetwork = ', yacoinNetwork)
-  console.log('TACA createYacClient, yacoinExploraApis = ', yacoinExploraApis)
-  console.log('TACA createYacClient, network = ', network)
-  console.log('TACA createYacClient, mnemonic = ', mnemonic)
-  console.log('TACA createYacClient, accountType = ', accountType)
-  console.log('TACA createYacClient, derivationPath = ', derivationPath)
 
   const yacClient = new Client()
   yacClient.addProvider(
