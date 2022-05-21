@@ -293,6 +293,7 @@ const REQUEST_MAP = {
   wallet_getAddresses: 'wallet.getAddresses',
   wallet_signMessage: 'wallet.signMessage',
   wallet_sendTransaction: 'chain.sendTransaction',
+  wallet_signTx: 'signTx',
 }
 
 async function handleRequest (req) {

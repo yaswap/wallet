@@ -23,7 +23,9 @@ const ALLOWED = [
   ...CONFIRM_REQUIRED,
   /^wallet.getConnectedNetwork$/,
   /^wallet.getAddresses*$/,
-  /^jsonrpc$/
+  /^jsonrpc$/,
+  // Yacoin
+  /^signTx$/
 ]
 
 export const requestPermission = async ({ state, dispatch, commit }, { origin, data }) => {
@@ -60,6 +62,7 @@ export const requestPermission = async ({ state, dispatch, commit }, { origin, d
       method,
       args: printArgs
     }
+    console.log("TACA ===> requestPermission.js, request = ", request)
 
     if (CONFIRM_REQUIRED.some((re) => re.test(method))) {
       const id = Date.now() + '.' + Math.random()
@@ -83,12 +86,13 @@ export const requestPermission = async ({ state, dispatch, commit }, { origin, d
         if (chain === 'terra') permissionRoute = '/permission/terra'
         else if (method === 'chain.sendTransaction') permissionRoute = '/permission/send'
         else if (method === 'wallet.signMessage') permissionRoute = '/permission/sign'
-        else if (method === 'signPSBT') permissionRoute = '/permission/signPsbt'
+        else if (method === 'signPSBT' || method === 'signTx') permissionRoute = '/permission/signPsbt'
 
         createPopup(`${permissionRoute}?${query}`, () => reject(new Error('User denied')))
       })
     } else {
       commit('app/SET_REQUEST_PERMISSION_ACTIVE', { active: false }, { root: true })
+      console.log("TACA ===> requestPermission.js, executeRequest request")
       return dispatch('executeRequest', { request })
     }
   }
