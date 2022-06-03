@@ -24,6 +24,7 @@ import Enable from '@/views/Enable.vue'
 import PermissionSend from '@/views/PermissionSend.vue'
 import PermissionSign from '@/views/PermissionSign.vue'
 import PermissionSignPsbt from '@/views/PermissionSignPsbt.vue'
+import PermissionSignTx from '@/views/PermissionSignTx.vue'
 import PermissionTerra from '@/views/PermissionTerra.vue'
 import Permission from '@/views/Permission.vue'
 import WalletAssets from '@/views/Wallet/WalletAssets.vue'
@@ -196,6 +197,10 @@ const routes = [
   {
     path: '/permission/signPsbt',
     component: PermissionSignPsbt
+  },
+  {
+    path: '/permission/signTx',
+    component: PermissionSignTx
   },
   {
     path: '/permission/default',
