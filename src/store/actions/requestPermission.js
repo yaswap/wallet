@@ -62,7 +62,6 @@ export const requestPermission = async ({ state, dispatch, commit }, { origin, d
       method,
       args: printArgs
     }
-    console.log('TACA ===> requestPermission.js, request = ', request)
 
     if (CONFIRM_REQUIRED.some((re) => re.test(method))) {
       const id = Date.now() + '.' + Math.random()
@@ -93,7 +92,6 @@ export const requestPermission = async ({ state, dispatch, commit }, { origin, d
       })
     } else {
       commit('app/SET_REQUEST_PERMISSION_ACTIVE', { active: false }, { root: true })
-      console.log('TACA ===> requestPermission.js, executeRequest request')
       return dispatch('executeRequest', { request })
     }
   }

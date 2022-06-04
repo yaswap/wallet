@@ -117,19 +117,15 @@ export default {
     //   return this.request.args[1]
     // },
     transactionHex() {
-      console.log('TACA ===> PermissionSignTx, transactionHex = ', this.request.args[0])
       return this.request.args[0]
     },
     signatureHash() {
-      console.log('TACA ===> PermissionSignTx, signatureHash = ', this.request.args[1])
       return this.request.args[1]
     },
     walletDerivationPath() {
-      console.log('TACA ===> PermissionSignTx, walletDerivationPath = ', this.request.args[2])
       return this.request.args[2]
     },
     fee() {
-      console.log('TACA ===> PermissionSignTx, fee = ', this.request.args[3])
       return this.request.args[3]
     },
     // inputsValue() {
@@ -141,7 +137,6 @@ export default {
     //   })
     // },
     transaction() {
-      console.log('TACA ===> PermissionSignTx, calling transaction')
       return TransactionYacoinJs.fromHex(this.transactionHex)
     },
     // outputs() {
@@ -178,19 +173,14 @@ export default {
     const addressesPerCall = 50
     let i = 0
     while (i < maxAddresses) {
-      console.log('TACA ===> PermissionSignTx, i = ', i)
       const changeAddresses = (await client.wallet.getAddresses(i, addressesPerCall, true)).map(
         (a) => a.address
       )
-      console.log('TACA ===> PermissionSignTx, changeAddresses = ', changeAddresses)
-      console.log('TACA ===> PermissionSignTx, calling this.transaction')
-      console.log('TACA ===> PermissionSignTx, this.transaction = ', this.transaction)
       this.changeOutputIndex = this.transaction.outs.findIndex((vout) =>
         changeAddresses.includes(
           AddressYacoinJs.fromOutputScript(vout.script, ChainNetworks.yacoin[this.activeNetwork])
         )
       )
-      console.log('TACA ===> PermissionSignTx, this.changeOutputIndex = ', this.changeOutputIndex)
       if (this.changeOutputIndex) break
       i += addressesPerCall
     }
@@ -199,7 +189,6 @@ export default {
     this.externalAddresses = (await client.wallet.getAddresses(0, maxAddresses, false)).map(
       (a) => a.address
     )
-    console.log('TACA ===> PermissionSignTx, this.externalAddresses = ', this.externalAddresses)
   }
 }
 </script>

@@ -33,9 +33,7 @@ export const executeRequest = async ({ getters, dispatch, rootState }, { request
       } else {
         methodFunc = client.getMethod(request.method).bind(client)
       }
-      console.log('TACA ===> executeRequest.js, BEGIN methodFunc = ', methodFunc)
       call = methodFunc(...request.args)
-      console.log('TACA ===> executeRequest.js, END methodFunc = ', methodFunc)
     }
 
     const { ledgerBridgeConnected, ledgerBridgeTransportConnected } = rootState.app
