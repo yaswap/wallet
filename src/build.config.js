@@ -61,7 +61,7 @@ export default {
         name: 'Liquality',
         icon: 'liquality.svg',
         type: SwapProviderType.LIQUALITY,
-        agent: process.env.VUE_APP_AGENT_TESTNET_URL || 'https://testnet-dev-agent.liq-chainhub.net'
+        agent: 'http://localhost:3030'
       },
       liqualityBoostNativeToERC20: {
         name: 'Liquality Boost',
