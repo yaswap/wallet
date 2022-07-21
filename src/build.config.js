@@ -39,7 +39,8 @@ export default {
       'SOL',
       'LUNA',
       'UST',
-      'YAC'
+      'YAC',
+      'FAU'
     ]
   },
   infuraApiKey: 'da99ebc8c0964bb8bb757b6f8cc40f1f',

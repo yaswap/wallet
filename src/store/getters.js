@@ -16,7 +16,8 @@ const TESTNET_CONTRACT_ADDRESSES = {
   SOV: '0x6a9A07972D07E58f0daF5122D11e069288A375fB',
   PWETH: '0xA6FA4fB5f76172d178d61B04b0ecd319C5d1C0aa',
   SUSHI: '0x0769fd68dFb93167989C6f7254cd0D766Fb2841F',
-  ANC: 'terra1747mad58h0w4y589y3sk84r5efqdev9q4r02pc'
+  ANC: 'terra1747mad58h0w4y589y3sk84r5efqdev9q4r02pc',
+  FAU: '0xFab46E002BbF0b4509813474841E0716E6730136'
 }
 const TESTNET_ASSETS = [
   'BTC',
@@ -35,7 +36,8 @@ const TESTNET_ASSETS = [
   'UST',
   'ANC',
   'FUSE',
-  'YAC'
+  'YAC',
+  'FAU'
 ].reduce((assets, asset) => {
   return Object.assign(assets, {
     [asset]: {
