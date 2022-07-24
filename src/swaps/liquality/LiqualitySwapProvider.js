@@ -156,7 +156,10 @@ class LiqualitySwapProvider extends SwapProvider {
   }
 
   async estimateFees({ network, walletId, asset, txType, quote, feePrices, max }) {
-    if (txType === LiqualitySwapProvider.txTypes.SWAP_INITIATION && asset === 'BTC') {
+    if (
+      txType === LiqualitySwapProvider.txTypes.SWAP_INITIATION &&
+      (asset === 'BTC' || asset === 'YAC')
+    ) {
       const client = this.getClient(network, walletId, asset, quote.fromAccountId)
       const value = max ? undefined : BN(quote.fromAmount)
       const txs = feePrices.map((fee) => ({ to: '', value, fee }))
@@ -610,7 +613,8 @@ class LiqualitySwapProvider extends SwapProvider {
       LUNA: 800000,
       UST: 800000,
       ERC20: 100000,
-      ARBETH: 680000
+      ARBETH: 680000,
+      YAC: 11
     }
   }
 

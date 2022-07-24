@@ -7,6 +7,7 @@ import { EthereumRpcProvider } from '@liquality/ethereum-rpc-provider'
 import { EthereumJsWalletProvider } from '@liquality/ethereum-js-wallet-provider'
 import { EthereumErc20Provider } from '@liquality/ethereum-erc20-provider'
 import { ChainNetworks } from '@/utils/networks'
+import buildConfig from '../build.config'
 
 export const CHAIN_LOCK = {}
 
@@ -99,6 +100,12 @@ export const shouldApplyRskLegacyDerivation = async (accounts, mnemonic, indexPa
   const balances = await Promise.all([client.chain.getBalance(addresses), ...erc20BalancesPromises])
 
   return balances.some((amount) => amount.isGreaterThan(0))
+}
+
+export async function getYacPrices() {
+  const yacoinExploraSwapApis = buildConfig.yacoinExploraApis.esploraSwapUrl['mainnet']
+  const { data } = await axios.get(`${yacoinExploraSwapApis}/getprice`)
+  return data['price']
 }
 
 export async function getPrices(baseCurrencies, toCurrency) {

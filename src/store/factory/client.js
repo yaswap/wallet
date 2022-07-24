@@ -10,6 +10,8 @@ import { BitcoinRpcFeeProvider } from '@liquality/bitcoin-rpc-fee-provider'
 import { YacoinEsploraApiProvider } from '@liquality/yacoin-esplora-api-provider'
 import { YacoinJsWalletProvider } from '@liquality/yacoin-js-wallet-provider'
 import { YacoinRpcFeeProvider } from '@liquality/yacoin-rpc-fee-provider'
+import { YacoinEsploraSwapFindProvider } from '@liquality/yacoin-esplora-swap-find-provider'
+import { YacoinSwapProvider } from '@liquality/yacoin-swap-provider'
 
 import { EthereumRpcProvider } from '@liquality/ethereum-rpc-provider'
 import { EthereumJsWalletProvider } from '@liquality/ethereum-js-wallet-provider'
@@ -103,7 +105,8 @@ function createBtcClient(network, mnemonic, accountType, derivationPath) {
 
 function createYacClient(network, mnemonic, accountType, derivationPath) {
   const yacoinNetwork = ChainNetworks.yacoin[network]
-  const yacoinExploraApis = buildConfig.yacoinExploraApis[network]
+  const yacoinExploraApis = buildConfig.yacoinExploraApis.esploraUrl[network]
+  const yacoinExploraSwapApis = buildConfig.yacoinExploraApis.esploraSwapUrl[network]
 
   const yacClient = new Client()
   yacClient.addProvider(
@@ -122,9 +125,9 @@ function createYacClient(network, mnemonic, accountType, derivationPath) {
     })
   )
 
+  yacClient.addProvider(new YacoinSwapProvider({ network: yacoinNetwork }))
+  yacClient.addProvider(new YacoinEsploraSwapFindProvider(yacoinExploraSwapApis))
   yacClient.addProvider(new YacoinRpcFeeProvider())
-  // yacClient.addProvider(new YacoinSwapProvider({ network: yacoinNetwork }))
-  // yacClient.addProvider(new YacoinEsploraSwapFindProvider(yacoinExploraApis))
   // if (isTestnet) yacClient.addProvider(new YacoinRpcFeeProvider())
   // else
   //   yacClient.addProvider(
@@ -196,7 +199,7 @@ function createEthClient(asset, network, mnemonic, accountType, derivationPath) 
     ? `https://ropsten.infura.io/v3/${buildConfig.infuraApiKey}`
     : `https://mainnet.infura.io/v3/${buildConfig.infuraApiKey}`
   const scraperApi = isTestnet
-    ? 'https://eth-ropsten-api.liq-chainhub.net/'
+    ? 'http://localhost:8080/'
     : 'https://eth-mainnet-api.liq-chainhub.net/'
 
   const feeProvider = new EthereumEIP1559FeeProvider({ uri: infuraApi })

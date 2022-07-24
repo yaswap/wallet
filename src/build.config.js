@@ -45,8 +45,14 @@ export default {
   },
   infuraApiKey: 'da99ebc8c0964bb8bb757b6f8cc40f1f',
   yacoinExploraApis: {
-    testnet: 'http://73.43.56.247:3001/api',
-    mainnet: 'http://73.43.56.247:3001/api'
+    esploraUrl: {
+      testnet: 'http://73.43.56.247:3001/api',
+      mainnet: 'http://73.43.56.247:3001/api'
+    },
+    esploraSwapUrl: {
+      testnet: 'http://73.43.56.247:3001',
+      mainnet: 'http://73.43.56.247:3001'
+    }
   },
   bitcoinExploraApis: {
     testnet: 'https://electrs-testnet-api.liq-chainhub.net/',
@@ -104,7 +110,7 @@ export default {
         name: 'Liquality',
         icon: 'liquality.svg',
         type: SwapProviderType.LIQUALITY,
-        agent: process.env.VUE_APP_AGENT_MAINNET_URL || 'https://mainnet-dev-agent.liq-chainhub.net'
+        agent: 'http://localhost:3030'
       },
       liqualityBoostNativeToERC20: {
         name: 'Liquality Boost',

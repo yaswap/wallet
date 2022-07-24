@@ -871,7 +871,6 @@ export default {
       if (fees) {
         Object.assign(assetFees, fees)
       }
-
       return assetFees
     },
     setSendAmount(amount) {
@@ -944,7 +943,6 @@ export default {
           ),
           max
         })
-
         if (!totalFees) return
 
         for (const [speed, fee] of Object.entries(assetFees)) {

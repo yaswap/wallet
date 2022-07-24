@@ -1,7 +1,8 @@
-import { getPrices } from '../utils'
+import { getPrices, getYacPrices } from '../utils'
 
 export const updateFiatRates = async ({ commit }, { assets }) => {
-  const fiatRates = await getPrices(assets, 'usd')
+  let fiatRates = await getPrices(assets, 'usd')
+  fiatRates['YAC'] = await getYacPrices()
 
   commit('UPDATE_FIAT_RATES', { fiatRates })
 

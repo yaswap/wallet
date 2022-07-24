@@ -9,7 +9,6 @@ export const updateFees = async ({ commit, getters, state }, { asset }) => {
       accountId: null
     })
     .chain.getFees()
-
   commit('UPDATE_FEES', { network, walletId, asset, fees })
 
   return fees
