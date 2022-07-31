@@ -46,12 +46,12 @@ export default {
   infuraApiKey: 'da99ebc8c0964bb8bb757b6f8cc40f1f',
   yacoinExploraApis: {
     esploraUrl: {
-      testnet: 'http://73.43.56.247:3001/api',
-      mainnet: 'http://73.43.56.247:3001/api'
+      testnet: 'http://104.48.189.74:3001/api',
+      mainnet: 'http://104.48.189.74:3001/api'
     },
     esploraSwapUrl: {
-      testnet: 'http://73.43.56.247:3001',
-      mainnet: 'http://73.43.56.247:3001'
+      testnet: 'http://104.48.189.74:3001',
+      mainnet: 'http://104.48.189.74:3001'
     }
   },
   bitcoinExploraApis: {
