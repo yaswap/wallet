@@ -388,7 +388,7 @@ class LiqualitySwapProvider extends SwapProvider {
       }
     } catch (e) {
       console.log('TACA ===> LiqualitySwapProvider.js, findCounterPartyInitiation, exception = ', e)
-      if (['BlockNotFoundError', 'PendingTxError', 'TxNotFoundError'].includes(e.name))
+      if (['BlockNotFoundError', 'PendingTxError', 'TxNotFoundError', 'TypeError'].includes(e.name))
         console.warn(e)
       else throw e
     }
