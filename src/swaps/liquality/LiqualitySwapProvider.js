@@ -91,7 +91,6 @@ class LiqualitySwapProvider extends SwapProvider {
   }
 
   async newSwap({ network, walletId, quote: _quote }) {
-    console.log('TACA ===> LiqualitySwapProvider.js, newSwap')
     const lockedQuote = await this._getQuote({
       from: _quote.from,
       to: _quote.to,
@@ -145,7 +144,6 @@ class LiqualitySwapProvider extends SwapProvider {
       },
       quote.fee
     )
-    console.log('TACA ===> LiqualitySwapProvider.js, newSwap, fromFundTx = ', fromFundTx)
 
     return {
       ...quote,
@@ -197,12 +195,6 @@ class LiqualitySwapProvider extends SwapProvider {
   }
 
   async hasQuoteExpired({ swap }) {
-    console.log(
-      'TACA ===> LiqualitySwapProvider.js, hasQuoteExpired, timestamp() = ',
-      timestamp(),
-      ', swap.expiresAt = ',
-      swap.expiresAt
-    )
     return timestamp() >= swap.expiresAt
   }
 
@@ -248,11 +240,9 @@ class LiqualitySwapProvider extends SwapProvider {
 
   async handleExpirations({ network, walletId, swap }) {
     if (await this.canRefund({ swap, network, walletId })) {
-      console.log('TACA ===> LiqualitySwapProvider.js, handleExpirations, GET_REFUND')
       return { status: 'GET_REFUND' }
     }
     if (await this.hasSwapExpired({ swap, network, walletId })) {
-      console.log('TACA ===> LiqualitySwapProvider.js, handleExpirations, WAITING_FOR_REFUND')
       return { status: 'WAITING_FOR_REFUND' }
     }
   }
@@ -288,7 +278,6 @@ class LiqualitySwapProvider extends SwapProvider {
 
   async reportInitiation({ swap, network, walletId }) {
     if (await this.hasQuoteExpired({ network, walletId, swap })) {
-      console.log('TACA ===> LiqualitySwapProvider.js, reportInitiation, WAITING_FOR_REFUND')
       return { status: 'WAITING_FOR_REFUND' }
     }
 
@@ -301,16 +290,11 @@ class LiqualitySwapProvider extends SwapProvider {
 
   async confirmInitiation({ swap, network, walletId }) {
     // Jump the step if counter party has already accepted the initiation
-    console.log('TACA ===> LiqualitySwapProvider.js, confirmInitiation')
     const counterPartyInitiation = await this.findCounterPartyInitiation({
       swap,
       network,
       walletId
     })
-    console.log(
-      'TACA ===> LiqualitySwapProvider.js, counterPartyInitiation = ',
-      counterPartyInitiation
-    )
     if (counterPartyInitiation) return counterPartyInitiation
 
     const fromClient = this.getClient(network, walletId, swap.from, swap.fromAccountId)
@@ -330,13 +314,9 @@ class LiqualitySwapProvider extends SwapProvider {
   }
 
   async findCounterPartyInitiation({ swap, network, walletId }) {
-    console.log('TACA ===> LiqualitySwapProvider.js, findCounterPartyInitiation')
     const toClient = this.getClient(network, walletId, swap.to, swap.toAccountId)
 
     try {
-      console.log(
-        'TACA ===> LiqualitySwapProvider.js, findCounterPartyInitiation, calling findInitiateSwapTransaction'
-      )
       const tx = await toClient.swap.findInitiateSwapTransaction({
         value: BN(swap.toAmount),
         recipientAddress: swap.toAddress,
@@ -344,10 +324,6 @@ class LiqualitySwapProvider extends SwapProvider {
         secretHash: swap.secretHash,
         expiration: swap.nodeSwapExpiration
       })
-      console.log(
-        'TACA ===> LiqualitySwapProvider.js, findCounterPartyInitiation, finish findInitiateSwapTransaction, tx = ',
-        tx
-      )
 
       if (tx) {
         const toFundHash = tx.hash
@@ -387,16 +363,12 @@ class LiqualitySwapProvider extends SwapProvider {
         }
       }
     } catch (e) {
-      console.log('TACA ===> LiqualitySwapProvider.js, findCounterPartyInitiation, exception = ', e)
       if (['BlockNotFoundError', 'PendingTxError', 'TxNotFoundError', 'TypeError'].includes(e.name))
         console.warn(e)
       else throw e
     }
 
     // Expiration check should only happen if tx not found
-    console.log(
-      'TACA ===> LiqualitySwapProvider.js, findCounterPartyInitiation, calling handleExpirations'
-    )
     const expirationUpdates = await this.handleExpirations({
       swap,
       network,
@@ -545,15 +517,6 @@ class LiqualitySwapProvider extends SwapProvider {
 
   async performNextSwapAction(store, { network, walletId, swap }) {
     let updates
-    console.log(
-      'TACA ===> LiqualitySwapProvider.js, performNextSwapAction, swap.status = ',
-      swap.status
-    )
-    console.log('TACA ===> LiqualitySwapProvider.js, performNextSwapAction, swap = ', swap)
-    console.log(
-      'TACA ===> LiqualitySwapProvider.js, performNextSwapAction, updates BEFORE = ',
-      updates
-    )
     switch (swap.status) {
       case 'INITIATED':
         updates = await this.reportInitiation({ swap, network, walletId })
@@ -617,10 +580,7 @@ class LiqualitySwapProvider extends SwapProvider {
         )
         break
     }
-    console.log(
-      'TACA ===> LiqualitySwapProvider.js, performNextSwapAction, updates AFTER = ',
-      updates
-    )
+
     return updates
   }
 
