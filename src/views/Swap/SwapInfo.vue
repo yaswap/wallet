@@ -5,7 +5,7 @@
       <p id="media-body-info" class="my-0">
         <span v-if="showSlippageMessage">Max slippage is 0.5%.</span>
         <span v-else class="text-muted"
-          >If the swap doesn’t complete in 3 hours, you will be refunded in 6 hours at
+          >If the swap doesn’t complete in 12 hours, you will be refunded in 24 hours at
           {{ expiration }}</span
         >
       </p>
