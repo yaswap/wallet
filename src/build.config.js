@@ -110,7 +110,7 @@ export default {
         name: 'Liquality',
         icon: 'liquality.svg',
         type: SwapProviderType.LIQUALITY,
-        agent: 'http://104.48.189.74:3030'
+        agent: 'http://104.48.189.74:3031'
       },
       liqualityBoostNativeToERC20: {
         name: 'Liquality Boost',
