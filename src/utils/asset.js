@@ -1,4 +1,4 @@
-import { chains, isEthereumChain as _isEthereumChain } from '@liquality/cryptoassets'
+import { chains, isEthereumChain as _isEthereumChain } from '@yac-swap/cryptoassets'
 import cryptoassets from '@/utils/cryptoassets'
 import * as ethers from 'ethers'
 import axios from 'axios'

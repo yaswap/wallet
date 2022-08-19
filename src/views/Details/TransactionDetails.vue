@@ -118,7 +118,7 @@
 import { mapActions, mapState, mapGetters } from 'vuex'
 import moment from '@/utils/moment'
 import cryptoassets from '@/utils/cryptoassets'
-import { chains } from '@liquality/cryptoassets'
+import { chains } from '@yac-swap/cryptoassets'
 import BN from 'bignumber.js'
 import { getSendFee } from '@/utils/fees'
 import { prettyBalance, prettyFiatBalance } from '@/utils/coinFormatter'

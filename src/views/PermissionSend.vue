@@ -111,7 +111,7 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 import cryptoassets from '@/utils/cryptoassets'
-import { unitToCurrency, chainToTokenAddressMap, ChainId } from '@liquality/cryptoassets'
+import { unitToCurrency, chainToTokenAddressMap, ChainId } from '@yac-swap/cryptoassets'
 import FeeSelector from '@/components/FeeSelector'
 import CustomFees from '@/components/CustomFees'
 import CustomFeesEIP1559 from '@/components/CustomFeesEIP1559'

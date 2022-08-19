@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 import ERC20 from '@uniswap/v2-core/build/ERC20.json'
 
 import buildConfig from '../../build.config'
-import { chains, currencyToUnit, unitToCurrency, isEthereumChain } from '@liquality/cryptoassets'
+import { chains, currencyToUnit, unitToCurrency, isEthereumChain } from '@yac-swap/cryptoassets'
 import cryptoassets from '@/utils/cryptoassets'
 import { isERC20 } from '../../utils/asset'
 import { prettyBalance } from '../../utils/coinFormatter'

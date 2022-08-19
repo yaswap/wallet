@@ -101,7 +101,7 @@ import { getFeeLabel } from '@/utils/fees'
 import BN from 'bignumber.js'
 import { prettyFiatBalance } from '@/utils/coinFormatter'
 import cryptoassets from '@/utils/cryptoassets'
-import { chains } from '@liquality/cryptoassets'
+import { chains } from '@yac-swap/cryptoassets'
 import ChevronUpIcon from '@/assets/icons/chevron_up.svg'
 import ChevronDownIcon from '@/assets/icons/chevron_down.svg'
 

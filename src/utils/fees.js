@@ -1,6 +1,6 @@
 import BN from 'bignumber.js'
 import cryptoassets from './cryptoassets'
-import { chains, unitToCurrency } from '@liquality/cryptoassets'
+import { chains, unitToCurrency } from '@yac-swap/cryptoassets'
 import { isERC20, isEthereumChain } from './asset'
 
 const SEND_FEE_UNITS = {

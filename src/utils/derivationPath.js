@@ -1,4 +1,4 @@
-import { ChainId } from '@liquality/cryptoassets'
+import { ChainId } from '@yac-swap/cryptoassets'
 import { ChainNetworks } from '@/utils/networks'
 import { BTC_ADDRESS_TYPE_TO_PREFIX } from '@/utils/address'
 import { bitcoin } from '@liquality/types'

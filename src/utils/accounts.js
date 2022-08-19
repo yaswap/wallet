@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid'
 import { getAssetIcon } from '@/utils/asset'
 import { getDerivationPath } from '@/utils/derivationPath'
-import { chains } from '@liquality/cryptoassets'
+import { chains } from '@yac-swap/cryptoassets'
 
 export const accountCreator = (payload) => {
   const { network, walletId, account } = payload

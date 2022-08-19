@@ -86,7 +86,7 @@
 import { mapActions, mapState, mapGetters } from 'vuex'
 import BN from 'bignumber.js'
 import moment from '@/utils/moment'
-import { chains, assets as cryptoassets } from '@liquality/cryptoassets'
+import { chains, assets as cryptoassets } from '@yac-swap/cryptoassets'
 
 import { prettyBalance } from '@/utils/coinFormatter'
 import { isEthereumChain, getNativeAsset, getAddressExplorerLink } from '@/utils/asset'

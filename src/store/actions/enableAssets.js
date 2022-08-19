@@ -1,6 +1,6 @@
 import cryptoassets from '@/utils/cryptoassets'
 import { accountCreator, getNextAccountColor } from '@/utils/accounts'
-import { chains } from '@liquality/cryptoassets'
+import { chains } from '@yac-swap/cryptoassets'
 
 export const enableAssets = async (
   { state, commit, dispatch, getters },

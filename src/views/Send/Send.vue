@@ -211,7 +211,7 @@ import { mapState, mapActions, mapGetters } from 'vuex'
 import _ from 'lodash'
 import BN from 'bignumber.js'
 import cryptoassets from '@/utils/cryptoassets'
-import { chains, currencyToUnit, unitToCurrency, ChainId } from '@liquality/cryptoassets'
+import { chains, currencyToUnit, unitToCurrency, ChainId } from '@yac-swap/cryptoassets'
 import NavBar from '@/components/NavBar'
 import FeeSelector from '@/components/FeeSelector'
 import {

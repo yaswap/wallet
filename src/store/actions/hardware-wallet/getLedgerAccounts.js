@@ -1,4 +1,4 @@
-import { assets } from '@liquality/cryptoassets'
+import { assets } from '@yac-swap/cryptoassets'
 export const getLedgerAccounts = async (
   { getters },
   { network, walletId, asset, accountType, startingIndex, numAccounts }

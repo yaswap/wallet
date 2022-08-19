@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { encrypt } from '../../utils/crypto'
 import buildConfig from '../../build.config'
 import { accountCreator, getNextAccountColor } from '@/utils/accounts'
-import { ChainId, chains, assets as cryptoassets } from '@liquality/cryptoassets'
+import { ChainId, chains, assets as cryptoassets } from '@yac-swap/cryptoassets'
 
 export const createWallet = async ({ commit }, { key, mnemonic, imported = false }) => {
   const id = uuidv4()

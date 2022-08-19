@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { LCDClient } from '@terra-money/terra.js'
 
 import cryptoassets from '@/utils/cryptoassets'
-import { ChainId, chains, currencyToUnit, unitToCurrency } from '@liquality/cryptoassets'
+import { ChainId, chains, currencyToUnit, unitToCurrency } from '@yac-swap/cryptoassets'
 import { TerraNetworks } from '@liquality/terra-networks'
 import { withInterval } from '../../store/actions/performNextAction/utils'
 import { prettyBalance } from '../../utils/coinFormatter'

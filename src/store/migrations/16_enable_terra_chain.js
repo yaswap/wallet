@@ -1,7 +1,7 @@
 import { accountCreator, getNextAccountColor } from '@/utils/accounts'
 import { Networks } from '@/utils/networks'
 import { getDerivationPath } from '@/utils/derivationPath'
-import { chains, ChainId } from '@liquality/cryptoassets'
+import { chains, ChainId } from '@yac-swap/cryptoassets'
 
 export const enableTerraChain = {
   version: 16,

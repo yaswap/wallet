@@ -1,7 +1,7 @@
 import { ChainNetworks } from '@/utils/networks'
 import buildConfig from '../build.config'
 import { BG_PREFIX, handleConnection, removeConnectId, getRootURL } from './utils'
-import { assets } from '@liquality/cryptoassets'
+import { assets } from '@yac-swap/cryptoassets'
 import { connectRemote } from './terra-injection'
 
 function attemptOrWarn(func, message) {

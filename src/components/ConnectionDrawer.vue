@@ -42,7 +42,7 @@
 
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
-import { isEthereumChain, chains } from '@liquality/cryptoassets'
+import { isEthereumChain, chains } from '@yac-swap/cryptoassets'
 import { shortenAddress } from '@/utils/address'
 import buildConfig from '@/build.config'
 

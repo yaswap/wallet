@@ -29,7 +29,7 @@ import BN from 'bignumber.js'
 import { prettyFiatBalance } from '@/utils/coinFormatter'
 import { getNativeAsset, getFeeAsset } from '@/utils/asset'
 import cryptoassets from '@/utils/cryptoassets'
-import { chains } from '@liquality/cryptoassets'
+import { chains } from '@yac-swap/cryptoassets'
 
 export default {
   props: ['asset', 'value', 'fees', 'totalFees', 'fiatRates', 'swap'],

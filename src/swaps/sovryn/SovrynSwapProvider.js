@@ -2,7 +2,7 @@ import BN from 'bignumber.js'
 import { v4 as uuidv4 } from 'uuid'
 import * as ethers from 'ethers'
 
-import { chains, currencyToUnit, unitToCurrency } from '@liquality/cryptoassets'
+import { chains, currencyToUnit, unitToCurrency } from '@yac-swap/cryptoassets'
 import cryptoassets from '@/utils/cryptoassets'
 import { isERC20 } from '../../utils/asset'
 import { prettyBalance } from '../../utils/coinFormatter'

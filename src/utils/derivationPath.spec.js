@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { ChainId } from '@liquality/cryptoassets'
+import { ChainId } from '@yac-swap/cryptoassets'
 import { getDerivationPath } from './derivationPath'
 
 // Bitcoin

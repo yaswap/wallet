@@ -96,7 +96,7 @@
 import { mapActions, mapState, mapGetters } from 'vuex'
 import moment from '@/utils/moment'
 import cryptoassets from '@/utils/cryptoassets'
-import { chains, unitToCurrency } from '@liquality/cryptoassets'
+import { chains, unitToCurrency } from '@yac-swap/cryptoassets'
 
 import { prettyBalance, dpUI } from '@/utils/coinFormatter'
 import { calculateQuoteRate } from '@/utils/quotes'
