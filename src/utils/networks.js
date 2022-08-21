@@ -3,7 +3,7 @@ import { EthereumNetworks } from '@liquality/ethereum-networks'
 import { NearNetworks } from '@liquality/near-networks'
 import { SolanaNetworks } from '@liquality/solana-networks'
 import { TerraNetworks } from '@liquality/terra-networks'
-import { YacoinNetworks } from '@yac-swap/yacoin-networks'
+import { YacoinNetworks } from '@yaswap/yacoin-networks'
 
 export const Networks = ['mainnet', 'testnet']
 

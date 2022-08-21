@@ -57,7 +57,7 @@
 <script>
 import 'setimmediate'
 import { mapActions, mapState, mapGetters } from 'vuex'
-import { Transaction as TransactionYacoinJs, address as AddressYacoinJs } from '@yac-swap/yacoinjs-lib'
+import { Transaction as TransactionYacoinJs, address as AddressYacoinJs } from '@yaswap/yacoinjs-lib'
 import { getAssetIcon } from '@/utils/asset'
 import LogoWallet from '@/assets/icons/logo_wallet.svg?inline'
 import SpinnerIcon from '@/assets/icons/spinner.svg'

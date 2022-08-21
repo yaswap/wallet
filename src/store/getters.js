@@ -1,4 +1,4 @@
-import { assets as cryptoassets, unitToCurrency } from '@yac-swap/cryptoassets'
+import { assets as cryptoassets, unitToCurrency } from '@yaswap/cryptoassets'
 import { createClient } from './factory/client'
 import { createSwapProvider } from './factory/swapProvider'
 import { Object } from 'core-js'

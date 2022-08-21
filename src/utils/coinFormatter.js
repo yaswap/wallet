@@ -1,6 +1,6 @@
 import BN from 'bignumber.js'
 import cryptoassets from './cryptoassets'
-import { unitToCurrency } from '@yac-swap/cryptoassets'
+import { unitToCurrency } from '@yaswap/cryptoassets'
 
 export const VALUE_DECIMALS = 6
 

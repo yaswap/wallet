@@ -17,7 +17,7 @@
 import { mapGetters, mapState } from 'vuex'
 // import BN from 'bignumber.js'
 // import cryptoassets from '@/utils/cryptoassets'
-// import { unitToCurrency } from '@yac-swap/cryptoassets'
+// import { unitToCurrency } from '@yaswap/cryptoassets'
 
 export default {
   computed: {

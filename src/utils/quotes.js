@@ -1,5 +1,5 @@
 import BN from 'bignumber.js'
-import { unitToCurrency } from '@yac-swap/cryptoassets'
+import { unitToCurrency } from '@yaswap/cryptoassets'
 import cryptoassets from './cryptoassets'
 import { SwapProviderType, getSwapProviderConfig } from './swaps'
 

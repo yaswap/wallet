@@ -72,7 +72,7 @@ import CopyIcon from '@/assets/icons/copy.svg'
 import CopyWhiteIcon from '@/assets/icons/copy_white.svg'
 import TickIcon from '@/assets/icons/tick.svg'
 import cryptoassets from '@/utils/cryptoassets'
-import { chains } from '@yac-swap/cryptoassets'
+import { chains } from '@yaswap/cryptoassets'
 
 export default {
   components: {

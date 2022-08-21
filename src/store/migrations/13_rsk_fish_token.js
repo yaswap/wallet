@@ -1,4 +1,4 @@
-import { ChainId } from '@yac-swap/cryptoassets'
+import { ChainId } from '@yaswap/cryptoassets'
 
 export const rskFishToken = {
   version: 13,

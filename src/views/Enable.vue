@@ -80,7 +80,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import { isEthereumChain, dappChains } from '@yac-swap/cryptoassets'
+import { isEthereumChain, dappChains } from '@yaswap/cryptoassets'
 import LogoWallet from '@/assets/icons/logo_wallet.svg?inline'
 import NetworkAccounts from '@/components/NetworkAccounts'
 import ChainDropdown from '@/components/ChainDropdown'

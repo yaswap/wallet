@@ -13,7 +13,7 @@ import {
 } from './inject'
 import buildConfig from './build.config'
 import { ChainNetworks } from '@/utils/networks'
-import { chains, isEthereumChain } from '@yac-swap/cryptoassets'
+import { chains, isEthereumChain } from '@yaswap/cryptoassets'
 import PortStream from 'extension-port-stream'
 import LocalMessageDuplexStream from 'post-message-stream'
 new Script().start()

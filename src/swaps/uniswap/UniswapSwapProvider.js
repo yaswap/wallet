@@ -10,7 +10,7 @@ import UniswapV2Router from '@uniswap/v2-periphery/build/IUniswapV2Router02.json
 import * as ethers from 'ethers'
 
 import buildConfig from '../../build.config'
-import { chains, currencyToUnit, unitToCurrency } from '@yac-swap/cryptoassets'
+import { chains, currencyToUnit, unitToCurrency } from '@yaswap/cryptoassets'
 import cryptoassets from '@/utils/cryptoassets'
 import { isEthereumChain, isERC20 } from '../../utils/asset'
 import { prettyBalance } from '../../utils/coinFormatter'

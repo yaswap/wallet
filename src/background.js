@@ -3,7 +3,7 @@ import { random } from 'lodash-es'
 import store from './store'
 import { wait } from './store/utils'
 import cryptoassets from '@/utils/cryptoassets'
-import { unitToCurrency } from '@yac-swap/cryptoassets'
+import { unitToCurrency } from '@yaswap/cryptoassets'
 import { prettyFiatBalance } from '@/utils/coinFormatter'
 
 function asyncLoop(fn, delay) {

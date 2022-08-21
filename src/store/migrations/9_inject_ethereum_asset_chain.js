@@ -1,4 +1,4 @@
-import { assets as cryptoassets } from '@yac-swap/cryptoassets'
+import { assets as cryptoassets } from '@yaswap/cryptoassets'
 
 export const injectEthereumAssetChain = {
   // Inject ethereum asset -> chain

@@ -203,7 +203,7 @@
 <script>
 import { getAssetIcon, getFeeAsset, getNativeAsset } from '@/utils/asset'
 import cryptoassets from '@/utils/cryptoassets'
-import { chains } from '@yac-swap/cryptoassets'
+import { chains } from '@yaswap/cryptoassets'
 import NavBar from '@/components/NavBar'
 import BN from 'bignumber.js'
 import { getFeeLabel, getSendFee } from '@/utils/fees'

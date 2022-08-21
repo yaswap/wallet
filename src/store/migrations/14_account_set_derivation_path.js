@@ -1,7 +1,7 @@
 import { getDerivationPath } from '@/utils/derivationPath'
 import { Networks } from '@/utils/networks'
 import { accountCreator, getNextAccountColor } from '@/utils/accounts'
-import { ChainId, chains } from '@yac-swap/cryptoassets'
+import { ChainId, chains } from '@yaswap/cryptoassets'
 
 export const accountSetDerivationPath = {
   version: 14,

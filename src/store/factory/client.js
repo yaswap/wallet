@@ -1,17 +1,17 @@
 import { Client } from '@liquality/client'
 
 import { BitcoinSwapProvider } from '@liquality/bitcoin-swap-provider'
-import { BitcoinJsWalletProvider } from '@yac-swap/bitcoin-js-wallet-provider'
+import { BitcoinJsWalletProvider } from '@yaswap/bitcoin-js-wallet-provider'
 import { BitcoinEsploraBatchApiProvider } from '@liquality/bitcoin-esplora-batch-api-provider'
 import { BitcoinEsploraSwapFindProvider } from '@liquality/bitcoin-esplora-swap-find-provider'
 import { BitcoinFeeApiProvider } from '@liquality/bitcoin-fee-api-provider'
 import { BitcoinRpcFeeProvider } from '@liquality/bitcoin-rpc-fee-provider'
 
-import { YacoinEsploraApiProvider } from '@yac-swap/yacoin-esplora-api-provider'
-import { YacoinJsWalletProvider } from '@yac-swap/yacoin-js-wallet-provider'
-import { YacoinRpcFeeProvider } from '@yac-swap/yacoin-rpc-fee-provider'
-import { YacoinEsploraSwapFindProvider } from '@yac-swap/yacoin-esplora-swap-find-provider'
-import { YacoinSwapProvider } from '@yac-swap/yacoin-swap-provider'
+import { YacoinEsploraApiProvider } from '@yaswap/yacoin-esplora-api-provider'
+import { YacoinJsWalletProvider } from '@yaswap/yacoin-js-wallet-provider'
+import { YacoinRpcFeeProvider } from '@yaswap/yacoin-rpc-fee-provider'
+import { YacoinEsploraSwapFindProvider } from '@yaswap/yacoin-esplora-swap-find-provider'
+import { YacoinSwapProvider } from '@yaswap/yacoin-swap-provider'
 
 import { EthereumRpcProvider } from '@liquality/ethereum-rpc-provider'
 import { EthereumJsWalletProvider } from '@liquality/ethereum-js-wallet-provider'
@@ -46,7 +46,7 @@ import {
   EthereumLedgerBridgeApp,
   LEDGER_BITCOIN_OPTIONS
 } from '@/utils/ledger-bridge-provider'
-import { ChainId } from '@yac-swap/cryptoassets'
+import { ChainId } from '@yaswap/cryptoassets'
 
 import { isERC20 } from '@/utils/asset'
 import cryptoassets from '@/utils/cryptoassets'

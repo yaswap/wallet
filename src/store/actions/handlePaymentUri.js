@@ -1,6 +1,6 @@
 import qs from 'qs'
 import cryptoassets from '../../utils/cryptoassets'
-import { currencyToUnit } from '@yac-swap/cryptoassets'
+import { currencyToUnit } from '@yaswap/cryptoassets'
 
 export const handlePaymentUri = async ({ dispatch }, { data }) => {
   const { uri } = data

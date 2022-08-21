@@ -1,6 +1,6 @@
 import BN from 'bignumber.js'
 import { SwapProvider } from '../../SwapProvider'
-import { unitToCurrency, assets } from '@yac-swap/cryptoassets'
+import { unitToCurrency, assets } from '@yaswap/cryptoassets'
 import { withInterval } from '../../../store/actions/performNextAction/utils'
 import { prettyBalance } from '../../../utils/coinFormatter'
 import { isERC20, getNativeAsset } from '@/utils/asset'

@@ -1,6 +1,6 @@
 import buildConfig from '../../build.config'
 import { accountCreator, getNextAccountColor } from '@/utils/accounts'
-import { chains, assets as cryptoassets } from '@yac-swap/cryptoassets'
+import { chains, assets as cryptoassets } from '@yaswap/cryptoassets'
 
 export const multipleAccountSupport = {
   // multiple account support

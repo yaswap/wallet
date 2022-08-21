@@ -2,7 +2,7 @@ const Wallet = require('ethereumjs-wallet')
 const bitcoin = require('bitcoinjs-lib')
 const bip39 = require('bip39')
 const crypto = require('crypto')
-const chains = require('@yac-swap/cryptoassets').chains
+const chains = require('@yaswap/cryptoassets').chains
 
 class TestDataUtils {
   /**

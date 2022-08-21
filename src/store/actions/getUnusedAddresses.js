@@ -1,6 +1,6 @@
 import Bluebird from 'bluebird'
 import { isEthereumChain } from '@/utils/asset'
-import { ChainId } from '@yac-swap/cryptoassets'
+import { ChainId } from '@yaswap/cryptoassets'
 
 export const getUnusedAddresses = async (
   { state, commit, getters },

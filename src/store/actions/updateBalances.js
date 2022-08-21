@@ -1,6 +1,6 @@
 import Bluebird from 'bluebird'
 import { Address } from '@liquality/types'
-import { ChainId } from '@yac-swap/cryptoassets'
+import { ChainId } from '@yaswap/cryptoassets'
 
 export const updateBalances = async ({ state, commit, getters }, { network, walletId, assets }) => {
   let accounts = state.accounts[walletId]?.[network].filter(

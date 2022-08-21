@@ -1,4 +1,4 @@
-import { chains } from '@yac-swap/cryptoassets'
+import { chains } from '@yaswap/cryptoassets'
 
 export const exportPrivateKey = async ({ getters }, args) => {
   const { network, walletId, accountId, chainId } = args
