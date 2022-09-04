@@ -12,7 +12,7 @@
       >
         <p class="c7" id="h.gjdgxs">
           <span class="c14 c3">
-            THIS IS THE BETA VERSION OF THE LIQUALITY PLATFORM WHICH IS STILL BEING ACTIVELY
+            THIS IS THE BETA VERSION OF THE YASWAP PLATFORM WHICH IS STILL BEING ACTIVELY
             DEVELOPED. YOU ACKNOWLEDGE THE INFORMATION AVAILABLE IS NOT INTENDED TO BE RELIED ON OR
             USED IN A PRODUCTION ENVIRONMENT. YOU ACKNOWLEDGE AND ACCEPT THAT THE SITE OR SERVICES
             (A) MAY CONTAIN BUGS, ERRORS, AND DEFECTS, (B) MAY FUNCTION IMPROPERLY OR BE SUBJECT TO
@@ -40,9 +40,9 @@
         </p>
         <p class="c7">
           <span>Welcome to ConsenSys AG’s</span>
-          <span>Liquality</span>
+          <span>Yaswap</span>
           <span>(“</span>
-          <span class="c3">Liquality</span>
+          <span class="c3">Yaswap</span>
           <span>”, “</span>
           <span class="c3">Company</span>
           <span>”, “</span>
@@ -52,7 +52,7 @@
           <span>”, or “</span>
           <span class="c3">us</span>
           <span>
-            ”). Liquality is a client-based platform that would enable users to swap consumer tokens
+            ”). Yaswap is a client-based platform that would enable users to swap consumer tokens
             on a peer-to-peer basis without an intermediary. These terms of use (“
           </span>
           <span class="c3">Terms</span>
@@ -62,7 +62,7 @@
           <span class="c3">Agreement</span>
           <span>”) govern your use of the website located at</span>
           <span class="c15">
-            <a class="c16" href="https://liquality.io/"> https://liquality.io/ </a>
+            <a class="c16" href="https://www.yacoin.org/"> https://www.yacoin.org/ </a>
           </span>
           <span>&nbsp;(the “</span>
           <span class="c3">Site</span>
@@ -620,7 +620,7 @@
         </p>
         <p class="c4">
           <span>Subject Line: Copyright Notification:</span>
-          <span>Liquality</span>
+          <span>Yaswap</span>
         </p>
         <ol class="c12 lst-kix_list_1-0" start="12">
           <li class="c4 c13" id="h.35nkun2">
@@ -922,11 +922,11 @@
           <span>
             We welcome your comments or questions about these Terms. Please contact us at:
           </span>
-          <a class="" href="mailto:info@liquality.io"> info@liquality.io </a>
+          <a class="" href="mailto:yaswap2022@gmail.com"> yaswap2022@gmail.com </a>
           <span class="c2">.</span>
         </p>
         <div class="analytics-optin">
-          <div class="analytics-optin-title">Help us improve Liquality to better serve you</div>
+          <div class="analytics-optin-title">Help us improve Yaswap to better serve you</div>
           <div class="analytics-optin-message">
             Share where you click. There is no identifying or personal data shared with us. You can
             change these permissions at any time in your settings.
@@ -943,7 +943,7 @@
                 @click="setAnalyticsOption(true)"
               />
               <label class="custom-control-label" for="optin_anaylitics_accept">
-                Sure, I'll help improve Liquality
+                Sure, I'll help improve Yaswap
               </label>
             </div>
             <div class="custom-control custom-radio">

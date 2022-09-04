@@ -38,7 +38,7 @@ describe('RBTC->BTC swap-["PULL_REQUEST_TEST"]', async () => {
     await browser.close()
   })
 
-  it('SWAP RBTC to BTC - liquality', async () => {
+  it('SWAP RBTC to BTC - yaswap', async () => {
     const fromAsset = 'RBTC'
     const toAsset = 'BTC'
 
@@ -70,7 +70,7 @@ describe('RBTC->BTC swap-["PULL_REQUEST_TEST"]', async () => {
 
     await page.waitForTimeout(10000)
     expect(await page.$eval('#selectedQuote_provider', (el) => el.textContent),
-      'BTC->RBTC,Liquality swap Provider!!').oneOf(['Liquality'])
+      'BTC->RBTC,Yaswap swap Provider!!').oneOf(['Yaswap'])
 
     // Click on SWAP Review button
     await swapPage.clickSwapReviewButton(page)

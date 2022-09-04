@@ -39,7 +39,7 @@ describe('SWAP feature["TESTNET"]', async () => {
       await browser.close()
   })
 
-  it.skip('SWAP BTC to ETH (LIQUALITY)', async () => {
+  it.skip('SWAP BTC to ETH (YASWAP)', async () => {
     const asset1 = 'BTC'
     const asset2 = 'ETH'
     // Select testnet
@@ -53,10 +53,10 @@ describe('SWAP feature["TESTNET"]', async () => {
     const swapSendAmountField = await swapPage.GetSwapSendAmount(page)
     expect(swapSendAmountField, 'BTC to ETH SWAP min value not set in input').not.equals('0.0000')
     await swapPage.ClickOnMin(page)
-    // Rate & source provider validation (BTC->ETH source chosen is LIQUALITY)
+    // Rate & source provider validation (BTC->ETH source chosen is YASWAP)
     await page.waitForSelector('#selectedQuote_provider', { visible: true })
     expect(await page.$eval('#selectedQuote_provider', (el) => el.textContent),
-      'BTC->ETH swap, LIQUALITY source should be chosen!').equals('Liquality')
+      'BTC->ETH swap, YASWAP source should be chosen!').equals('Yaswap')
     // Click on Network speed + FEE
     await swapPage.ValidateNetworkFeeTab(page)
     // Click on Network speed + FEE & Validate BTC Avg/ETH Avg
@@ -220,7 +220,7 @@ describe('SWAP feature["TESTNET"]', async () => {
     // Rate & source provider validation (BTC if its more than 1 or 2 source chosen is Thorchain)
     await page.waitForSelector('#selectedQuote_provider', { visible: true })
     expect(await page.$eval('#selectedQuote_provider', (el) => el.textContent),
-      'ETH swap, Thorchain source should be chosen!').oneOf(['Liquality', 'Thorchain'])
+      'ETH swap, Thorchain source should be chosen!').oneOf(['Yaswap', 'Thorchain'])
     // Check review button has been disabled
     await swapPage.HasReviewButtonDisabled(page)
   })
@@ -244,7 +244,7 @@ describe('SWAP feature["TESTNET"]', async () => {
 
     // Check source name
     expect(await swapPage.getSelectedServiceProvider(page),
-      `${fromAsset}->${toAsset} swap, source should be chosen!`).oneOf(['Thorchain', 'Liquality'])
+      `${fromAsset}->${toAsset} swap, source should be chosen!`).oneOf(['Thorchain', 'Yaswap'])
 
     // Click on selected Quote service provider
     await page.click('#selectedQuote_provider')

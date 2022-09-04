@@ -62,12 +62,12 @@ module.exports = {
     popup: {
       template: 'public/index.html',
       entry: './src/main.js',
-      title: 'Liquality Wallet'
+      title: 'Yaswap Wallet'
     },
     standalone: {
       template: 'public/index.html',
       entry: './src/main.js',
-      title: 'Liquality Wallet',
+      title: 'Yaswap Wallet',
       filename: 'index.html'
     }
   }

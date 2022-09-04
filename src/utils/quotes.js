@@ -13,9 +13,9 @@ export function sortQuotes(quotes, network) {
   return quotes.slice(0).sort((a, b) => {
     const isCrossChain = cryptoassets[a.from].chain !== cryptoassets[a.to].chain
     if (isCrossChain) {
-      // Prefer Liquality for crosschain swaps where liquidity is available
-      if (getSwapProviderConfig(network, a.provider).type === SwapProviderType.LIQUALITY) return -1
-      else if (getSwapProviderConfig(network, b.provider).type === SwapProviderType.LIQUALITY)
+      // Prefer Yaswap for crosschain swaps where liquidity is available
+      if (getSwapProviderConfig(network, a.provider).type === SwapProviderType.YASWAP) return -1
+      else if (getSwapProviderConfig(network, b.provider).type === SwapProviderType.YASWAP)
         return 1
     }
 

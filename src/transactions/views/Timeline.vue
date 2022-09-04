@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="liquality-timeline">
+    <div class="yaswap-timeline">
       <small id="start_time">{{ prettyTime(item.startTime) }}</small>
       <h3>Sent</h3>
-      <div class="liquality-timeline_inner">
-        <div class="liquality-timeline_container left completed">
+      <div class="yaswap-timeline_inner">
+        <div class="yaswap-timeline_container left completed">
           <div class="content">
             <h3 :id="item.from">
               From:
@@ -19,7 +19,7 @@
           </div>
         </div>
         <div
-          class="liquality-timeline_container right"
+          class="yaswap-timeline_container right"
           :class="{ completed: item.status === 'SUCCESS' && tx && tx.confirmations > 0 }"
         >
           <div class="content">
@@ -130,7 +130,7 @@ export default {
       return BN(1).div(calculateQuoteRate(this.item)).dp(8)
     },
     orderLink() {
-      if (this.item.provider !== 'liquality') {
+      if (this.item.provider !== 'yaswap') {
         return ''
       }
       const agent = getSwapProviderConfig(this.item.network, this.item.provider).agent
@@ -182,7 +182,7 @@ export default {
 </script>
 
 <style lang="scss">
-.liquality-timeline {
+.yaswap-timeline {
   padding-bottom: 20px;
   text-align: center;
 

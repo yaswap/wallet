@@ -49,7 +49,7 @@ const TESTNET_ASSETS = [
 
 const mapLegacyProvidersToSupported = {
   oneinchV3: 'oneinchV4',
-  liqualityBoost: 'liqualityBoostNativeToERC20'
+  yaswapBoost: 'yaswapBoostNativeToERC20'
 }
 
 export default {

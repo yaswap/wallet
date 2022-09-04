@@ -66,10 +66,10 @@ class Background {
           attemptOrWarn(
             () =>
               connection.postMessage({
-                id: 'liqualityChainChanged',
+                id: 'yaswapChainChanged',
                 data: { chainIds: this.getChainIds(state.activeNetwork) }
               }),
-            `liqualityChainChanged: Injection connection dropped: ${connection.name}`
+            `yaswapChainChanged: Injection connection dropped: ${connection.name}`
           )
         )
       }
@@ -79,10 +79,10 @@ class Background {
           attemptOrWarn(
             () =>
               connection.postMessage({
-                id: 'liqualityAccountsChanged',
+                id: 'yaswapAccountsChanged',
                 data: {}
               }),
-            `liqualityAccountsChanged: Injection connection dropped: ${connection.name}`
+            `yaswapAccountsChanged: Injection connection dropped: ${connection.name}`
           )
         )
       }

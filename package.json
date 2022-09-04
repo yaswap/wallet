@@ -1,8 +1,8 @@
 {
-  "name": "liquality-wallet",
+  "name": "yaswap-wallet",
   "version": "0.57.0",
   "private": true,
-  "author": "Liquality <info@liquality.io>",
+  "author": "Yaswap <yaswap2022@gmail.com>",
   "scripts": {
     "build": "vue-cli-service build",
     "test:unit": "jest test/unit/*.test.js",
@@ -163,6 +163,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:liquality/wallet.git"
+    "url": "git@github.com:yaswap/wallet.git"
   }
 }

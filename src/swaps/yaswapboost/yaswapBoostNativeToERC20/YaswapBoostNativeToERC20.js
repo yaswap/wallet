@@ -4,16 +4,16 @@ import { unitToCurrency, assets } from '@yaswap/cryptoassets'
 import { withInterval } from '../../../store/actions/performNextAction/utils'
 import { prettyBalance } from '../../../utils/coinFormatter'
 import { isERC20, getNativeAsset } from '@/utils/asset'
-import { LiqualitySwapProvider } from '../../liquality/LiqualitySwapProvider'
+import { YaswapSwapProvider } from '../../yaswap/YaswapSwapProvider'
 import { OneinchSwapProvider } from '../../oneinch/OneinchSwapProvider'
 import { createSwapProvider } from '../../../store/factory/swapProvider'
 
 const slippagePercentage = 3
 
-class LiqualityBoostNativeToERC20 extends SwapProvider {
+class YaswapBoostNativeToERC20 extends SwapProvider {
   constructor(config) {
     super(config)
-    this.liqualitySwapProvider = createSwapProvider(this.config.network, 'liquality')
+    this.yaswapSwapProvider = createSwapProvider(this.config.network, 'yaswap')
     this.sovrynSwapProvider = createSwapProvider(this.config.network, 'sovryn')
     this.supportedBridgeAssets = this.config.supportedBridgeAssets
 
@@ -40,7 +40,7 @@ class LiqualityBoostNativeToERC20 extends SwapProvider {
     if (isERC20(from) || !isERC20(to) || amount <= 0) return null
     const bridgeAsset = getNativeAsset(to)
     if (!this.supportedBridgeAssets.includes(bridgeAsset)) return null
-    const quote = await this.liqualitySwapProvider.getQuote({
+    const quote = await this.yaswapSwapProvider.getQuote({
       network,
       from,
       to: bridgeAsset,
@@ -67,7 +67,7 @@ class LiqualityBoostNativeToERC20 extends SwapProvider {
   }
 
   async newSwap({ network, walletId, quote: _quote }) {
-    const result = await this.liqualitySwapProvider.newSwap({
+    const result = await this.yaswapSwapProvider.newSwap({
       network,
       walletId,
       quote: {
@@ -85,17 +85,17 @@ class LiqualityBoostNativeToERC20 extends SwapProvider {
   }
 
   async updateOrder(order) {
-    return await this.liqualitySwapProvider.updateOrder(order)
+    return await this.yaswapSwapProvider.updateOrder(order)
   }
 
   async estimateFees({ network, walletId, asset, txType, quote, feePrices, max }) {
-    const liqualityFees = await this.liqualitySwapProvider.estimateFees({
+    const yaswapFees = await this.yaswapSwapProvider.estimateFees({
       network,
       walletId,
       asset,
       txType:
-        txType === LiqualityBoostNativeToERC20.txTypes.SWAP
-          ? LiqualityBoostNativeToERC20.txTypes.SWAP_CLAIM
+        txType === YaswapBoostNativeToERC20.txTypes.SWAP
+          ? YaswapBoostNativeToERC20.txTypes.SWAP_CLAIM
           : txType,
       quote: {
         ...quote,
@@ -105,14 +105,14 @@ class LiqualityBoostNativeToERC20 extends SwapProvider {
       feePrices,
       max
     })
-    if (isERC20(asset) && txType === LiqualityBoostNativeToERC20.txTypes.SWAP) {
+    if (isERC20(asset) && txType === YaswapBoostNativeToERC20.txTypes.SWAP) {
       const automatedMarketMakerFees = await this.bridgeAssetToAutomatedMarketMaker[
         quote.bridgeAsset
       ].estimateFees({
         network,
         walletId,
         asset,
-        txType: LiqualityBoostNativeToERC20.txTypes.SWAP,
+        txType: YaswapBoostNativeToERC20.txTypes.SWAP,
         quote: {
           ...quote,
           from: quote.bridgeAsset,
@@ -125,15 +125,15 @@ class LiqualityBoostNativeToERC20 extends SwapProvider {
       })
       const totalFees = {}
       for (const key in automatedMarketMakerFees) {
-        totalFees[key] = BN(automatedMarketMakerFees[key]).plus(liqualityFees[key])
+        totalFees[key] = BN(automatedMarketMakerFees[key]).plus(yaswapFees[key])
       }
       return totalFees
     }
-    return liqualityFees
+    return yaswapFees
   }
 
-  async finalizeLiqualitySwapAndStartAutomatedMarketMaker({ swap, network, walletId }) {
-    const result = await this.liqualitySwapProvider.waitForClaimConfirmations({
+  async finalizeYaswapSwapAndStartAutomatedMarketMaker({ swap, network, walletId }) {
+    const result = await this.yaswapSwapProvider.waitForClaimConfirmations({
       swap,
       network,
       walletId
@@ -143,7 +143,7 @@ class LiqualityBoostNativeToERC20 extends SwapProvider {
 
   async performNextSwapAction(store, { network, walletId, swap }) {
     let updates
-    const swapLiqualityFormat = {
+    const swapYaswapFormat = {
       ...swap,
       to: swap.bridgeAsset,
       toAmount: swap.bridgeAssetAmount,
@@ -159,17 +159,17 @@ class LiqualityBoostNativeToERC20 extends SwapProvider {
     }
     if (swap.status === 'WAITING_FOR_CLAIM_CONFIRMATIONS') {
       updates = await withInterval(async () =>
-        this.finalizeLiqualitySwapAndStartAutomatedMarketMaker({
-          swap: swapLiqualityFormat,
+        this.finalizeYaswapSwapAndStartAutomatedMarketMaker({
+          swap: swapYaswapFormat,
           network,
           walletId
         })
       )
     } else {
-      updates = await this.liqualitySwapProvider.performNextSwapAction(store, {
+      updates = await this.yaswapSwapProvider.performNextSwapAction(store, {
         network,
         walletId,
-        swap: swapLiqualityFormat
+        swap: swapYaswapFormat
       })
     }
 
@@ -186,19 +186,19 @@ class LiqualityBoostNativeToERC20 extends SwapProvider {
   }
 
   static txTypes = {
-    ...LiqualitySwapProvider.txTypes,
+    ...YaswapSwapProvider.txTypes,
     ...OneinchSwapProvider.txTypes
   }
 
   static statuses = {
-    ...LiqualitySwapProvider.statuses,
+    ...YaswapSwapProvider.statuses,
     ...OneinchSwapProvider.statuses,
     FUNDED: {
-      ...LiqualitySwapProvider.statuses.FUNDED,
+      ...YaswapSwapProvider.statuses.FUNDED,
       label: 'Locking {bridgeAsset}'
     },
     CONFIRM_COUNTER_PARTY_INITIATION: {
-      ...LiqualitySwapProvider.statuses.CONFIRM_COUNTER_PARTY_INITIATION,
+      ...YaswapSwapProvider.statuses.CONFIRM_COUNTER_PARTY_INITIATION,
       label: 'Locking {bridgeAsset}',
       notification(swap) {
         return {
@@ -209,11 +209,11 @@ class LiqualityBoostNativeToERC20 extends SwapProvider {
       }
     },
     READY_TO_CLAIM: {
-      ...LiqualitySwapProvider.statuses.READY_TO_CLAIM,
+      ...YaswapSwapProvider.statuses.READY_TO_CLAIM,
       label: 'Claiming {bridgeAsset}'
     },
     WAITING_FOR_CLAIM_CONFIRMATIONS: {
-      ...LiqualitySwapProvider.statuses.WAITING_FOR_CLAIM_CONFIRMATIONS,
+      ...YaswapSwapProvider.statuses.WAITING_FOR_CLAIM_CONFIRMATIONS,
       label: 'Claiming {bridgeAsset}'
     },
     APPROVE_CONFIRMED: {
@@ -231,7 +231,7 @@ class LiqualityBoostNativeToERC20 extends SwapProvider {
       step: 3
     },
     SUCCESS: {
-      ...LiqualitySwapProvider.statuses.SUCCESS,
+      ...YaswapSwapProvider.statuses.SUCCESS,
       step: 4
     },
     FAILED: {
@@ -240,12 +240,12 @@ class LiqualityBoostNativeToERC20 extends SwapProvider {
     }
   }
 
-  static fromTxType = LiqualityBoostNativeToERC20.txTypes.SWAP_INITIATION
-  static toTxType = LiqualityBoostNativeToERC20.txTypes.SWAP
+  static fromTxType = YaswapBoostNativeToERC20.txTypes.SWAP_INITIATION
+  static toTxType = YaswapBoostNativeToERC20.txTypes.SWAP
 
   static timelineDiagramSteps = ['INITIATION', 'AGENT_INITIATION', 'CLAIM_OR_REFUND', 'SWAP']
 
   static totalSteps = 5
 }
 
-export { LiqualityBoostNativeToERC20 }
+export { YaswapBoostNativeToERC20 }

@@ -51,7 +51,7 @@ describe('Hamburger menu options["MAINNET"]', async () => {
     // Default Web3 Wallet
     await page.waitForSelector('#settings_item_default_wallet', { visible: true })
     const settingDefaultWebWallet = await page.$eval('#settings_item_default_wallet', (el) => el.textContent)
-    expect(settingDefaultWebWallet).contains('Set Liquality as the default dapp wallet. Other wallets cannot interact with dapps while this is enabled.')
+    expect(settingDefaultWebWallet).contains('Set Yaswap as the default dapp wallet. Other wallets cannot interact with dapps while this is enabled.')
 
     // Check the Analytics toggle option has been added
     await page.waitForSelector('#analytics_toggle_button', { visible: true })

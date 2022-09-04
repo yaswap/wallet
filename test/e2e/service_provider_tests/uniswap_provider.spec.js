@@ -62,7 +62,7 @@ describe('UNISWAP service Provider-["MAINNET","PULL_REQUEST_TEST"]', async () =>
     })
     expect(await page.$eval('#selectedQuote_provider', (el) => el.textContent),
       'ETH->DAI, Supporting source should be chosen!')
-      .oneOf(['Uniswap V2', 'Thorchain', 'Liquality'])
+      .oneOf(['Uniswap V2', 'Thorchain', 'Yaswap'])
 
     // Click on Network speed + FEE & Validate
     const networkSpeedFee = await page.$eval('#details_header_chevron_down_icon', el => el.textContent)

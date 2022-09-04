@@ -634,7 +634,7 @@ export default {
     },
     min() {
       const toQuoteAsset =
-        this.selectedQuoteProvider?.config?.type === SwapProviderType.LIQUALITYBOOST
+        this.selectedQuoteProvider?.config?.type === SwapProviderType.YASWAPBOOST
           ? this.toAssetChain
           : this.toAsset
       const liqualityMarket = this.networkMarketData?.find((pair) => {
@@ -642,7 +642,7 @@ export default {
           pair.from === this.asset &&
           pair.to === toQuoteAsset &&
           getSwapProviderConfig(this.activeNetwork, pair.provider).type ===
-            SwapProviderType.LIQUALITY
+            SwapProviderType.YASWAP
         )
       })
 

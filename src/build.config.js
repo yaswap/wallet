@@ -64,24 +64,24 @@ export default {
   },
   swapProviders: {
     testnet: {
-      liquality: {
-        name: 'Liquality',
-        icon: 'liquality.svg',
-        type: SwapProviderType.LIQUALITY,
+      yaswap: {
+        name: 'Yaswap',
+        icon: 'yaswap.svg',
+        type: SwapProviderType.YASWAP,
         agent: 'http://104.48.189.74:3030'
       },
-      liqualityBoostNativeToERC20: {
-        name: 'Liquality Boost',
-        type: SwapProviderType.LIQUALITYBOOST_NATIVE_TO_ERC20,
+      yaswapBoostNativeToERC20: {
+        name: 'Yaswap Boost',
+        type: SwapProviderType.YASWAPBOOST_NATIVE_TO_ERC20,
         network: 'testnet',
-        icon: 'liqualityboost.svg',
+        icon: 'yaswapboost.svg',
         supportedBridgeAssets: ['RBTC']
       },
-      liqualityBoostERC20toNative: {
-        name: 'Liquality Boost',
-        type: SwapProviderType.LIQUALITYBOOST_ERC20_TO_NATIVE,
+      yaswapBoostERC20toNative: {
+        name: 'Yaswap Boost',
+        type: SwapProviderType.YASWAPBOOST_ERC20_TO_NATIVE,
         network: 'testnet',
-        icon: 'liqualityboost.svg',
+        icon: 'yaswapboost.svg',
         supportedBridgeAssets: ['RBTC']
       },
       uniswapV2: {
@@ -106,24 +106,24 @@ export default {
       }
     },
     mainnet: {
-      liquality: {
-        name: 'Liquality',
-        icon: 'liquality.svg',
-        type: SwapProviderType.LIQUALITY,
+      yaswap: {
+        name: 'Yaswap',
+        icon: 'yaswap.svg',
+        type: SwapProviderType.YASWAP,
         agent: 'http://104.48.189.74:3031'
       },
-      liqualityBoostNativeToERC20: {
-        name: 'Liquality Boost',
-        type: SwapProviderType.LIQUALITYBOOST_NATIVE_TO_ERC20,
+      yaswapBoostNativeToERC20: {
+        name: 'Yaswap Boost',
+        type: SwapProviderType.YASWAPBOOST_NATIVE_TO_ERC20,
         network: 'mainnet',
-        icon: 'liqualityboost.svg',
+        icon: 'yaswapboost.svg',
         supportedBridgeAssets: ['MATIC', 'RBTC']
       },
-      liqualityBoostERC20toNative: {
-        name: 'Liquality Boost',
-        type: SwapProviderType.LIQUALITYBOOST_ERC20_TO_NATIVE,
+      yaswapBoostERC20toNative: {
+        name: 'Yaswap Boost',
+        type: SwapProviderType.YASWAPBOOST_ERC20_TO_NATIVE,
         network: 'mainnet',
-        icon: 'liqualityboost.svg',
+        icon: 'yaswapboost.svg',
         supportedBridgeAssets: ['MATIC', 'RBTC']
       },
       uniswapV2: {

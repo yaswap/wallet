@@ -108,7 +108,7 @@ if (process.env.NODE_ENV === 'mainnet') {
         expect(
           await swapPage.getSelectedServiceProvider(page),
           'BTC->RBTC,fastBTC swap Provider!!'
-        ).oneOf(['FastBTC', 'Liquality'])
+        ).oneOf(['FastBTC', 'Yaswap'])
       }
     })
   })

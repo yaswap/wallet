@@ -15,7 +15,7 @@ const swapPage = new SwapPage()
 
 let browser, page
 const password = '123123123'
-const BOOSTER = 'Liquality Boost'
+const BOOSTER = 'Yaswap Boost'
 
 // https://docs.google.com/spreadsheets/d/18c-B2jYeyxoRTNI0yuFWsltSXYQ3quObxacXEx42N5g/edit#gid=0
 if (process.env.NODE_ENV === 'mainnet') {
@@ -24,15 +24,15 @@ if (process.env.NODE_ENV === 'mainnet') {
     try {
       await page.waitForSelector('#selectedQuote_provider', { visible: true })
       expect(await page.$eval('#selectedQuote_provider', (el) => el.textContent),
-        'Liquality Boost source should be chosen!')
+        'Yaswap Boost source should be chosen!')
         .contain(BOOSTER)
     } catch (e) {
-      await testUtil.takeScreenshot(page, 'liqualityBoost-rate-provider-issue')
-      expect(e, 'Liquality Boost should chosen').equals(null)
+      await testUtil.takeScreenshot(page, 'yaswapBoost-rate-provider-issue')
+      expect(e, 'Yaswap Boost should chosen').equals(null)
     }
   }
   // Only works on Mainnet
-  describe.skip('Liquality Booster-["MAINNET"]', async () => {
+  describe.skip('Yaswap Booster-["MAINNET"]', async () => {
     beforeEach(async () => {
       browser = await puppeteer.launch(testUtil.getChromeOptions())
       page = await browser.newPage()
@@ -68,13 +68,13 @@ if (process.env.NODE_ENV === 'mainnet') {
       let serviceProvider = await swapPage.getSelectedServiceProvider(page)
       if (serviceProvider !== BOOSTER) {
         await swapPage.ClickOnMin(page)
-      } else if (serviceProvider === 'Liquality') {
+      } else if (serviceProvider === 'Yaswap') {
         await page.waitForSelector('#see_all_quotes', { visible: true })
-        // Select Liquality Boost
+        // Select Yaswap Boost
         await page.waitForSelector('#see_all_quotes', { visible: true })
         await page.click('#see_all_quotes')
-        await page.waitForSelector('#liqualityBoost_rate_provider', { visible: true })
-        await page.click('#liqualityBoost_rate_provider')
+        await page.waitForSelector('#yaswapBoost_rate_provider', { visible: true })
+        await page.click('#yaswapBoost_rate_provider')
         await page.click('#select_quote_button')
       }
       // Check source name
@@ -98,7 +98,7 @@ if (process.env.NODE_ENV === 'mainnet') {
       } else {
         await swapPage.EnterSendAmountOnSwap(page, '0.00001')
       }
-      // Select Liquality Boost
+      // Select Yaswap Boost
       try {
         await page.waitForSelector('#selectedQuote_provider', { visible: true })
       } catch (e) {
@@ -108,20 +108,20 @@ if (process.env.NODE_ENV === 'mainnet') {
       await page.waitForTimeout(5000)
       try {
         const selectedQuoteProviderText = await page.$eval('#selectedQuote_provider', (el) => el.textContent)
-        if (selectedQuoteProviderText === liqualityBooster) {
+        if (selectedQuoteProviderText === yaswapBooster) {
           // Check source name
           await checkBooster()
-        } else if (selectedQuoteProviderText === 'Liquality') {
+        } else if (selectedQuoteProviderText === 'Yaswap') {
           await page.click('#see_all_quotes')
-          await page.waitForSelector('#liqualityBoost_rate_provider', { visible: true })
-          await page.click('#liqualityBoost_rate_provider')
+          await page.waitForSelector('#yaswapBoost_rate_provider', { visible: true })
+          await page.click('#yaswapBoost_rate_provider')
           await page.click('#select_quote_button')
           // Check source name
           await checkBooster()
         }
       } catch (e) {
-        await testUtil.takeScreenshot(page, 'liqualityBooster-selected-error')
-        expect(e, 'Liquality Boost selected quote provider error!!').equals(null)
+        await testUtil.takeScreenshot(page, 'yaswapBooster-selected-error')
+        expect(e, 'Yaswap Boost selected quote provider error!!').equals(null)
       }
     })
     it.skip('SWAP (RBTC->PWETH (Polygon))', async () => {
@@ -142,7 +142,7 @@ if (process.env.NODE_ENV === 'mainnet') {
       } else {
         await swapPage.EnterSendAmountOnSwap(page, '0.00001')
       }
-      // Select Liquality Boost
+      // Select Yaswap Boost
       try {
         await page.waitForSelector('#selectedQuote_provider', { visible: true })
       } catch (e) {
@@ -155,17 +155,17 @@ if (process.env.NODE_ENV === 'mainnet') {
         if (selectedQuoteProviderText === BOOSTER) {
           // Check source name
           await checkBooster()
-        } else if (selectedQuoteProviderText === 'Liquality') {
+        } else if (selectedQuoteProviderText === 'Yaswap') {
           await page.click('#see_all_quotes')
-          await page.waitForSelector('#liqualityBoost_rate_provider', { visible: true })
-          await page.click('#liqualityBoost_rate_provider')
+          await page.waitForSelector('#yaswapBoost_rate_provider', { visible: true })
+          await page.click('#yaswapBoost_rate_provider')
           await page.click('#select_quote_button')
           // Check source name
           await checkBooster()
         }
       } catch (e) {
-        await testUtil.takeScreenshot(page, 'liqualityBooster-selected-error')
-        expect(e, 'Liquality Boost selected quote provider error!!').equals(null)
+        await testUtil.takeScreenshot(page, 'yaswapBooster-selected-error')
+        expect(e, 'Yaswap Boost selected quote provider error!!').equals(null)
       }
     })
   })

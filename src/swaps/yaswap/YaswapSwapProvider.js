@@ -16,7 +16,7 @@ export const VERSION_STRING = `Wallet ${pkg.version} (CAL ${pkg.dependencies['@l
   .replace('^', '')
   .replace('~', '')})`
 
-class LiqualitySwapProvider extends SwapProvider {
+class YaswapSwapProvider extends SwapProvider {
   async _getQuote({ from, to, amount }) {
     try {
       return (
@@ -157,7 +157,7 @@ class LiqualitySwapProvider extends SwapProvider {
 
   async estimateFees({ network, walletId, asset, txType, quote, feePrices, max }) {
     if (
-      txType === LiqualitySwapProvider.txTypes.SWAP_INITIATION &&
+      txType === YaswapSwapProvider.txTypes.SWAP_INITIATION &&
       (asset === 'BTC' || asset === 'YAC')
     ) {
       const client = this.getClient(network, walletId, asset, quote.fromAccountId)
@@ -167,10 +167,10 @@ class LiqualitySwapProvider extends SwapProvider {
       return mapValues(totalFees, (f) => unitToCurrency(cryptoassets[asset], f))
     }
 
-    if (txType in LiqualitySwapProvider.feeUnits) {
+    if (txType in YaswapSwapProvider.feeUnits) {
       const fees = {}
       for (const feePrice of feePrices) {
-        fees[feePrice] = getTxFee(LiqualitySwapProvider.feeUnits[txType], asset, feePrice)
+        fees[feePrice] = getTxFee(YaswapSwapProvider.feeUnits[txType], asset, feePrice)
       }
 
       return fees
@@ -718,12 +718,12 @@ class LiqualitySwapProvider extends SwapProvider {
     }
   }
 
-  static fromTxType = LiqualitySwapProvider.txTypes.SWAP_INITIATION
-  static toTxType = LiqualitySwapProvider.txTypes.SWAP_CLAIM
+  static fromTxType = YaswapSwapProvider.txTypes.SWAP_INITIATION
+  static toTxType = YaswapSwapProvider.txTypes.SWAP_CLAIM
 
   static timelineDiagramSteps = ['INITIATION', 'AGENT_INITIATION', 'CLAIM_OR_REFUND']
 
   static totalSteps = 4
 }
 
-export { LiqualitySwapProvider }
+export { YaswapSwapProvider }

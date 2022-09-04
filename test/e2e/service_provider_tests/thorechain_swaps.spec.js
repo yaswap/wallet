@@ -53,7 +53,7 @@ describe('ThoreChain SWAP provider["MAINNET", "PULL_REQUEST_TEST"]', async () =>
     await page.waitForSelector('#selectedQuote_provider', { visible: true })
     try {
       const selectedQuoteProviderText = await page.$eval('#selectedQuote_provider', (el) => el.textContent)
-      if (selectedQuoteProviderText === 'Liquality') {
+      if (selectedQuoteProviderText === 'Yaswap') {
         await page.click('#see_all_quotes', {delay: 1000})
         await page.waitForSelector('#thorchain_rate_provider', { visible: true })
         await page.click('#thorchain_rate_provider', {delay: 1000})
@@ -80,7 +80,7 @@ describe('ThoreChain SWAP provider["MAINNET", "PULL_REQUEST_TEST"]', async () =>
     await page.waitForSelector('#selectedQuote_provider', { visible: true })
     try {
       const selectedQuoteProviderText = await page.$eval('#selectedQuote_provider', (el) => el.textContent)
-      if (selectedQuoteProviderText === 'Liquality') {
+      if (selectedQuoteProviderText === 'Yaswap') {
         await page.click('#see_all_quotes', {delay: 1000})
         await page.waitForSelector('#thorchain_rate_provider', { visible: true })
         await page.click('#thorchain_rate_provider', {delay: 1000})

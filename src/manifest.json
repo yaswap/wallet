@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
   "version": "0.57.0",
-  "name": "Liquality Wallet",
+  "name": "Yaswap Wallet",
   "description": "Secure multi-crypto wallet with built-in Atomic Swaps!",
-  "homepage_url": "https://liquality.io",
+  "homepage_url": "https://www.yacoin.org/",
   "permissions": [
     "notifications",
     "storage",

@@ -1,27 +1,27 @@
 import buildConfig from '../build.config'
 
 export const SwapProviderType = {
-  LIQUALITY: 'LIQUALITY',
+  YASWAP: 'YASWAP',
   UNISWAPV2: 'UNISWAPV2',
   ONEINCHV4: 'ONEINCHV4',
   THORCHAIN: 'THORCHAIN',
-  LIQUALITYBOOST_NATIVE_TO_ERC20: 'LIQUALITYBOOST_NATIVE_TO_ERC20',
-  LIQUALITYBOOST_ERC20_TO_NATIVE: 'LIQUALITYBOOST_ERC20_TO_NATIVE',
+  YASWAPBOOST_NATIVE_TO_ERC20: 'YASWAPBOOST_NATIVE_TO_ERC20',
+  YASWAPBOOST_ERC20_TO_NATIVE: 'YASWAPBOOST_ERC20_TO_NATIVE',
   FASTBTC: 'FASTBTC',
   SOVRYN: 'SOVRYN',
   ASTROPORT: 'ASTROPORT'
 }
 
 const swapProviderRoot = {
-  [SwapProviderType.LIQUALITY]: 'swaps/liquality',
+  [SwapProviderType.YASWAP]: 'swaps/yaswap',
   [SwapProviderType.UNISWAPV2]: 'swaps/uniswap',
   [SwapProviderType.ONEINCHV4]: 'swaps/oneinch',
   [SwapProviderType.THORCHAIN]: 'swaps/thorchain',
   [SwapProviderType.FASTBTC]: 'swaps/fastbtc',
-  [SwapProviderType.LIQUALITYBOOST_NATIVE_TO_ERC20]:
-    'swaps/liqualityboost/liqualityBoostNativeToERC20',
-  [SwapProviderType.LIQUALITYBOOST_ERC20_TO_NATIVE]:
-    'swaps/liqualityboost/liqualityBoostERC20toNative',
+  [SwapProviderType.YASWAPBOOST_NATIVE_TO_ERC20]:
+    'swaps/yaswapboost/yaswapBoostNativeToERC20',
+  [SwapProviderType.YASWAPBOOST_ERC20_TO_NATIVE]:
+    'swaps/yaswapboost/yaswapBoostERC20toNative',
   [SwapProviderType.SOVRYN]: 'swaps/sovryn',
   [SwapProviderType.ASTROPORT]: 'swaps/astroport'
 }

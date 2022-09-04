@@ -1,4 +1,4 @@
-# Liquality Wallet <img align="right" src="https://raw.githubusercontent.com/liquality/chainabstractionlayer/master/liquality-logo.png" height="80px" />
+# Yaswap Wallet <img align="right" src="https://raw.githubusercontent.com/yaswap/chainabstractionlayer/master/yaswap-logo.png" height="80px" />
 
 ## Getting started
 - Install [NVM](https://github.com/nvm-sh/nvm#installing-and-updating)
@@ -28,7 +28,7 @@ npm run lint
 
 ### Run Integration __tests__
 
-[Wallet](https://liquality.io/wallet.html) Integration __tests__ have been written using [puppeteer](https://developers.google.com/web/tools/puppeteer)
+Integration __tests__ have been written using [puppeteer](https://developers.google.com/web/tools/puppeteer)
 
 #### testNet __tests__
 ```

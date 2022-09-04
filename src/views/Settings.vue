@@ -8,7 +8,7 @@
         <div class="setting-item_title flex-fill mb-2">
           Default Web3 Wallet
           <span class="setting-item_sub"
-            >Set Liquality as the default dapp wallet. Other wallets cannot interact with dapps
+            >Set Yaswap as the default dapp wallet. Other wallets cannot interact with dapps
             while this is enabled.</span
           >
         </div>
@@ -144,7 +144,7 @@ export default {
     async downloadLogs() {
       const logs = await getWalletStateLogs()
       downloadFile({
-        filename: 'Liquality Wallet Logs.json',
+        filename: 'Yaswap Wallet Logs.json',
         type: 'application/javascript;charset=utf-8;',
         content: logs
       })

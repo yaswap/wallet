@@ -98,7 +98,7 @@ async function handleRequest (req) {
 }
 
 window[injectionName] = {
-  isLiquality: true,
+  isYaswap: true,
   isEIP1193: true,
   networkVersion: '${network.networkId}',
   chainId: '0x${network.chainId.toString(16)}',
@@ -133,14 +133,14 @@ window[injectionName] = {
   },
   on: (method, callback) => {
     if (method === 'chainChanged') {
-      window.addEventListener('liqualityChainChanged', ({ detail }) => {
+      window.addEventListener('yaswapChainChanged', ({ detail }) => {
         const result = JSON.parse(detail)
         callback('0x' + result.chainIds['${chain}'].toString(16))
       })
     }
 
     if (method === 'accountsChanged') {
-      window.addEventListener('liqualityAccountsChanged', () => {
+      window.addEventListener('yaswapAccountsChanged', () => {
         const addresses = getAddresses()
         callback(addresses)
       })
@@ -161,7 +161,7 @@ function proxyEthereum(chain) {
     window.ethereumProxyChain = chain
     const injectionName = window.providerManager.getInjectionName(chain)
     if (chainChanged) {
-      window.dispatchEvent(new CustomEvent('liqualityChainChanged', { detail: JSON.stringify({ chainIds: { [chain]: window[injectionName].chainId } }) }))
+      window.dispatchEvent(new CustomEvent('yaswapChainChanged', { detail: JSON.stringify({ chainIds: { [chain]: window[injectionName].chainId } }) }))
     }
     return window[injectionName].enable(chain)
   }
@@ -174,14 +174,14 @@ function proxyEthereum(chain) {
       if (prop === 'on') {
         return (method, callback) => {
           if (method === 'chainChanged') {
-            window.addEventListener('liqualityChainChanged', ({ detail }) => {
+            window.addEventListener('yaswapChainChanged', ({ detail }) => {
               const result = JSON.parse(detail)
               callback('0x' + result.chainIds[window.ethereumProxyChain].toString(16))
             })
           }
 
           if (method === 'accountsChanged') {
-            window.addEventListener('liqualityAccountsChanged', () => {
+            window.addEventListener('yaswapAccountsChanged', () => {
               target.request({ method: 'eth_accounts', params: [] }).then((newAccounts) => {
                 callback(newAccounts)
               })
@@ -240,7 +240,7 @@ if (!window.ethereum) {
   let retries = 0
   const interval = setInterval(() => {
     retries++
-    if (window.ethereum && !window.ethereum.isLiquality) {
+    if (window.ethereum && !window.ethereum.isYaswap) {
       overrideEthereum('${chain}')
       clearInterval(interval)
     }
