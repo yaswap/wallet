@@ -212,7 +212,13 @@ export default {
         }
       })
       .sort((a, b) => {
-        if (a.type.includes('ledger') || a.chain < b.chain) {
+        if (a.chain === 'yacoin') {
+          return -1
+        }
+        else if (b.chain === 'yacoin') {
+          return 1
+        }
+        else if (a.type.includes('ledger') || a.chain < b.chain) {
           return -1
         }
 
