@@ -35,7 +35,7 @@
         </template>
         <template
           #detail-sub
-          v-if="account.totalFiatBalance && account.loadingInitialBalance === false"
+          v-if="account.totalFiatBalance"
         >
           {{ formatFiatUI(formatFiat(account.totalFiatBalance)) }}
         </template>
@@ -66,7 +66,7 @@
           </template>
           <template
             #detail-sub
-            v-if="account.totalFiatBalance && account.loadingInitialBalance === false"
+            v-if="account.totalFiatBalance"
           >
             {{ formatFiatUI(formatFiat(account.totalFiatBalance)) }}
           </template>
