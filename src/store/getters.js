@@ -188,6 +188,18 @@ export default {
   accountsData(state, getters) {
     const { accounts, activeNetwork, activeWalletId, enabledChains } = state
     const { accountFiatBalance, assetFiatBalance } = getters
+    function getPriority(chain) {
+      switch(chain) {
+        case 'yacoin':
+          return 3
+        case 'bitcoin':
+          return 2
+        case 'ethereum':
+          return 1
+        default:
+          return 0
+      }
+    }
     return accounts[activeWalletId]?.[activeNetwork]
       .filter(
         (account) =>
@@ -212,11 +224,11 @@ export default {
         }
       })
       .sort((a, b) => {
-        if (a.chain === 'yacoin') {
-          return -1
-        }
-        else if (b.chain === 'yacoin') {
-          return 1
+        const aPriority = getPriority(a.chain)
+        const bPriority = getPriority(b.chain)
+        const difference = bPriority - aPriority
+        if (difference != 0) {
+          return difference
         }
         else if (a.type.includes('ledger') || a.chain < b.chain) {
           return -1
