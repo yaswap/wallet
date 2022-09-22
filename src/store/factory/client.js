@@ -199,8 +199,8 @@ function createEthClient(asset, network, mnemonic, accountType, derivationPath) 
     ? `https://ropsten.infura.io/v3/${buildConfig.infuraApiKey}`
     : `https://mainnet.infura.io/v3/${buildConfig.infuraApiKey}`
   const scraperApi = isTestnet
-    ? 'http://104.48.189.74:8080/'
-    : 'http://104.48.189.74:8081/'
+    ? 'https://yaswap.yacoin.org/ethscraper_testnet/'
+    : 'https://yaswap.yacoin.org/ethscraper_mainnet/'
 
   const feeProvider = new EthereumEIP1559FeeProvider({ uri: infuraApi })
 

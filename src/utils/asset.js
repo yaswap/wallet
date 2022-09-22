@@ -108,12 +108,12 @@ const EXPLORERS = {
   },
   yacoin: {
     testnet: {
-      tx: 'http://104.48.189.74:3001/tx/{hash}',
-      address: 'http://104.48.189.74:3001/address/{hash}'
+      tx: 'https://yaswap.yacoin.org/tx/{hash}',
+      address: 'https://yaswap.yacoin.org/address/{hash}'
     },
     mainnet: {
-      tx: 'http://104.48.189.74:3001/tx/{hash}',
-      address: 'http://104.48.189.74:3001/address/{hash}'
+      tx: 'https://yaswap.yacoin.org/tx/{hash}',
+      address: 'https://yaswap.yacoin.org/address/{hash}'
     }
   }
 }

@@ -46,12 +46,12 @@ export default {
   infuraApiKey: 'da99ebc8c0964bb8bb757b6f8cc40f1f',
   yacoinExploraApis: {
     esploraUrl: {
-      testnet: 'http://104.48.189.74:3001/api',
-      mainnet: 'http://104.48.189.74:3001/api'
+      testnet: 'https://yaswap.yacoin.org/api',
+      mainnet: 'https://yaswap.yacoin.org/api'
     },
     esploraSwapUrl: {
-      testnet: 'http://104.48.189.74:3001',
-      mainnet: 'http://104.48.189.74:3001'
+      testnet: 'https://yaswap.yacoin.org',
+      mainnet: 'https://yaswap.yacoin.org'
     }
   },
   bitcoinExploraApis: {
@@ -68,7 +68,7 @@ export default {
         name: 'Yaswap',
         icon: 'yaswap.svg',
         type: SwapProviderType.YASWAP,
-        agent: 'http://104.48.189.74:3030'
+        agent: 'https://yaswap.yacoin.org/atomicagent_testnet'
       },
       yaswapBoostNativeToERC20: {
         name: 'Yaswap Boost',
@@ -110,7 +110,7 @@ export default {
         name: 'Yaswap',
         icon: 'yaswap.svg',
         type: SwapProviderType.YASWAP,
-        agent: 'http://104.48.189.74:3031'
+        agent: 'https://yaswap.yacoin.org/atomicagent_mainnet'
       },
       yaswapBoostNativeToERC20: {
         name: 'Yaswap Boost',
