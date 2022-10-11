@@ -497,8 +497,13 @@ export default {
     } else {
       if (this.networkAccounts.length > 0) {
         const toAccount = this.networkAccounts.find(
-          (account) =>
-            account.assets && !account.assets.includes(this.asset) && account.id !== this.accountId
+          (account) => {
+            if (this.asset === 'YAC') {
+              return account.assets && !account.assets.includes(this.asset) && account.id !== this.accountId
+            } else {
+              return account.assets && account.assets.includes('YAC') && account.id !== this.accountId
+            }
+          }
         )
         if (toAccount) {
           this.toAccountId = toAccount.id
