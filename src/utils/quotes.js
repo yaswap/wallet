@@ -15,8 +15,7 @@ export function sortQuotes(quotes, network) {
     if (isCrossChain) {
       // Prefer Yaswap for crosschain swaps where liquidity is available
       if (getSwapProviderConfig(network, a.provider).type === SwapProviderType.YASWAP) return -1
-      else if (getSwapProviderConfig(network, b.provider).type === SwapProviderType.YASWAP)
-        return 1
+      else if (getSwapProviderConfig(network, b.provider).type === SwapProviderType.YASWAP) return 1
     }
 
     return BN(b.toAmount).minus(a.toAmount).toNumber()

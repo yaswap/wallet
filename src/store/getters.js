@@ -189,7 +189,7 @@ export default {
     const { accounts, activeNetwork, activeWalletId, enabledChains } = state
     const { accountFiatBalance, assetFiatBalance } = getters
     function getPriority(chain) {
-      switch(chain) {
+      switch (chain) {
         case 'yacoin':
           return 3
         case 'bitcoin':
@@ -229,8 +229,7 @@ export default {
         const difference = bPriority - aPriority
         if (difference != 0) {
           return difference
-        }
-        else if (a.type.includes('ledger') || a.chain < b.chain) {
+        } else if (a.type.includes('ledger') || a.chain < b.chain) {
           return -1
         }
 

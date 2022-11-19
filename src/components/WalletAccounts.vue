@@ -33,10 +33,7 @@
             </div>
           </div>
         </template>
-        <template
-          #detail-sub
-          v-if="account.totalFiatBalance"
-        >
+        <template #detail-sub v-if="account.totalFiatBalance">
           {{ formatFiatUI(formatFiat(account.totalFiatBalance)) }}
         </template>
         <template v-else> Loading... </template>
@@ -64,10 +61,7 @@
               Ledger
             </div>
           </template>
-          <template
-            #detail-sub
-            v-if="account.totalFiatBalance"
-          >
+          <template #detail-sub v-if="account.totalFiatBalance">
             {{ formatFiatUI(formatFiat(account.totalFiatBalance)) }}
           </template>
           <template v-else> Loading... </template>

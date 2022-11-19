@@ -31,9 +31,7 @@ export default {
     },
     showSlippageMessage() {
       const providerType = getSwapProviderConfig(this.activeNetwork, this.quote.provider).type
-      return (
-        providerType !== SwapProviderType.YASWAP && providerType !== SwapProviderType.FASTBTC
-      )
+      return providerType !== SwapProviderType.YASWAP && providerType !== SwapProviderType.FASTBTC
     },
     showRefundMessage() {
       const providerType = getSwapProviderConfig(this.activeNetwork, this.quote.provider).type

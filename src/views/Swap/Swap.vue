@@ -15,9 +15,7 @@
         <BridgeAssetRequiredMessage :account-id="toAccount.id" :asset="selectedQuote.bridgeAsset" />
       </InfoNotification>
       <InfoNotification v-else-if="cannotCoverNetworkFee">
-        <NoFundsForNetworkFee
-          :assetChain="assetChain"
-        />
+        <NoFundsForNetworkFee :assetChain="assetChain" />
       </InfoNotification>
       <InfoNotification v-else-if="showNoLiquidityMessage && sendAmount >= min && sendAmount > 0">
         <NoLiquidityMessage :isPairAvailable="isPairAvailable" />
@@ -502,15 +500,17 @@ export default {
       toAsset = this.account?.assets.find((a) => a !== this.asset)
     } else {
       if (this.networkAccounts.length > 0) {
-        const toAccount = this.networkAccounts.find(
-          (account) => {
-            if (this.asset === 'YAC') {
-              return account.assets && !account.assets.includes(this.asset) && account.id !== this.accountId
-            } else {
-              return account.assets && account.assets.includes('YAC') && account.id !== this.accountId
-            }
+        const toAccount = this.networkAccounts.find((account) => {
+          if (this.asset === 'YAC') {
+            return (
+              account.assets &&
+              !account.assets.includes(this.asset) &&
+              account.id !== this.accountId
+            )
+          } else {
+            return account.assets && account.assets.includes('YAC') && account.id !== this.accountId
           }
-        )
+        })
         if (toAccount) {
           this.toAccountId = toAccount.id
           toAsset = toAccount.assets.find((a) => a !== this.asset)
@@ -652,8 +652,7 @@ export default {
         return (
           pair.from === this.asset &&
           pair.to === toQuoteAsset &&
-          getSwapProviderConfig(this.activeNetwork, pair.provider).type ===
-            SwapProviderType.YASWAP
+          getSwapProviderConfig(this.activeNetwork, pair.provider).type === SwapProviderType.YASWAP
         )
       })
 
@@ -736,7 +735,7 @@ export default {
         this.ethRequired ||
         !this.canCoverAmmFee ||
         this.nativeAssetRequired ||
-        (BN(this.available).lt(this.sendAmount))
+        BN(this.available).lt(this.sendAmount)
       )
     },
     nativeAssetRequired() {

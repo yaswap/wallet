@@ -18,10 +18,8 @@ const swapProviderRoot = {
   [SwapProviderType.ONEINCHV4]: 'swaps/oneinch',
   [SwapProviderType.THORCHAIN]: 'swaps/thorchain',
   [SwapProviderType.FASTBTC]: 'swaps/fastbtc',
-  [SwapProviderType.YASWAPBOOST_NATIVE_TO_ERC20]:
-    'swaps/yaswapboost/yaswapBoostNativeToERC20',
-  [SwapProviderType.YASWAPBOOST_ERC20_TO_NATIVE]:
-    'swaps/yaswapboost/yaswapBoostERC20toNative',
+  [SwapProviderType.YASWAPBOOST_NATIVE_TO_ERC20]: 'swaps/yaswapboost/yaswapBoostNativeToERC20',
+  [SwapProviderType.YASWAPBOOST_ERC20_TO_NATIVE]: 'swaps/yaswapboost/yaswapBoostERC20toNative',
   [SwapProviderType.SOVRYN]: 'swaps/sovryn',
   [SwapProviderType.ASTROPORT]: 'swaps/astroport'
 }

@@ -8,8 +8,8 @@
         <div class="setting-item_title flex-fill mb-2">
           Default Web3 Wallet
           <span class="setting-item_sub"
-            >Set Yaswap as the default dapp wallet. Other wallets cannot interact with dapps
-            while this is enabled.</span
+            >Set Yaswap as the default dapp wallet. Other wallets cannot interact with dapps while
+            this is enabled.</span
           >
         </div>
         <div class="setting-item_control" id="default_web3_wallet_toggle_button">
