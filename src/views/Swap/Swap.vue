@@ -14,7 +14,11 @@
       <InfoNotification v-if="!canCoverAmmFee">
         <BridgeAssetRequiredMessage :account-id="toAccount.id" :asset="selectedQuote.bridgeAsset" />
       </InfoNotification>
-
+      <InfoNotification v-else-if="cannotCoverNetworkFee">
+        <NoFundsForNetworkFee
+          :assetChain="assetChain"
+        />
+      </InfoNotification>
       <InfoNotification v-else-if="showNoLiquidityMessage && sendAmount >= min && sendAmount > 0">
         <NoLiquidityMessage :isPairAvailable="isPairAvailable" />
       </InfoNotification>
@@ -383,6 +387,7 @@ import NavBar from '@/components/NavBar'
 import InfoNotification from '@/components/InfoNotification'
 import EthRequiredMessage from '@/components/EthRequiredMessage'
 import BridgeAssetRequiredMessage from '@/components/BridgeAssetRequiredMessage'
+import NoFundsForNetworkFee from '@/components/NoFundsForNetworkFee'
 import NoLiquidityMessage from '@/components/NoLiquidityMessage'
 import {
   cryptoToFiat,
@@ -429,6 +434,7 @@ export default {
     EthRequiredMessage,
     BridgeAssetRequiredMessage,
     NoLiquidityMessage,
+    NoFundsForNetworkFee,
     FeeSelector,
     SwapIcon,
     SpinnerIcon,
@@ -715,13 +721,34 @@ export default {
       if (!this.selectedQuote?.bridgeAsset) return true
 
       const account = isERC20(this.asset) ? this.account : this.toAccount
+
       const balance = account?.balances[this.selectedQuote.bridgeAsset]
+
       const toSwapFeeInUnits = currencyToUnit(
         cryptoassets[this.selectedQuote.bridgeAsset],
         this.receiveFee
       )
 
       return BN(balance).gt(toSwapFeeInUnits)
+    },
+    cannotCoverNetworkFee() {
+      return (
+        this.ethRequired ||
+        !this.canCoverAmmFee ||
+        this.nativeAssetRequired ||
+        (BN(this.available).lt(this.sendAmount))
+      )
+    },
+    nativeAssetRequired() {
+      if (!this.networkWalletBalances || !isERC20(this.asset) || this.asset === 'ARBETH') return 0
+      const nativeAssetBalance = this.networkWalletBalances[getNativeAsset(this.asset)]
+      if (
+        !nativeAssetBalance ||
+        BN(nativeAssetBalance).lte(0) ||
+        BN(nativeAssetBalance).minus(BN(this.maxFee).times(1.5)).lt(0)
+      )
+        return true
+      return false
     },
     availableAmount() {
       return dpUI(this.available, VALUE_DECIMALS)
