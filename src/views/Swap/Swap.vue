@@ -15,7 +15,10 @@
         <BridgeAssetRequiredMessage :account-id="toAccount.id" :asset="selectedQuote.bridgeAsset" />
       </InfoNotification>
       <InfoNotification v-else-if="cannotCoverNetworkFee">
-        <NoFundsForNetworkFee :assetChain="assetChain" />
+        <NoFundsForNetworkFee
+          :assetChain="assetChain"
+          :toAssetChain="toAssetChain"
+        />
       </InfoNotification>
       <InfoNotification v-else-if="showNoLiquidityMessage && sendAmount >= min && sendAmount > 0">
         <NoLiquidityMessage :isPairAvailable="isPairAvailable" />
