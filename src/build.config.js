@@ -145,12 +145,6 @@ export default {
         },
         referrerFee: 0.3
       },
-      fastBTC: {
-        name: 'FastBTC',
-        icon: 'sovryn.svg',
-        type: SwapProviderType.FASTBTC,
-        bridgeEndpoint: 'http://3.131.33.161:3000/'
-      },
       sovryn: {
         name: 'Sovryn',
         icon: 'sovryn.svg',
@@ -164,13 +158,6 @@ export default {
         icon: 'thorchain.svg',
         type: SwapProviderType.THORCHAIN,
         thornode: 'https://thornode.thorchain.info'
-      },
-      astroport: {
-        name: 'Astroport',
-        icon: 'astroport.svg',
-        type: SwapProviderType.ASTROPORT,
-        URL: 'https://lcd.terra.dev',
-        chainID: 'columbus-5'
       }
     }
   },

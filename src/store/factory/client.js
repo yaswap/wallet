@@ -97,7 +97,7 @@ function createBtcClient(network, mnemonic, accountType, derivationPath) {
   if (isTestnet) btcClient.addProvider(new BitcoinRpcFeeProvider())
   else
     btcClient.addProvider(
-      new BitcoinFeeApiProvider('https://liquality.io/swap/mempool/v1/fees/recommended')
+      new BitcoinFeeApiProvider('https://mempool.space/api/v1/fees/recommended')
     )
 
   return btcClient
