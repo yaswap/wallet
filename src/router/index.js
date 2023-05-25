@@ -255,6 +255,11 @@ const routes = [
     meta: { protect: false }
   },
   {
+    path: '/permission/signTx',
+    component: () => import('@/views/PermissionSignTx.vue'),
+    meta: { protect: false }
+  },
+  {
     path: '/permission/default',
     component: () => import('@/views/Permission.vue'),
     meta: { protect: false }

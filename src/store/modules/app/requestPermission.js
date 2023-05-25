@@ -25,7 +25,9 @@ const CONFIRM_REQUIRED = [
   /^swap.updateTransactionFee$/,
 
   // Bitcoin
-  /^wallet.signPSBT$/
+  /^wallet.signPSBT$/,
+  // Yacoin
+  /^wallet.signTx$/
 ]
 
 const ALLOWED = [
@@ -102,6 +104,8 @@ export const requestPermission = async (
           permissionRoute = '/permission/sign'
         } else if (method === 'wallet.signPSBT') {
           permissionRoute = '/permission/signPsbt'
+        } else if (method === 'signTx') {
+          permissionRoute = '/permission/signTx'
         }
 
         const url = `${permissionRoute}?${query}`
