@@ -4817,6 +4817,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@yaswap/yacoinjs-lib@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@yaswap/yacoinjs-lib@npm:1.1.0"
+  dependencies:
+    bech32: ^1.1.2
+    bip174: ^2.0.1
+    bip32: ^2.0.4
+    bip66: ^1.1.0
+    bitcoin-ops: ^1.4.0
+    bs58check: ^2.0.0
+    create-hash: ^1.1.0
+    create-hmac: ^1.1.3
+    merkle-lib: ^2.0.10
+    pushdata-bitcoin: ^1.0.1
+    randombytes: ^2.0.1
+    tiny-secp256k1: ^1.1.1
+    typeforce: ^1.11.3
+    varuint-bitcoin: ^1.0.4
+    wif: ^2.0.1
+  checksum: cad40bcc7d068821656edf8b66e6b893434b1bbfc3225487eaacd25b99926cbcab8d6a60eed1ceca738cf979c5d017aeec6c754faa42a15bf773a5f6948a6c19
+  languageName: node
+  linkType: hard
+
 "abab@npm:^2.0.0, abab@npm:^2.0.3, abab@npm:^2.0.5":
   version: 2.0.6
   resolution: "abab@npm:2.0.6"
@@ -6046,7 +6069,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bech32@npm:1.1.4, bech32@npm:^1.1.3":
+"bech32@npm:1.1.4, bech32@npm:^1.1.2, bech32@npm:^1.1.3":
   version: 1.1.4
   resolution: "bech32@npm:1.1.4"
   checksum: 0e98db619191548390d6f09ff68b0253ba7ae6a55db93dfdbb070ba234c1fd3308c0606fbcc95fad50437227b10011e2698b89f0181f6e7f845c499bd14d0f4b
@@ -6123,7 +6146,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bip32@npm:^2.0.6":
+"bip32@npm:^2.0.4, bip32@npm:^2.0.6":
   version: 2.0.6
   resolution: "bip32@npm:2.0.6"
   dependencies:
@@ -6147,6 +6170,22 @@ __metadata:
     pbkdf2: ^3.0.9
     randombytes: ^2.0.1
   checksum: 79ce1600a03d1ba5053bdd4e6323f9463ec340764c7e52918b6c6b9dca81221940f2d9a65656447f108f9bc2c8d9ae8df319cca83bbd1dad63f53ef2768d9bae
+  languageName: node
+  linkType: hard
+
+"bip66@npm:^1.1.0":
+  version: 1.1.5
+  resolution: "bip66@npm:1.1.5"
+  dependencies:
+    safe-buffer: ^5.0.1
+  checksum: 956cff6e51d7206571ef8ce875bc5fa61b5c181589790b9155799b7edcae4b20dbb3eed43b188ff3eec27cdbe98e0b7e0ec9f1cb2e4f5370c119028b248ad859
+  languageName: node
+  linkType: hard
+
+"bitcoin-ops@npm:^1.3.0, bitcoin-ops@npm:^1.4.0":
+  version: 1.4.1
+  resolution: "bitcoin-ops@npm:1.4.1"
+  checksum: 3daa3303d6af49c0727041b5d7801a20c5806d00f1cc1afa2d53099974e30a7b1e7e9e578723dd25f5e120903f2725c595c0205d5d99a6578ad65213d74d806d
   languageName: node
   linkType: hard
 
@@ -6487,7 +6526,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bs58check@npm:<3.0.0, bs58check@npm:^2.1.1, bs58check@npm:^2.1.2":
+"bs58check@npm:<3.0.0, bs58check@npm:^2.0.0, bs58check@npm:^2.1.1, bs58check@npm:^2.1.2":
   version: 2.1.2
   resolution: "bs58check@npm:2.1.2"
   dependencies:
@@ -7841,7 +7880,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"create-hmac@npm:^1.1.0, create-hmac@npm:^1.1.4, create-hmac@npm:^1.1.7":
+"create-hmac@npm:^1.1.0, create-hmac@npm:^1.1.3, create-hmac@npm:^1.1.4, create-hmac@npm:^1.1.7":
   version: 1.1.7
   resolution: "create-hmac@npm:1.1.7"
   dependencies:
@@ -15914,6 +15953,7 @@ __metadata:
     "@vue/devtools": ^6.4.5
     "@vue/eslint-config-prettier": ^6.0.0
     "@vue/test-utils": 1.3.4
+    "@yaswap/yacoinjs-lib": ^1.1.0
     amplitude-js: 8.18.2
     babel-eslint: ^10.1.0
     bignumber.js: 9.1.1
@@ -16969,6 +17009,13 @@ __metadata:
   version: 1.4.1
   resolution: "merge2@npm:1.4.1"
   checksum: 7268db63ed5169466540b6fb947aec313200bcf6d40c5ab722c22e242f651994619bcd85601602972d3c85bd2cc45a358a4c61937e9f11a061919a1da569b0c2
+  languageName: node
+  linkType: hard
+
+"merkle-lib@npm:^2.0.10":
+  version: 2.0.10
+  resolution: "merkle-lib@npm:2.0.10"
+  checksum: 057331fe5e15a12a35c94c40bcc956c6b2d38cf6a3c69858b05a55434a9ac7be552595be5955491d3c380c7a91c522e429c7d13db7b676463b729de05c07b9e1
   languageName: node
   linkType: hard
 
@@ -19668,6 +19715,15 @@ __metadata:
     unbzip2-stream: 1.4.3
     ws: 8.8.1
   checksum: ed3d51de2bc6587646f9021cceb45b2ca8bb6f9a332825cecfd179d1b33e85764949060b5570a850f58d951668c9b6b7df4db01c31d905afbf627974683a8900
+  languageName: node
+  linkType: hard
+
+"pushdata-bitcoin@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "pushdata-bitcoin@npm:1.0.1"
+  dependencies:
+    bitcoin-ops: ^1.3.0
+  checksum: 8452106d4b39ea1b335cd8f319c5e704b19aca72afb8bda4eee3df4602e3ad14cb9746d228712cdf0dcfec68e055dad4fc51cddf14cf072caf698c6ba4b34be2
   languageName: node
   linkType: hard
 
@@ -22419,7 +22475,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tiny-secp256k1@npm:^1.1.3":
+"tiny-secp256k1@npm:^1.1.1, tiny-secp256k1@npm:^1.1.3":
   version: 1.1.6
   resolution: "tiny-secp256k1@npm:1.1.6"
   dependencies:
@@ -23385,7 +23441,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"varuint-bitcoin@npm:^1.1.2":
+"varuint-bitcoin@npm:^1.0.4, varuint-bitcoin@npm:^1.1.2":
   version: 1.1.2
   resolution: "varuint-bitcoin@npm:1.1.2"
   dependencies:

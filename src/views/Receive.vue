@@ -129,6 +129,7 @@ export default {
       } else {
         return {
           bitcoin: 'bitcoin',
+          yacoin: 'yacoin',
           near: 'near',
           solana: 'solana',
           terra: 'terra'
