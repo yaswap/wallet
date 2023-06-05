@@ -1534,39 +1534,39 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chainify/errors@npm:2.2.0":
+"@yac-swap/errors@npm:2.2.0":
   version: 2.2.0
-  resolution: "@chainify/errors@npm:2.2.0"
+  resolution: "@yac-swap/errors@npm:2.2.0"
   dependencies:
     standard-error: ^1.1.0
   checksum: d62ec1a2c6c72bb8a37494867f2450bec9e124575306462abebb63924c148ea5c3e6ec5816328b52b27f34b31c0bed95bdf7f08450b28981642917e922ed30cf
   languageName: node
   linkType: hard
 
-"@chainify/hw-ledger@npm:2.4.1":
+"@yac-swap/hw-ledger@npm:2.4.1":
   version: 2.4.1
-  resolution: "@chainify/hw-ledger@npm:2.4.1"
+  resolution: "@yac-swap/hw-ledger@npm:2.4.1"
   dependencies:
-    "@chainify/errors": 2.2.0
-    "@chainify/logger": 2.2.0
-    "@chainify/types": 2.3.0
-    "@chainify/utils": 2.3.0
+    "@yac-swap/errors": 2.2.0
+    "@yac-swap/logger": 2.2.0
+    "@yac-swap/types": 2.3.0
+    "@yac-swap/utils": 2.3.0
     "@ledgerhq/hw-transport": 6.27.10
     "@ledgerhq/hw-transport-webhid": 6.27.10
   checksum: 762627197662107128688a1025beb0d4f21bb5d5d44ed86727916bf24801296ee71ab05430aea4441c8f0fe09a5706be5b462b9829c8b9c5c6db1955532a7bd6
   languageName: node
   linkType: hard
 
-"@chainify/logger@npm:2.2.0":
+"@yac-swap/logger@npm:2.2.0":
   version: 2.2.0
-  resolution: "@chainify/logger@npm:2.2.0"
+  resolution: "@yac-swap/logger@npm:2.2.0"
   checksum: 32817036850e524197bb8c99f0dff55ab4156303b81a5f53f5ee8cbffc33d27545612046bcb116139da17694916c9e008c1fb724a2a2be47d7f120e87ccdd79d
   languageName: node
   linkType: hard
 
-"@chainify/types@npm:2.3.0":
+"@yac-swap/types@npm:2.3.0":
   version: 2.3.0
-  resolution: "@chainify/types@npm:2.3.0"
+  resolution: "@yac-swap/types@npm:2.3.0"
   dependencies:
     "@ethersproject/bignumber": 5.7.0
     "@liquality/cryptoassets": 1.6.0
@@ -1575,12 +1575,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chainify/utils@npm:2.3.0":
+"@yac-swap/utils@npm:2.3.0":
   version: 2.3.0
-  resolution: "@chainify/utils@npm:2.3.0"
+  resolution: "@yac-swap/utils@npm:2.3.0"
   dependencies:
-    "@chainify/errors": 2.2.0
-    "@chainify/types": 2.3.0
+    "@yac-swap/errors": 2.2.0
+    "@yac-swap/types": 2.3.0
     "@ethersproject/sha2": 5.7.0
     bech32: ^2.0.0
     bs58: 5.0.0
@@ -15934,7 +15934,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "liquality-wallet@workspace:."
   dependencies:
-    "@chainify/hw-ledger": 2.4.1
+    "@yac-swap/hw-ledger": 2.4.1
     "@liquality/cryptoassets": 2.11.0
     "@liquality/error-parser": 2.2.10
     "@liquality/ethereum-utils": ^1.13.12

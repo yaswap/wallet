@@ -23,7 +23,7 @@
     "devtools": "node_modules/.bin/vue-devtools"
   },
   "dependencies": {
-    "@chainify/hw-ledger": "2.4.1",
+    "@yac-swap/hw-ledger": "2.4.1",
     "@liquality/cryptoassets": "2.11.0",
     "@liquality/error-parser": "2.2.10",
     "@liquality/ethereum-utils": "^1.13.12",
