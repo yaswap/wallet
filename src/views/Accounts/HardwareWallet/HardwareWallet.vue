@@ -40,14 +40,14 @@ import { ledgerConnectMixin } from '@/utils/hardware-wallet'
 import {
   LEDGER_BITCOIN_OPTIONS,
   LEDGER_OPTIONS
-} from '@liquality/wallet-core/dist/src/utils/ledger'
+} from '@yac-swap/wallet-core/dist/src/utils/ledger'
 import { getAssetIcon } from '@/utils/asset'
-import cryptoassets from '@liquality/wallet-core/dist/src/utils/cryptoassets'
+import cryptoassets from '@yac-swap/wallet-core/dist/src/utils/cryptoassets'
 import { version as walletVersion } from '../../../../package.json'
-import { getNextAccountColor } from '@liquality/wallet-core/dist/src/utils/accounts'
-import { ChainId, getAllEvmChains } from '@liquality/cryptoassets'
-import { errorToLiqualityErrorString } from '@liquality/error-parser/dist/src/utils'
-import { reportLiqualityError } from '@liquality/error-parser/dist/src/reporters/index'
+import { getNextAccountColor } from '@yac-swap/wallet-core/dist/src/utils/accounts'
+import { ChainId, getAllEvmChains } from '@yac-swap/cryptoassets'
+import { errorToLiqualityErrorString } from '@yac-swap/error-parser/dist/src/utils'
+import { reportLiqualityError } from '@yac-swap/error-parser/dist/src/reporters/index'
 
 const LEDGER_PER_PAGE = 5
 

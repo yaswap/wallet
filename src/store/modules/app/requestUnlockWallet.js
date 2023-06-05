@@ -1,7 +1,7 @@
 import { stringify } from 'qs'
 import { emitter } from '../../utils'
 import { createPopup } from '../../../broker/utils'
-import { NoActiveWalletError, WalletLockedError } from '@liquality/error-parser'
+import { NoActiveWalletError, WalletLockedError } from '@yac-swap/error-parser'
 
 export const requestUnlockWallet = async ({ rootState }) => {
   if (!rootState.activeWalletId) throw new NoActiveWalletError()

@@ -1,4 +1,4 @@
-import { setupWallet } from '@liquality/wallet-core'
+import { setupWallet } from '@yac-swap/wallet-core'
 import { AES } from 'crypto-js'
 import _pbkdf2 from 'pbkdf2'
 import { createNotification as _createNotification } from './utils/notification'

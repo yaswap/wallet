@@ -11,7 +11,7 @@
 <script>
 import CopyIcon from '@/assets/icons/copy.svg'
 import CheckIcon from '@/assets/icons/check-primary.svg'
-import { liqualityErrorStringToJson } from '@liquality/error-parser'
+import { liqualityErrorStringToJson } from '@yac-swap/error-parser'
 
 export default {
   props: ['translatedError', 'liqualityErrorString'],

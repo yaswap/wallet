@@ -1,11 +1,11 @@
-import { Client } from '@liquality/client'
-import { SolanaNetworks } from '@liquality/solana-networks'
-import { SolanaRpcProvider } from '@liquality/solana-rpc-provider'
-import { SolanaWalletProvider } from '@liquality/solana-wallet-provider'
-import { SolanaSwapProvider } from '@liquality/solana-swap-provider'
-import { SolanaSwapFindProvider } from '@liquality/solana-swap-find-provider'
-import { Network } from '@liquality/wallet-core/dist/src/store/types'
-import { ChainId, getChain } from '@liquality/cryptoassets'
+import { Client } from '@yac-swap/client'
+import { SolanaNetworks } from '@yac-swap/solana-networks'
+import { SolanaRpcProvider } from '@yac-swap/solana-rpc-provider'
+import { SolanaWalletProvider } from '@yac-swap/solana-wallet-provider'
+import { SolanaSwapProvider } from '@yac-swap/solana-swap-provider'
+import { SolanaSwapFindProvider } from '@yac-swap/solana-swap-find-provider'
+import { Network } from '@yac-swap/wallet-core/dist/src/store/types'
+import { ChainId, getChain } from '@yac-swap/cryptoassets'
 
 test('Solana Network TesnetConfig', () => {
   expect(SolanaNetworks.solana_testnet).toEqual({

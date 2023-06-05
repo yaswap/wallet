@@ -60,10 +60,10 @@
 import { mapState } from 'vuex'
 import Modal from '@/components/Modal'
 import TickBlue from '@/assets/icons/tick_blue.svg'
-import { getSwapProviderConfig } from '@liquality/wallet-core/dist/src/swaps/utils'
+import { getSwapProviderConfig } from '@yac-swap/wallet-core/dist/src/swaps/utils'
 import { getSwapProviderIcon } from '@/utils/swaps'
-import { calculateQuoteRate, sortQuotes } from '@liquality/wallet-core/dist/src/utils/quotes'
-import { dpUI } from '@liquality/wallet-core/dist/src/utils/coinFormatter'
+import { calculateQuoteRate, sortQuotes } from '@yac-swap/wallet-core/dist/src/utils/quotes'
+import { dpUI } from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
 
 export default {
   components: {

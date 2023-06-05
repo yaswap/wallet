@@ -98,12 +98,12 @@
 <script>
 import isEmpty from 'lodash-es/isEmpty'
 import { mapState, mapActions, mapGetters } from 'vuex'
-import cryptoassets from '@liquality/wallet-core/dist/src/utils/cryptoassets'
-import { getNativeAsset } from '@liquality/wallet-core/dist/src/utils/asset'
+import cryptoassets from '@yac-swap/wallet-core/dist/src/utils/cryptoassets'
+import { getNativeAsset } from '@yac-swap/wallet-core/dist/src/utils/asset'
 import { getAssetIcon } from '@/utils/asset'
 import NavBar from '@/components/NavBar.vue'
 import SearchIcon from '@/assets/icons/search.svg'
-import { buildConfig } from '@liquality/wallet-core'
+import { buildConfig } from '@yac-swap/wallet-core'
 
 export default {
   components: {

@@ -63,8 +63,8 @@
 import { mapActions } from 'vuex'
 import LogoWallet from '@/assets/icons/logo_wallet.svg?inline'
 import { version as walletVersion } from '../../../../package.json'
-import { errorToLiqualityErrorString } from '@liquality/error-parser/dist/src/utils'
-import { reportLiqualityError } from '@liquality/error-parser'
+import { errorToLiqualityErrorString } from '@yac-swap/error-parser/dist/src/utils'
+import { reportLiqualityError } from '@yac-swap/error-parser'
 export default {
   props: {
     titleKey: {

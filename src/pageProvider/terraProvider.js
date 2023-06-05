@@ -1,4 +1,4 @@
-import { UserDeclinedError } from '@liquality/error-parser'
+import { UserDeclinedError } from '@yac-swap/error-parser'
 import { PageProvider } from './pageProvider'
 import { COMMON_REQUEST_MAP } from './utils'
 

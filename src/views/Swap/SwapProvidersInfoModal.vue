@@ -62,9 +62,9 @@ import SwapProviderLabel from '@/components/SwapProviderLabel.vue'
 import {
   getSwapProviderConfig,
   getSwapProviderInfo
-} from '@liquality/wallet-core/dist/src/swaps/utils'
+} from '@yac-swap/wallet-core/dist/src/swaps/utils'
 import { getSwapProviderIcon } from '@/utils/swaps'
-import { buildConfig } from '@liquality/wallet-core'
+import { buildConfig } from '@yac-swap/wallet-core'
 
 export default {
   components: {

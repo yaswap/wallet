@@ -73,10 +73,10 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
-import cryptoassets from '@liquality/wallet-core/dist/src/utils/cryptoassets'
+import cryptoassets from '@yac-swap/wallet-core/dist/src/utils/cryptoassets'
 import PlusIcon from '@/assets/icons/plus_circle.svg'
 import EditIcon from '@/assets/icons/edit_icon.svg'
-import { formatFiat, formatFiatUI } from '@liquality/wallet-core/dist/src/utils/coinFormatter'
+import { formatFiat, formatFiatUI } from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
 import { getAccountIcon } from '@/utils/accounts'
 import { getChainIcon } from '@/utils/accounts'
 import ListItem from '@/components/ListItem'

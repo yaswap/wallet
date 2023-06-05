@@ -77,7 +77,7 @@ import AssetsIcon from '@/assets/icons/assets.svg'
 import AccountsIcon from '@/assets/icons/accounts_menu_icon.svg'
 import LedgerIcon from '@/assets/icons/ledger_menu_icon.svg'
 import KeyIcon from '@/assets/icons/key.svg'
-import { ChainId } from '@liquality/cryptoassets'
+import { ChainId } from '@yac-swap/cryptoassets'
 import { version as walletVersion } from '../../package.json'
 
 export default {

@@ -1,14 +1,14 @@
 import { stringify } from 'qs'
 import { emitter } from '../../utils'
 import { createPopup } from '../../../broker/utils'
-import { ChainId } from '@liquality/cryptoassets'
+import { ChainId } from '@yac-swap/cryptoassets'
 import {
   CUSTOM_ERRORS,
   createInternalError,
   NoActiveWalletError,
   WalletLockedError,
   UserDeclinedError
-} from '@liquality/error-parser'
+} from '@yac-swap/error-parser'
 
 const CONFIRM_REQUIRED = [
   /^wallet.buildTransaction$/,

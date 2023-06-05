@@ -1,7 +1,7 @@
 import { stringify } from 'qs'
 import { emitter } from '../../utils'
 import { createPopup } from '../../../broker/utils'
-import { UserDeclinedError } from '@liquality/error-parser'
+import { UserDeclinedError } from '@yac-swap/error-parser'
 
 export const requestOriginAccess = async (
   { state, dispatch, commit },

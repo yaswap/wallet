@@ -14,9 +14,9 @@
 
 <script>
 import ClockIcon from '@/assets/icons/clock.svg'
-import { getSwapProviderConfig } from '@liquality/wallet-core/dist/src/swaps/utils'
+import { getSwapProviderConfig } from '@yac-swap/wallet-core/dist/src/swaps/utils'
 import { mapState } from 'vuex'
-import { SwapProviderType } from '@liquality/wallet-core/dist/src/store/types'
+import { SwapProviderType } from '@yac-swap/wallet-core/dist/src/store/types'
 
 export default {
   props: ['quote'],

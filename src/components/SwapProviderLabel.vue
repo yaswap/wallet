@@ -18,7 +18,7 @@
 import {
   getSwapProviderConfig,
   getSwapProviderInfo
-} from '@liquality/wallet-core/dist/src/swaps/utils'
+} from '@yac-swap/wallet-core/dist/src/swaps/utils'
 import { getSwapProviderIcon } from '@/utils/swaps'
 
 export default {

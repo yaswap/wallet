@@ -291,16 +291,16 @@
 import { mapState, mapGetters, mapActions } from 'vuex'
 import NavBar from '@/components/NavBar.vue'
 import Accordion from '@/components/Accordion.vue'
-import { getChain, getNativeAssetCode } from '@liquality/cryptoassets'
-import { shortenAddress } from '@liquality/wallet-core/dist/src/utils/address'
-import cryptoassets from '@liquality/wallet-core/dist/src/utils/cryptoassets'
+import { getChain, getNativeAssetCode } from '@yac-swap/cryptoassets'
+import { shortenAddress } from '@yac-swap/wallet-core/dist/src/utils/address'
+import cryptoassets from '@yac-swap/wallet-core/dist/src/utils/cryptoassets'
 import CopyIcon from '@/assets/icons/copy.svg'
 import {
   estimateTransferNFT,
   getFeeLabel,
   feePerUnit
-} from '@liquality/wallet-core/dist/src/utils/fees'
-import { getFeeAsset, getNativeAsset } from '@liquality/wallet-core/dist/src/utils/asset'
+} from '@yac-swap/wallet-core/dist/src/utils/fees'
+import { getFeeAsset, getNativeAsset } from '@yac-swap/wallet-core/dist/src/utils/asset'
 import { getAssetIcon } from '@/utils/asset'
 import SpinnerIcon from '@/assets/icons/spinner.svg'
 import OperationErrorModal from '@/components/OperationErrorModal'
@@ -313,12 +313,12 @@ import {
   formatFiatUI,
   prettyBalance,
   prettyFiatBalance
-} from '@liquality/wallet-core/dist/src/utils/coinFormatter'
+} from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
 import _ from 'lodash'
 import BN from 'bignumber.js'
 import NFTThumbnailImage from '@/assets/nft_thumbnail.png'
-import { errorToLiqualityErrorString } from '@liquality/error-parser/dist/src/utils'
-import { reportLiqualityError } from '@liquality/error-parser/dist/src/reporters/index'
+import { errorToLiqualityErrorString } from '@yac-swap/error-parser/dist/src/utils'
+import { reportLiqualityError } from '@yac-swap/error-parser/dist/src/reporters/index'
 
 export default {
   components: {

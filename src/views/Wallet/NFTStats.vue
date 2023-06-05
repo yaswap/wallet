@@ -64,10 +64,10 @@ import SendIcon from '@/assets/icons/arrow_send.svg'
 import { getAssetIcon } from '@/utils/asset'
 import RefreshIcon from '@/assets/icons/refresh.svg'
 import EyeIcon from '@/assets/icons/eye.svg'
-import { shortenAddress } from '@liquality/wallet-core/dist/src/utils/address'
-import { getChain, getNativeAssetCode } from '@liquality/cryptoassets'
-import { getAddressExplorerLink } from '@liquality/wallet-core/dist/src/utils/asset'
-import { reportLiqualityError } from '@liquality/error-parser'
+import { shortenAddress } from '@yac-swap/wallet-core/dist/src/utils/address'
+import { getChain, getNativeAssetCode } from '@yac-swap/cryptoassets'
+import { getAddressExplorerLink } from '@yac-swap/wallet-core/dist/src/utils/asset'
+import { reportLiqualityError } from '@yac-swap/error-parser'
 
 export default {
   components: {

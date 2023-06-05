@@ -1,6 +1,6 @@
 import { COMMON_REQUEST_MAP } from './utils'
 import { PageProvider } from './pageProvider'
-import { UserDeclinedError } from '@liquality/error-parser'
+import { UserDeclinedError } from '@yac-swap/error-parser'
 
 class NearPageProvider extends PageProvider {
   async handleRequest(req) {

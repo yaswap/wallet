@@ -153,15 +153,15 @@
 </template>
 <script>
 import SpinnerIcon from '@/assets/icons/spinner.svg'
-import { LEDGER_BITCOIN_OPTIONS } from '@liquality/wallet-core/dist/src/utils/ledger'
+import { LEDGER_BITCOIN_OPTIONS } from '@yac-swap/wallet-core/dist/src/utils/ledger'
 import clickAway from '@/directives/clickAway'
 import { getAccountIcon } from '@/utils/accounts'
 import CircleProgressBar from '@/assets/icons/circle_progress_bar.svg'
 import CheckRightIcon from '@/assets/icons/check.svg'
-import { shortenAddress } from '@liquality/wallet-core/dist/src/utils/address'
-import { prettyBalance, formatFiat } from '@liquality/wallet-core/dist/src/utils/coinFormatter'
+import { shortenAddress } from '@yac-swap/wallet-core/dist/src/utils/address'
+import { prettyBalance, formatFiat } from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
 import BN from 'bignumber.js'
-import { ChainId } from '@liquality/cryptoassets'
+import { ChainId } from '@yac-swap/cryptoassets'
 
 export default {
   directives: {

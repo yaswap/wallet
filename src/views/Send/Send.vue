@@ -259,9 +259,9 @@
 import { mapState, mapActions, mapGetters } from 'vuex'
 import _, { debounce } from 'lodash'
 import BN from 'bignumber.js'
-import cryptoassets from '@liquality/wallet-core/dist/src/utils/cryptoassets'
+import cryptoassets from '@yac-swap/wallet-core/dist/src/utils/cryptoassets'
 import { version as walletVersion } from '../../../package.json'
-import { currencyToUnit, unitToCurrency, ChainId, getChain } from '@liquality/cryptoassets'
+import { currencyToUnit, unitToCurrency, ChainId, getChain } from '@yac-swap/cryptoassets'
 import NavBar from '@/components/NavBar'
 import FeeSelector from '@/components/FeeSelector'
 import {
@@ -270,15 +270,15 @@ import {
   dpUI,
   formatFiatUI,
   fiatToCrypto
-} from '@liquality/wallet-core/dist/src/utils/coinFormatter'
+} from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
 import {
   getNativeAsset,
   getAssetColorStyle,
   getFeeAsset
-} from '@liquality/wallet-core/dist/src/utils/asset'
+} from '@yac-swap/wallet-core/dist/src/utils/asset'
 import { getAssetIcon } from '@/utils/asset'
-import { shortenAddress } from '@liquality/wallet-core/dist/src/utils/address'
-import { getSendTxFees, getFeeLabel, feePerUnit } from '@liquality/wallet-core/dist/src/utils/fees'
+import { shortenAddress } from '@yac-swap/wallet-core/dist/src/utils/address'
+import { getSendTxFees, getFeeLabel, feePerUnit } from '@yac-swap/wallet-core/dist/src/utils/fees'
 
 import SpinnerIcon from '@/assets/icons/spinner.svg'
 import DetailsContainer from '@/components/DetailsContainer'
@@ -289,9 +289,9 @@ import CustomFees from '@/components/CustomFees'
 import CustomFeesEIP1559 from '@/components/CustomFeesEIP1559'
 import { ledgerConnectMixin } from '@/utils/hardware-wallet'
 import qs from 'qs'
-import { UNSResolver } from '@liquality/wallet-core/dist/src/nameResolvers/uns'
-import { errorToLiqualityErrorString } from '@liquality/error-parser/dist/src/utils'
-import { reportLiqualityError } from '@liquality/error-parser/dist/src/reporters/index'
+import { UNSResolver } from '@yac-swap/wallet-core/dist/src/nameResolvers/uns'
+import { errorToLiqualityErrorString } from '@yac-swap/error-parser/dist/src/utils'
+import { reportLiqualityError } from '@yac-swap/error-parser/dist/src/reporters/index'
 import InfoNotification from '@/components/InfoNotification'
 
 export default {

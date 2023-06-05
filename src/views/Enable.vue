@@ -81,11 +81,11 @@
 
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex'
-import { dappChains, isEvmChain } from '@liquality/cryptoassets'
+import { dappChains, isEvmChain } from '@yac-swap/cryptoassets'
 import LogoWallet from '@/assets/icons/logo_wallet.svg?inline'
 import NetworkAccounts from '@/components/NetworkAccounts'
 import ChainDropdown from '@/components/ChainDropdown'
-import { buildConfig } from '@liquality/wallet-core'
+import { buildConfig } from '@yac-swap/wallet-core'
 
 export default {
   components: {

@@ -219,10 +219,10 @@
 </template>
 
 <script>
-import { getFeeAsset, getNativeAsset } from '@liquality/wallet-core/dist/src/utils/asset'
+import { getFeeAsset, getNativeAsset } from '@yac-swap/wallet-core/dist/src/utils/asset'
 import { getAssetIcon } from '@/utils/asset'
-import cryptoassets from '@liquality/wallet-core/dist/src/utils/cryptoassets'
-import { getChain } from '@liquality/cryptoassets'
+import cryptoassets from '@yac-swap/wallet-core/dist/src/utils/cryptoassets'
+import { getChain } from '@yac-swap/cryptoassets'
 import NavBar from '@/components/NavBar'
 import BN from 'bignumber.js'
 import {
@@ -230,8 +230,8 @@ import {
   getSendFee,
   probableFeePerUnitEIP1559,
   maxFeePerUnitEIP1559
-} from '@liquality/wallet-core/dist/src/utils/fees'
-import { prettyFiatBalance } from '@liquality/wallet-core/dist/src/utils/coinFormatter'
+} from '@yac-swap/wallet-core/dist/src/utils/fees'
+import { prettyFiatBalance } from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
 import ChevronUpIcon from '@/assets/icons/chevron_up.svg'
 import ChevronDownIcon from '@/assets/icons/chevron_down.svg'
 import { mapState } from 'vuex'
@@ -241,7 +241,7 @@ import {
   VeryHighTipWarning,
   NoMaxFeeError,
   VeryHighMaxFeeWarning
-} from '@liquality/error-parser/dist/src/LiqualityErrors'
+} from '@yac-swap/error-parser/dist/src/LiqualityErrors'
 
 export default {
   components: {

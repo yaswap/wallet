@@ -1,14 +1,14 @@
-import { buildConfig } from '@liquality/wallet-core'
+import { buildConfig } from '@yac-swap/wallet-core'
 import { BG_PREFIX, handleConnection, removeConnectId, getRootURL } from './utils'
-import { getChain } from '@liquality/cryptoassets'
+import { getChain } from '@yac-swap/cryptoassets'
 import {
   CUSTOM_ERRORS,
   createInternalError,
   reportLiqualityError,
   DappNotConnectedError
-} from '@liquality/error-parser'
+} from '@yac-swap/error-parser'
 import { connectRemote } from './terra-injection'
-import { errorToLiqualityErrorString } from '@liquality/error-parser/dist/src/utils'
+import { errorToLiqualityErrorString } from '@yac-swap/error-parser/dist/src/utils'
 
 function attemptOrWarn(func, message) {
   try {

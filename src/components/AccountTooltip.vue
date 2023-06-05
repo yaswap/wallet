@@ -23,10 +23,10 @@
 </template>
 
 <script>
-import { shortenAddress } from '@liquality/wallet-core/dist/src/utils/address'
+import { shortenAddress } from '@yac-swap/wallet-core/dist/src/utils/address'
 import { getAccountIcon } from '@/utils/accounts'
-import { isChainEvmCompatible, getNativeAsset } from '@liquality/wallet-core/dist/src/utils/asset'
-import { prettyBalance } from '@liquality/wallet-core/dist/src/utils/coinFormatter'
+import { isChainEvmCompatible, getNativeAsset } from '@yac-swap/wallet-core/dist/src/utils/asset'
+import { prettyBalance } from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
 
 export default {
   props: {

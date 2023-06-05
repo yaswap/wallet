@@ -48,15 +48,15 @@ import {
   ACTIVITY_STATUSES,
   ACTIVITY_FILTER_TYPES,
   SEND_STATUS_FILTER_MAP
-} from '@liquality/wallet-core/dist/src/utils/history'
-import { getSwapProvider } from '@liquality/wallet-core/dist/src/factory'
+} from '@yac-swap/wallet-core/dist/src/utils/history'
+import { getSwapProvider } from '@yac-swap/wallet-core/dist/src/factory'
 import { getItemIcon } from '@/utils/history'
 import {
   prettyBalance,
   prettyFiatBalance,
   formatFiatUI
-} from '@liquality/wallet-core/dist/src/utils/coinFormatter'
-import moment from '@liquality/wallet-core/dist/src/utils/moment'
+} from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
+import moment from '@yac-swap/wallet-core/dist/src/utils/moment'
 import { mapState } from 'vuex'
 
 export default {

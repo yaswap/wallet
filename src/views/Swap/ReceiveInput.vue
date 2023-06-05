@@ -57,9 +57,9 @@
 </template>
 
 <script>
-import { getAssetColorStyle } from '@liquality/wallet-core/dist/src/utils/asset'
+import { getAssetColorStyle } from '@yac-swap/wallet-core/dist/src/utils/asset'
 import { getAssetIcon } from '@/utils/asset'
-import { formatFiat, dpUI, formatFiatUI } from '@liquality/wallet-core/dist/src/utils/coinFormatter'
+import { formatFiat, dpUI, formatFiatUI } from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
 import ChevronRightIcon from '@/assets/icons/chevron_right_gray.svg'
 import AccountTooltip from '@/components/AccountTooltip'
 

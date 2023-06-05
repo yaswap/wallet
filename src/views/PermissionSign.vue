@@ -101,16 +101,16 @@
 
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex'
-import { getAssetColorStyle } from '@liquality/wallet-core/dist/src/utils/asset'
+import { getAssetColorStyle } from '@yac-swap/wallet-core/dist/src/utils/asset'
 import { getAssetIcon } from '@/utils/asset'
-import { shortenAddress } from '@liquality/wallet-core/dist/src/utils/address'
+import { shortenAddress } from '@yac-swap/wallet-core/dist/src/utils/address'
 import LogoWallet from '@/assets/icons/logo_wallet.svg?inline'
 import SpinnerIcon from '@/assets/icons/spinner.svg'
 import { isAddress } from 'ethers/lib/utils'
 import LedgerSignRequestModal from '@/components/LedgerSignRequestModal'
 import Modal from '@/components/Modal'
 import { ledgerConnectMixin } from '@/utils/hardware-wallet'
-import { getChain, getAllSupportedChains } from '@liquality/cryptoassets'
+import { getChain, getAllSupportedChains } from '@yac-swap/cryptoassets'
 
 const signTypedDataMethodToVersion = {
   eth_signTypedData: 'V1',

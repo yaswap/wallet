@@ -28,16 +28,16 @@
 import ListItem from '@/components/ListItem'
 import { mapGetters, mapState } from 'vuex'
 import { getAccountIcon } from '@/utils/accounts'
-import { shortenAddress } from '@liquality/wallet-core/dist/src/utils/address'
+import { shortenAddress } from '@yac-swap/wallet-core/dist/src/utils/address'
 import {
   prettyBalance,
   formatFiat,
   formatFiatUI
-} from '@liquality/wallet-core/dist/src/utils/coinFormatter'
+} from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
 import PlusIcon from '@/assets/icons/plus_icon.svg'
 import MinusIcon from '@/assets/icons/minus_icon.svg'
 import CustomRpcSettingsForm from '@/components/CustomRpcSettingsForm.vue'
-import { getChain, isEvmChain } from '@liquality/cryptoassets'
+import { getChain, isEvmChain } from '@yac-swap/cryptoassets'
 
 export default {
   name: 'NetworkSettings',

@@ -8,7 +8,7 @@ import { executeRequest } from './executeRequest'
 import { handlePaymentUri } from './handlePaymentUri'
 import { initializeAnalytics } from './initializeAnalytics'
 import { checkAnalyticsOptIn } from './checkAnalyticsOptIn'
-import { getChain } from '@liquality/cryptoassets'
+import { getChain } from '@yac-swap/cryptoassets'
 import { trackAnalytics } from './trackAnalytics'
 
 export const actions = {

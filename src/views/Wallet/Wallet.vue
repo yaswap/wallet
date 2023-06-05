@@ -19,12 +19,12 @@
 
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex'
-import { isERC20 } from '@liquality/wallet-core/dist/src/utils/asset'
+import { isERC20 } from '@yac-swap/wallet-core/dist/src/utils/asset'
 import NavBar from '@/components/NavBar.vue'
 import WalletStats from './WalletStats.vue'
 import WalletTabs from './WalletTabs.vue'
 import NFTStats from './NFTStats'
-import { reportLiqualityError } from '@liquality/error-parser'
+import { reportLiqualityError } from '@yac-swap/error-parser'
 
 export default {
   components: {

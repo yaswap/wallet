@@ -51,10 +51,10 @@
 
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
-import { getChain, isEvmChain } from '@liquality/cryptoassets'
+import { getChain, isEvmChain } from '@yac-swap/cryptoassets'
 import { version as walletVersion } from '../../package.json'
-import { shortenAddress } from '@liquality/wallet-core/dist/src/utils/address'
-import { buildConfig } from '@liquality/wallet-core'
+import { shortenAddress } from '@yac-swap/wallet-core/dist/src/utils/address'
+import { buildConfig } from '@yac-swap/wallet-core'
 
 import clickAway from '@/directives/clickAway'
 import TickBlue from '@/assets/icons/tick_blue.svg'

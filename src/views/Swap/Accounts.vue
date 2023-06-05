@@ -31,7 +31,7 @@
 import SearchIcon from '@/assets/icons/search.svg'
 import WalletAccounts from '@/components/WalletAccounts'
 import { mapGetters, mapState } from 'vuex'
-import { isEvmChain } from '@liquality/cryptoassets'
+import { isEvmChain } from '@yac-swap/cryptoassets'
 
 export default {
   computed: {
