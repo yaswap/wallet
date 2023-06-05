@@ -26,9 +26,9 @@
     "@yac-swap/hw-ledger": "2.4.1",
     "@yac-swap/cryptoassets": "2.11.0",
     "@yac-swap/error-parser": "2.2.10",
-    "@yac-swap/ethereum-utils": "^1.13.12",
-    "@yac-swap/terra-networks": "^1.13.12",
-    "@yac-swap/types": "^1.13.12",
+    "@liquality/ethereum-utils": "^1.13.12",
+    "@liquality/terra-networks": "^1.13.12",
+    "@liquality/types": "^1.13.12",
     "@yac-swap/wallet-core": "4.26.0",
     "@terra-money/terra.js": "3.1.6",
     "@testing-library/vue": "^5.8.2",
@@ -133,8 +133,8 @@
     "@ledgerhq/hw-app-eth": "6.30.5",
     "@ledgerhq/hw-app-btc": "9.1.2",
     "@solana/web3.js": "1.50.1",
-    "@yac-swap/cryptoassets": "link:/home/chaunguyen/projects/yacoin/chaunguyen4392/wallet-core/packages/cryptoassets",
-    "@yac-swap/error-parser": "link:/home/chaunguyen/projects/yacoin/chaunguyen4392/wallet-core/packages/error-parser",
-    "@yac-swap/wallet-core": "link:/home/chaunguyen/projects/yacoin/chaunguyen4392/wallet-core/packages/wallet-core"
+    "@yac-swap/cryptoassets": "link:/home/chaunguyen/projects/yacoin/yacswap/wallet-core/packages/cryptoassets",
+    "@yac-swap/error-parser": "link:/home/chaunguyen/projects/yacoin/yacswap/wallet-core/packages/error-parser",
+    "@yac-swap/wallet-core": "link:/home/chaunguyen/projects/yacoin/yacswap/wallet-core/packages/wallet-core"
   }
 }

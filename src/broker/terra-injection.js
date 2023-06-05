@@ -1,4 +1,4 @@
-import { TerraNetworks } from '@yac-swap/terra-networks'
+import { TerraNetworks } from '@liquality/terra-networks'
 
 import PortStream from 'extension-port-stream'
 import BN from 'bignumber.js'
