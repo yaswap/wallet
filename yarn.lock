@@ -1534,62 +1534,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yac-swap/errors@npm:2.2.0":
-  version: 2.2.0
-  resolution: "@yac-swap/errors@npm:2.2.0"
-  dependencies:
-    standard-error: ^1.1.0
-  checksum: d62ec1a2c6c72bb8a37494867f2450bec9e124575306462abebb63924c148ea5c3e6ec5816328b52b27f34b31c0bed95bdf7f08450b28981642917e922ed30cf
-  languageName: node
-  linkType: hard
-
-"@yac-swap/hw-ledger@npm:2.4.1":
-  version: 2.4.1
-  resolution: "@yac-swap/hw-ledger@npm:2.4.1"
-  dependencies:
-    "@yac-swap/errors": 2.2.0
-    "@yac-swap/logger": 2.2.0
-    "@yac-swap/types": 2.3.0
-    "@yac-swap/utils": 2.3.0
-    "@ledgerhq/hw-transport": 6.27.10
-    "@ledgerhq/hw-transport-webhid": 6.27.10
-  checksum: 762627197662107128688a1025beb0d4f21bb5d5d44ed86727916bf24801296ee71ab05430aea4441c8f0fe09a5706be5b462b9829c8b9c5c6db1955532a7bd6
-  languageName: node
-  linkType: hard
-
-"@yac-swap/logger@npm:2.2.0":
-  version: 2.2.0
-  resolution: "@yac-swap/logger@npm:2.2.0"
-  checksum: 32817036850e524197bb8c99f0dff55ab4156303b81a5f53f5ee8cbffc33d27545612046bcb116139da17694916c9e008c1fb724a2a2be47d7f120e87ccdd79d
-  languageName: node
-  linkType: hard
-
-"@yac-swap/types@npm:2.3.0":
-  version: 2.3.0
-  resolution: "@yac-swap/types@npm:2.3.0"
-  dependencies:
-    "@ethersproject/bignumber": 5.7.0
-    "@liquality/cryptoassets": 1.6.0
-    bignumber.js: ^9.0.2
-  checksum: 18d8aa38a98811540bba4db2ca82c71de3333c38a7483b30d24ede63a191ab05afc3b18bf1b2462af72e3080b4d8038f953f1eed131cbfce507668c8f9c5fc4f
-  languageName: node
-  linkType: hard
-
-"@yac-swap/utils@npm:2.3.0":
-  version: 2.3.0
-  resolution: "@yac-swap/utils@npm:2.3.0"
-  dependencies:
-    "@yac-swap/errors": 2.2.0
-    "@yac-swap/types": 2.3.0
-    "@ethersproject/sha2": 5.7.0
-    bech32: ^2.0.0
-    bs58: 5.0.0
-    crypto-hashing: ^1.0.0
-    setimmediate: ^1.0.5
-  checksum: 7809ef48e6d2cedbf2e5208299568b8c8b900ebb24822577fe4dee23196a9f5f84661b151f6f6a7d12cfab6b252127dc7fd5b9949883eaf03fb28a1a775511c8
-  languageName: node
-  linkType: hard
-
 "@cnakazawa/watch@npm:^1.0.3":
   version: 1.0.4
   resolution: "@cnakazawa/watch@npm:1.0.4"
@@ -2777,17 +2721,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@liquality/cryptoassets@link:/home/chaunguyen/projects/yacoin/chaunguyen4392/wallet-core/packages/cryptoassets::locator=liquality-wallet%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@liquality/cryptoassets@link:/home/chaunguyen/projects/yacoin/chaunguyen4392/wallet-core/packages/cryptoassets::locator=liquality-wallet%40workspace%3A."
+"@liquality/cryptoassets@npm:1.6.0":
+  version: 1.6.0
+  resolution: "@liquality/cryptoassets@npm:1.6.0"
+  dependencies:
+    bignumber.js: ^8.0.1
+    bitcoin-address-validation: ^0.2.9
+    bs58: ^4.0.1
+    cashaddrjs: ^0.4.4
+    ethereumjs-util: ^7.1.3
+    lodash: ^4.17.11
+  checksum: f7e35f45862104cd8b5b529dfc102305545ccc1ac322823dca02b11d1da0263bd429f48cbe2668fce33650a70f4da66cce64c2898d98921cf617e56f06dfb2cf
   languageName: node
-  linkType: soft
-
-"@liquality/error-parser@link:/home/chaunguyen/projects/yacoin/chaunguyen4392/wallet-core/packages/error-parser::locator=liquality-wallet%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@liquality/error-parser@link:/home/chaunguyen/projects/yacoin/chaunguyen4392/wallet-core/packages/error-parser::locator=liquality-wallet%40workspace%3A."
-  languageName: node
-  linkType: soft
+  linkType: hard
 
 "@liquality/errors@npm:^1.13.12":
   version: 1.13.12
@@ -2855,12 +2801,6 @@ __metadata:
   checksum: bd2fd9fb3ddfa6d45e6de15ba536365f90414be1943d8c4367ce923918bd0c6d20f98898739bde709e3c0f60686de468f0bd55b9db49de6e08576bd23787b393
   languageName: node
   linkType: hard
-
-"@liquality/wallet-core@link:/home/chaunguyen/projects/yacoin/chaunguyen4392/wallet-core/packages/wallet-core::locator=liquality-wallet%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@liquality/wallet-core@link:/home/chaunguyen/projects/yacoin/chaunguyen4392/wallet-core/packages/wallet-core::locator=liquality-wallet%40workspace%3A."
-  languageName: node
-  linkType: soft
 
 "@mrmlnc/readdir-enhanced@npm:^2.2.1":
   version: 2.2.1
@@ -4817,6 +4757,80 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@yac-swap/cryptoassets@link:/home/chaunguyen/projects/yacoin/yacswap/wallet-core/packages/cryptoassets::locator=liquality-wallet%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@yac-swap/cryptoassets@link:/home/chaunguyen/projects/yacoin/yacswap/wallet-core/packages/cryptoassets::locator=liquality-wallet%40workspace%3A."
+  languageName: node
+  linkType: soft
+
+"@yac-swap/error-parser@link:/home/chaunguyen/projects/yacoin/yacswap/wallet-core/packages/error-parser::locator=liquality-wallet%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@yac-swap/error-parser@link:/home/chaunguyen/projects/yacoin/yacswap/wallet-core/packages/error-parser::locator=liquality-wallet%40workspace%3A."
+  languageName: node
+  linkType: soft
+
+"@yac-swap/errors@file:/home/chaunguyen/projects/yacoin/yacswap/chainabstractionlayer/packages/errors::locator=liquality-wallet%40workspace%3A.":
+  version: 2.0.0
+  resolution: "@yac-swap/errors@file:/home/chaunguyen/projects/yacoin/yacswap/chainabstractionlayer/packages/errors#/home/chaunguyen/projects/yacoin/yacswap/chainabstractionlayer/packages/errors::hash=c836a0&locator=liquality-wallet%40workspace%3A."
+  dependencies:
+    standard-error: ^1.1.0
+  checksum: fbff8306542a88e476fdb8e584d2db8b3484df05f7806bd1040fd52fe33998b0f6fbfe52398b099a5d78f2cf30468c763018c09ddb0c1c883b73b7cd62c90a8e
+  languageName: node
+  linkType: hard
+
+"@yac-swap/hw-ledger@file:/home/chaunguyen/projects/yacoin/yacswap/chainabstractionlayer/packages/hw-ledger::locator=liquality-wallet%40workspace%3A.":
+  version: 2.0.0
+  resolution: "@yac-swap/hw-ledger@file:/home/chaunguyen/projects/yacoin/yacswap/chainabstractionlayer/packages/hw-ledger#/home/chaunguyen/projects/yacoin/yacswap/chainabstractionlayer/packages/hw-ledger::hash=31383c&locator=liquality-wallet%40workspace%3A."
+  dependencies:
+    "@ledgerhq/hw-transport": 6.27.10
+    "@ledgerhq/hw-transport-webhid": 6.27.10
+    "@yac-swap/errors": "workspace:*"
+    "@yac-swap/logger": "workspace:*"
+    "@yac-swap/types": "workspace:*"
+    "@yac-swap/utils": "workspace:*"
+  checksum: 85135ca5c2d417473423a5d40d835572c2bcacccd50f5fa7f927adb0289af696d0c4715cd4f1fe7f6192ca7c37ee7bd365910877389e59fa41a9dfe2f9ba3622
+  languageName: node
+  linkType: hard
+
+"@yac-swap/logger@file:/home/chaunguyen/projects/yacoin/yacswap/chainabstractionlayer/packages/logger::locator=liquality-wallet%40workspace%3A.":
+  version: 2.0.0
+  resolution: "@yac-swap/logger@file:/home/chaunguyen/projects/yacoin/yacswap/chainabstractionlayer/packages/logger#/home/chaunguyen/projects/yacoin/yacswap/chainabstractionlayer/packages/logger::hash=1a9a97&locator=liquality-wallet%40workspace%3A."
+  checksum: 1063cc5fd2c2605050c042a9e573a930237f2fbd2e1649a251e28d30d1d7ac5d48e5346aaf84eab78725e1c31b15df7c7cc7b1945314bcac3c96d01976f09c23
+  languageName: node
+  linkType: hard
+
+"@yac-swap/types@file:/home/chaunguyen/projects/yacoin/yacswap/chainabstractionlayer/packages/types::locator=liquality-wallet%40workspace%3A.":
+  version: 2.0.0
+  resolution: "@yac-swap/types@file:/home/chaunguyen/projects/yacoin/yacswap/chainabstractionlayer/packages/types#/home/chaunguyen/projects/yacoin/yacswap/chainabstractionlayer/packages/types::hash=a0ecb8&locator=liquality-wallet%40workspace%3A."
+  dependencies:
+    "@ethersproject/bignumber": 5.7.0
+    "@liquality/cryptoassets": 1.6.0
+    bignumber.js: ^9.0.2
+  checksum: 07279d139a47723468269071a9b80e04af124b4397a2e9d839cdb40931907ad764a210bb865a4ee89b083dfcd806cba0302e628dbc7a0a0fcd653d3eff6deaea
+  languageName: node
+  linkType: hard
+
+"@yac-swap/utils@file:/home/chaunguyen/projects/yacoin/yacswap/chainabstractionlayer/packages/utils::locator=liquality-wallet%40workspace%3A.":
+  version: 2.0.0
+  resolution: "@yac-swap/utils@file:/home/chaunguyen/projects/yacoin/yacswap/chainabstractionlayer/packages/utils#/home/chaunguyen/projects/yacoin/yacswap/chainabstractionlayer/packages/utils::hash=67b162&locator=liquality-wallet%40workspace%3A."
+  dependencies:
+    "@ethersproject/sha2": 5.7.0
+    "@yac-swap/errors": "workspace:*"
+    "@yac-swap/types": "workspace:*"
+    bech32: ^2.0.0
+    bs58: 5.0.0
+    crypto-hashing: ^1.0.0
+    setimmediate: ^1.0.5
+  checksum: 2cf6519ced6f0480d7d09e26f913d59ee75c77743d10b0e93e7527c3e88109aaf0cb3d00323c635839fef4b179383dd034fc6fe884603753d9fa9426f6370d86
+  languageName: node
+  linkType: hard
+
+"@yac-swap/wallet-core@link:/home/chaunguyen/projects/yacoin/yacswap/wallet-core/packages/wallet-core::locator=liquality-wallet%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@yac-swap/wallet-core@link:/home/chaunguyen/projects/yacoin/yacswap/wallet-core/packages/wallet-core::locator=liquality-wallet%40workspace%3A."
+  languageName: node
+  linkType: soft
+
 "@yaswap/yacoinjs-lib@npm:^1.1.0":
   version: 1.1.0
   resolution: "@yaswap/yacoinjs-lib@npm:1.1.0"
@@ -6008,7 +6022,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"base-x@npm:^3.0.2":
+"base-x@npm:^3.0.2, base-x@npm:^3.0.6":
   version: 3.0.9
   resolution: "base-x@npm:3.0.9"
   dependencies:
@@ -6095,6 +6109,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"big-integer@npm:1.6.36":
+  version: 1.6.36
+  resolution: "big-integer@npm:1.6.36"
+  checksum: 8cb9366ab72975a94ace5a99f6f81e0624dc8a5d14349df1f331d75ceec405c9286ad04c2a1188bc4ec4aa65cbbf1f8065f5d6b529fdb4a9d9867bbdfa769306
+  languageName: node
+  linkType: hard
+
 "big.js@npm:^3.1.3":
   version: 3.2.0
   resolution: "big.js@npm:3.2.0"
@@ -6113,6 +6134,13 @@ __metadata:
   version: 9.1.1
   resolution: "bignumber.js@npm:9.1.1"
   checksum: ad243b7e2f9120b112d670bb3d674128f0bd2ca1745b0a6c9df0433bd2c0252c43e6315d944c2ac07b4c639e7496b425e46842773cf89c6a2dcd4f31e5c4b11e
+  languageName: node
+  linkType: hard
+
+"bignumber.js@npm:^8.0.1":
+  version: 8.1.1
+  resolution: "bignumber.js@npm:8.1.1"
+  checksum: 71544348507cd16c2c152699a8e5146964d9cf4f46108075bcd16a964dffb3963256259fc6ffc9753b4d33dfd0cf863a6b564103a3a20e10002f12a1902e8075
   languageName: node
   linkType: hard
 
@@ -6179,6 +6207,17 @@ __metadata:
   dependencies:
     safe-buffer: ^5.0.1
   checksum: 956cff6e51d7206571ef8ce875bc5fa61b5c181589790b9155799b7edcae4b20dbb3eed43b188ff3eec27cdbe98e0b7e0ec9f1cb2e4f5370c119028b248ad859
+  languageName: node
+  linkType: hard
+
+"bitcoin-address-validation@npm:^0.2.9":
+  version: 0.2.9
+  resolution: "bitcoin-address-validation@npm:0.2.9"
+  dependencies:
+    base-x: ^3.0.6
+    bech32: ^1.1.3
+    hash.js: ^1.1.7
+  checksum: 9de7bb864943b07173c42a6d979df2bd4e2a7510416f7f8e985487e3689300dd48353805f83734840d5124a0c9f57223b908bbeb0e3c6b1cd1938d4a9dfc6af6
   languageName: node
   linkType: hard
 
@@ -6889,6 +6928,15 @@ __metadata:
   version: 0.12.0
   resolution: "caseless@npm:0.12.0"
   checksum: b43bd4c440aa1e8ee6baefee8063b4850fd0d7b378f6aabc796c9ec8cb26d27fb30b46885350777d9bd079c5256c0e1329ad0dc7c2817e0bb466810ebb353751
+  languageName: node
+  linkType: hard
+
+"cashaddrjs@npm:^0.4.4":
+  version: 0.4.4
+  resolution: "cashaddrjs@npm:0.4.4"
+  dependencies:
+    big-integer: 1.6.36
+  checksum: ffc458dfc96c8f3938c7bc4e024c27d1797c63c99a5fd3a9c5a43c8046e74f891cf132a21c1ac3622474f2bb18131548d6305aac59914768e7ff1be6c18ee882
   languageName: node
   linkType: hard
 
@@ -10802,7 +10850,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ethereumjs-util@npm:^7.1.2":
+"ethereumjs-util@npm:^7.1.2, ethereumjs-util@npm:^7.1.3":
   version: 7.1.5
   resolution: "ethereumjs-util@npm:7.1.5"
   dependencies:
@@ -15934,13 +15982,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "liquality-wallet@workspace:."
   dependencies:
-    "@yac-swap/hw-ledger": 2.4.1
-    "@liquality/cryptoassets": 2.11.0
-    "@liquality/error-parser": 2.2.10
     "@liquality/ethereum-utils": ^1.13.12
     "@liquality/terra-networks": ^1.13.12
     "@liquality/types": ^1.13.12
-    "@liquality/wallet-core": 4.26.0
     "@terra-money/terra.js": 3.1.6
     "@testing-library/jest-dom": 5.16.5
     "@testing-library/vue": ^5.8.2
@@ -15953,6 +15997,10 @@ __metadata:
     "@vue/devtools": ^6.4.5
     "@vue/eslint-config-prettier": ^6.0.0
     "@vue/test-utils": 1.3.4
+    "@yac-swap/cryptoassets": 2.11.0
+    "@yac-swap/error-parser": 2.2.10
+    "@yac-swap/hw-ledger": 2.4.1
+    "@yac-swap/wallet-core": 4.26.0
     "@yaswap/yacoinjs-lib": ^1.1.0
     amplitude-js: 8.18.2
     babel-eslint: ^10.1.0
