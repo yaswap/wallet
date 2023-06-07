@@ -6,7 +6,7 @@ const YACOIN_REQUEST_MAP = {
   wallet_getAddresses: 'wallet.getAddresses',
   wallet_signMessage: 'wallet.signMessage',
   wallet_sendTransaction: 'wallet.sendTransaction',
-  wallet_signPSBT: 'wallet.signTx'
+  wallet_signTx: 'wallet.signTx'
 }
 
 class YacoinPageProvider extends PageProvider {
