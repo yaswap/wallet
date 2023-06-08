@@ -95,7 +95,7 @@ class SwapPage {
   /**
    * Get Selected service provider from SWAP screen.
    * @param page
-   * @returns {Promise<*>} - Liquality, Thorchain....
+   * @returns {Promise<*>} - Yaswap, Thorchain....
    * @constructor
    */
   async getSelectedServiceProvider(page) {

@@ -11,10 +11,10 @@
 <script>
 import CopyIcon from '@/assets/icons/copy.svg'
 import CheckIcon from '@/assets/icons/check-primary.svg'
-import { liqualityErrorStringToJson } from '@yaswap/error-parser'
+import { yaswapErrorStringToJson } from '@yaswap/error-parser'
 
 export default {
-  props: ['translatedError', 'liqualityErrorString'],
+  props: ['translatedError', 'yaswapErrorString'],
   components: {
     CopyIcon,
     CheckIcon
@@ -22,7 +22,7 @@ export default {
   computed: {
     jsonError() {
       return {
-        error: liqualityErrorStringToJson(this.liqualityErrorString),
+        error: yaswapErrorStringToJson(this.yaswapErrorString),
         friendlyMessage: this.translatedError
       }
     }

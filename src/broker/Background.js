@@ -4,11 +4,11 @@ import { getChain } from '@yaswap/cryptoassets'
 import {
   CUSTOM_ERRORS,
   createInternalError,
-  reportLiqualityError,
+  reportYaswapError,
   DappNotConnectedError
 } from '@yaswap/error-parser'
 import { connectRemote } from './terra-injection'
-import { errorToLiqualityErrorString } from '@yaswap/error-parser/dist/src/utils'
+import { errorToYaswapErrorString } from '@yaswap/error-parser/dist/src/utils'
 
 function attemptOrWarn(func, message) {
   try {
@@ -70,10 +70,10 @@ class Background {
           attemptOrWarn(
             () =>
               connection.postMessage({
-                id: 'liqualityChainChanged',
+                id: 'yaswapChainChanged',
                 data: { chainIds: this.getChainIds(state.activeNetwork) }
               }),
-            `liqualityChainChanged: Injection connection dropped: ${connection.name}`
+            `yaswapChainChanged: Injection connection dropped: ${connection.name}`
           )
         )
       }
@@ -83,10 +83,10 @@ class Background {
           attemptOrWarn(
             () =>
               connection.postMessage({
-                id: 'liqualityAccountsChanged',
+                id: 'yaswapAccountsChanged',
                 data: {}
               }),
-            `liqualityAccountsChanged: Injection connection dropped: ${connection.name}`
+            `yaswapAccountsChanged: Injection connection dropped: ${connection.name}`
           )
         )
       }
@@ -159,10 +159,10 @@ class Background {
           .dispatch(data.type, data.payload)
           .then((result) => ({ result }))
           .catch((error) => {
-            const liqualityErrorString = errorToLiqualityErrorString(error)
-            reportLiqualityError(error)
+            const yaswapErrorString = errorToYaswapErrorString(error)
+            reportYaswapError(error)
             return {
-              error: liqualityErrorString
+              error: yaswapErrorString
             }
           })
           .then((response) =>
@@ -286,9 +286,9 @@ class Background {
       .dispatch(action, data)
       .then((result) => ({ result }))
       .catch((error) => {
-        const liqualityErrorString = errorToLiqualityErrorString(error)
+        const yaswapErrorString = errorToYaswapErrorString(error)
         return {
-          error: liqualityErrorString
+          error: yaswapErrorString
         }
       })
       .then((response) => {

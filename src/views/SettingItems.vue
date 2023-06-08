@@ -200,7 +200,7 @@ export default {
     async downloadLogs() {
       const logs = await getWalletStateLogs()
       downloadFile({
-        filename: 'Liquality Wallet Logs.json',
+        filename: 'Yaswap Wallet Logs.json',
         type: 'application/javascript;charset=utf-8;',
         content: logs
       })

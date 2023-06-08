@@ -241,7 +241,7 @@ import {
   VeryHighTipWarning,
   NoMaxFeeError,
   VeryHighMaxFeeWarning
-} from '@yaswap/error-parser/dist/src/LiqualityErrors'
+} from '@yaswap/error-parser/dist/src/YaswapErrors'
 
 export default {
   components: {

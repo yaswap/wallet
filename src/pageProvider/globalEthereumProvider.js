@@ -19,7 +19,7 @@ class GlobalEthereumPageProvider extends PageProvider {
     const injectionName = this.window.providerManager.getInjectionName(chain)
     if (chainChanged) {
       this.window.dispatchEvent(
-        new CustomEvent('liqualityChainChanged', {
+        new CustomEvent('yaswapChainChanged', {
           detail: JSON.stringify({ chainIds: { [chain]: this.window[injectionName].chainId } })
         })
       )
@@ -40,14 +40,14 @@ class GlobalEthereumPageProvider extends PageProvider {
         if (prop === 'on') {
           return (method, callback) => {
             if (method === 'chainChanged') {
-              this.window.addEventListener('liqualityChainChanged', ({ detail }) => {
+              this.window.addEventListener('yaswapChainChanged', ({ detail }) => {
                 const result = JSON.parse(detail)
                 callback('0x' + result.chainIds[this.window.ethereumProxyChain].toString(16))
               })
             }
 
             if (method === 'accountsChanged') {
-              this.window.addEventListener('liqualityAccountsChanged', () => {
+              this.window.addEventListener('yaswapAccountsChanged', () => {
                 target.request({ method: 'eth_accounts', params: [] }).then((newAccounts) => {
                   callback(newAccounts)
                 })
@@ -106,7 +106,7 @@ class GlobalEthereumPageProvider extends PageProvider {
       let retries = 0
       const interval = setInterval(() => {
         retries++
-        if (this.window.ethereum && !this.window.ethereum.isLiquality) {
+        if (this.window.ethereum && !this.window.ethereum.isYaswap) {
           this.proxyEthereum()
           clearInterval(interval)
         }

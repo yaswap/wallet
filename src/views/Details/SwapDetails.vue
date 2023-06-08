@@ -115,7 +115,7 @@ import Modal from '@/components/Modal'
 import SwapProviderLabel from '@/components/SwapProviderLabel'
 import LedgerSignRquest from '@/assets/icons/ledger_sign_request.svg'
 import Timeline from '@/swaps/views/Timeline.vue'
-import { liqualityErrorStringToJson } from '@yaswap/error-parser'
+import { yaswapErrorStringToJson } from '@yaswap/error-parser'
 
 export default {
   components: {
@@ -146,7 +146,7 @@ export default {
     },
     hasTxNotFoundError() {
       if (this.item?.error) {
-        const errorContent = liqualityErrorStringToJson(this.item.error)
+        const errorContent = yaswapErrorStringToJson(this.item.error)
         if (errorContent?.rawError?.name === 'TxNotFoundError') {
           return true
         }

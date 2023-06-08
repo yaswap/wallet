@@ -67,7 +67,7 @@ import EyeIcon from '@/assets/icons/eye.svg'
 import { shortenAddress } from '@yaswap/wallet-core/dist/src/utils/address'
 import { getChain, getNativeAssetCode } from '@yaswap/cryptoassets'
 import { getAddressExplorerLink } from '@yaswap/wallet-core/dist/src/utils/asset'
-import { reportLiqualityError } from '@yaswap/error-parser'
+import { reportYaswapError } from '@yaswap/error-parser'
 
 export default {
   components: {
@@ -148,7 +148,7 @@ export default {
           accountIds: accountIds
         })
       } catch (error) {
-        reportLiqualityError(error)
+        reportYaswapError(error)
       } finally {
         this.updatingAssets = false
       }

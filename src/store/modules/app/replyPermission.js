@@ -1,4 +1,4 @@
-import { errorToLiqualityErrorString } from '@yaswap/error-parser/dist/src/utils'
+import { errorToYaswapErrorString } from '@yaswap/error-parser/dist/src/utils'
 import { emitter } from '../../utils'
 
 export const replyPermission = async ({ dispatch }, { request, allowed }) => {
@@ -7,7 +7,7 @@ export const replyPermission = async ({ dispatch }, { request, allowed }) => {
     try {
       response.result = await dispatch('executeRequest', { request })
     } catch (error) {
-      response.error = errorToLiqualityErrorString(error)
+      response.error = errorToYaswapErrorString(error)
     }
   }
 

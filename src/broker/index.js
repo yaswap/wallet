@@ -14,7 +14,7 @@ const Broker = (state) => {
   if (isBackgroundScript(window)) {
     const locale = state.app?.locale
     const vuexPersist = new VuexPersist({
-      key: 'liquality-wallet',
+      key: 'yaswap-wallet',
       storage: Storage,
       asyncStorage: true,
       reducer: (state) => {
@@ -33,10 +33,10 @@ const Broker = (state) => {
      */
     const restoreState = vuexPersist.restoreState
     vuexPersist.restoreState = async (key, storage) => {
-      const currentState = await Storage.getItem('liquality-wallet')
+      const currentState = await Storage.getItem('yaswap-wallet')
       if (currentState && isMigrationNeeded(currentState)) {
         const newState = await processMigrations(currentState)
-        await Storage.setItem('liquality-wallet', newState)
+        await Storage.setItem('yaswap-wallet', newState)
       }
       const state = await restoreState(key, storage)
       vuexPersist.restoreState = restoreState // Remove hook

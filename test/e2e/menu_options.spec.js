@@ -55,7 +55,7 @@ describe('Hamburger menu options["MAINNET"]', async () => {
       (el) => el.textContent
     )
     expect(settingDefaultWebWallet).contains(
-      'Set Liquality as the default dapp wallet. Other wallets cannot interact with dapps while this is enabled.'
+      'Set Yaswap as the default dapp wallet. Other wallets cannot interact with dapps while this is enabled.'
     )
 
     // Check the Analytics toggle option has been added

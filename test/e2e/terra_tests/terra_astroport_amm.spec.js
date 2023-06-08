@@ -128,7 +128,7 @@ describe.skip('SWAP Astroport AMM service Provider-["MAINNET"]', async () => {
       expect(
         await page.$eval('#selectedQuote_provider', (el) => el.textContent),
         'LUNA->UST, Supporting source should be chosen!'
-      ).oneOf(['Liquality', 'Astroport'])
+      ).oneOf(['Yaswap', 'Astroport'])
       // validate Send & To fiat values
       const { sendFromFiat, toFiat } = await swapPage.getSwapFiatValues(page)
       expect(
@@ -303,7 +303,7 @@ describe.skip('SWAP Astroport AMM service Provider-["MAINNET"]', async () => {
       expect(
         await swapPage.getSelectedServiceProvider(page),
         `${fromAsset}->${toAsset.coin} swap, source should be chosen!`
-      ).oneOf(['Liquality'])
+      ).oneOf(['Yaswap'])
     })
     it('UST->ETH quote check', async () => {
       const fromAsset = 'UST'
@@ -338,7 +338,7 @@ describe.skip('SWAP Astroport AMM service Provider-["MAINNET"]', async () => {
       expect(
         await swapPage.getSelectedServiceProvider(page),
         `${fromAsset}->${toAsset.coin} swap, source should be chosen!`
-      ).oneOf(['Liquality'])
+      ).oneOf(['Yaswap'])
     })
     it('UST->MATIC quote check', async () => {
       const fromAsset = 'UST'
@@ -373,7 +373,7 @@ describe.skip('SWAP Astroport AMM service Provider-["MAINNET"]', async () => {
       expect(
         await swapPage.getSelectedServiceProvider(page),
         `${fromAsset}->${toAsset.coin} swap, source should be chosen!`
-      ).oneOf(['Liquality'])
+      ).oneOf(['Yaswap'])
       await swapPage.clickSwapReviewButton(page)
     })
   })

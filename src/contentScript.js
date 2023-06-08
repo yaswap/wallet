@@ -44,7 +44,7 @@ function injectProviders(state) {
 
   setupTerraStreams()
 
-  inject(`window.liquality = ${JSON.stringify(injectConfig)};`)
+  inject(`window.yaswap = ${JSON.stringify(injectConfig)};`)
   inject('#PAGEPROVIDER#')
 }
 
@@ -67,7 +67,7 @@ function getGlobalEthereumChain(state) {
   return ethereumChain
 }
 
-chrome.storage.local.get(['liquality-wallet'], (storage) => {
-  const state = storage['liquality-wallet']
+chrome.storage.local.get(['yaswap-wallet'], (storage) => {
+  const state = storage['yaswap-wallet']
   injectProviders(state)
 })

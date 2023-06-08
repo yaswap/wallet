@@ -55,7 +55,7 @@ import LogoWalletMain from '@/assets/icons/logo_wallet_main.svg'
 import NewWalletText from '@/assets/icons/wallet_tagline.svg'
 import SpinnerIcon from '@/assets/icons/spinner.svg'
 import { version as walletVersion } from '../../package.json'
-import { reportLiqualityError } from '@yaswap/error-parser/dist/src/reporters/index'
+import { reportYaswapError } from '@yaswap/error-parser/dist/src/reporters/index'
 
 export default {
   components: {
@@ -92,7 +92,7 @@ export default {
           }
         })
       } catch (e) {
-        reportLiqualityError(e)
+        reportYaswapError(e)
         const { plain } = this.$tle({ translationKey: 'PasswordError' })
         this.error = plain
         this.trackAnalytics({

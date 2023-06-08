@@ -64,7 +64,7 @@
   "settings": {
     "settings": "Mga setting",
     "title": "Default na Web3 Wallet",
-    "description": "I-set ang Liquality bilang default na dapp wallet. Ang ibang mga wallet ay hindi maaaring makipag-ugnayan sa mga dapps habang ito ay pinagana.",
+    "description": "I-set ang Yaswap bilang default na dapp wallet. Ang ibang mga wallet ay hindi maaaring makipag-ugnayan sa mga dapps habang ito ay pinagana.",
     "analytics": "Analytics",
     "analyticsSub": "Ibahagi kung saan ka nag-click. Walang nakolektang data ng pagkakakilanlan.",
     "walletLogs": "Mga Log ng Wallet",
@@ -125,7 +125,7 @@
       "other": "NFTs"
     },
     "nftActivityDescription": "Dito makikita ang mga activity ng iyong wallet kapag sinimulan mo na itong gamitin",
-    "nftDescription": "Ang mga NFTs mo sa iyong Liquality account ay makikita dito",
+    "nftDescription": "Ang mga NFTs mo sa iyong Yaswap account ay makikita dito",
     "exploreNFT": "Tingnan at suriin ang mga NFT sa Polygon, Ethereum at Solana",
     "checkOutOpenSea": "Tingnan at suriin ang OpenSea",
     "discoverCollect": "Tuklasin at mangolekta ng mga NFT sa Arbitrum",

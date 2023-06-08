@@ -140,9 +140,9 @@ import { CHAINS_WITH_FETCH_TOKEN_DETAILS } from '@yaswap/wallet-core/dist/src/ut
 import NavBar from '@/components/NavBar.vue'
 import ChevronDownIcon from '@/assets/icons/chevron_down.svg'
 import ChevronUpIcon from '@/assets/icons/chevron_up.svg'
-import { DuplicateTokenSymbolError } from '@yaswap/error-parser/dist/src/LiqualityErrors/DuplicateTokenSymbolError'
-import { errorToLiqualityErrorString } from '@yaswap/error-parser/dist/src/utils'
-import { reportLiqualityError } from '@yaswap/error-parser'
+import { DuplicateTokenSymbolError } from '@yaswap/error-parser/dist/src/YaswapErrors/DuplicateTokenSymbolError'
+import { errorToYaswapErrorString } from '@yaswap/error-parser/dist/src/utils'
+import { reportYaswapError } from '@yaswap/error-parser'
 
 export default {
   components: {
@@ -243,10 +243,10 @@ export default {
           })
           this.$router.replace('/settings/manage-assets')
         } catch (error) {
-          const liqualityErrorString = errorToLiqualityErrorString(error)
-          reportLiqualityError(error)
+          const yaswapErrorString = errorToYaswapErrorString(error)
+          reportYaswapError(error)
           return {
-            error: liqualityErrorString
+            error: yaswapErrorString
           }
         } finally {
           this.addingToken = false

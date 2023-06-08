@@ -8,7 +8,7 @@
         "dateRange": "Date Range"
     },
     "analyticsOptinModal": {
-        "title": "Tulungan kaming pagbutihin ang Liquality para mas mapagsilbihan ka",
+        "title": "Tulungan kaming pagbutihin ang Yaswap para mas mapagsilbihan ka",
         "message": "Ibahagi kung saan ka nag-click. Walang nagpapakilalang data. Maaaring bawiin ang pahintulot na ito anumang oras.",
         "analitycsAccept": "Oo, ibabahagi ko ang aking mga pag-click",
         "analitycsReject": "Hindi muna ngayon"
@@ -100,7 +100,7 @@
     "buyCrypto": {
         "buyCrypto": "Bumili ng Crypto",
         "gettingStarted": "Madali ang Pagsisimula sa Crypto",
-        "recommendations": "Inirerekomenda namin na magsimula sa pagpapadala ng ETH sa iyong Liquality wallet dahil ito ang karaniwang ginagamit sa maraming transaksyon.",
+        "recommendations": "Inirerekomenda namin na magsimula sa pagpapadala ng ETH sa iyong Yaswap wallet dahil ito ang karaniwang ginagamit sa maraming transaksyon.",
         "transakInstructions": "Hinahayaan ka ng Transak na bumili ng crypto gamit ang iyong credit card o sa pamamagitan ng bank transfer depende sa lokasyon. Para mabayaran ang mga fee (gas) o makipag-ugnayan sa dApps, karamihan ay kakailanganin mo ang token ng gas (ang unang token ng account).",
         "onramperDescription": "Ang Onramper ay isang pinagsama-samang serbisyong nagbibigay ng pinakamahusay na quote mula sa ilang source at tumatanggap ng mga karaniwang paraan ng pagbabayad depende sa lokasyon.",
         "trustedPartnerMessage": "Maaari ka ring bumili ng crypto sa aming pinagkakatiwalaang partner.",

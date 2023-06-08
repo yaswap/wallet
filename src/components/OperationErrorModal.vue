@@ -30,7 +30,7 @@
         </button>
         <CopyError
           :translatedError="translatedError"
-          :liqualityErrorString="liqualityErrorString"
+          :yaswapErrorString="yaswapErrorString"
         />
       </div>
     </template>
@@ -57,7 +57,7 @@ export default {
       type: Boolean,
       default: false
     },
-    liqualityErrorString: {
+    yaswapErrorString: {
       type: String,
       default: ''
     }
@@ -69,7 +69,7 @@ export default {
   },
   computed: {
     translatedError() {
-      return this.$tle(this.liqualityErrorString)
+      return this.$tle(this.yaswapErrorString)
     }
   }
 }

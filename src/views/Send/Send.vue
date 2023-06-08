@@ -249,7 +249,7 @@
       :open="sendErrorModalOpen"
       :account="account"
       @close="closeSendErrorModal"
-      :liqualityErrorString="sendErrorMessage"
+      :yaswapErrorString="sendErrorMessage"
     />
     <LedgerSignRequestModal :open="signRequestModalOpen" @close="closeSignRequestModal" />
   </div>
@@ -290,8 +290,8 @@ import CustomFeesEIP1559 from '@/components/CustomFeesEIP1559'
 import { ledgerConnectMixin } from '@/utils/hardware-wallet'
 import qs from 'qs'
 import { UNSResolver } from '@yaswap/wallet-core/dist/src/nameResolvers/uns'
-import { errorToLiqualityErrorString } from '@yaswap/error-parser/dist/src/utils'
-import { reportLiqualityError } from '@yaswap/error-parser/dist/src/reporters/index'
+import { errorToYaswapErrorString } from '@yaswap/error-parser/dist/src/utils'
+import { reportYaswapError } from '@yaswap/error-parser/dist/src/reporters/index'
 import InfoNotification from '@/components/InfoNotification'
 
 export default {
@@ -658,10 +658,10 @@ export default {
 
         this.$router.replace(`/accounts/${this.accountId}/${this.asset}`)
       } catch (error) {
-        reportLiqualityError(error)
+        reportYaswapError(error)
         this.loading = false
         this.signRequestModalOpen = false
-        this.sendErrorMessage = errorToLiqualityErrorString(error)
+        this.sendErrorMessage = errorToYaswapErrorString(error)
         this.sendErrorModalOpen = true
       }
     },

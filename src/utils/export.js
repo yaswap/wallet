@@ -2,8 +2,8 @@ import { version } from '../../package.json'
 
 export const getWalletStateLogs = async () => {
   return new Promise((resolve) => {
-    chrome.storage.local.get(['liquality-wallet'], (storage) => {
-      const state = storage['liquality-wallet']
+    chrome.storage.local.get(['yaswap-wallet'], (storage) => {
+      const state = storage['yaswap-wallet']
 
       // Remove key related properties
       delete state.encryptedWallets

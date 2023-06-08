@@ -8,9 +8,9 @@ import { TerraPageProvider } from './terraProvider'
 import { NearPageProvider } from './nearProvider'
 import { SolanaPageProvider } from './solanaProvider'
 
-const { override, ethereumChain } = window.liquality.globalEthereum
+const { override, ethereumChain } = window.yaswap.globalEthereum
 
-const ethereumProviders = window.liquality.evmChains.map(
+const ethereumProviders = window.yaswap.evmChains.map(
   (evmChain) => new EthereumPageProvider(window, evmChain.chain, evmChain.asset, evmChain.network)
 )
 

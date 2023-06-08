@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="liquality-timeline">
+    <div class="yaswap-timeline">
       <small id="start_time">{{ prettyTime(item.startTime) }}</small>
       <h3>{{ $t('common.started') }}</h3>
-      <div class="liquality-timeline_inner">
-        <div class="liquality-timeline_container left completed">
+      <div class="yaswap-timeline_inner">
+        <div class="yaswap-timeline_container left completed">
           <div class="content">
             <h3 :id="asset">
               {{ $t('common.from') }}:
@@ -19,7 +19,7 @@
           </div>
         </div>
         <div
-          class="liquality-timeline_container right"
+          class="yaswap-timeline_container right"
           :class="{ completed: item.status === 'SUCCESS' && tx && tx.confirmations > 0 }"
         >
           <div class="content">
@@ -199,7 +199,7 @@ export default {
 </script>
 
 <style lang="scss">
-.liquality-timeline {
+.yaswap-timeline {
   padding-bottom: 20px;
   text-align: center;
 

@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div class="liquality-timeline">
+    <div class="yaswap-timeline">
       <small id="start_time">{{ prettyTime(item.startTime) }}</small>
       <h3>Start</h3>
-      <div class="liquality-timeline_inner">
-        <div class="liquality-timeline_container left completed">
+      <div class="yaswap-timeline_inner">
+        <div class="yaswap-timeline_container left completed">
           <div class="content" id="swap_details_content"></div>
         </div>
         <div
-          class="liquality-timeline_container"
+          class="yaswap-timeline_container"
           v-for="(step, id) in timeline"
           :key="id"
           :class="{
@@ -92,7 +92,7 @@
           </div>
         </div>
         <div
-          class="liquality-timeline_container right"
+          class="yaswap-timeline_container right"
           :class="{
             completed: !timeline[timeline.length - 1] || timeline[timeline.length - 1].completed
           }"
@@ -296,7 +296,7 @@
               <pre>{{ translatedItemError }}
                 <CopyError
                   :translatedError="translatedItemError"
-                  :liqualityErrorString="item.error"
+                  :yaswapErrorString="item.error"
                 />
               </pre>
             </td>
@@ -380,7 +380,7 @@ export default {
       return BN(1).div(calculateQuoteRate(this.item)).dp(8)
     },
     orderLink() {
-      if (this.item.provider !== 'liquality') {
+      if (this.item.provider !== 'yaswap') {
         return ''
       }
       const agent = getSwapProviderConfig(this.item.network, this.item.provider).agent
@@ -406,7 +406,7 @@ export default {
     prettyBalance,
     shortenAddress,
     isChainEvmCompatible,
-    // get to asset when liquality boost provider is swapping from Native to ERC20
+    // get to asset when yaswap boost provider is swapping from Native to ERC20
     prettyTime(timestamp) {
       return moment(timestamp).format('L, LT')
     },
@@ -493,7 +493,7 @@ export default {
 </script>
 
 <style lang="scss">
-.liquality-timeline {
+.yaswap-timeline {
   padding-bottom: 20px;
   text-align: center;
 

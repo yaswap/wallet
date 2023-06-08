@@ -43,7 +43,7 @@
       <div class="d-flex justify-content-center">
         <a
           class="text-primary font-bold"
-          href="https://blog.liquality.io/nfts-are-here-manage-your-collections-from-multiple-chains-on-your-liquality-wallet/"
+          href="https://blog.yaswap.yacoin.org/nfts-are-here-manage-your-collections-from-multiple-chains-on-your-yaswap-wallet/"
           target="_blank"
           rel="noopener noreferrer"
           >{{ $t('pages.wallet.learnHowItWorks') }}</a

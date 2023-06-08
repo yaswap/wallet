@@ -64,7 +64,7 @@
   "settings": {
     "settings": "Configuración",
     "title": "Cartera Web3 por defecto",
-    "description": "Usa Liquality como la cartera por defecto para dapps. Otras carteras no podrán interactuar con dapps mientras esto está activado.",
+    "description": "Usa Yaswap como la cartera por defecto para dapps. Otras carteras no podrán interactuar con dapps mientras esto está activado.",
     "analytics": "Analytics",
     "analyticsSub": "Comparte donde haces click. No recolectamos datos que puedan identificarte.",
     "walletLogs": "Wallet Logs",
@@ -125,7 +125,7 @@
       "other": "NFTs"
     },
     "nftActivityDescription": "Cuando empieces a usas tus NFTs verás la actividad aquí",
-    "nftDescription": "Cuando tengas NFTs en cuentas de tu cartera Liquality los verás aquí",
+    "nftDescription": "Cuando tengas NFTs en cuentas de tu cartera Yaswap los verás aquí",
     "exploreNFT": "Explora NFTs en Polygon, Ethereum, y Solana",
     "checkOutOpenSea": "Ver OpenSea",
     "discoverCollect": "Descrubre y colecciona NFTs en Arbitrum",

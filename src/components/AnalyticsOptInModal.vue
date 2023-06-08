@@ -2,7 +2,7 @@
   <Modal v-if="open" @close="close">
     <!-- <div class="analytics-optin"> -->
     <template #header>
-      <!-- <h6>Help us to improve Liquality for you</h6> -->
+      <!-- <h6>Help us to improve Yaswap for you</h6> -->
       <div class="analytics-optin-title">
         {{ $t('components.analyticsOptinModal.title') }}
       </div>

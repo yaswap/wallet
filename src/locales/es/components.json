@@ -8,7 +8,7 @@
         "dateRange": "Rango de Fechas"
     },
     "analyticsOptinModal": {
-        "title": "Ayúdanos a mejorar Liquality",
+        "title": "Ayúdanos a mejorar Yaswap",
         "message": "Comparte dónde haces click. No se comparten datos que te identifiquen. Este permiso se puede revocar en cualquier momento.",
         "analitycsAccept": "Claro, compartiré mis clicks",
         "analitycsReject": "Hoy no, pregúntame luego"
@@ -100,7 +100,7 @@
     "buyCrypto": {
         "buyCrypto": "Comprar Crypto",
         "gettingStarted": "Iniciarse en Crypto es fácil",
-        "recommendations": "Recomendamos empezar enviando ETH a tu cartera de Liquality porque así podrás cubrir el gas de muchas transacciones.",
+        "recommendations": "Recomendamos empezar enviando ETH a tu cartera de Yaswap porque así podrás cubrir el gas de muchas transacciones.",
         "transakInstructions": "Transak te permite comprar crypto con tu tarjeta de crédito o usando transferencias bancarias dependiendo de tu ubicación. Para cubrir pagar las comisiones (gas) o interactuar con dApps necesitarás el token nativo que se usa para el gas (el primer token que aparece habilitado en tu cuenta).",
         "onramperDescription": "Onramper es una agregador que provee la mejor oferta desde diferentes servicios y acepta los métodos de pago más populares dependiendo de tu ubicación.",
         "trustedPartnerMessage": "También puedes comprar crypto a través de nuestros socios.",

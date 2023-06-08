@@ -64,7 +64,7 @@
   "settings": {
     "settings": "Configurações",
     "title": "Carteira Padrão Web3",
-    "description": "Definir Liquality como a carteira padrão para dApps. Outras carteiras não conseguirão interagir com os dApps enquanto esta opção estiver ativa.",
+    "description": "Definir Yaswap como a carteira padrão para dApps. Outras carteiras não conseguirão interagir com os dApps enquanto esta opção estiver ativa.",
     "analytics": "Analytics",
     "analyticsSub": "Compartilhe seus cliques. Nenhum dado de identificação é coletado.",
     "walletLogs": "Wallet Logs",
@@ -125,7 +125,7 @@
       "other": "NFTs"
     },
     "nftActivityDescription": "Quando começar a usar seus NFTs, verá atividade aqui",
-    "nftDescription": "Quando começar a ter NFTs em suas contas de sua carteira Liquality, os verá aqui",
+    "nftDescription": "Quando começar a ter NFTs em suas contas de sua carteira Yaswap, os verá aqui",
     "exploreNFT": "Explore NFTs em Polygon, Ethereum and Solana",
     "checkOutOpenSea": "Confira em OpenSea",
     "discoverCollect": "Descubra e colecione NFTs em Arbitrum",

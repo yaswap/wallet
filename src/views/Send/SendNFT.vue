@@ -282,7 +282,7 @@
       :open="sendErrorModalOpen"
       :account="account"
       @close="closeSendErrorModal"
-      :liqualityErrorString="sendErrorMessage"
+      :yaswapErrorString="sendErrorMessage"
     />
   </div>
 </template>
@@ -317,8 +317,8 @@ import {
 import _ from 'lodash'
 import BN from 'bignumber.js'
 import NFTThumbnailImage from '@/assets/nft_thumbnail.png'
-import { errorToLiqualityErrorString } from '@yaswap/error-parser/dist/src/utils'
-import { reportLiqualityError } from '@yaswap/error-parser/dist/src/reporters/index'
+import { errorToYaswapErrorString } from '@yaswap/error-parser/dist/src/utils'
+import { reportYaswapError } from '@yaswap/error-parser/dist/src/reporters/index'
 
 export default {
   components: {
@@ -641,7 +641,7 @@ export default {
           accountIds: accountIds
         })
       } catch (error) {
-        reportLiqualityError(error)
+        reportYaswapError(error)
       }
     },
     async sendNFT() {
@@ -666,7 +666,7 @@ export default {
         this.$router.replace(`/wallet/nfts/activity/${this.account?.id}?tab=activity`)
       } catch (error) {
         this.loading = false
-        this.sendErrorMessage = errorToLiqualityErrorString(error)
+        this.sendErrorMessage = errorToYaswapErrorString(error)
         this.sendErrorModalOpen = true
       }
     },

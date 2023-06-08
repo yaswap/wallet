@@ -10,7 +10,7 @@ import { ChainId, getChain } from '@yaswap/cryptoassets'
 test('Solana Network TesnetConfig', () => {
   expect(SolanaNetworks.solana_testnet).toEqual({
     name: 'devnet',
-    nodeUrl: 'http://liquality.devnet.rpcpool.com/',
+    nodeUrl: 'http://yaswap.devnet.rpcpool.com/',
     helperUrl: 'https://explorer-api.devnet.solana.com/',
     coinType: '501',
     isTestnet: true,

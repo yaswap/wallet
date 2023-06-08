@@ -74,8 +74,8 @@ describe.skip('Terra swaps-["PULL_REQUEST_TEST"]', async () => {
         await page.waitForSelector('#selectedQuote_provider', { visible: true })
         expect(
           await page.$eval('#selectedQuote_provider', (el) => el.textContent),
-          `SWAP (${obj.fromAsset}->${obj.toAsset}), Liquality should be chosen!`
-        ).equals('Liquality')
+          `SWAP (${obj.fromAsset}->${obj.toAsset}), Yaswap should be chosen!`
+        ).equals('Yaswap')
       } catch (e) {
         await testUtil.takeScreenshot(
           page,
@@ -83,7 +83,7 @@ describe.skip('Terra swaps-["PULL_REQUEST_TEST"]', async () => {
         )
         expect(
           e,
-          `${obj.fromAsset}->${obj.toAsset} SWAP issue, Liquality Quote service provider should be chosen`
+          `${obj.fromAsset}->${obj.toAsset} SWAP issue, Yaswap Quote service provider should be chosen`
         ).equals(null)
       }
       if (swapToAsset === 'BTC') {

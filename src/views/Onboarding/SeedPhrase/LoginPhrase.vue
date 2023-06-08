@@ -63,8 +63,8 @@
 import { mapActions } from 'vuex'
 import LogoWallet from '@/assets/icons/logo_wallet.svg?inline'
 import { version as walletVersion } from '../../../../package.json'
-import { errorToLiqualityErrorString } from '@yaswap/error-parser/dist/src/utils'
-import { reportLiqualityError } from '@yaswap/error-parser'
+import { errorToYaswapErrorString } from '@yaswap/error-parser/dist/src/utils'
+import { reportYaswapError } from '@yaswap/error-parser'
 export default {
   props: {
     titleKey: {
@@ -107,8 +107,8 @@ export default {
           this.error = this.$t('pages.onboarding.seedlogin.pleaseAcceptTerms')
         }
       } catch (e) {
-        reportLiqualityError(e)
-        this.error = this.$tle(errorToLiqualityErrorString(e))
+        reportYaswapError(e)
+        this.error = this.$tle(errorToYaswapErrorString(e))
         this.trackAnalytics({
           event: 'User Backup Seed failed',
           properties: {

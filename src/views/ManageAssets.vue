@@ -27,7 +27,7 @@
           </p>
           <a
             target="_blank"
-            href="https://liquality.io/blog/how-to-use-the-liquality-wallet-101/#q-how-can-i-add-custom-tokens-to-my-liquality-wallet"
+            href="https://yaswap.yacoin.org/blog/how-to-use-the-yaswap-wallet-101/#q-how-can-i-add-custom-tokens-to-my-yaswap-wallet"
             >{{ $t('pages.manageAssets.learnHow') }}</a
           >
         </div>

@@ -24,7 +24,7 @@ import NavBar from '@/components/NavBar.vue'
 import WalletStats from './WalletStats.vue'
 import WalletTabs from './WalletTabs.vue'
 import NFTStats from './NFTStats'
-import { reportLiqualityError } from '@yaswap/error-parser'
+import { reportYaswapError } from '@yaswap/error-parser'
 
 export default {
   components: {
@@ -47,7 +47,7 @@ export default {
       ])
     } catch (error) {
       // TODO: manage error
-      reportLiqualityError(error)
+      reportYaswapError(error)
     }
   },
   computed: {
@@ -104,7 +104,7 @@ export default {
           accountIds: accountIds
         })
       } catch (error) {
-        reportLiqualityError(error)
+        reportYaswapError(error)
       }
     }
   }

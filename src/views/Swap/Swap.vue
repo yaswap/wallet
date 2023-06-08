@@ -488,7 +488,7 @@
       :open="swapErrorModalOpen"
       :account="account"
       @close="closeSwapErrorModal"
-      :liqualityErrorString="swapErrorMessage"
+      :yaswapErrorString="swapErrorMessage"
     />
     <LedgerSignRequestModal :open="signRequestModalOpen" @close="closeSignRequestModal" />
   </div>
@@ -553,8 +553,8 @@ import { buildConfig } from '@yaswap/wallet-core'
 import { SwapProviderType } from '@yaswap/wallet-core/dist/src/store/types'
 import { getSwapProvider } from '@yaswap/wallet-core/dist/src/factory'
 import qs from 'qs'
-import { errorToLiqualityErrorString } from '@yaswap/error-parser/dist/src/utils'
-import { reportLiqualityError } from '@yaswap/error-parser/dist/src/reporters/index'
+import { errorToYaswapErrorString } from '@yaswap/error-parser/dist/src/utils'
+import { reportYaswapError } from '@yaswap/error-parser/dist/src/reporters/index'
 
 const QUOTE_TIMER_MS = 30000
 
@@ -727,8 +727,8 @@ export default {
       const enabledAssets = this.enabledAssets[this.activeNetwork][this.activeWalletId]
 
       return (
-        (provider === SwapProviderType.LiqualityBoostNativeToERC20 ||
-          provider === SwapProviderType.LiqualityBoostERC20ToNative) &&
+        (provider === SwapProviderType.YaswapBoostNativeToERC20 ||
+          provider === SwapProviderType.YaswapBoostERC20ToNative) &&
         !enabledAssets.includes(bridgeAsset)
       )
     },
@@ -811,14 +811,14 @@ export default {
       return this.max
     },
     isPairAvailable() {
-      const liqualityMarket = this.networkMarketData?.find(
+      const yaswapMarket = this.networkMarketData?.find(
         (pair) =>
           (pair.from === this.asset ||
             buildConfig.supportedBridgeAssets.indexOf(this.assetChain) !== -1) &&
           (pair.to === this.toAsset ||
             buildConfig.supportedBridgeAssets.indexOf(this.toAssetChain) !== -1)
       )
-      return !!liqualityMarket
+      return !!yaswapMarket
     },
     min() {
       return Math.ceil(this.minSwapAmount * Math.pow(10, 6)) / Math.pow(10, 6)
@@ -880,10 +880,10 @@ export default {
         )
         return totalFees ? totalFees : BN(0)
       } catch (error) {
-        const liqualityErrorString = errorToLiqualityErrorString(error)
-        reportLiqualityError(error)
+        const yaswapErrorString = errorToYaswapErrorString(error)
+        reportYaswapError(error)
         return {
-          error: liqualityErrorString
+          error: yaswapErrorString
         }
       }
     },
@@ -931,7 +931,7 @@ export default {
         return !this.account?.balances?.ETH || this.account?.balances?.ETH === 0
       }
 
-      if (this.toAssetChain === 'ETH' && this.selectedQuote?.provider == 'liquality') {
+      if (this.toAssetChain === 'ETH' && this.selectedQuote?.provider == 'yaswap') {
         return (
           !this.toAccount?.balances?.ETH ||
           this.toAccount?.balances?.ETH === 0 ||
@@ -1396,10 +1396,10 @@ export default {
         this.signRequestModalOpen = false
         this.$router.replace(`/accounts/${this.account?.id}/${this.asset}`)
       } catch (error) {
-        reportLiqualityError(error)
+        reportYaswapError(error)
         this.loading = false
         this.signRequestModalOpen = false
-        this.swapErrorMessage = errorToLiqualityErrorString(error)
+        this.swapErrorMessage = errorToYaswapErrorString(error)
         this.swapErrorModalOpen = true
       }
     },
@@ -1479,7 +1479,7 @@ export default {
     }, 800),
     getAccountId() {
       if (
-        this.selectedQuoteProvider?.config.type === SwapProviderType.LiqualityBoostERC20ToNative
+        this.selectedQuoteProvider?.config.type === SwapProviderType.YaswapBoostERC20ToNative
       ) {
         return this.fromAccountId
       }

@@ -8,7 +8,7 @@
         "dateRange": "Date Range"
     },
     "analyticsOptinModal": {
-        "title": "Help us improve Liquality to better serve you",
+        "title": "Help us improve Yaswap to better serve you",
         "message": "Share where you click. There is no identifying data. This permission can be revoked any time.",
         "analitycsAccept": "Sure, I will share my clicks",
         "analitycsReject": "Not today, ask me again"
@@ -100,7 +100,7 @@
     "buyCrypto": {
         "buyCrypto": "Buy Crypto",
         "gettingStarted": "Getting Started with Crypto is Easy",
-        "recommendations": "We recommend to start with sending ETH to your Liquality wallet because that fuels many transactions.",
+        "recommendations": "We recommend to start with sending ETH to your Yaswap wallet because that fuels many transactions.",
         "transakInstructions": "Transak lets you buy crypto with your credit card or via bank transfer depending on location. To cover fees (gas) or interact with dApps you’ll mostly need the gas token (the first token of the account).",
         "onramperDescription": "Onramper is an aggregated service providing the best quote from several sources and accepts popular payment methods depending on location.",
         "trustedPartnerMessage": "You can also buy crypto at our trusted partner.",

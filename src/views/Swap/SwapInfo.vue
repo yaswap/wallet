@@ -28,9 +28,9 @@ export default {
     showRefundMessage() {
       const providerType = getSwapProviderConfig(this.activeNetwork, this.quote.provider).type
       return (
-        providerType === SwapProviderType.Liquality ||
-        providerType === SwapProviderType.LiqualityBoostERC20ToNative ||
-        providerType === SwapProviderType.LiqualityBoostNativeToERC20
+        providerType === SwapProviderType.Yaswap ||
+        providerType === SwapProviderType.YaswapBoostERC20ToNative ||
+        providerType === SwapProviderType.YaswapBoostNativeToERC20
       )
     }
   }

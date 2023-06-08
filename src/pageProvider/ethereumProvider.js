@@ -68,7 +68,7 @@ class EthereumPageProvider extends PageProvider {
     const injectionName = this.window.providerManager.getInjectionName(this.chain)
 
     this.window[injectionName] = {
-      isLiquality: true,
+      isYaswap: true,
       isMetaMask: metamaskEmulated,
       isEIP1193: true,
       networkVersion: this.network.networkId,
@@ -115,14 +115,14 @@ class EthereumPageProvider extends PageProvider {
       },
       on: (method, callback) => {
         if (method === 'chainChanged') {
-          this.window.addEventListener('liqualityChainChanged', ({ detail }) => {
+          this.window.addEventListener('yaswapChainChanged', ({ detail }) => {
             const result = JSON.parse(detail)
             callback('0x' + result.chainIds[this.chain].toString(16))
           })
         }
 
         if (method === 'accountsChanged') {
-          this.window.addEventListener('liqualityAccountsChanged', () => {
+          this.window.addEventListener('yaswapAccountsChanged', () => {
             const addresses = this.getAddresses()
             callback(addresses)
           })

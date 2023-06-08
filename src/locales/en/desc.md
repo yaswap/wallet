@@ -1,6 +1,6 @@
 Self-Custodial Multi-Chain Wallet that is 100% Open Source
 
-The Liquality Wallet is an extension for accessing Bitcoin, Ethereum Web3, Rootstock, NEAR, Polygon, Binance Smart Chain, and Arbitrum applications in your browser. This MetaMask alternative supports multiple blockchains and provides the easiest way to flip between BTC, ETH/ERC20s, RSK, NEAR, TERRA, Avalanche and Polygon tokens with built-in one-click atomic swaps.
+The Yaswap Wallet is an extension for accessing Bitcoin, Ethereum Web3, Rootstock, NEAR, Polygon, Binance Smart Chain, and Arbitrum applications in your browser. This MetaMask alternative supports multiple blockchains and provides the easiest way to flip between BTC, ETH/ERC20s, RSK, NEAR, TERRA, Avalanche and Polygon tokens with built-in one-click atomic swaps.
 
 - Multi-Chain: send, receive, swap, hodl, use dapps, and more with your BTC, ETH, ERC20s, RSK, NEAR, Polygon, BSC, TERRA, Avalanche and Arbitrum tokens.
 

@@ -64,7 +64,7 @@
   "settings": {
     "settings": "设置",
     "title": "默认web3钱包",
-    "description": "将 Liquality 设置为默认的 dapp 钱包。 启用此功能后，其他钱包将无法与 dapp 交互。",
+    "description": "将 Yaswap 设置为默认的 dapp 钱包。 启用此功能后，其他钱包将无法与 dapp 交互。",
     "analytics": "Analytics",
     "analyticsSub": "分享您的使用行为。但我们不会收集任何隐私数据。",
     "walletLogs": "Wallet Logs",
@@ -125,7 +125,7 @@
       "other": "NFTs"
     },
     "nftActivityDescription": "开始使用 NFT 后，您将在此处看到活动",
-    "nftDescription": "如果您 Liquality 中的账户拥有 NFT，您可以在此处看到它们",
+    "nftDescription": "如果您 Yaswap 中的账户拥有 NFT，您可以在此处看到它们",
     "exploreNFT": "在Polygon, Ethereum and Solana查看NFT",
     "checkOutOpenSea": "在OpenSea上查看",
     "discoverCollect": "在 Arbitrum 上发现和收集 NFT",

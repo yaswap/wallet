@@ -46,8 +46,8 @@ import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
 import { version as walletVersion } from '../../../../package.json'
 import { getNextAccountColor } from '@yaswap/wallet-core/dist/src/utils/accounts'
 import { ChainId, getAllEvmChains } from '@yaswap/cryptoassets'
-import { errorToLiqualityErrorString } from '@yaswap/error-parser/dist/src/utils'
-import { reportLiqualityError } from '@yaswap/error-parser/dist/src/reporters/index'
+import { errorToYaswapErrorString } from '@yaswap/error-parser/dist/src/utils'
+import { reportYaswapError } from '@yaswap/error-parser/dist/src/reporters/index'
 
 const LEDGER_PER_PAGE = 5
 
@@ -153,10 +153,10 @@ export default {
         }
       } catch (error) {
         this.ledgerError = {
-          message: this.$tle(errorToLiqualityErrorString(error))
+          message: this.$tle(errorToYaswapErrorString(error))
         }
         this.ledgerConnected = false
-        reportLiqualityError(error)
+        reportYaswapError(error)
         await this.trackAnalytics({
           event: 'HD Wallet Ledger error',
           properties: {
@@ -261,8 +261,8 @@ export default {
           this.creatingAccount = false
           this.currentStep = 'completed'
         } catch (error) {
-          this.ledgerError = { message: this.$tle(errorToLiqualityErrorString(error)) }
-          reportLiqualityError(error)
+          this.ledgerError = { message: this.$tle(errorToYaswapErrorString(error)) }
+          reportYaswapError(error)
           this.creatingAccount = false
           this.trackAnalytics({
             event: 'Ledger error creating accounts',

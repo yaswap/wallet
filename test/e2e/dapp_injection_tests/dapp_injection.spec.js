@@ -50,7 +50,7 @@ describe("Dapp Injection-['MAINNET','PULL_REQUEST_TEST']", async () => {
       const connectRequestWindow = (await browser.pages())[3];
       let pageTitle = await connectRequestWindow.title();
       console.log("Page title is: ", pageTitle);
-      expect(pageTitle,'Liquality wallet page title is wrong clicked metamask connect button').to.equal("Liquality Wallet");
+      expect(pageTitle,'Yaswap wallet page title is wrong clicked metamask connect button').to.equal("Yaswap Wallet");
       await connectRequestWindow.waitForSelector("#filter_by_chain", {
         visible: true,
         timeout: 90000
@@ -125,7 +125,7 @@ describe("Dapp Injection-['MAINNET','PULL_REQUEST_TEST']", async () => {
         timeout: 60000
       });
       await connectRequestWindow.click("#connect_request_button");
-      console.log("user clicked on connect button from liquality wallet");
+      console.log("user clicked on connect button from yaswap wallet");
 
       // Check web3 status as connected
       await metaMaskTestDapp.waitForSelector('#accounts', { visible: true, timeout: 30000 })

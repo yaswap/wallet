@@ -8,7 +8,7 @@
         "dateRange": "Sakot sa Petsa"
     },
     "analyticsOptinModal": {
-        "title": "Tabangi kami sa pagpalambo sa Liquality aron mas maayo nga makaalagad kanimo",
+        "title": "Tabangi kami sa pagpalambo sa Yaswap aron mas maayo nga makaalagad kanimo",
         "message": "Ipakigbahin kung asa nimo gi-klik. Walay nagpaila nga datos. Kini nga pagtugot mahimong bawion bisan unsang orasa.",
         "analitycsAccept": "Mouyon ko nga ipaambit ang akong mga pag-klik",
         "analitycsReject": "Dili usa sa pagka karon"
@@ -100,7 +100,7 @@
     "buyCrypto": {
         "buyCrypto": "Palit ug Crypto",
         "gettingStarted": "Sayon ang Pagsugod sa Crypto",
-        "recommendations": "Among girekomendar nga magsugod sa pagpadala sa ETH sa imong Liquality nga wallet tungod mao kini ang kasagarang ginagamit sa daghang mga transaksyon.",
+        "recommendations": "Among girekomendar nga magsugod sa pagpadala sa ETH sa imong Yaswap nga wallet tungod mao kini ang kasagarang ginagamit sa daghang mga transaksyon.",
         "transakInstructions": "Gitugotan ka sa Transak nga makapalit og crypto gamit ang imong credit card o pinaagi sa pagbalhin sa bangko depende sa lokasyon. Aron mabayaran ang mga fees (gas) o makagamit sa dApps kasagaran kinahanglan nimo ang token sa gas (ang unang token sa account).",
         "onramperDescription": "Ang Onramper usa ka aggregated nga serbisyo nga naghatag sa labing kaayo nga quote gikan sa daghang mga gigikanan ug gidawat ang mga kadaghanang pamaagi sa pagbayad depende sa lokasyon.",
         "trustedPartnerMessage": "Mahimo ka usab mopalit og crypto sa among kasaligan nga partner.",
