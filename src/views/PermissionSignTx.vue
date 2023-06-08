@@ -65,11 +65,11 @@ import {
 import { getAssetIcon } from '@/utils/asset'
 import LogoWallet from '@/assets/icons/logo_wallet.svg?inline'
 import SpinnerIcon from '@/assets/icons/spinner.svg'
-import { prettyBalance } from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
+import { prettyBalance } from '@yaswap/wallet-core/dist/src/utils/coinFormatter'
 import LedgerSignRequestModal from '@/components/LedgerSignRequestModal'
 import { ledgerConnectMixin } from '@/utils/hardware-wallet'
-import { ChainId, getChain } from '@yac-swap/cryptoassets'
-import cryptoassets from '@yac-swap/wallet-core/dist/src/utils/cryptoassets'
+import { ChainId, getChain } from '@yaswap/cryptoassets'
+import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
 
 export default {
   components: {

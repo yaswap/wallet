@@ -498,8 +498,8 @@
 import { mapActions, mapGetters, mapState } from 'vuex'
 import _ from 'lodash'
 import BN from 'bignumber.js'
-import cryptoassets from '@yac-swap/wallet-core/dist/src/utils/cryptoassets'
-import { currencyToUnit, unitToCurrency, getChain } from '@yac-swap/cryptoassets'
+import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
+import { currencyToUnit, unitToCurrency, getChain } from '@yaswap/cryptoassets'
 import FeeSelector from '@/components/FeeSelector'
 import NavBar from '@/components/NavBar'
 import InfoNotification from '@/components/InfoNotification'
@@ -518,20 +518,20 @@ import {
   prettyBalance,
   prettyFiatBalance,
   VALUE_DECIMALS
-} from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
+} from '@yaswap/wallet-core/dist/src/utils/coinFormatter'
 import {
   getAssetColorStyle,
   getNativeAsset,
   isERC20
-} from '@yac-swap/wallet-core/dist/src/utils/asset'
+} from '@yaswap/wallet-core/dist/src/utils/asset'
 import { getAssetIcon } from '@/utils/asset'
-import { shortenAddress } from '@yac-swap/wallet-core/dist/src/utils/address'
+import { shortenAddress } from '@yaswap/wallet-core/dist/src/utils/address'
 import {
   getFeeLabel,
   isEIP1559Fees,
   feePerUnit,
   newSendFees
-} from '@yac-swap/wallet-core/dist/src/utils/fees'
+} from '@yaswap/wallet-core/dist/src/utils/fees'
 import SwapIcon from '@/assets/icons/arrow_swap.svg'
 import SpinnerIcon from '@/assets/icons/spinner.svg'
 import ArrowDown from '@/assets/icons/arrow-down.svg'
@@ -547,14 +547,14 @@ import LedgerSignRequestModal from '@/components/LedgerSignRequestModal'
 import OperationErrorModal from '@/components/OperationErrorModal'
 import CustomFees from '@/components/CustomFees'
 import CustomFeesEIP1559 from '@/components/CustomFeesEIP1559'
-import { calculateQuoteRate, sortQuotes } from '@yac-swap/wallet-core/dist/src/utils/quotes'
+import { calculateQuoteRate, sortQuotes } from '@yaswap/wallet-core/dist/src/utils/quotes'
 import { version as walletVersion } from '../../../package.json'
-import { buildConfig } from '@yac-swap/wallet-core'
-import { SwapProviderType } from '@yac-swap/wallet-core/dist/src/store/types'
-import { getSwapProvider } from '@yac-swap/wallet-core/dist/src/factory'
+import { buildConfig } from '@yaswap/wallet-core'
+import { SwapProviderType } from '@yaswap/wallet-core/dist/src/store/types'
+import { getSwapProvider } from '@yaswap/wallet-core/dist/src/factory'
 import qs from 'qs'
-import { errorToLiqualityErrorString } from '@yac-swap/error-parser/dist/src/utils'
-import { reportLiqualityError } from '@yac-swap/error-parser/dist/src/reporters/index'
+import { errorToLiqualityErrorString } from '@yaswap/error-parser/dist/src/utils'
+import { reportLiqualityError } from '@yaswap/error-parser/dist/src/reporters/index'
 
 const QUOTE_TIMER_MS = 30000
 

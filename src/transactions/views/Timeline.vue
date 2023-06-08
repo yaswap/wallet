@@ -87,21 +87,21 @@
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
 import BN from 'bignumber.js'
-import moment from '@yac-swap/wallet-core/dist/src/utils/moment'
-import { getChain, isEvmChain } from '@yac-swap/cryptoassets'
-import cryptoassets from '@yac-swap/wallet-core/dist/src/utils/cryptoassets'
+import moment from '@yaswap/wallet-core/dist/src/utils/moment'
+import { getChain, isEvmChain } from '@yaswap/cryptoassets'
+import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
 
-import { prettyBalance } from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
-import { getNativeAsset, getAddressExplorerLink } from '@yac-swap/wallet-core/dist/src/utils/asset'
+import { prettyBalance } from '@yaswap/wallet-core/dist/src/utils/coinFormatter'
+import { getNativeAsset, getAddressExplorerLink } from '@yaswap/wallet-core/dist/src/utils/asset'
 
 import CopyIcon from '@/assets/icons/copy.svg'
 import ChevronDownIcon from '@/assets/icons/chevron_down.svg'
 import ChevronRightIcon from '@/assets/icons/chevron_right.svg'
 
-import { getSwapProviderConfig } from '@yac-swap/wallet-core/dist/src/swaps/utils'
-import { calculateQuoteRate } from '@yac-swap/wallet-core/dist/src/utils/quotes'
-import { shortenAddress } from '@yac-swap/wallet-core/dist/src/utils/address'
-import { UNSResolver } from '@yac-swap/wallet-core/dist/src/nameResolvers/uns'
+import { getSwapProviderConfig } from '@yaswap/wallet-core/dist/src/swaps/utils'
+import { calculateQuoteRate } from '@yaswap/wallet-core/dist/src/utils/quotes'
+import { shortenAddress } from '@yaswap/wallet-core/dist/src/utils/address'
+import { UNSResolver } from '@yaswap/wallet-core/dist/src/nameResolvers/uns'
 import { debounce } from 'lodash'
 
 export default {

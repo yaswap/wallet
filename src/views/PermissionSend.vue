@@ -113,8 +113,8 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
-import cryptoassets from '@yac-swap/wallet-core/dist/src/utils/cryptoassets'
-import { getToken } from '@yac-swap/cryptoassets'
+import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
+import { getToken } from '@yaswap/cryptoassets'
 import FeeSelector from '@/components/FeeSelector'
 import CustomFees from '@/components/CustomFees'
 import LedgerSignRequestModal from '@/components/LedgerSignRequestModal'
@@ -123,19 +123,19 @@ import {
   prettyBalance,
   prettyFiatBalance,
   formatFiatUI
-} from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
+} from '@yaswap/wallet-core/dist/src/utils/coinFormatter'
 import {
   getNativeAsset,
   getAssetColorStyle,
   estimateGas
-} from '@yac-swap/wallet-core/dist/src/utils/asset'
-import { parseTokenTx } from '@yac-swap/wallet-core/dist/src/utils/parseTokenTx'
+} from '@yaswap/wallet-core/dist/src/utils/asset'
+import { parseTokenTx } from '@yaswap/wallet-core/dist/src/utils/parseTokenTx'
 import {
   isEIP1559Fees,
   getSendTxFees,
   feePerUnit
-} from '@yac-swap/wallet-core/dist/src/utils/fees'
-import { shortenAddress } from '@yac-swap/wallet-core/dist/src/utils/address'
+} from '@yaswap/wallet-core/dist/src/utils/fees'
+import { shortenAddress } from '@yaswap/wallet-core/dist/src/utils/address'
 import SpinnerIcon from '@/assets/icons/spinner.svg'
 import ChevronDown from '@/assets/icons/chevron_down.svg'
 import ChevronRight from '@/assets/icons/chevron_right.svg'

@@ -104,9 +104,9 @@
 </template>
 
 <script>
-import { getAssetColorStyle } from '@yac-swap/wallet-core/dist/src/utils/asset'
+import { getAssetColorStyle } from '@yaswap/wallet-core/dist/src/utils/asset'
 import { getAssetIcon } from '@/utils/asset'
-import { dpUI, formatFiatUI } from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
+import { dpUI, formatFiatUI } from '@yaswap/wallet-core/dist/src/utils/coinFormatter'
 import AccountTooltip from '@/components/AccountTooltip'
 import AssetAvailableAmount from '@/views/Send/AssetAvailableAmount.vue'
 import { mapState } from 'vuex'

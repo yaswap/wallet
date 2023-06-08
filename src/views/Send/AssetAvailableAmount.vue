@@ -5,7 +5,7 @@
   </div>
 </template>
 <script>
-import { dpUI } from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
+import { dpUI } from '@yaswap/wallet-core/dist/src/utils/coinFormatter'
 
 export default {
   name: 'AssetAvailableAmount',

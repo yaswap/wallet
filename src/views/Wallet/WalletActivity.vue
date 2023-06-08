@@ -13,7 +13,7 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex'
-import { applyActivityFilters } from '@yac-swap/wallet-core/dist/src/utils/history'
+import { applyActivityFilters } from '@yaswap/wallet-core/dist/src/utils/history'
 
 export default {
   components: {

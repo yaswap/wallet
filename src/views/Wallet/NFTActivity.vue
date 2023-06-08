@@ -55,13 +55,13 @@ import { mapState, mapGetters } from 'vuex'
 import NavBar from '@/components/NavBar.vue'
 import TransactionList from '@/components/TransactionList'
 import ActivityFilter from '@/components/ActivityFilter'
-import { applyActivityFilters } from '@yac-swap/wallet-core/dist/src/utils/history'
+import { applyActivityFilters } from '@yaswap/wallet-core/dist/src/utils/history'
 import NFTStats from '@/views/Wallet/NFTStats'
 import amplitude from 'amplitude-js'
 import WalletNFTs from './WalletNFTs.vue'
 import { getAccountIcon } from '@/utils/accounts'
 import NFTIcon from '@/assets/icons/nft.svg'
-import { getNativeAssetCode } from '@yac-swap/cryptoassets'
+import { getNativeAssetCode } from '@yaswap/cryptoassets'
 
 amplitude.getInstance().init('bf12c665d1e64601347a600f1eac729e')
 

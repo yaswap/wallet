@@ -86,8 +86,8 @@ import BuyCryptoButton from '@/components/BuyCrypto/BuyCryptoButton'
 import CopyIcon from '@/assets/icons/copy.svg'
 import CopyWhiteIcon from '@/assets/icons/copy_white.svg'
 import TickIcon from '@/assets/icons/tick.svg'
-import { ChainId, getChain, isEvmChain } from '@yac-swap/cryptoassets'
-import cryptoassets from '@yac-swap/wallet-core/dist/src/utils/cryptoassets'
+import { ChainId, getChain, isEvmChain } from '@yaswap/cryptoassets'
+import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
 import { version as walletVersion } from '../../package.json'
 
 export default {

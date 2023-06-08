@@ -1,11 +1,11 @@
-import { Client } from '@yac-swap/client'
-import { SolanaNetworks } from '@yac-swap/solana-networks'
-import { SolanaRpcProvider } from '@yac-swap/solana-rpc-provider'
-import { SolanaWalletProvider } from '@yac-swap/solana-wallet-provider'
-import { SolanaSwapProvider } from '@yac-swap/solana-swap-provider'
-import { SolanaSwapFindProvider } from '@yac-swap/solana-swap-find-provider'
-import { Network } from '@yac-swap/wallet-core/dist/src/store/types'
-import { ChainId, getChain } from '@yac-swap/cryptoassets'
+import { Client } from '@yaswap/client'
+import { SolanaNetworks } from '@yaswap/solana-networks'
+import { SolanaRpcProvider } from '@yaswap/solana-rpc-provider'
+import { SolanaWalletProvider } from '@yaswap/solana-wallet-provider'
+import { SolanaSwapProvider } from '@yaswap/solana-swap-provider'
+import { SolanaSwapFindProvider } from '@yaswap/solana-swap-find-provider'
+import { Network } from '@yaswap/wallet-core/dist/src/store/types'
+import { ChainId, getChain } from '@yaswap/cryptoassets'
 
 test('Solana Network TesnetConfig', () => {
   expect(SolanaNetworks.solana_testnet).toEqual({

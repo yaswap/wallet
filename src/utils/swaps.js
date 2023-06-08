@@ -1,4 +1,4 @@
-import { getSwapProviderConfig } from '@yac-swap/wallet-core/dist/src/swaps/utils'
+import { getSwapProviderConfig } from '@yaswap/wallet-core/dist/src/swaps/utils'
 
 export function getSwapProviderIcon(network, providerId) {
   const config = getSwapProviderConfig(network, providerId)

@@ -1,7 +1,7 @@
 import { inject } from './broker/utils'
 import Script from './broker/Script'
-import { buildConfig } from '@yac-swap/wallet-core'
-import { getChain, getNativeAssetCode, isEvmChain } from '@yac-swap/cryptoassets'
+import { buildConfig } from '@yaswap/wallet-core'
+import { getChain, getNativeAssetCode, isEvmChain } from '@yaswap/cryptoassets'
 import PortStream from 'extension-port-stream'
 import LocalMessageDuplexStream from 'post-message-stream'
 new Script().start()

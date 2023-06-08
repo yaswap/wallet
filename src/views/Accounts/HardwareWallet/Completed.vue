@@ -32,7 +32,7 @@
 </template>
 <script>
 import CircleProgressBar from '@/assets/icons/circle_progress_bar.svg'
-import { ChainId } from '@yac-swap/cryptoassets'
+import { ChainId } from '@yaswap/cryptoassets'
 
 export default {
   props: {

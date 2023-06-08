@@ -62,10 +62,10 @@
 
 <script>
 import { mapActions } from 'vuex'
-import { getNativeAsset, getAssetColorStyle } from '@yac-swap/wallet-core/dist/src/utils/asset'
-import cryptoassets from '@yac-swap/wallet-core/dist/src/utils/cryptoassets'
-import { unitToCurrency } from '@yac-swap/cryptoassets'
-import { shortenAddress } from '@yac-swap/wallet-core/dist/src/utils/address'
+import { getNativeAsset, getAssetColorStyle } from '@yaswap/wallet-core/dist/src/utils/asset'
+import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
+import { unitToCurrency } from '@yaswap/cryptoassets'
+import { shortenAddress } from '@yaswap/wallet-core/dist/src/utils/address'
 import SpinnerIcon from '@/assets/icons/spinner.svg'
 import ChevronDown from '@/assets/icons/chevron_down.svg'
 import ChevronRight from '@/assets/icons/chevron_right.svg'

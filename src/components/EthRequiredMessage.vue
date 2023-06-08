@@ -11,7 +11,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { getNativeAsset, getFeeAsset } from '@yac-swap/wallet-core/dist/src/utils/asset'
+import { getNativeAsset, getFeeAsset } from '@yaswap/wallet-core/dist/src/utils/asset'
 export default {
   props: {
     accountId: String,

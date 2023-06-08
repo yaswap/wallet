@@ -1,4 +1,4 @@
-import cryptoassets from '@yac-swap/wallet-core/dist/src/utils/cryptoassets'
+import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
 
 export const getAssetIcon = (asset, extension = 'svg') => {
   const _asset = cryptoassets[asset]?.matchingAsset ?? asset

@@ -135,14 +135,14 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { debounce } from 'lodash-es'
-import cryptoassets from '@yac-swap/wallet-core/dist/src/utils/cryptoassets'
-import { CHAINS_WITH_FETCH_TOKEN_DETAILS } from '@yac-swap/wallet-core/dist/src/utils/fetchTokenDetails'
+import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
+import { CHAINS_WITH_FETCH_TOKEN_DETAILS } from '@yaswap/wallet-core/dist/src/utils/fetchTokenDetails'
 import NavBar from '@/components/NavBar.vue'
 import ChevronDownIcon from '@/assets/icons/chevron_down.svg'
 import ChevronUpIcon from '@/assets/icons/chevron_up.svg'
-import { DuplicateTokenSymbolError } from '@yac-swap/error-parser/dist/src/LiqualityErrors/DuplicateTokenSymbolError'
-import { errorToLiqualityErrorString } from '@yac-swap/error-parser/dist/src/utils'
-import { reportLiqualityError } from '@yac-swap/error-parser'
+import { DuplicateTokenSymbolError } from '@yaswap/error-parser/dist/src/LiqualityErrors/DuplicateTokenSymbolError'
+import { errorToLiqualityErrorString } from '@yaswap/error-parser/dist/src/utils'
+import { reportLiqualityError } from '@yaswap/error-parser'
 
 export default {
   components: {

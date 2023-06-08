@@ -1,6 +1,6 @@
 import qs from 'qs'
-import { currencyToUnit } from '@yac-swap/cryptoassets'
-import { CUSTOM_ERRORS, createInternalError } from '@yac-swap/error-parser'
+import { currencyToUnit } from '@yaswap/cryptoassets'
+import { CUSTOM_ERRORS, createInternalError } from '@yaswap/error-parser'
 
 export const handlePaymentUri = async ({ dispatch, rootGetters }, { data }) => {
   const { uri } = data

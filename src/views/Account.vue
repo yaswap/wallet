@@ -118,8 +118,8 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
-import cryptoassets from '@yac-swap/wallet-core/dist/src/utils/cryptoassets'
-import { getChain } from '@yac-swap/cryptoassets'
+import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
+import { getChain } from '@yaswap/cryptoassets'
 import NavBar from '@/components/NavBar.vue'
 import RefreshIcon from '@/assets/icons/refresh.svg'
 import SendIcon from '@/assets/icons/arrow_send.svg'
@@ -129,13 +129,13 @@ import {
   prettyBalance,
   formatFiat,
   formatFiatUI
-} from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
-import { shortenAddress } from '@yac-swap/wallet-core/dist/src/utils/address'
-import { getAddressExplorerLink } from '@yac-swap/wallet-core/dist/src/utils/asset'
+} from '@yaswap/wallet-core/dist/src/utils/coinFormatter'
+import { shortenAddress } from '@yaswap/wallet-core/dist/src/utils/address'
+import { getAddressExplorerLink } from '@yaswap/wallet-core/dist/src/utils/asset'
 import { getAssetIcon } from '@/utils/asset'
 import TransactionList from '@/components/TransactionList'
 import ActivityFilter from '@/components/ActivityFilter'
-import { applyActivityFilters } from '@yac-swap/wallet-core/dist/src/utils/history'
+import { applyActivityFilters } from '@yaswap/wallet-core/dist/src/utils/history'
 import EyeIcon from '@/assets/icons/eye.svg'
 import BN from 'bignumber.js'
 import { formatFontSize } from '@/utils/fontSize'

@@ -1,4 +1,4 @@
-import { ChainId as ChainName, Network } from '@yac-swap/cryptoassets'
+import { ChainId as ChainName, Network } from '@yaswap/cryptoassets'
 
 export const chainIdsMapping = {
   eip155: {

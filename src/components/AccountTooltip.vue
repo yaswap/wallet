@@ -23,10 +23,10 @@
 </template>
 
 <script>
-import { shortenAddress } from '@yac-swap/wallet-core/dist/src/utils/address'
+import { shortenAddress } from '@yaswap/wallet-core/dist/src/utils/address'
 import { getAccountIcon } from '@/utils/accounts'
-import { isChainEvmCompatible, getNativeAsset } from '@yac-swap/wallet-core/dist/src/utils/asset'
-import { prettyBalance } from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
+import { isChainEvmCompatible, getNativeAsset } from '@yaswap/wallet-core/dist/src/utils/asset'
+import { prettyBalance } from '@yaswap/wallet-core/dist/src/utils/coinFormatter'
 
 export default {
   props: {

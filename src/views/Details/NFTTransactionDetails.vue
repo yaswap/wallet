@@ -124,24 +124,24 @@
 
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
-import moment from '@yac-swap/wallet-core/dist/src/utils/moment'
-import cryptoassets from '@yac-swap/wallet-core/dist/src/utils/cryptoassets'
-import { getChain, getNativeAssetCode } from '@yac-swap/cryptoassets'
+import moment from '@yaswap/wallet-core/dist/src/utils/moment'
+import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
+import { getChain, getNativeAssetCode } from '@yaswap/cryptoassets'
 import BN from 'bignumber.js'
-import { getSendTxFees, feePerUnit } from '@yac-swap/wallet-core/dist/src/utils/fees'
+import { getSendTxFees, feePerUnit } from '@yaswap/wallet-core/dist/src/utils/fees'
 import {
   prettyBalance,
   prettyFiatBalance
-} from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
+} from '@yaswap/wallet-core/dist/src/utils/coinFormatter'
 import {
   getStatusLabel,
   ACTIVITY_FILTER_TYPES
-} from '@yac-swap/wallet-core/dist/src/utils/history'
+} from '@yaswap/wallet-core/dist/src/utils/history'
 import {
   getNativeAsset,
   getTransactionExplorerLink,
   getAddressExplorerLink
-} from '@yac-swap/wallet-core/dist/src/utils/asset'
+} from '@yaswap/wallet-core/dist/src/utils/asset'
 import { getAssetIcon } from '@/utils/asset'
 import { getItemIcon } from '@/utils/history'
 
@@ -151,7 +151,7 @@ import CompletedIcon from '@/assets/icons/completed.svg'
 import FailedIcon from '@/assets/icons/failed.svg'
 import SpinnerIcon from '@/assets/icons/spinner.svg'
 import NavBar from '@/components/NavBar.vue'
-import { shortenAddress } from '@yac-swap/wallet-core/dist/src/utils/address'
+import { shortenAddress } from '@yaswap/wallet-core/dist/src/utils/address'
 import NFTThumbnailImage from '@/assets/nft_thumbnail.png'
 
 export default {

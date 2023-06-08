@@ -48,9 +48,9 @@
 </template>
 
 <script>
-import { getAssetColorStyle } from '@yac-swap/wallet-core/dist/src/utils/asset'
+import { getAssetColorStyle } from '@yaswap/wallet-core/dist/src/utils/asset'
 import { getChainIcon } from '@/utils/accounts'
-import { getChain } from '@yac-swap/cryptoassets'
+import { getChain } from '@yaswap/cryptoassets'
 import SearchIcon from '@/assets/icons/search.svg'
 import ChevronDownIcon from '@/assets/icons/chevron_down.svg'
 import ChevronUpIcon from '@/assets/icons/chevron_up.svg'

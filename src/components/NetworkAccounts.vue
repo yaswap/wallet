@@ -42,10 +42,10 @@ import {
   prettyBalance,
   formatFiat,
   formatFiatUI
-} from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
+} from '@yaswap/wallet-core/dist/src/utils/coinFormatter'
 import { getAssetIcon } from '@/utils/asset'
 import { getAccountIcon } from '@/utils/accounts'
-import { shortenAddress } from '@yac-swap/wallet-core/dist/src/utils/address'
+import { shortenAddress } from '@yaswap/wallet-core/dist/src/utils/address'
 
 export default {
   components: {

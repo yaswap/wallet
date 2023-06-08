@@ -105,14 +105,14 @@
 </template>
 
 <script>
-import { getNativeAsset, getFeeAsset } from '@yac-swap/wallet-core/dist/src/utils/asset'
+import { getNativeAsset, getFeeAsset } from '@yaswap/wallet-core/dist/src/utils/asset'
 import { getAssetIcon } from '@/utils/asset'
 import NavBar from '@/components/NavBar'
-import { getFeeLabel } from '@yac-swap/wallet-core/dist/src/utils/fees'
+import { getFeeLabel } from '@yaswap/wallet-core/dist/src/utils/fees'
 import BN from 'bignumber.js'
-import { prettyFiatBalance } from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
-import cryptoassets from '@yac-swap/wallet-core/dist/src/utils/cryptoassets'
-import { getChain } from '@yac-swap/cryptoassets'
+import { prettyFiatBalance } from '@yaswap/wallet-core/dist/src/utils/coinFormatter'
+import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
+import { getChain } from '@yaswap/cryptoassets'
 import ChevronUpIcon from '@/assets/icons/chevron_up.svg'
 import ChevronDownIcon from '@/assets/icons/chevron_down.svg'
 import { mapState } from 'vuex'

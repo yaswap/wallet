@@ -140,13 +140,13 @@ import {
   prettyBalance,
   formatFiat,
   formatFiatUI
-} from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
+} from '@yaswap/wallet-core/dist/src/utils/coinFormatter'
 import { getAssetIcon } from '@/utils/asset'
 import { getAccountIcon } from '@/utils/accounts'
-import cryptoassets from '@yac-swap/wallet-core/dist/src/utils/cryptoassets'
+import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
 import PlusIcon from '@/assets/icons/plus_icon.svg'
 import MinusIcon from '@/assets/icons/minus_icon.svg'
-import { shortenAddress } from '@yac-swap/wallet-core/dist/src/utils/address'
+import { shortenAddress } from '@yaswap/wallet-core/dist/src/utils/address'
 import NFTIcon from '@/assets/icons/nft.svg'
 import ChevronRightIcon from '@/assets/icons/chevron_right.svg'
 

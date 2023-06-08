@@ -26,10 +26,10 @@
 
 <script>
 import BN from 'bignumber.js'
-import { prettyFiatBalance } from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
-import { getNativeAsset, getFeeAsset } from '@yac-swap/wallet-core/dist/src/utils/asset'
-import cryptoassets from '@yac-swap/wallet-core/dist/src/utils/cryptoassets'
-import { getChain } from '@yac-swap/cryptoassets'
+import { prettyFiatBalance } from '@yaswap/wallet-core/dist/src/utils/coinFormatter'
+import { getNativeAsset, getFeeAsset } from '@yaswap/wallet-core/dist/src/utils/asset'
+import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
+import { getChain } from '@yaswap/cryptoassets'
 import { mapState } from 'vuex'
 
 export default {

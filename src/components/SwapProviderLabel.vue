@@ -18,7 +18,7 @@
 import {
   getSwapProviderConfig,
   getSwapProviderInfo
-} from '@yac-swap/wallet-core/dist/src/swaps/utils'
+} from '@yaswap/wallet-core/dist/src/swaps/utils'
 import { getSwapProviderIcon } from '@/utils/swaps'
 
 export default {

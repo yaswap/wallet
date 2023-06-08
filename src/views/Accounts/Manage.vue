@@ -18,11 +18,11 @@
 
 <script>
 import { mapState } from 'vuex'
-import cryptoassets from '@yac-swap/wallet-core/dist/src/utils/cryptoassets'
+import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
 import NavBar from '@/components/NavBar.vue'
-import { buildConfig } from '@yac-swap/wallet-core'
-import { getChain } from '@yac-swap/cryptoassets'
-import { formatFiat } from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
+import { buildConfig } from '@yaswap/wallet-core'
+import { getChain } from '@yaswap/cryptoassets'
+import { formatFiat } from '@yaswap/wallet-core/dist/src/utils/coinFormatter'
 import { getAccountIcon } from '@/utils/accounts'
 import ChainAccounts from './ChainAccounts.vue'
 

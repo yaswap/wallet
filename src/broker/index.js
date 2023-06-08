@@ -5,8 +5,8 @@ import Background from './Background'
 import Foreground from './Foreground'
 import { isBackgroundScript } from './utils'
 import Storage from './Storage'
-import { migrations } from '@yac-swap/wallet-core'
-import { updateErrorReporterConfig } from '@yac-swap/error-parser'
+import { migrations } from '@yaswap/wallet-core'
+import { updateErrorReporterConfig } from '@yaswap/error-parser'
 
 const { isMigrationNeeded, processMigrations } = migrations
 

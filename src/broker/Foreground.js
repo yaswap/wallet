@@ -1,4 +1,4 @@
-import { CUSTOM_ERRORS, createInternalError } from '@yac-swap/error-parser'
+import { CUSTOM_ERRORS, createInternalError } from '@yaswap/error-parser'
 import EventEmitter from 'events'
 import { BG_PREFIX, connectToBackground, newConnectId, Deferred } from './utils'
 

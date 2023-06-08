@@ -1,4 +1,4 @@
-// import { LedgerDeviceConnectionError } from '@yac-swap/error-parser'
+// import { LedgerDeviceConnectionError } from '@yaswap/error-parser'
 
 export const LEDGER_USB_VENDOR_ID = '0x2c97'
 

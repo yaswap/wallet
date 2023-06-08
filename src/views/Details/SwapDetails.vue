@@ -98,14 +98,14 @@
 
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
-import moment from '@yac-swap/wallet-core/dist/src/utils/moment'
-import cryptoassets from '@yac-swap/wallet-core/dist/src/utils/cryptoassets'
-import { getChain, unitToCurrency } from '@yac-swap/cryptoassets'
-import { prettyBalance, dpUI } from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
-import { calculateQuoteRate } from '@yac-swap/wallet-core/dist/src/utils/quotes'
-import { feePerUnit } from '@yac-swap/wallet-core/dist/src/utils/fees'
-import { getStatusLabel } from '@yac-swap/wallet-core/dist/src/utils/history'
-import { isERC20, getNativeAsset, getFeeAsset } from '@yac-swap/wallet-core/dist/src/utils/asset'
+import moment from '@yaswap/wallet-core/dist/src/utils/moment'
+import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
+import { getChain, unitToCurrency } from '@yaswap/cryptoassets'
+import { prettyBalance, dpUI } from '@yaswap/wallet-core/dist/src/utils/coinFormatter'
+import { calculateQuoteRate } from '@yaswap/wallet-core/dist/src/utils/quotes'
+import { feePerUnit } from '@yaswap/wallet-core/dist/src/utils/fees'
+import { getStatusLabel } from '@yaswap/wallet-core/dist/src/utils/history'
+import { isERC20, getNativeAsset, getFeeAsset } from '@yaswap/wallet-core/dist/src/utils/asset'
 import InfoNotification from '@/components/InfoNotification.vue'
 import CompletedIcon from '@/assets/icons/completed.svg'
 import RefundedIcon from '@/assets/icons/refunded.svg'
@@ -115,7 +115,7 @@ import Modal from '@/components/Modal'
 import SwapProviderLabel from '@/components/SwapProviderLabel'
 import LedgerSignRquest from '@/assets/icons/ledger_sign_request.svg'
 import Timeline from '@/swaps/views/Timeline.vue'
-import { liqualityErrorStringToJson } from '@yac-swap/error-parser'
+import { liqualityErrorStringToJson } from '@yaswap/error-parser'
 
 export default {
   components: {

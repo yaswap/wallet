@@ -322,26 +322,26 @@
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
 import BN from 'bignumber.js'
-import moment from '@yac-swap/wallet-core/dist/src/utils/moment'
-import cryptoassets from '@yac-swap/wallet-core/dist/src/utils/cryptoassets'
-import { getChain } from '@yac-swap/cryptoassets'
+import moment from '@yaswap/wallet-core/dist/src/utils/moment'
+import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
+import { getChain } from '@yaswap/cryptoassets'
 
-import { prettyBalance } from '@yac-swap/wallet-core/dist/src/utils/coinFormatter'
-import { getSwapTimeline, ACTIONS_TERMS } from '@yac-swap/wallet-core/dist/src/utils/timeline'
+import { prettyBalance } from '@yaswap/wallet-core/dist/src/utils/coinFormatter'
+import { getSwapTimeline, ACTIONS_TERMS } from '@yaswap/wallet-core/dist/src/utils/timeline'
 import {
   isChainEvmCompatible,
   getNativeAsset,
   getAddressExplorerLink
-} from '@yac-swap/wallet-core/dist/src/utils/asset'
+} from '@yaswap/wallet-core/dist/src/utils/asset'
 
 import SpinnerIcon from '@/assets/icons/spinner.svg'
 import CopyIcon from '@/assets/icons/copy.svg'
 import ChevronDownIcon from '@/assets/icons/chevron_down.svg'
 import ChevronRightIcon from '@/assets/icons/chevron_right.svg'
-import { getSwapProviderConfig } from '@yac-swap/wallet-core/dist/src/swaps/utils'
-import { getSwapProvider } from '@yac-swap/wallet-core/dist/src/factory'
-import { calculateQuoteRate } from '@yac-swap/wallet-core/dist/src/utils/quotes'
-import { shortenAddress } from '@yac-swap/wallet-core/dist/src/utils/address'
+import { getSwapProviderConfig } from '@yaswap/wallet-core/dist/src/swaps/utils'
+import { getSwapProvider } from '@yaswap/wallet-core/dist/src/factory'
+import { calculateQuoteRate } from '@yaswap/wallet-core/dist/src/utils/quotes'
+import { shortenAddress } from '@yaswap/wallet-core/dist/src/utils/address'
 import { isObject } from 'lodash-es'
 import CopyError from '../../components/CopyError.vue'
 
