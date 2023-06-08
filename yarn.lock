@@ -6281,9 +6281,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yaswap/cryptoassets@npm:2.0.0, @yaswap/cryptoassets@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@yaswap/cryptoassets@npm:2.0.0"
+"@yaswap/cryptoassets@npm:2.0.1, @yaswap/cryptoassets@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@yaswap/cryptoassets@npm:2.0.1"
   dependencies:
     "@ethersproject/address": 5.7.0
     "@types/bs58": 4.0.1
@@ -6294,19 +6294,19 @@ __metadata:
     ethereumjs-util: 7.1.5
     lodash: 4.17.21
     sha256-uint8array: ^0.10.3
-  checksum: ad9bd5bd3232558e723623f2f84d038840332b78b06ddbe4b269081e9cf0a9b9f5602fd87fa420c760b61ecdb5fe1198273742338bd81c6373defa6a327153ab
+  checksum: 4ad69627636e7696b6e6b5335c82ea5de3b07ac9326ce41ba587ab6d8c3ed6c660260497c261ade43eeadaa3fe16c4e6be1efd3701598a9d6edab3a56206ff14
   languageName: node
   linkType: hard
 
-"@yaswap/error-parser@npm:2.0.0, @yaswap/error-parser@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@yaswap/error-parser@npm:2.0.0"
+"@yaswap/error-parser@npm:2.0.1, @yaswap/error-parser@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@yaswap/error-parser@npm:2.0.1"
   dependencies:
     "@yaswap/client": 2.0.0
-    "@yaswap/cryptoassets": 2.0.0
+    "@yaswap/cryptoassets": 2.0.1
     "@yaswap/errors": 2.0.0
     randombytes: ^2.1.0
-  checksum: be8d3f4d87a0dd1ebc9c6a4d93f972d4f20ec0ce09d21469176f6238bb92a4947b1105f02befeff2b61a42867d75a94e9ee2a1bb740c3721a92787c85f069a82
+  checksum: df6612b61bf0fe5666f0861121abb686a62ec96d7da83ca2e5ae1292b3386fae309cc90381a09135bcd773c13bae6d08a69c5e5f01f8b2acc85924b27c2b40c4
   languageName: node
   linkType: hard
 
@@ -6467,9 +6467,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yaswap/wallet-core@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@yaswap/wallet-core@npm:2.0.0"
+"@yaswap/wallet-core@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@yaswap/wallet-core@npm:2.0.1"
   dependencies:
     "@blobfishkate/sovryncontracts": 1.3.27
     "@eth-optimism/sdk": 1.1.5
@@ -6496,8 +6496,8 @@ __metadata:
     "@yaswap/bitcoin": 2.0.0
     "@yaswap/bitcoin-ledger": 2.0.0
     "@yaswap/client": 2.0.0
-    "@yaswap/cryptoassets": 2.0.0
-    "@yaswap/error-parser": 2.0.0
+    "@yaswap/cryptoassets": 2.0.1
+    "@yaswap/error-parser": 2.0.1
     "@yaswap/errors": 2.0.0
     "@yaswap/evm": 2.0.0
     "@yaswap/evm-ledger": 2.0.0
@@ -6523,7 +6523,7 @@ __metadata:
     urql: ^2.2.0
     vue: ^2.6.11
     vuex: ^3.1.3
-  checksum: 37f8cfa26abb6847ddc53b1b6b10b8e193234ec9ccdc7c5e8b87fdff7afc53a8106b17b6e1d325b16ab9448290a8c4e222108c07d5988d1b631fe3b0b9aa42a3
+  checksum: 6e4097596889d7da3e32732c6f810c1b11c76425e2f1fd6dd960cb9e75e094f0c9e75d4d1c69e244ce9b18e64f8fd4e66cfaa3374092e7afead506d1d090d66d
   languageName: node
   linkType: hard
 
@@ -19025,98 +19025,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"liquality-wallet@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "liquality-wallet@workspace:."
-  dependencies:
-    "@liquality/ethereum-utils": ^1.13.12
-    "@liquality/terra-networks": ^1.13.12
-    "@liquality/types": ^1.13.12
-    "@terra-money/terra.js": 3.1.6
-    "@testing-library/jest-dom": 5.16.5
-    "@testing-library/vue": ^5.8.2
-    "@vue/cli-plugin-babel": 4.5.15
-    "@vue/cli-plugin-eslint": ~4.5.0
-    "@vue/cli-plugin-router": 4.5.15
-    "@vue/cli-plugin-unit-jest": ^4.5.8
-    "@vue/cli-plugin-vuex": 4.5.15
-    "@vue/cli-service": 4.5.15
-    "@vue/devtools": ^6.4.5
-    "@vue/eslint-config-prettier": ^6.0.0
-    "@vue/test-utils": 1.3.4
-    "@yaswap/cryptoassets": ^2.0.0
-    "@yaswap/error-parser": ^2.0.0
-    "@yaswap/hw-ledger": ^2.0.0
-    "@yaswap/wallet-core": ^2.0.0
-    "@yaswap/yacoinjs-lib": ^1.1.0
-    amplitude-js: 8.18.2
-    babel-eslint: ^10.1.0
-    bignumber.js: 9.1.1
-    bip39: ^3.0.2
-    bitcoinjs-lib: 6.0.2
-    bluebird: ^3.7.2
-    bootstrap: 4.6.1
-    caniuse-lite: ^1.0.30001397
-    chai: 4.3.6
-    chai-match: ^1.1.1
-    copy-webpack-plugin: 6
-    core-js: ^3.25.2
-    crypto-js: ^4.0.0
-    cryptocurrency-icons: 0.18.0
-    date-fns: 2.28.0
-    eslint: ^6.8.0
-    eslint-plugin-import: ^2.23.4
-    eslint-plugin-node: ^11.1.0
-    eslint-plugin-prettier: ^3.3.1
-    eslint-plugin-promise: 5.2.0
-    eslint-plugin-vue: ^6.2.2
-    ethereumjs-wallet: ^1.0.1
-    ethers: 5.7.0
-    extension-port-stream: ^2.0.1
-    human-standard-token-abi: ^2.0.0
-    husky: 7.0.4
-    i18n-js: ^4.1.1
-    jest: 27.5.1
-    jest-environment-jsdom-fifteen: ^1.0.2
-    kcd-scripts: 12.0.0
-    lint-staged: ^9.5.0
-    lodash-es: ^4.17.15
-    log: ^6.0.0
-    markdown-it-vue: ^1.1.7
-    memoizee: ^0.4.15
-    mocha: 9.2.2
-    moment: ^2.25.3
-    node-gyp: ^9.0.0
-    pbkdf2: ^3.1.1
-    post-message-stream: ^3.0.0
-    prettier: 2.5.1
-    priv-key-precommit: 0.5.0
-    puppeteer: 17.1.2
-    puppeteer-core: 17.1.2
-    qrcode: 1.5.0
-    qs: 6.10.3
-    raw-loader: 4.0.2
-    sass: 1.49.0
-    sass-loader: ^8.0.2
-    setimmediate: ^1.0.5
-    sinon-chrome: ^3.0.1
-    socket.io-client: 4.6.1
-    svg-url-loader: 7.1.1
-    uuid: ^8.1.0
-    v-tooltip: ^2.0.3
-    vue: ^2.6.11
-    vue-cli-plugin-browser-extension: ^0.25.1
-    vue-date-pick: ^1.4.1
-    vue-js-toggle-button: ^1.3.3
-    vue-loader: ^17.0.0
-    vue-router: ^3.1.6
-    vue-svg-loader: ^0.16.0
-    vue-template-compiler: ^2.6.14
-    vuex: ^3.1.3
-    vuex-persist: 3.1.3
-  languageName: unknown
-  linkType: soft
-
 "listr-silent-renderer@npm:^1.1.1":
   version: 1.1.1
   resolution: "listr-silent-renderer@npm:1.1.1"
@@ -29401,6 +29309,98 @@ __metadata:
   checksum: 47da1b0d854fa16d45a3ded57b716b013b2179022352a5f7467409da5a04a1eef5b3b3d97a2dfc13e8bbe5f2ffc0afe3bc6a4a72f8254e60f5a4bd7947138643
   languageName: node
   linkType: hard
+
+"yaswap-wallet@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "yaswap-wallet@workspace:."
+  dependencies:
+    "@liquality/ethereum-utils": ^1.13.12
+    "@liquality/terra-networks": ^1.13.12
+    "@liquality/types": ^1.13.12
+    "@terra-money/terra.js": 3.1.6
+    "@testing-library/jest-dom": 5.16.5
+    "@testing-library/vue": ^5.8.2
+    "@vue/cli-plugin-babel": 4.5.15
+    "@vue/cli-plugin-eslint": ~4.5.0
+    "@vue/cli-plugin-router": 4.5.15
+    "@vue/cli-plugin-unit-jest": ^4.5.8
+    "@vue/cli-plugin-vuex": 4.5.15
+    "@vue/cli-service": 4.5.15
+    "@vue/devtools": ^6.4.5
+    "@vue/eslint-config-prettier": ^6.0.0
+    "@vue/test-utils": 1.3.4
+    "@yaswap/cryptoassets": ^2.0.1
+    "@yaswap/error-parser": ^2.0.1
+    "@yaswap/hw-ledger": ^2.0.0
+    "@yaswap/wallet-core": ^2.0.1
+    "@yaswap/yacoinjs-lib": ^1.1.0
+    amplitude-js: 8.18.2
+    babel-eslint: ^10.1.0
+    bignumber.js: 9.1.1
+    bip39: ^3.0.2
+    bitcoinjs-lib: 6.0.2
+    bluebird: ^3.7.2
+    bootstrap: 4.6.1
+    caniuse-lite: ^1.0.30001397
+    chai: 4.3.6
+    chai-match: ^1.1.1
+    copy-webpack-plugin: 6
+    core-js: ^3.25.2
+    crypto-js: ^4.0.0
+    cryptocurrency-icons: 0.18.0
+    date-fns: 2.28.0
+    eslint: ^6.8.0
+    eslint-plugin-import: ^2.23.4
+    eslint-plugin-node: ^11.1.0
+    eslint-plugin-prettier: ^3.3.1
+    eslint-plugin-promise: 5.2.0
+    eslint-plugin-vue: ^6.2.2
+    ethereumjs-wallet: ^1.0.1
+    ethers: 5.7.0
+    extension-port-stream: ^2.0.1
+    human-standard-token-abi: ^2.0.0
+    husky: 7.0.4
+    i18n-js: ^4.1.1
+    jest: 27.5.1
+    jest-environment-jsdom-fifteen: ^1.0.2
+    kcd-scripts: 12.0.0
+    lint-staged: ^9.5.0
+    lodash-es: ^4.17.15
+    log: ^6.0.0
+    markdown-it-vue: ^1.1.7
+    memoizee: ^0.4.15
+    mocha: 9.2.2
+    moment: ^2.25.3
+    node-gyp: ^9.0.0
+    pbkdf2: ^3.1.1
+    post-message-stream: ^3.0.0
+    prettier: 2.5.1
+    priv-key-precommit: 0.5.0
+    puppeteer: 17.1.2
+    puppeteer-core: 17.1.2
+    qrcode: 1.5.0
+    qs: 6.10.3
+    raw-loader: 4.0.2
+    sass: 1.49.0
+    sass-loader: ^8.0.2
+    setimmediate: ^1.0.5
+    sinon-chrome: ^3.0.1
+    socket.io-client: 4.6.1
+    svg-url-loader: 7.1.1
+    uuid: ^8.1.0
+    v-tooltip: ^2.0.3
+    vue: ^2.6.11
+    vue-cli-plugin-browser-extension: ^0.25.1
+    vue-date-pick: ^1.4.1
+    vue-js-toggle-button: ^1.3.3
+    vue-loader: ^17.0.0
+    vue-router: ^3.1.6
+    vue-svg-loader: ^0.16.0
+    vue-template-compiler: ^2.6.14
+    vuex: ^3.1.3
+    vuex-persist: 3.1.3
+  languageName: unknown
+  linkType: soft
 
 "yauzl@npm:^2.10.0":
   version: 2.10.0
