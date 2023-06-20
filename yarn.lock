@@ -6281,9 +6281,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yaswap/cryptoassets@npm:2.2.1, @yaswap/cryptoassets@npm:^2.2.1":
-  version: 2.2.1
-  resolution: "@yaswap/cryptoassets@npm:2.2.1"
+"@yaswap/cryptoassets@portal:/home/chaunguyen/projects/yacoin/yaswap/wallet-core/packages/cryptoassets::locator=yaswap-wallet%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@yaswap/cryptoassets@portal:/home/chaunguyen/projects/yacoin/yaswap/wallet-core/packages/cryptoassets::locator=yaswap-wallet%40workspace%3A."
   dependencies:
     "@ethersproject/address": 5.7.0
     "@types/bs58": 4.0.1
@@ -6294,21 +6294,19 @@ __metadata:
     ethereumjs-util: 7.1.5
     lodash: 4.17.21
     sha256-uint8array: ^0.10.3
-  checksum: d36cbe85fc5190c3584572ee1c1c9522a7c794c49812c92d37c9ac13dc3d56274d6e31c398cb2f59b1741578fee25682fcea05b0d1b159ffdbb56d7cc2b78fbc
   languageName: node
-  linkType: hard
+  linkType: soft
 
-"@yaswap/error-parser@npm:2.2.1, @yaswap/error-parser@npm:^2.2.1":
-  version: 2.2.1
-  resolution: "@yaswap/error-parser@npm:2.2.1"
+"@yaswap/error-parser@portal:/home/chaunguyen/projects/yacoin/yaswap/wallet-core/packages/error-parser::locator=yaswap-wallet%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@yaswap/error-parser@portal:/home/chaunguyen/projects/yacoin/yaswap/wallet-core/packages/error-parser::locator=yaswap-wallet%40workspace%3A."
   dependencies:
     "@yaswap/client": 2.1.0
-    "@yaswap/cryptoassets": 2.2.1
+    "@yaswap/cryptoassets": "workspace:*"
     "@yaswap/errors": 2.1.0
     randombytes: ^2.1.0
-  checksum: d2606d58a07a7d6e6727a649db1788dc4aafb4a2ef4597aeba33ff88e747414bf9486baac0398067bf820a5672a12e8eda961e531d4fa40d85ed2f3f12dd507a
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "@yaswap/errors@npm:2.0.0":
   version: 2.0.0
@@ -6523,9 +6521,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yaswap/wallet-core@npm:^2.2.1":
-  version: 2.2.1
-  resolution: "@yaswap/wallet-core@npm:2.2.1"
+"@yaswap/wallet-core@portal:/home/chaunguyen/projects/yacoin/yaswap/wallet-core/packages/wallet-core::locator=yaswap-wallet%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@yaswap/wallet-core@portal:/home/chaunguyen/projects/yacoin/yaswap/wallet-core/packages/wallet-core::locator=yaswap-wallet%40workspace%3A."
   dependencies:
     "@blobfishkate/sovryncontracts": 1.3.27
     "@eth-optimism/sdk": 1.1.5
@@ -6552,8 +6550,8 @@ __metadata:
     "@yaswap/bitcoin": 2.1.0
     "@yaswap/bitcoin-ledger": 2.1.0
     "@yaswap/client": 2.1.0
-    "@yaswap/cryptoassets": 2.2.1
-    "@yaswap/error-parser": 2.2.1
+    "@yaswap/cryptoassets": "workspace:*"
+    "@yaswap/error-parser": "workspace:*"
     "@yaswap/errors": 2.1.0
     "@yaswap/evm": 2.1.0
     "@yaswap/evm-ledger": 2.1.0
@@ -6579,9 +6577,8 @@ __metadata:
     urql: ^2.2.0
     vue: ^2.6.11
     vuex: ^3.1.3
-  checksum: 341f0537383b57b94c40be2e45915d12c3582573569ad96102b8fc77cbb6df275a493a66ccef119604cc2ec3659a9095920949d05337b4bc30fb598f6065c60b
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "@yaswap/yacoin@npm:2.1.0":
   version: 2.1.0
