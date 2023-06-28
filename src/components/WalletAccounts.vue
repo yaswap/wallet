@@ -6,7 +6,7 @@
       class="overview-screen-chain-section"
       :id="account.chain.toUpperCase()"
     >
-      <ListItem v-if="account.chain === 'bitcoin' || account.chain === 'yacoin'" @item-selected="selectItem(account)">
+      <ListItem v-if="account.chain === 'bitcoin'" @item-selected="selectItem(account)">
         <template #prefix>
           <div class="account-color" :style="{ 'background-color': account.color }"></div>
         </template>
@@ -38,6 +38,97 @@
           }}
         </template>
       </ListItem>
+      <div v-else-if="account.chain === 'yacoin'">
+        <ListItem @item-selected="toggleExpandedAccounts(account.id)">
+          <template #prefix>
+            <div class="account-color" :style="{ 'background-color': account.color }"></div>
+            <div class="prefix-icon-container">
+              <MinusIcon v-if="shouldExpandAccount(account)" class="prefix-icon" />
+              <PlusIcon v-else class="prefix-icon" />
+            </div>
+          </template>
+          <template #icon>
+            <img :src="getAccountIcon(account.chain)" class="asset-icon" />
+          </template>
+          {{ account.alias ? `${account.name} - ${account.alias}` : account.name }}
+          <template #sub-title>
+            {{
+              account.addresses && account.addresses[0] ? shortenAddress(account.addresses[0]) : ''
+            }}
+          </template>
+          <template #detail>
+            <div class="ledger-tag" v-if="account.type && account.type.includes('ledger')">
+              Ledger
+            </div>
+          </template>
+          <template #detail-sub>
+            {{
+              account.totalFiatBalance
+                ? formatFiatUI(formatFiat(account.totalFiatBalance))
+                : `${$t('common.loading')}...`
+            }}
+          </template>
+        </ListItem>
+        <div class="account-assets" :class="{ active: shouldExpandAccount(account) }">
+          <ListItem
+            v-if="!isAssetList && (hasNft(account) || hasNFTActivity(account))"
+            @item-selected="
+              $router.push({
+                path: `/wallet/nfts/activity/${account.id}`,
+                query: {
+                  tab: getDefaultTab(account)
+                }
+              })
+            "
+          >
+            <template #prefix>
+              <div class="account-color" :style="{ 'background-color': account.color }"></div>
+            </template>
+            <template #icon class="account-asset-item">
+              <NFTIcon class="asset-icon" />
+            </template>
+            NFTs ({{ account.nfts.length || 0 }})
+            <template #detail>
+              <router-link
+                class="d-flex align-items-center link"
+                :to="{
+                  path: `/wallet/nfts/activity/${account.id}`,
+                  query: {
+                    tab: getDefaultTab(account)
+                  }
+                }"
+              >
+                <span class="d-flex align-items-center"
+                  >See all <ChevronRightIcon class="ml-2 icon-sm" />
+                </span>
+              </router-link>
+            </template>
+          </ListItem>
+          <ListItem
+            v-for="asset in account.assets"
+            :id="asset"
+            :key="asset"
+            @item-selected="selectItem(account, asset)"
+          >
+            <template #prefix>
+              <div class="account-color" :style="{ 'background-color': account.color }"></div>
+            </template>
+            <template #icon class="account-asset-item">
+              <img :src="getAssetIcon(asset)" class="asset-icon" />
+            </template>
+            {{ getAssetName(asset) }}
+            <template #detail>
+              <span class="d-flex align-items-center"
+                >{{ prettyBalance(account.balances[asset], asset) }} {{ asset === 'YAC' ? asset : 'Token' }}
+                <ChevronRightIcon class="ml-2 icon-sm" />
+              </span>
+            </template>
+            <template #detail-sub v-if="asset === 'YAC' && account.fiatBalances[asset]">
+              {{ formatFiatUI(formatFiat(account.fiatBalances[asset])) }}
+            </template>
+          </ListItem>
+        </div>
+      </div>
       <div v-else>
         <ListItem @item-selected="toggleExpandedAccounts(account.id)">
           <template #prefix>
