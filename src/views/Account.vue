@@ -24,7 +24,7 @@
             <span class="account-container_balance_value" :id="`${asset}_balance_value`">
               {{ balance }}
             </span>
-            <span class="account-container_balance_code">{{ asset }}</span>
+            <span class="account-container_balance_code">{{ chain === 'yacoin' && asset !== 'YAC' ? 'Token' : asset }}</span>
           </div>
         </div>
         <div v-if="address" class="account-container_address">
@@ -78,6 +78,7 @@
             active-class=""
             tag="button"
             :to="`/accounts/${accountId}/${asset}/swap`"
+            v-if="chain !== 'yacoin' || (chain === 'yacoin' && asset === 'YAC')"
           >
             <div class="account-container_actions_button_wrapper" :id="`${asset}_swap_button`">
               <SwapIcon
@@ -96,21 +97,200 @@
           </router-link>
         </div>
       </div>
-      <div class="account-container_transactions" v-if="filteredTransactions.length > 0">
-        <ActivityFilter
-          @filters-changed="applyFilters"
-          :activity-data="activityData"
-          :showTypeFilters="true"
-        />
-        <TransactionList :transactions="filteredTransactions" />
+      <div v-if="chain === 'yacoin' && asset !== 'YAC'" class="wallet-tabs">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <span
+              :class="activeTab === 'overview' ? 'nav-link active' : 'nav-link'"
+              id="overview_tab"
+              @click="activeTab = 'overview'"
+            >
+              {{ $t('common.overview') }}
+            </span>
+          </li>
+          <li class="nav-item">
+            <span
+              :class="activeTab === 'details' ? 'nav-link active' : 'nav-link'"
+              id="details_tab"
+              @click="activeTab = 'details'"
+            >
+              {{ $t('pages.details.details') }}
+            </span>
+          </li>
+          <li class="nav-item">
+            <span
+              :class="activeTab === 'activity' ? 'nav-link active' : 'nav-link'"
+              id="activity_tab"
+              @click="activeTab = 'activity'"
+            >
+              {{ $t('pages.wallet.activity') }}
+            </span>
+          </li>
+        </ul>
+        <div class="wallet-tab-content py-1">
+          <div>
+            <!-- <div class="px-4 mt-2" v-if="activeTab === 'overview'">
+              <p> Full token name: only display if we specify "name" in metadata JSON file </p>
+              <p> Description: only display if we specify "description" in metadata JSON file </p>
+              <div>
+                <img
+                  width="200"
+                  height="200"
+                  ref="nftImage"
+                  :src="getAssetIcon(asset)"
+                  :alt="asset || 'YA-token'"
+                  @error="imageError('nftImage')"
+                />
+              </div>
+            </div> -->
+            <div class="table" v-if="activeTab === 'overview'">
+              <table class="table bg-white border-0 mb-1 mt-1">
+                <tbody class="font-weight-normal">
+                  <!-- Full token name -->
+                  <tr class="border-top-0">
+                    <td class="text-muted text-left small-12">
+                      Full token name
+                    </td>
+                    <td class="text-break">
+                      {{ getAssetFullName(asset) ?? asset }}
+                    </td>
+                  </tr>
+                  <!-- Description -->
+                  <tr>
+                    <td class="text-muted text-left small-12">
+                      Description
+                    </td>
+                    <td class="text-break" >
+                      {{ getAssetDescription(asset) ?? '-' }}
+                    </td>
+                  </tr>
+                  <!-- Image -->
+                  <tr>
+                    <td class="text-muted text-left small-12" id="your_to_address">
+                      Image
+                    </td>
+                    <td class="text-break" >
+                      <img
+                        width="200"
+                        height="200"
+                        ref="nftImage"
+                        :src="getAssetIcon(asset)"
+                        :alt="asset || 'YA-token'"
+                        @error="imageError('nftImage')"
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="table" v-if="activeTab === 'details'">
+              <table class="table bg-white border-0 mb-1 mt-1">
+                <tbody class="font-weight-normal">
+                  <!-- Total Supply -->
+                  <tr class="border-top-0">
+                    <td class="text-muted text-left small-12">
+                      Total Supply
+                    </td>
+                    <td class="text-break">
+                      {{ assetInfo.totalSupply }}
+                    </td>
+                  </tr>
+                  <!-- Divisibility -->
+                  <tr>
+                    <td class="text-muted text-left small-12">
+                      Divisibility
+                    </td>
+                    <td class="text-break" >
+                      {{ assetInfo.decimals }}
+                    </td>
+                  </tr>
+                  <!-- Reissuable -->
+                  <tr>
+                    <td class="text-muted text-left small-12" id="your_to_address">
+                      Reissuable
+                    </td>
+                    <td class="text-break" >
+                      {{ assetInfo.reissuable ? 'True' : 'False' }}
+                    </td>
+                  </tr>
+                  <!-- Created at block -->
+                  <tr>
+                    <td class="text-muted text-left small-12">
+                      Created at block
+                    </td>
+                    <td class="text-break" v-if="assetInfo.contractAddress">
+                      <span class="text-primary d-flex align-items-center">
+                        {{ shortenAddress(assetInfo.contractAddress) }}
+                        <CopyIcon
+                          @click="copy(assetInfo.contractAddress)"
+                          class="copy-icon"
+                      /></span>
+                    </td>
+                  </tr>
+                  <!-- IPFS Hash -->
+                  <tr>
+                    <td class="text-muted text-left small-12">
+                      IPFS Hash
+                    </td>
+                    <td class="text-break">
+                      <span class="text-primary d-flex align-items-center">
+                        {{ assetInfo.ipfsHash || '-' }}
+                        <CopyIcon
+                          @click="copy(assetInfo.ipfsHash)"
+                          class="copy-icon"
+                          v-if="assetInfo.ipfsHash"
+                      /></span>
+                    </td>
+                  </tr>
+                  <!-- Blockchain -->
+                  <tr>
+                    <td class="text-muted text-left small-12">Blockchain</td>
+                    <td class="text-break text-capitalize">
+                      <img :src="getAccountIcon(chain)" class="asset-icon" />
+                      {{ chain }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="px-4 mt-2" v-if="activeTab === 'activity'">
+              <div class="account-container_transactions" v-if="filteredTransactions.length > 0">
+                <ActivityFilter
+                  @filters-changed="applyFilters"
+                  :activity-data="activityData"
+                  :showTypeFilters="true"
+                />
+                <TransactionList :transactions="filteredTransactions" />
+              </div>
+              <div class="account-container_transactions" v-else>
+                <EmptyActivity
+                  :active-network="activeNetwork"
+                  :chain="chain"
+                  :asset="asset"
+                  :address="address"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="account-container_transactions" v-else>
-        <EmptyActivity
-          :active-network="activeNetwork"
-          :chain="chain"
-          :asset="asset"
-          :address="address"
-        />
+      <div v-else >
+        <div class="account-container_transactions" v-if="filteredTransactions.length > 0">
+          <ActivityFilter
+            @filters-changed="applyFilters"
+            :activity-data="activityData"
+            :showTypeFilters="true"
+          />
+          <TransactionList :transactions="filteredTransactions" />
+        </div>
+        <div class="account-container_transactions" v-else>
+          <EmptyActivity
+            :active-network="activeNetwork"
+            :chain="chain"
+            :asset="asset"
+            :address="address"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -120,6 +300,7 @@
 import { mapState, mapGetters, mapActions } from 'vuex'
 import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
 import { getChain } from '@yaswap/cryptoassets'
+import CopyIcon from '@/assets/icons/copy.svg'
 import NavBar from '@/components/NavBar.vue'
 import RefreshIcon from '@/assets/icons/refresh.svg'
 import SendIcon from '@/assets/icons/arrow_send.svg'
@@ -132,7 +313,8 @@ import {
 } from '@yaswap/wallet-core/dist/src/utils/coinFormatter'
 import { shortenAddress } from '@yaswap/wallet-core/dist/src/utils/address'
 import { getAddressExplorerLink } from '@yaswap/wallet-core/dist/src/utils/asset'
-import { getAssetIcon } from '@/utils/asset'
+import { getAccountIcon } from '@/utils/accounts'
+import { getAssetIcon, getAssetFullName, getAssetDescription } from '@/utils/asset'
 import TransactionList from '@/components/TransactionList'
 import ActivityFilter from '@/components/ActivityFilter'
 import { applyActivityFilters } from '@yaswap/wallet-core/dist/src/utils/history'
@@ -143,10 +325,12 @@ import EmptyActivity from '@/components/EmptyActivity'
 import CopyAddress from '@/components/CopyAddress'
 import amplitude from 'amplitude-js'
 amplitude.getInstance().init('bf12c665d1e64601347a600f1eac729e')
+import NFTThumbnailImage from '@/assets/nft_thumbnail.png'
 
 export default {
   components: {
     NavBar,
+    CopyIcon,
     RefreshIcon,
     SendIcon,
     ReceiveIcon,
@@ -159,6 +343,7 @@ export default {
   },
   data() {
     return {
+      activeTab: 'overview',
       addressCopied: false,
       activityData: [],
       updatingBalances: false,
@@ -178,6 +363,9 @@ export default {
       'fiatRates',
       'marketData'
     ]),
+    thumbnailImage() {
+      return NFTThumbnailImage
+    },
     account() {
       return this.accountItem(this.accountId)
     },
@@ -206,6 +394,10 @@ export default {
     chain() {
       return cryptoassets[this.asset]?.chain
     },
+    assetInfo() {
+      console.log('TACA ===> Account.vue, this.asset = ', this.asset, ', cryptoassets[this.asset] = ', cryptoassets[this.asset])
+      return cryptoassets[this.asset]
+    },
     filteredTransactions() {
       return this.activityData.filter((t) => {
         return (
@@ -219,13 +411,19 @@ export default {
   methods: {
     ...mapActions('app', ['trackAnalytics']),
     ...mapActions(['updateAccountBalance', 'getUnusedAddresses']),
+    getAccountIcon,
     getAssetIcon,
+    getAssetFullName,
+    getAssetDescription,
     shortenAddress,
     formatFontSize,
     formatFiat,
     formatFiatUI,
     isNotNftTransaction(item) {
       return item.type !== 'NFT'
+    },
+    async copy(text) {
+      await navigator.clipboard.writeText(text)
     },
     async copyAddress() {
       await navigator.clipboard.writeText(this.address)
@@ -258,6 +456,11 @@ export default {
       this.$nextTick(() => {
         this.tooltipDelay = { hide: 1000, show: 200 }
       })
+    },
+    imageError(ref) {
+      if (ref) {
+        this.$refs[ref].src = this.thumbnailImage
+      }
     }
   },
   async created() {
@@ -405,6 +608,79 @@ export default {
     -ms-overflow-style: none;
     &::-webkit-scrollbar {
       display: none;
+    }
+  }
+}
+
+.nft-img {
+  width: 50%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  &__open {
+    width: 50%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+  }
+
+  img {
+    height: 50%;
+    object-fit: cover;
+    border: 1px solid #c4c4c4 !important;
+  }
+}
+
+.wallet-tabs {
+  margin: 0;
+  padding: 0;
+}
+.nav-tabs {
+  height: 48px;
+  cursor: pointer;
+  border-bottom: none !important;
+
+  .nav-item {
+    width: 33%;
+    height: 100%;
+    margin-bottom: none !important;
+
+    .nav-link {
+      height: 100%;
+      font-size: $font-size-sm;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: #646f85;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none !important;
+      border-bottom: 1px solid $hr-border-color !important;
+      padding: 0 !important;
+      &.active,
+      &:hover {
+        color: #000d35 !important;
+        font-weight: 600;
+        border: none !important;
+        border-bottom: 1px solid #1d1e21 !important;
+      }
+    }
+  }
+}
+
+.wallet-tab-content {
+  a {
+    color: $color-text-primary;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+
+  .table {
+    table {
+      tr {
+        padding: 12px 20px !important;
+      }
     }
   }
 }
