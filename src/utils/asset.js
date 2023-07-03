@@ -2,7 +2,6 @@ import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
 
 export const getAssetIcon = (asset, extension = 'svg') => {
   const cryptoAsset = cryptoassets[asset]
-  console.log('TACA ===> getAssetIcon, asset = ', asset, ', cryptoAsset = ', cryptoAsset)
   if (cryptoAsset?.chain === 'yacoin' && cryptoAsset?.type !== 'native' && cryptoAsset?.tokenMetadata?.imageURL) {
     return cryptoAsset.tokenMetadata.imageURL
   }
