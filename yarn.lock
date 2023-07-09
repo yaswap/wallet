@@ -4831,9 +4831,9 @@ __metadata:
   languageName: node
   linkType: soft
 
-"@yaswap/yacoinjs-lib@npm:^1.1.0":
+"@yaswap/yacoinjs-lib@file:/home/chaunguyen/projects/yacoin/yaswap/yacoinjs-lib::locator=yaswap-wallet%40workspace%3A.":
   version: 1.1.0
-  resolution: "@yaswap/yacoinjs-lib@npm:1.1.0"
+  resolution: "@yaswap/yacoinjs-lib@file:/home/chaunguyen/projects/yacoin/yaswap/yacoinjs-lib#/home/chaunguyen/projects/yacoin/yaswap/yacoinjs-lib::hash=fa7b1f&locator=yaswap-wallet%40workspace%3A."
   dependencies:
     bech32: ^1.1.2
     bip174: ^2.0.1
@@ -4850,7 +4850,7 @@ __metadata:
     typeforce: ^1.11.3
     varuint-bitcoin: ^1.0.4
     wif: ^2.0.1
-  checksum: cad40bcc7d068821656edf8b66e6b893434b1bbfc3225487eaacd25b99926cbcab8d6a60eed1ceca738cf979c5d017aeec6c754faa42a15bf773a5f6948a6c19
+  checksum: 4560ff5b50781606fb2da73424824ae3a30a4fed45e752bd0b2b5924aceab69ffd0314b9496a3b33c7824aeecc183cd5f0790d5aa7b75fcce671ba03df1f6c2c
   languageName: node
   linkType: hard
 
@@ -24641,7 +24641,7 @@ __metadata:
     "@yaswap/error-parser": ^2.2.1
     "@yaswap/hw-ledger": ^2.0.0
     "@yaswap/wallet-core": ^2.2.1
-    "@yaswap/yacoinjs-lib": ^1.1.0
+    "@yaswap/yacoinjs-lib": "file:/home/chaunguyen/projects/yacoin/yaswap/yacoinjs-lib"
     amplitude-js: 8.18.2
     babel-eslint: ^10.1.0
     bignumber.js: 9.1.1
