@@ -26,3 +26,7 @@ export const getAssetFullName = (asset) => {
 export const getAssetDescription = (asset) => {
   return cryptoassets[asset]?.tokenMetadata?.description
 }
+
+export const getAssetLengthLimitDisplay = () => {
+  return 12
+}

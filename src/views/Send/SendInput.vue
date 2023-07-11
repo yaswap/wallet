@@ -51,7 +51,7 @@
         <AccountTooltip :account="account" :asset="asset">
           <div class="send-main-icon">
             <img :src="getAssetIcon(asset)" class="asset-icon" />
-            <span class="asset-name">
+            <span :class="asset.length > getAssetLengthLimitDisplay() ? 'asset-name-small' : 'asset-name'">
               {{ asset }}
             </span>
           </div>
@@ -65,7 +65,7 @@
     </div>
     <div class="send-bottom">
       <v-popover v-if="reserveBalance > 0" offset="1" trigger="hover" :placement="'top'">
-        <AssetAvailableAmount :available="available" :asset="asset" />
+        <AssetAvailableAmount :available="available" :asset="assetStr" />
         <template slot="popover">
           <div class="send-bottom-available">
             <span>
@@ -77,7 +77,7 @@
         </template>
       </v-popover>
       <template v-else>
-        <AssetAvailableAmount :available="available" :asset="asset" />
+        <AssetAvailableAmount :available="available" :asset="assetStr" />
       </template>
       <div class="send-bottom-options">
         <div class="btn-group">
@@ -93,7 +93,7 @@
               {{ $t('common.max') }}
             </button>
             <template slot="popover">
-              <p class="my-0 text-right">{{ max }} {{ asset }}</p>
+              <p class="my-0 text-right">{{ max }} {{ assetStr }}</p>
               <p class="text-muted my-0 text-right">{{ maxFiat }} USD</p>
             </template>
           </v-popover>
@@ -105,8 +105,9 @@
 
 <script>
 import { getAssetColorStyle } from '@yaswap/wallet-core/dist/src/utils/asset'
-import { getAssetIcon } from '@/utils/asset'
+import { getAssetIcon, getAssetLengthLimitDisplay } from '@/utils/asset'
 import { dpUI, formatFiatUI } from '@yaswap/wallet-core/dist/src/utils/coinFormatter'
+import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
 import AccountTooltip from '@/components/AccountTooltip'
 import AssetAvailableAmount from '@/views/Send/AssetAvailableAmount.vue'
 import { mapState } from 'vuex'
@@ -134,13 +135,21 @@ export default {
     'reserveBalance'
   ],
   computed: {
-    ...mapState(['fiatRates'])
+    ...mapState(['fiatRates']),
+    assetStr() {
+      const chain = cryptoassets[this.asset]?.chain
+      if (chain === 'yacoin' && this.asset !== 'YAC') {
+        return 'Token'
+      }
+      return this.asset
+    }
   },
   methods: {
     dpUI,
     formatFiatUI,
     getAssetColorStyle,
     getAssetIcon,
+    getAssetLengthLimitDisplay,
     toggleShowAmountsFiat() {
       this.showAmountsInFiat = !this.showAmountsInFiat
     },
@@ -205,6 +214,14 @@ export default {
         font-style: normal;
         font-weight: 300;
         font-size: 24px;
+        line-height: 24px;
+      }
+
+      .asset-name-small {
+        margin-left: 5px;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 12px;
         line-height: 24px;
       }
 

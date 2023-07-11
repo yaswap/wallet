@@ -1,6 +1,6 @@
 <template>
   <div class="account-container">
-    <NavBar :showMenu="true" :showBack="true" backPath="/wallet" :backLabel="asset.length > 12 ? 'Back' : $t('common.overview')">
+    <NavBar :showMenu="true" :showBack="true" backPath="/wallet" :backLabel="asset.length > getAssetLengthLimitDisplay() ? 'Back' : $t('common.overview')">
       <span class="account-title"
         ><img :src="getAssetIcon(asset)" class="asset-icon" /> {{ asset }}</span
       >
@@ -321,6 +321,7 @@ import { applyActivityFilters } from '@yaswap/wallet-core/dist/src/utils/history
 import EyeIcon from '@/assets/icons/eye.svg'
 import BN from 'bignumber.js'
 import { formatFontSize } from '@/utils/fontSize'
+import { getAssetLengthLimitDisplay } from '@/utils/asset'
 import EmptyActivity from '@/components/EmptyActivity'
 import CopyAddress from '@/components/CopyAddress'
 import amplitude from 'amplitude-js'
@@ -417,6 +418,7 @@ export default {
     getAssetDescription,
     shortenAddress,
     formatFontSize,
+    getAssetLengthLimitDisplay,
     formatFiat,
     formatFiatUI,
     isNotNftTransaction(item) {
