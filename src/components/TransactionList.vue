@@ -57,6 +57,7 @@ import {
   formatFiatUI
 } from '@yaswap/wallet-core/dist/src/utils/coinFormatter'
 import moment from '@yaswap/wallet-core/dist/src/utils/moment'
+import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
 import { mapState } from 'vuex'
 
 export default {
@@ -96,7 +97,13 @@ export default {
 
       if (!amount) return `${item.from}`
 
-      return `${this.prettyBalance(amount, item.from)} ${item.from}`
+      let assetName = item.from
+      const chain = cryptoassets[assetName]?.chain
+      if (chain === 'yacoin' && assetName !== 'YAC') {
+        assetName = 'Token'
+      }
+
+      return `${this.prettyBalance(amount, item.from)} ${assetName}`
     },
     getDetailSub(item) {
       const status = this.getUIStatus(item)
