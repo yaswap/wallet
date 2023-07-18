@@ -34,13 +34,13 @@
                 }
               })
             "
-            v-tooltip.bottom="{
+            v-tooltip.left="{
               content: $t('common.sendNFT'),
               hideOnTargetClick: false
             }"
           />
           <ShareIcon
-            v-if="transferLink"
+            v-if="transferLink && isMarketplaceAvailable(asset)"
             class="nft-action-buttons__icon"
             @click="transferNFT"
             v-tooltip.left="{
@@ -133,7 +133,117 @@
                 </span>
               </li>
             </ul>
-            <div class="wallet-tab-content py-1">
+            <div v-if="asset === 'YAC'" class="wallet-tab-content py-1">
+              <div>
+                <div class="table" v-if="activeTab === 'overview'">
+                  <table class="table bg-white border-0 mb-1 mt-1">
+                    <tbody class="font-weight-normal">
+                      <!-- Full NFT name -->
+                      <tr class="border-top-0">
+                        <td class="text-muted text-left small-12">
+                          Full NFT name
+                        </td>
+                        <td class="text-break">
+                          {{ nftAsset.token_id }}
+                        </td>
+                      </tr>
+                      <!-- Description -->
+                      <tr>
+                        <td class="text-muted text-left small-12">
+                          Description
+                        </td>
+                        <td class="text-break" >
+                          {{ nftAsset.description || defaultDescription }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="table" v-if="activeTab === 'details'">
+                  <table class="table bg-white border-0 mb-1 mt-1">
+                    <tbody class="font-weight-normal">
+                      <tr class="border-top-0">
+                        <td class="text-muted text-left small-12">
+                          {{ $t('common.account', { count: 1 }) }}
+                        </td>
+                        <td class="text-break" v-if="nftAsset.asset_contract">
+                          <a
+                            class="text-primary d-flex align-items-center"
+                            :href="addressLink"
+                            target="_blank"
+                          >
+                            <img :src="getAssetIcon(asset)" class="asset-icon mr-1" />
+                            {{ shortenAddress(address) }}
+                            <CopyIcon @click="copy(address)" class="copy-icon"
+                          /></a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted text-left small-12">
+                          Created at block
+                        </td>
+                        <td class="text-break" v-if="nftAsset.asset_contract">
+                          <span class="text-primary d-flex align-items-center">
+                            {{ shortenAddress(nftAsset.asset_contract.address) }}
+                            <CopyIcon
+                              @click="copy(nftAsset.asset_contract.address)"
+                              class="copy-icon"
+                          /></span>
+                        </td>
+                      </tr>
+                      <!-- IPFS Hash -->
+                      <tr>
+                        <td class="text-muted text-left small-12">
+                          IPFS Hash
+                        </td>
+                        <td class="text-break">
+                          <span class="text-primary d-flex align-items-center">
+                            {{ nftAsset.asset_contract.ipfs_hash || '-' }}
+                            <CopyIcon
+                              @click="copy(nftAsset.asset_contract.ipfs_hash)"
+                              class="copy-icon"
+                              v-if="nftAsset.asset_contract.ipfs_hash"
+                          /></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted text-left small-12" id="your_to_address">
+                          {{ $t('common.tokenID') }}
+                        </td>
+                        <td class="text-break" v-if="nftAsset.token_id">
+                          <span class="text-primary">
+                            {{ nftAsset.token_id }}
+                            <CopyIcon @click="copy(nftAsset.token_id)" class="copy-icon"
+                          /></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted text-left small-12">
+                          {{ $t('common.tokenStandard') }}
+                        </td>
+                        <td class="text-break">
+                          {{ nftAsset.standard || '-' }}
+                        </td>
+                      </tr>
+                      <tr v-if="nftAsset.amount && nftAsset.amount > 1">
+                        <td class="text-muted text-left small-12">
+                          {{ $t('pages.details.youOwn') }}
+                        </td>
+                        <td class="text-break">{{ nftAsset.amount }}</td>
+                      </tr>
+                      <tr>
+                        <td class="text-muted text-left small-12">Blockchain</td>
+                        <td class="text-break text-capitalize">
+                          <img :src="getAccountIcon(chain)" class="asset-icon" />
+                          {{ chain }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div v-else class="wallet-tab-content py-1">
               <div>
                 <div class="px-4 mt-2" v-if="activeTab === 'overview'">
                   <h5 class="text-bold">{{ $t('pages.details.description') }}</h5>
@@ -319,9 +429,15 @@ export default {
     async copy(text) {
       await navigator.clipboard.writeText(text)
     },
-    marketplaceName() {
+    isMarketplaceAvailable(asset) {
       // Currently, there is no NFT marketplace for BNB and YAC blockchain
-      if (this.asset && !['BNB', 'YAC'].some((asset) => asset === this.asset)) {
+      if (['BNB', 'YAC'].some((item) => item === asset)) {
+        return false
+      }
+      return true
+    },
+    marketplaceName() {
+      if (this.asset && this.isMarketplaceAvailable(this.asset)) {
         return getMarketplaceName(this.asset, this.activeNetwork)
       }
       return ''
