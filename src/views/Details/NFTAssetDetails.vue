@@ -307,6 +307,7 @@ export default {
       } else {
         this.accountId = this.nftAsset.accountId
       }
+      console.log('TACA ===> NFTAssetDetails.vue, this.nftAsset = ', this.nftAsset, ', this.accountId = ', this.accountId)
     }
   },
   methods: {
@@ -319,7 +320,8 @@ export default {
       await navigator.clipboard.writeText(text)
     },
     marketplaceName() {
-      if (this.asset) {
+      // Currently, there is no NFT marketplace for BNB and YAC blockchain
+      if (this.asset && !['BNB', 'YAC'].some((asset) => asset === this.asset)) {
         return getMarketplaceName(this.asset, this.activeNetwork)
       }
       return ''
