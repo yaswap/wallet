@@ -195,7 +195,7 @@
     <template class="send" v-else-if="activeView === 'custom-fees' && !isEIP1559Fees">
       <NavBar
         :showBackButton="true"
-        :backClick="(activeView = 'selectedAsset')"
+        :backClick="cancelCustomFee"
         :backLabel="$t('common.back')"
       >
         <span class="account-title">{{ title }}</span>
@@ -499,7 +499,7 @@ export default {
       return this.assetFees && Object.keys(this.assetFees).length
     },
     isEIP1559Fees() {
-      return cryptoassets[this.asset].chain === this.account?.chain
+      return cryptoassets[this.asset].chain === this.account?.chain && getChain(this.activeNetwork, cryptoassets[this.asset].chain).EIP1559
     },
     asset() {
       return this.account ? getNativeAssetCode(this.activeNetwork, this.account?.chain) : null
