@@ -38,7 +38,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-12">
+          <div class="col">
             <h2>{{ $t('pages.details.sentAsset') }}</h2>
             <div class="d-flex">
               <div class="nft-image mr-2" style="--img-width: 100px">
@@ -49,12 +49,14 @@
                   @error="imageError('nftThumbnailImage')"
                 />
               </div>
-              <div class="w-100">
-                <p class="font-bold text-break">{{ item.nft.name }}</p>
-                <p class="text-break">{{ item.nft.collection.name }}</p>
-                <p class="text-break" v-if="item.nft.token_id">#{{ item.nft.token_id }}</p>
-              </div>
             </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+              <p class="text-break">NFT name: {{ item.nft.name }}</p>
+              <p class="text-break">NFT collection: {{ item.nft.collection.name }}</p>
+              <p class="text-break" v-if="item.nft.token_id">NFT ID: {{ item.nft.token_id }}</p>
           </div>
         </div>
         <hr />
