@@ -77,8 +77,8 @@
           </tr>
           <tr>
             <td class="text-muted text-left small-12">{{ $t('common.tokenStandard') }}</td>
-            <td class="text-break" v-if="item.nft.standard">
-              {{ item.nft.standard }}
+            <td class="text-break">
+              {{ item.nft.standard || '-'}}
             </td>
           </tr>
           <tr v-if="fromAddress" id="your_from_address">
