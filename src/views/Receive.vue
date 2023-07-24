@@ -3,7 +3,7 @@
     <NavBar
       :showBack="true"
       :backPath="routeSource === 'assets' ? '/wallet' : `/accounts/${account.id}/${asset}`"
-      :backLabel="routeSource === 'assets' ? $t('common.overview') : asset"
+      :backLabel="asset.length > getAssetLengthLimitDisplay() ? 'Back' : routeSource === 'assets' ? $t('common.overview') : asset"
     >
       {{ $t('common.receive') }} {{ asset }}
     </NavBar>
@@ -80,7 +80,7 @@
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
 import QRCode from 'qrcode'
-import { getAssetIcon } from '@/utils/asset'
+import { getAssetLengthLimitDisplay, getAssetIcon } from '@/utils/asset'
 import NavBar from '@/components/NavBar'
 import BuyCryptoButton from '@/components/BuyCrypto/BuyCryptoButton'
 import CopyIcon from '@/assets/icons/copy.svg'
@@ -186,6 +186,7 @@ export default {
     ...mapActions('app', ['trackAnalytics']),
     ...mapActions(['getUnusedAddresses']),
     getAssetIcon,
+    getAssetLengthLimitDisplay,
     async copy() {
       this.trackAnalytics({
         event: `User on ${this.asset} Receive Page`,

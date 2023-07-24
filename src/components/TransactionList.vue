@@ -76,13 +76,14 @@ export default {
     prettyFiatBalance,
     formatFiatUI,
     getTitle(item) {
+      const status = item.status === 'SUCCESS' ? `Sent` : `Send`
       switch (item.type) {
         case 'SWAP':
           return `${item.from} to ${item.to}`
         case 'SEND':
-          return `Send ${item.from}`
+          return `${status} ${item.from}`
         case 'NFT':
-          return item.status === 'SUCCESS' ? `Sent NFT` : `Send NFT`
+          return item.from === 'YAC' ? `${status} ${item.nft.token_id}`: `${status} ${item.nft.name}`
         case 'RECEIVE':
           return `Receive ${item.from}`
         default:
@@ -94,13 +95,9 @@ export default {
     },
     getDetail(item) {
       let assetName = item.from
-      if (item.type === 'NFT') {
-        return assetName === 'YAC' ? `${item.nft.token_id}`: `${item.nft.name}`
-      }
-
       const amount = item.type === 'SWAP' ? item.fromAmount : item.amount
 
-      if (!amount) return `${item.from}`
+      if (!amount) return ``
 
       const chain = cryptoassets[assetName]?.chain
       if (chain === 'yacoin' && assetName !== 'YAC') {
