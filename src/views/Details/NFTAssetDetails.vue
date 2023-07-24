@@ -144,7 +144,7 @@
                           Full NFT name
                         </td>
                         <td class="text-break">
-                          {{ nftAsset.token_id }}
+                          {{ nftAsset.metadataName || nftAsset.token_id }}
                         </td>
                       </tr>
                       <!-- Description -->
