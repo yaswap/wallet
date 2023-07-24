@@ -93,11 +93,15 @@ export default {
       return moment(item.startTime).format('L, LT')
     },
     getDetail(item) {
+      let assetName = item.from
+      if (item.type === 'NFT') {
+        return assetName === 'YAC' ? `${item.nft.token_id}`: `${item.nft.name}`
+      }
+
       const amount = item.type === 'SWAP' ? item.fromAmount : item.amount
 
       if (!amount) return `${item.from}`
 
-      let assetName = item.from
       const chain = cryptoassets[assetName]?.chain
       if (chain === 'yacoin' && assetName !== 'YAC') {
         assetName = 'Token'
