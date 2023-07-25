@@ -32,7 +32,7 @@
     "@yaswap/error-parser": "^2.2.1",
     "@yaswap/hw-ledger": "^2.0.0",
     "@yaswap/wallet-core": "^2.2.1",
-    "@yaswap/yacoinjs-lib": "file:/home/chaunguyen/projects/yacoin/yaswap/yacoinjs-lib",
+    "@yaswap/yacoinjs-lib": "^1.2.0",
     "amplitude-js": "8.18.2",
     "bignumber.js": "9.1.1",
     "bip39": "^3.0.2",
