@@ -459,6 +459,9 @@ export default {
       }
     },
     assetOriginalImageUrl(url) {
+      if (!url) {
+        return null
+      }
       return url.replace('ipfs://', 'https://ipfs.io/ipfs/')
     }
   }
