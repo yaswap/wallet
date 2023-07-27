@@ -196,11 +196,9 @@ export default {
       return this.enabledChains[chain] && this.networkAssets.includes(asset)
     },
     async toggleAsset(asset, enable) {
-      console.log("TACA ===> ManageAssets.vue, toggleAsset, asset = ", asset, ", enable = ", enable)
       const nativeAsset = getNativeAsset(asset)
       const assets = enable ? [asset, nativeAsset] : [asset]
 
-      console.log("TACA ===> ManageAssets.vue, toggleAsset, assets = ", assets)
       const params = {
         network: this.activeNetwork,
         walletId: this.activeWalletId,
@@ -244,7 +242,6 @@ export default {
         : false
     },
     async enableChainAndNativeAsset(chain) {
-      console.log("TACA ===> ManageAssets.vue, enableChainAndNativeAsset, chain = ", chain)
       await this.toggleBlockchain({
         network: this.activeNetwork,
         walletId: this.activeWalletId,
@@ -255,7 +252,6 @@ export default {
       const accountIds = this.accounts[this.activeWalletId][this.activeNetwork]
         .filter((acc) => acc.chain === chain)
         .map((a) => a.id)
-      console.log("TACA ===> ManageAssets.vue, enableChainAndNativeAsset, accountIds = ", accountIds)
 
       await this.toggleAccount({
         network: this.activeNetwork,

@@ -396,7 +396,6 @@ export default {
       return cryptoassets[this.asset]?.chain
     },
     assetInfo() {
-      console.log('TACA ===> Account.vue, this.asset = ', this.asset, ', cryptoassets[this.asset] = ', cryptoassets[this.asset])
       return cryptoassets[this.asset]
     },
     filteredTransactions() {

@@ -616,7 +616,6 @@ export default {
         this.selectedNFT,
         this.customFee
       )
-      console.log('TACA ===> [wallet] SendNFT.vue, _updateSendFees, sendFees = ', sendFees)
       this.sendFees = sendFees
     },
     updateSendFees: _.debounce(async function (amount) {

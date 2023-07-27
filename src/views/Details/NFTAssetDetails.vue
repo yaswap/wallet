@@ -417,7 +417,6 @@ export default {
       } else {
         this.accountId = this.nftAsset.accountId
       }
-      console.log('TACA ===> NFTAssetDetails.vue, this.nftAsset = ', this.nftAsset, ', this.accountId = ', this.accountId)
     }
   },
   methods: {

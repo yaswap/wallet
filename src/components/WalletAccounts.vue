@@ -259,7 +259,6 @@ export default {
     ...mapState(['activeWalletId', 'activeNetwork']),
     ...mapGetters(['accountsData', 'activity']),
     filteredItems() {
-      console.log("TACA ===>, WalletAccounts.vue, this.accounts = ", this.accounts)
       if (!this.search) return this.accounts
 
       const search = this.search.toUpperCase()

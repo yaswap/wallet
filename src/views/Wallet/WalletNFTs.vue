@@ -89,7 +89,6 @@ export default {
     } else {
       this.assets = this.allNftCollections
     }
-    console.log('TACA ===> WalletNFTs.vue, created(), this.assets = ', this.assets)
   },
   computed: {
     ...mapState(['activeWalletId', 'activeNetwork']),

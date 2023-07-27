@@ -379,11 +379,9 @@ export default {
     },
     amount: {
       get() {
-        console.log('TACA ===> Send.vue, amount, this.stateAmount = ', this.stateAmount)
         return this.stateAmount
       },
       set(newValue) {
-        console.log('TACA ===> Send.vue, amount, set newValue = ', newValue)
         this.updateSendAmount(newValue)
       }
     },
@@ -568,7 +566,6 @@ export default {
         this.stateAmount = 0.0
       }
       this.stateAmountFiat = prettyFiatBalance(this.stateAmount, this.fiatRates[this.asset])
-      console.log('TACA ===> Send.vue, updateSendAmount, newValue = ', newValue, ', this.stateAmount = ', this.stateAmount)
     },
     async _updateSendFees(amount) {
       const sendFees = await getSendTxFees(this.account.id, this.asset, amount, this.customFee)
@@ -658,7 +655,6 @@ export default {
           fiatRate: this.fiatRates[this.asset],
           ...(this.showMemoInput && { data: this.memoData })
         }
-        console.log('TACA ===> [wallet] Send.vue, calling wallet-core sendTransaction with argObj = ', argObj)
         await this.sendTransaction(argObj)
 
         this.$router.replace(`/accounts/${this.accountId}/${this.asset}`)
