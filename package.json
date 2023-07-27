@@ -28,10 +28,10 @@
     "@liquality/types": "^1.13.12",
     "@terra-money/terra.js": "3.1.6",
     "@testing-library/vue": "^5.8.2",
-    "@yaswap/cryptoassets": "^2.2.1",
-    "@yaswap/error-parser": "^2.2.1",
-    "@yaswap/hw-ledger": "^2.0.0",
-    "@yaswap/wallet-core": "^2.2.1",
+    "@yaswap/cryptoassets": "^2.3.0",
+    "@yaswap/error-parser": "^2.3.0",
+    "@yaswap/hw-ledger": "^2.2.0",
+    "@yaswap/wallet-core": "^2.3.0",
     "@yaswap/yacoinjs-lib": "^1.2.0",
     "amplitude-js": "8.18.2",
     "bignumber.js": "9.1.1",
@@ -132,9 +132,6 @@
     "@ledgerhq/cryptoassets": "7.3.0",
     "@ledgerhq/hw-app-eth": "6.30.5",
     "@ledgerhq/hw-app-btc": "9.1.2",
-    "@solana/web3.js": "1.50.1",
-    "@yaswap/cryptoassets": "link:/home/chaunguyen/projects/yacoin/yaswap/wallet-core/packages/cryptoassets",
-    "@yaswap/error-parser": "link:/home/chaunguyen/projects/yacoin/yaswap/wallet-core/packages/error-parser",
-    "@yaswap/wallet-core": "link:/home/chaunguyen/projects/yacoin/yaswap/wallet-core/packages/wallet-core"
+    "@solana/web3.js": "1.50.1"
   }
 }
