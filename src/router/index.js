@@ -83,6 +83,12 @@ const routes = [
     name: 'CustomToken',
     meta: { protect: true }
   },
+  {
+    path: '/settings/create-token',
+    component: () => import('@/views/CreateToken'),
+    name: 'CreateToken',
+    meta: { protect: true }
+  },
   // Settings
 
   // Wallet

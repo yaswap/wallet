@@ -47,6 +47,10 @@
           <SettingsIcon />
           {{ $t('components.navbar.settings') }}
         </li>
+        <li id="create_token" @click="createToken">
+          <CreateIcon />
+          Create YA-token/YA-NFT
+        </li>
         <li id="ledger" @click="ledger">
           <LedgerIcon />
           Ledger
@@ -77,6 +81,7 @@ import AssetsIcon from '@/assets/icons/assets.svg'
 import AccountsIcon from '@/assets/icons/accounts_menu_icon.svg'
 import LedgerIcon from '@/assets/icons/ledger_menu_icon.svg'
 import KeyIcon from '@/assets/icons/key.svg'
+import CreateIcon from '@/assets/icons/create_icon.svg'
 import { ChainId } from '@yaswap/cryptoassets'
 import { version as walletVersion } from '../../package.json'
 
@@ -93,7 +98,8 @@ export default {
     SettingsIcon,
     AccountsIcon,
     LedgerIcon,
-    KeyIcon
+    KeyIcon,
+    CreateIcon
   },
   props: [
     'showMenu',
@@ -223,6 +229,19 @@ export default {
       })
       this.showMenuList = false
       this.$router.replace({ name: 'ManageAccounts', params: { from: this.currentRoutePath } })
+    },
+    createToken() {
+      this.trackAnalytics({
+        event: 'User clicked on Create YA-token/YA-NFT option in navbar',
+        properties: {
+          walletVersion,
+          category: 'HamburgerIcon',
+          action: 'Click on Create YA-token/YA-NFT',
+          label: 'User clicked on Create YA-token/YA-NFT from menu option'
+        }
+      })
+      this.showMenuList = false
+      this.$router.replace({ name: 'CreateToken', params: { from: this.currentRoutePath } })
     },
     ledger() {
       this.trackAnalytics({
