@@ -149,6 +149,7 @@
               v-if="tokenNameError"
               class="text-danger form-text"
               id="token_name_error"
+              style="white-space: pre-line;"
               >{{ tokenNameError }}
             </small>
           </div>
@@ -213,6 +214,7 @@ const MAX_NFT_NAME_LENGTH = MAX_TOKEN_NAME_LENGTH + 1
 
 const YATOKEN_NAME_CHARACTERS = new RegExp("^[A-Z0-9._]{3,}$")
 const SUB_NAME_CHARACTERS = new RegExp("^[A-Z0-9._]+$")
+const UNIQUE_TAG_CHARACTERS = new RegExp("^[-A-Za-z0-9@$%&*()[\\]{}_.?:]+$")
 
 const DOUBLE_PUNCTUATION = new RegExp("^.*[._]{2,}.*$")
 const LEADING_PUNCTUATION = new RegExp("^[._].*$")
@@ -345,7 +347,7 @@ export default {
     async tokenNameChange(e) {
       this.tokenNameError = null
       if (this.tokenType === 'YA-token') {
-        return this.isTokenNameFollowSpec() && await this.isTokenNameUnique()
+        return this.isTokenNameFollowSpec(this.tokenName) && await this.isTokenNameUnique()
       } else { // YA-NFT
         return this.isNFTNameFollowSpec() && await this.isTokenNameUnique() && this.isOwnerTokenExist()
       }
@@ -357,33 +359,36 @@ export default {
     isSubNameValid(name) {
       return name.match(SUB_NAME_CHARACTERS)
     },
+    isNFTNameValid(name) {
+      return name.match(UNIQUE_TAG_CHARACTERS)
+    },
     isSpecialCharacterValid(name) {
       return !name.match(DOUBLE_PUNCTUATION)
         && !name.match(LEADING_PUNCTUATION)
         && !name.match(TRAILING_PUNCTUATION)
     },
-    isTokenNameFollowSpec() {
+    isTokenNameFollowSpec(tokenName, nameSpec) {
       // Sanity check if it isn't a YA-Token name
-      if (this.tokenName.indexOf(UNIQUE_TAG_DELIMITER) !== -1) {
+      if (tokenName.indexOf(UNIQUE_TAG_DELIMITER) !== -1) {
         this.tokenNameError = 'You are creating YA-NFT (having # in the token name). Please select token type = YA-NFT to create it.'
         return false
       }
 
-      const fullNameSpec = `\n\nFull name specification\n1) Name must be contain at least ${MIN_TOKEN_NAME_LENGTH} characters and maximum name length is ${MAX_TOKEN_NAME_LENGTH} characters.\n2) Valid characters are: A-Z 0-9 _ . /\n3) Special characters (_ . /) can't be the first or last characters. More than one of these special characters also cannot be next to one another.`
+      const fullNameSpec = nameSpec || `\n\nFull name specification\n1) Name must have at least ${MIN_TOKEN_NAME_LENGTH} characters and maximum name length is ${MAX_TOKEN_NAME_LENGTH} characters.\n2) Valid characters are: A-Z 0-9 _ . /\n3) Special characters (_ . /) can't be the first or last characters. More than one of these special characters also cannot be next to one another.`
 
       // Check name length
-      if (this.tokenName.length < MIN_TOKEN_NAME_LENGTH) {
-        this.tokenNameError = `Name must be contain at least ${MIN_TOKEN_NAME_LENGTH} characters.` + fullNameSpec
+      if (tokenName.length < MIN_TOKEN_NAME_LENGTH) {
+        this.tokenNameError = `Name must have at least ${MIN_TOKEN_NAME_LENGTH} characters.` + fullNameSpec
         return false
       }
 
-      if (this.tokenName.length > MAX_TOKEN_NAME_LENGTH) {
+      if (tokenName.length > MAX_TOKEN_NAME_LENGTH) {
         this.tokenNameError = `Name is greater than max length of ${MAX_TOKEN_NAME_LENGTH}.` + fullNameSpec
         return false
       }
 
       // Check if the name contains invalid characters
-      const tokenNameParts = this.tokenName.split(SUB_NAME_DELIMITER)
+      const tokenNameParts = tokenName.split(SUB_NAME_DELIMITER)
       for (const index in tokenNameParts) {
         console.log('TACA ===> isTokenNameFollowSpec, tokenNameParts[', index, '] = ', tokenNameParts[index])
         if (
@@ -405,6 +410,42 @@ export default {
       }
       return true
     },
+    isNFTNameFollowSpec() {
+      // Sanity check if it isn't a YA-NFT name
+      if (this.tokenName.indexOf(UNIQUE_TAG_DELIMITER) === -1) {
+        this.tokenNameError = `Must have character ${UNIQUE_TAG_DELIMITER} in the NFT name.`
+        return false
+      }
+
+      const fullNameSpec = `\n\nFull name specification\n1) Name must have at least ${MIN_TOKEN_NAME_LENGTH} characters and maximum name length is ${MAX_TOKEN_NAME_LENGTH} characters.\n2) The full YA-NFT name takes the form [YA-token name]#[YA-NFT portion].\n3) Valid characters for YA-token name are: A-Z 0-9 _ . /\n4) Valid characters for YA-NFT portion are: A-Z a-z 0-9 @ $ % & * ( ) [ ] { } _ . ? : -\n5) Special characters for YA-token name (_ . /) can't be the first or last characters. More than one of these special characters also cannot be next to one another.`
+
+      // Check name length
+      if (this.tokenName.length < MIN_NFT_NAME_LENGTH) {
+        this.tokenNameError = `Name must have at least ${MIN_NFT_NAME_LENGTH} characters.` + fullNameSpec
+        return false
+      }
+
+      if (this.tokenName.length > MAX_NFT_NAME_LENGTH) {
+        this.tokenNameError = `Name is greater than max length of ${MAX_NFT_NAME_LENGTH}.` + fullNameSpec
+        return false
+      }
+
+      // Check if the name contains invalid characters
+      const tokenNameParts = this.tokenName.split(UNIQUE_TAG_DELIMITER)
+      if (tokenNameParts.length >= 3) {
+        this.tokenNameError = `Name can only have one charater ${UNIQUE_TAG_DELIMITER}.` + fullNameSpec
+        return false
+      }
+
+      if (!this.isTokenNameFollowSpec(tokenNameParts[0], fullNameSpec)) {
+        return false
+      } else if (!this.isNFTNameValid(tokenNameParts[1])) {
+        this.tokenNameError = `YA-NFT portion contains invalid characters.` + fullNameSpec
+        return false
+      }
+
+      return true
+    },
     async isTokenNameUnique() {
       // Verify if the token name is unique
       console.log('TACA ===> isTokenNameUnique, this.tokenName = ', this.tokenName)
@@ -423,26 +464,15 @@ export default {
       }
       return true
     },
-    isNFTNameFollowSpec() {
-      // Sanity check if it isn't a YA-NFT name
-      if (this.tokenName.indexOf(UNIQUE_TAG_DELIMITER) === -1) {
-        this.tokenNameError = `NFT name must have character ${UNIQUE_TAG_DELIMITER} in the name.`
-        return false
-      }
-
-      if (this.tokenNameError) {
-        return false
-      }
-      return true
-    },
     isOwnerTokenExist() {
       // Verify if the wallet has the Owner token to create corresponding YA-NFT
-      const ownerTokenName = this.tokenName.split(UNIQUE_TAG_DELIMITER)[0] + '!'
+      const parentToken = this.tokenName.split(UNIQUE_TAG_DELIMITER)[0]
+      const ownerTokenName = parentToken + '!'
       console.log('TACA ===> isOwnerTokenExist, ownerTokenName = ', ownerTokenName)
       if (this.yacoinAssets.includes(ownerTokenName)) {
         this.tokenNameError = null
       } else {
-        this.tokenNameError = "You don't have the owner token to create YA-NFT for this collection."
+        this.tokenNameError = `You don't have the owner token of YA-token ${parentToken}. You need it to create YA-NFT which belong to ${parentToken} NFT collection.`
       }
 
       if (this.tokenNameError) {
