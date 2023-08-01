@@ -61,6 +61,7 @@
               v-if="tokenNameError"
               class="text-danger form-text"
               id="token_name_error"
+              style="white-space: pre-line;"
               >{{ tokenNameError }}
             </small>
           </div>
@@ -196,13 +197,31 @@
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { debounce } from 'lodash-es'
 import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
+import { ChainId } from '@yaswap/cryptoassets'
 import NavBar from '@/components/NavBar.vue'
 import ChevronDownIcon from '@/assets/icons/chevron_down.svg'
 import ChevronUpIcon from '@/assets/icons/chevron_up.svg'
 import { DuplicateTokenSymbolError } from '@yaswap/error-parser/dist/src/YaswapErrors/DuplicateTokenSymbolError'
 import { errorToYaswapErrorString } from '@yaswap/error-parser/dist/src/utils'
 import { reportYaswapError } from '@yaswap/error-parser'
-import { validateIPFSHash } from '@yaswap/wallet-core/dist/src/utils/asset'
+import { verifyIPFSHash, isAvailableTokenName } from '@yaswap/wallet-core/dist/src/utils/asset'
+
+const MIN_TOKEN_NAME_LENGTH = 3
+const MAX_TOKEN_NAME_LENGTH = 30
+const MIN_NFT_NAME_LENGTH = MIN_TOKEN_NAME_LENGTH
+const MAX_NFT_NAME_LENGTH = MAX_TOKEN_NAME_LENGTH + 1
+
+const YATOKEN_NAME_CHARACTERS = new RegExp("^[A-Z0-9._]{3,}$")
+const SUB_NAME_CHARACTERS = new RegExp("^[A-Z0-9._]+$")
+
+const DOUBLE_PUNCTUATION = new RegExp("^.*[._]{2,}.*$")
+const LEADING_PUNCTUATION = new RegExp("^[._].*$")
+const TRAILING_PUNCTUATION = new RegExp("^.*[._]$")
+
+const SUB_NAME_DELIMITER = "/"
+const UNIQUE_TAG_DELIMITER = "#";
+
+const YACOIN_NAMES = new RegExp("^YAC$|^YACOIN$|^#YAC$|^#YACOIN$")
 
 export default {
   components: {
@@ -239,11 +258,14 @@ export default {
   computed: {
     ...mapState(['activeNetwork', 'accounts', 'activeWalletId', 'enabledAssets']),
     ...mapGetters(['accountsData']),
-    networkAssets() {
-      return this.enabledAssets[this.activeNetwork][this.activeWalletId]
+    yacoinAssets() {
+      const yacoinAccount = this.accounts[this.activeWalletId]?.[this.activeNetwork].find((account) => account.chain === ChainId.Yacoin)
+      console.log('yacoinAccount = ', yacoinAccount)
+      console.log('yacoinAccount.assets = ', yacoinAccount.assets)
+      return yacoinAccount.assets
     },
-    isExistingNetworkAsset() {
-      return Boolean(this.networkAssets.find((_symbol) => _symbol === this.tokenName))
+    isExistingAsset() {
+      return this.yacoinAssets.includes(this.tokenName)
     },
     canAdd() {
       if (
@@ -306,14 +328,6 @@ export default {
         }
       }
     },
-    tokenNameChange(e) {
-      this.$nextTick(() => {
-        this.verifyTokenNameUnique()
-        if (this.tokenType === 'YA-NFT') {
-          this.verifyOwnerTokenExist()
-        }
-      })
-    },
     resetFields() {
       // Reset Fields
       this.tokenName = null
@@ -328,73 +342,114 @@ export default {
       this.decimalsError = null
       this.ipfsHashError = null
     },
-    verifyTokenNameUnique: debounce(async function () {
-      // TODO: Add verification if the token name is unique
+    async tokenNameChange(e) {
+      this.tokenNameError = null
+      if (this.tokenType === 'YA-token') {
+        return this.isTokenNameFollowSpec() && await this.isTokenNameUnique()
+      } else { // YA-NFT
+        return this.isNFTNameFollowSpec() && await this.isTokenNameUnique() && this.isOwnerTokenExist()
+      }
+    },
+    isYatokenNameValid(name) {
+      return name.match(YATOKEN_NAME_CHARACTERS)
+        && !name.match(YACOIN_NAMES)
+    },
+    isSubNameValid(name) {
+      return name.match(SUB_NAME_CHARACTERS)
+    },
+    isSpecialCharacterValid(name) {
+      return !name.match(DOUBLE_PUNCTUATION)
+        && !name.match(LEADING_PUNCTUATION)
+        && !name.match(TRAILING_PUNCTUATION)
+    },
+    isTokenNameFollowSpec() {
+      // Sanity check if it isn't a YA-Token name
+      if (this.tokenName.indexOf(UNIQUE_TAG_DELIMITER) !== -1) {
+        this.tokenNameError = 'You are creating YA-NFT (having # in the token name). Please select token type = YA-NFT to create it.'
+        return false
+      }
+
+      const fullNameSpec = `\n\nFull name specification\n1) Name must be contain at least ${MIN_TOKEN_NAME_LENGTH} characters and maximum name length is ${MAX_TOKEN_NAME_LENGTH} characters.\n2) Valid characters are: A-Z 0-9 _ . /\n3) Special characters (_ . /) can't be the first or last characters. More than one of these special characters also cannot be next to one another.`
+
+      // Check name length
+      if (this.tokenName.length < MIN_TOKEN_NAME_LENGTH) {
+        this.tokenNameError = `Name must be contain at least ${MIN_TOKEN_NAME_LENGTH} characters.` + fullNameSpec
+        return false
+      }
+
+      if (this.tokenName.length > MAX_TOKEN_NAME_LENGTH) {
+        this.tokenNameError = `Name is greater than max length of ${MAX_TOKEN_NAME_LENGTH}.` + fullNameSpec
+        return false
+      }
+
+      // Check if the name contains invalid characters
+      const tokenNameParts = this.tokenName.split(SUB_NAME_DELIMITER)
+      for (const index in tokenNameParts) {
+        console.log('TACA ===> isTokenNameFollowSpec, tokenNameParts[', index, '] = ', tokenNameParts[index])
+        if (
+            (index == 0 && !this.isYatokenNameValid(tokenNameParts[index])) ||
+            (index > 0 && !this.isSubNameValid(tokenNameParts[index]))
+          ) {
+            this.tokenNameError = `Name contains invalid characters.` + fullNameSpec
+            return false
+          }
+
+          if (!this.isSpecialCharacterValid(tokenNameParts[index])) {
+            this.tokenNameError = `Special characters (_ . /) can't be the first or last characters. More than one of these special characters also cannot be next to one another.` + fullNameSpec
+            return false
+          }
+      }
+
+      if (this.tokenNameError) {
+        return false
+      }
+      return true
+    },
+    async isTokenNameUnique() {
+      // Verify if the token name is unique
+      console.log('TACA ===> isTokenNameUnique, this.tokenName = ', this.tokenName)
       if (
-        (Object.keys(cryptoassets).includes(this.tokenName)) || this.isExistingNetworkAsset
+        (Object.keys(cryptoassets).includes(this.tokenName)) ||
+        this.isExistingAsset ||
+        !await isAvailableTokenName(this.tokenName, this.activeNetwork)
       ) {
-        this.tokenNameError = 'This token was already exist. Please specify another token name'
+        this.tokenNameError = 'This token was already exist. Please specify another token name.'
       } else {
         this.tokenNameError = null
       }
-      // this.tokenNameError = ''
 
-      // let customToken
+      if (this.tokenNameError) {
+        return false
+      }
+      return true
+    },
+    isNFTNameFollowSpec() {
+      // Sanity check if it isn't a YA-NFT name
+      if (this.tokenName.indexOf(UNIQUE_TAG_DELIMITER) === -1) {
+        this.tokenNameError = `NFT name must have character ${UNIQUE_TAG_DELIMITER} in the name.`
+        return false
+      }
 
-      // if (this.existingAsset) {
-      //   customToken = this.existingAsset
-      // } else if (this.activeNetwork === 'mainnet' && this.contractAddress) {
-      //   const { symbol, name, decimals } = await this.fetchTokenDetails({
-      //     network: this.activeNetwork,
-      //     walletId: this.activeWalletId,
-      //     chain: this.chain,
-      //     contractAddress: this.contractAddress
-      //   })
+      if (this.tokenNameError) {
+        return false
+      }
+      return true
+    },
+    isOwnerTokenExist() {
+      // Verify if the wallet has the Owner token to create corresponding YA-NFT
+      const ownerTokenName = this.tokenName.split(UNIQUE_TAG_DELIMITER)[0] + '!'
+      console.log('TACA ===> isOwnerTokenExist, ownerTokenName = ', ownerTokenName)
+      if (this.yacoinAssets.includes(ownerTokenName)) {
+        this.tokenNameError = null
+      } else {
+        this.tokenNameError = "You don't have the owner token to create YA-NFT for this collection."
+      }
 
-      //   customToken = {
-      //     symbol,
-      //     name,
-      //     decimals: parseInt(decimals),
-      //     chain: this.chain
-      //   }
-      // }
-
-      // if (customToken) {
-      //   this.symbol = customToken.symbol
-      //   this.name = customToken.name
-      //   this.decimals = customToken.decimals
-      // }
-    }, 500),
-    verifyOwnerTokenExist: debounce(async function () {
-      // TODO: Add verification if the wallet has the Owner token to create corresponding YA-NFT
-      // this.tokenNameError = ''
-
-      // let customToken
-
-      // if (this.existingAsset) {
-      //   customToken = this.existingAsset
-      // } else if (this.activeNetwork === 'mainnet' && this.contractAddress) {
-      //   const { symbol, name, decimals } = await this.fetchTokenDetails({
-      //     network: this.activeNetwork,
-      //     walletId: this.activeWalletId,
-      //     chain: this.chain,
-      //     contractAddress: this.contractAddress
-      //   })
-
-      //   customToken = {
-      //     symbol,
-      //     name,
-      //     decimals: parseInt(decimals),
-      //     chain: this.chain
-      //   }
-      // }
-
-      // if (customToken) {
-      //   this.symbol = customToken.symbol
-      //   this.name = customToken.name
-      //   this.decimals = customToken.decimals
-      // }
-    }, 500),
+      if (this.tokenNameError) {
+        return false
+      }
+      return true
+    },
     async selectTokenType(tokenType) {
       this.tokenType = tokenType
       this.tokenTypeDropdownOpen = false
@@ -419,12 +474,12 @@ export default {
       console.log('TACA ===> this.decimals = ', this.decimals)
     },
     verifyIPFSHash(e) {
-      // TODO: Verify IPFS Hash
+      // Verify IPFS Hash
       console.log('TACA ===> this.ipfsHash = ', this.ipfsHash)
       if (!this.ipfsHash) {
         this.ipfsHashError = null
       } else {
-        this.ipfsHashError = validateIPFSHash(this.ipfsHash)
+        this.ipfsHashError = verifyIPFSHash(this.ipfsHash)
       }
       console.log('TACA ===> this.ipfsHashError = ', this.ipfsHashError)
     }
