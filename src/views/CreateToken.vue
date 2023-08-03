@@ -8,7 +8,7 @@
     >
       <span class="wallet_header">
         <strong>
-          Create YA-token/YA-NFT
+          Create YA-Token/YA-NFT
         </strong>
       </span>
     </NavBar>
@@ -42,8 +42,8 @@
             </ul>
           </div>
         </div>
-        <!-- YA-token -->
-        <fieldset v-if="tokenType === 'YA-token'">
+        <!-- YA-Token -->
+        <fieldset v-if="tokenType === 'YA-Token'">
           <div class="form-group">
             <label for="token_name">Token name</label>
             <input
@@ -234,13 +234,14 @@ export default {
   data() {
     return {
       // NEW
-      tokenType: 'YA-token',
-      tokenTypeList: ['YA-token', 'YA-NFT'],
+      tokenType: 'YA-Token',
+      tokenTypeList: ['YA-Token', 'YA-NFT'],
       tokenName: null,
       tokenAmount: 1,
       decimals: 0,
       reissuable: true,
       ipfsHash: null,
+      rawIpfsHash: null,
       tokenTypeDropdownOpen: false,
       creatingToken: false,
 
@@ -259,15 +260,35 @@ export default {
   },
   computed: {
     ...mapState(['activeNetwork', 'accounts', 'activeWalletId', 'enabledAssets']),
-    ...mapGetters(['accountsData']),
-    yacoinAssets() {
-      const yacoinAccount = this.accounts[this.activeWalletId]?.[this.activeNetwork].find((account) => account.chain === ChainId.Yacoin)
-      console.log('yacoinAccount = ', yacoinAccount)
-      console.log('yacoinAccount.assets = ', yacoinAccount.assets)
-      return yacoinAccount.assets
+    ...mapGetters(['accountsData', 'suggestedFeePrices']),
+    account() {
+      // TODO: Support other chains
+      return this.accounts[this.activeWalletId][this.activeNetwork].find((acc) => acc.chain === ChainId.Yacoin)
+    },
+    accountAssets() {
+      console.log('yacoinAccount = ', this.account)
+      console.log('yacoinAccount.assets = ', this.account.assets)
+      return this.account.assets
     },
     isExistingAsset() {
-      return this.yacoinAssets.includes(this.tokenName)
+      return this.accountAssets.includes(this.tokenName)
+    },
+    asset() {
+      // TODO: Support other chains
+      return 'YAC'
+    },
+    assetChain() {
+      return this.asset
+    },
+    assetFees() {
+      const assetFees = {}
+
+      const fees = this.suggestedFeePrices(this.assetChain)
+      if (fees) {
+        Object.assign(assetFees, fees)
+      }
+
+      return assetFees
     },
     canAdd() {
       if (
@@ -284,50 +305,39 @@ export default {
   },
   methods: {
     ...mapActions([
+      'createToken',
       'fetchTokenDetails'
     ]),
     async addToken() {
-      if (!this.tokenNameError) {
-        try {
-          this.creatingToken = true
-          // TODO: Call createToken (wallet-core) for Yacoin only
-          // Add only if the token does not already exist
-
-          // OLD FOR REFERENCE
-          // await this.addCustomToken({
-          //   network: this.activeNetwork,
-          //   walletId: this.activeWalletId,
-          //   chain: this.chain,
-          //   contractAddress: this.contractAddress,
-          //   name: this.name,
-          //   symbol: this.symbol,
-          //   decimals: Number(this.decimals)
-          // })
-
-          // const isChainEnabledForNative = this.accountsData.find(
-          //   (account) => account.chain === this.chain
-          // )
-
-          // if (!isChainEnabledForNative) {
-          //   await this.enableChain()
-          // }
-
-          // await this.enableAssets({
-          //   network: this.activeNetwork,
-          //   walletId: this.activeWalletId,
-          //   assets: [this.symbol]
-          // })
-
-          this.$router.replace('/wallet')
-        } catch (error) {
-          const yaswapErrorString = errorToYaswapErrorString(error)
-          reportYaswapError(error)
-          return {
-            error: yaswapErrorString
-          }
-        } finally {
-          this.creatingToken = false
+      try {
+        this.creatingToken = true
+        if (this.tokenType === 'YA-NFT') {
+          this.tokenAmount = 1
+          this.decimals = 0
+          this.reissuable = false
         }
+        await this.createToken({
+          network: this.activeNetwork,
+          walletId: this.activeWalletId,
+          accountId: this.account.id,
+          asset: this.asset,
+          tokenType: this.tokenType,
+          tokenName: this.tokenName,
+          tokenAmount: this.tokenAmount,
+          decimals: this.decimals,
+          reissuable: this.reissuable,
+          ipfsHash: this.rawIpfsHash,
+        })
+
+        this.$router.replace('/wallet')
+      } catch (error) {
+        const yaswapErrorString = errorToYaswapErrorString(error)
+        reportYaswapError(error)
+        return {
+          error: yaswapErrorString
+        }
+      } finally {
+        this.creatingToken = false
       }
     },
     resetFields() {
@@ -346,7 +356,7 @@ export default {
     },
     async tokenNameChange(e) {
       this.tokenNameError = null
-      if (this.tokenType === 'YA-token') {
+      if (this.tokenType === 'YA-Token') {
         return this.isTokenNameFollowSpec(this.tokenName) && await this.isTokenNameUnique()
       } else { // YA-NFT
         return this.isNFTNameFollowSpec() && await this.isTokenNameUnique() && this.isOwnerTokenExist()
@@ -417,7 +427,7 @@ export default {
         return false
       }
 
-      const fullNameSpec = `\n\nFull name specification\n1) Name must have at least ${MIN_TOKEN_NAME_LENGTH} characters and maximum name length is ${MAX_TOKEN_NAME_LENGTH} characters.\n2) The full YA-NFT name takes the form [YA-token name]#[YA-NFT portion].\n3) Valid characters for YA-token name are: A-Z 0-9 _ . /\n4) Valid characters for YA-NFT portion are: A-Z a-z 0-9 @ $ % & * ( ) [ ] { } _ . ? : -\n5) Special characters for YA-token name (_ . /) can't be the first or last characters. More than one of these special characters also cannot be next to one another.`
+      const fullNameSpec = `\n\nFull name specification\n1) Name must have at least ${MIN_TOKEN_NAME_LENGTH} characters and maximum name length is ${MAX_TOKEN_NAME_LENGTH} characters.\n2) The full YA-NFT name takes the form [YA-Token name]#[YA-NFT portion].\n3) Valid characters for YA-Token name are: A-Z 0-9 _ . /\n4) Valid characters for YA-NFT portion are: A-Z a-z 0-9 @ $ % & * ( ) [ ] { } _ . ? : -\n5) Special characters for YA-Token name (_ . /) can't be the first or last characters. More than one of these special characters also cannot be next to one another.`
 
       // Check name length
       if (this.tokenName.length < MIN_NFT_NAME_LENGTH) {
@@ -469,10 +479,10 @@ export default {
       const parentToken = this.tokenName.split(UNIQUE_TAG_DELIMITER)[0]
       const ownerTokenName = parentToken + '!'
       console.log('TACA ===> isOwnerTokenExist, ownerTokenName = ', ownerTokenName)
-      if (this.yacoinAssets.includes(ownerTokenName)) {
+      if (this.accountAssets.includes(ownerTokenName)) {
         this.tokenNameError = null
       } else {
-        this.tokenNameError = `You don't have the owner token of YA-token ${parentToken}. You need it to create YA-NFT which belong to ${parentToken} NFT collection.`
+        this.tokenNameError = `You don't have the owner token of YA-Token ${parentToken}. You need it to create YA-NFT which belong to ${parentToken} NFT collection.`
       }
 
       if (this.tokenNameError) {
@@ -509,9 +519,12 @@ export default {
       if (!this.ipfsHash) {
         this.ipfsHashError = null
       } else {
-        this.ipfsHashError = verifyIPFSHash(this.ipfsHash)
+        const [rawIpfsHash, error] = verifyIPFSHash(this.ipfsHash)
+        this.ipfsHashError = error
+        this.rawIpfsHash = rawIpfsHash
       }
       console.log('TACA ===> this.ipfsHashError = ', this.ipfsHashError)
+      console.log('TACA ===> this.rawIpfsHash = ', this.rawIpfsHash)
     }
   }
 }
