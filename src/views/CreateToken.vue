@@ -357,10 +357,11 @@ export default {
     async tokenNameChange(e) {
       this.tokenNameError = null
       if (this.tokenType === 'YA-Token') {
-        if (this.tokenName.indexOf(SUB_NAME_DELIMITER) === -1) { // YA-Token
+        const subDeliLastIndex = this.tokenName.lastIndexOf(SUB_NAME_DELIMITER)
+        if (subDeliLastIndex === -1) { // YA-Token
           return this.isTokenNameFollowSpec(this.tokenName) && await this.isTokenNameUnique()
         } else { // sub YA-Token
-          const ownerTokenName = this.tokenName.split(SUB_NAME_DELIMITER)[0] + '!'
+          const ownerTokenName = this.tokenName.slice(0, subDeliLastIndex) + '!'
           return this.isTokenNameFollowSpec(this.tokenName) && await this.isTokenNameUnique()&& this.isOwnerTokenExist(ownerTokenName)
         }
       } else { // YA-NFT
