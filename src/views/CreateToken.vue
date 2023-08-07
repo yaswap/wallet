@@ -488,7 +488,9 @@ export default {
       if (this.accountAssets.includes(ownerTokenName)) {
         this.tokenNameError = null
       } else {
-        this.tokenNameError = `You don't have the owner token of YA-Token ${parentToken}. You need it to create YA-NFT which belong to ${parentToken} NFT collection.`
+        this.tokenNameError = this.tokenType === 'YA-NFT' ?
+          `You don't have the owner token of YA-Token ${parentToken}. You need it to create YA-NFT which belong to ${parentToken} NFT collection.` :
+          `You don't have the owner token of YA-Token ${parentToken}. You need it to create sub YA-Token which belong to ${parentToken}`
       }
 
       if (this.tokenNameError) {
