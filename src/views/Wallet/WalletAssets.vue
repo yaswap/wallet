@@ -15,7 +15,9 @@ export default {
   },
   methods: {
     onAccountSelected({ account, asset }) {
+      console.log('TACA ===> WalletAssets.vue, onAccountSelected, account = ', account, ', asset = ', asset)
       const _asset = asset || account.assets[0]
+      console.log('TACA ===> WalletAssets.vue, onAccountSelected, _asset = ', _asset)
       this.$router.push(`/accounts/${account.id}/${_asset}`)
     }
   }

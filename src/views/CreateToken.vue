@@ -41,6 +41,18 @@
               </li>
             </ul>
           </div>
+          <small
+              v-if="balanceError"
+              class="text-danger form-text"
+              id="balance_error"
+              >{{ balanceError }}
+            </small>
+            <small
+              v-else
+              class="text-danger form-text"
+              id="warning"
+              >{{ warningMessage }}
+            </small>
         </div>
         <!-- YA-Token -->
         <fieldset v-if="tokenType === 'YA-Token'">
@@ -197,8 +209,9 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 import { debounce } from 'lodash-es'
+import BN from 'bignumber.js'
 import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
-import { ChainId } from '@yaswap/cryptoassets'
+import { unitToCurrency, ChainId } from '@yaswap/cryptoassets'
 import NavBar from '@/components/NavBar.vue'
 import ChevronDownIcon from '@/assets/icons/chevron_down.svg'
 import ChevronUpIcon from '@/assets/icons/chevron_up.svg'
@@ -224,6 +237,8 @@ const SUB_NAME_DELIMITER = "/"
 const UNIQUE_TAG_DELIMITER = "#";
 
 const YACOIN_NAMES = new RegExp("^YAC$|^YACOIN$|^#YAC$|^#YACOIN$")
+const TIMELOCK_FEE_DURATION = 10; // 21000 blocks
+const TIMELOCK_FEE_AMOUNT = 10 * 1e6; // 2100 YAC
 
 export default {
   components: {
@@ -290,13 +305,27 @@ export default {
 
       return assetFees
     },
+    balance() {
+      return this.account?.balances[this.asset] || 0
+    },
+    balanceError() {
+      console.log('TACA ===> TIMELOCK_FEE_AMOUNT = ', TIMELOCK_FEE_AMOUNT, ', this.balance = ', this.balance)
+      if (Number(this.balance) < TIMELOCK_FEE_AMOUNT) {
+        return `You don't have enough ${this.asset} in wallet to create ${this.tokenType} (need at least ${TIMELOCK_FEE_AMOUNT/1e6} ${this.asset} for the timelock fee)`
+      }
+      return null
+    },
+    warningMessage() {
+      return `Warning: In order to create ${this.tokenType}, ${TIMELOCK_FEE_AMOUNT/1e6} ${this.asset} will be locked during ${TIMELOCK_FEE_DURATION} blocks`
+    },
     canAdd() {
       if (
         !this.tokenName ||
         this.tokenNameError ||
         this.tokenAmountError ||
         this.decimalsError ||
-        this.ipfsHashError
+        this.ipfsHashError ||
+        this.balanceError
       )
         return false
 
