@@ -357,9 +357,15 @@ export default {
     async tokenNameChange(e) {
       this.tokenNameError = null
       if (this.tokenType === 'YA-Token') {
-        return this.isTokenNameFollowSpec(this.tokenName) && await this.isTokenNameUnique()
+        if (this.tokenName.indexOf(SUB_NAME_DELIMITER) === -1) { // YA-Token
+          return this.isTokenNameFollowSpec(this.tokenName) && await this.isTokenNameUnique()
+        } else { // sub YA-Token
+          const ownerTokenName = this.tokenName.split(SUB_NAME_DELIMITER)[0] + '!'
+          return this.isTokenNameFollowSpec(this.tokenName) && await this.isTokenNameUnique()&& this.isOwnerTokenExist(ownerTokenName)
+        }
       } else { // YA-NFT
-        return this.isNFTNameFollowSpec() && await this.isTokenNameUnique() && this.isOwnerTokenExist()
+        const ownerTokenName = this.tokenName.split(UNIQUE_TAG_DELIMITER)[0] + '!'
+        return this.isNFTNameFollowSpec() && await this.isTokenNameUnique() && this.isOwnerTokenExist(ownerTokenName)
       }
     },
     isYatokenNameValid(name) {
@@ -474,11 +480,10 @@ export default {
       }
       return true
     },
-    isOwnerTokenExist() {
+    isOwnerTokenExist(ownerTokenName) {
       // Verify if the wallet has the Owner token to create corresponding YA-NFT
-      const parentToken = this.tokenName.split(UNIQUE_TAG_DELIMITER)[0]
-      const ownerTokenName = parentToken + '!'
       console.log('TACA ===> isOwnerTokenExist, ownerTokenName = ', ownerTokenName)
+      const parentToken = ownerTokenName.slice(0, -1)
       if (this.accountAssets.includes(ownerTokenName)) {
         this.tokenNameError = null
       } else {
