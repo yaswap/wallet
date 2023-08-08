@@ -218,7 +218,7 @@ import ChevronUpIcon from '@/assets/icons/chevron_up.svg'
 import { DuplicateTokenSymbolError } from '@yaswap/error-parser/dist/src/YaswapErrors/DuplicateTokenSymbolError'
 import { errorToYaswapErrorString } from '@yaswap/error-parser/dist/src/utils'
 import { reportYaswapError } from '@yaswap/error-parser'
-import { verifyIPFSHash, isAvailableTokenName } from '@yaswap/wallet-core/dist/src/utils/asset'
+import { getFeeAsset, getNativeAsset, verifyIPFSHash, isAvailableTokenName } from '@yaswap/wallet-core/dist/src/utils/asset'
 
 const MIN_TOKEN_NAME_LENGTH = 3
 const MAX_TOKEN_NAME_LENGTH = 30
@@ -237,8 +237,7 @@ const SUB_NAME_DELIMITER = "/"
 const UNIQUE_TAG_DELIMITER = "#";
 
 const YACOIN_NAMES = new RegExp("^YAC$|^YACOIN$|^#YAC$|^#YACOIN$")
-const TIMELOCK_FEE_DURATION = 10; // 21000 blocks
-const TIMELOCK_FEE_AMOUNT = 10 * 1e6; // 2100 YAC
+import { timelockFeeDuration, timelockFeeAmountInSatoshis } from '@/utils/asset'
 
 export default {
   components: {
@@ -276,6 +275,8 @@ export default {
   computed: {
     ...mapState(['activeNetwork', 'accounts', 'activeWalletId', 'enabledAssets']),
     ...mapGetters(['accountsData', 'suggestedFeePrices']),
+    timelockFeeDuration,
+    timelockFeeAmountInSatoshis,
     account() {
       // TODO: Support other chains
       return this.accounts[this.activeWalletId][this.activeNetwork].find((acc) => acc.chain === ChainId.Yacoin)
@@ -293,7 +294,7 @@ export default {
       return 'YAC'
     },
     assetChain() {
-      return this.asset
+      return getFeeAsset(this.asset) || getNativeAsset(this.asset)
     },
     assetFees() {
       const assetFees = {}
@@ -306,20 +307,22 @@ export default {
       return assetFees
     },
     fee() {
+      console.log('TACA ===> CreateToken.vue, this.assetChain = ', this.assetChain)
+      console.log('TACA ===> CreateToken.vue, this.assetFees = ', this.assetFees)
       return this.assetFees['average'].fee
     },
     balance() {
       return this.account?.balances[this.asset] || 0
     },
     balanceError() {
-      console.log('TACA ===> TIMELOCK_FEE_AMOUNT = ', TIMELOCK_FEE_AMOUNT, ', this.balance = ', this.balance)
-      if (Number(this.balance) < TIMELOCK_FEE_AMOUNT) {
-        return `You don't have enough ${this.asset} in wallet to create ${this.tokenType} (need at least ${TIMELOCK_FEE_AMOUNT/1e6} ${this.asset} for the timelock fee)`
+      console.log('TACA ===> this.timelockFeeAmountInSatoshis = ', this.timelockFeeAmountInSatoshis, ', this.balance = ', this.balance)
+      if (Number(this.balance) < this.timelockFeeAmountInSatoshis) {
+        return `You don't have enough ${this.asset} in wallet to create ${this.tokenType} (need at least ${this.timelockFeeAmountInSatoshis/1e6} ${this.asset} for the timelock fee)`
       }
       return null
     },
     warningMessage() {
-      return `Warning: In order to create ${this.tokenType}, ${TIMELOCK_FEE_AMOUNT/1e6} ${this.asset} will be locked during ${TIMELOCK_FEE_DURATION} blocks`
+      return `Warning: In order to create ${this.tokenType}, ${this.timelockFeeAmountInSatoshis/1e6} ${this.asset} will be locked during ${this.timelockFeeDuration} blocks`
     },
     canAdd() {
       if (

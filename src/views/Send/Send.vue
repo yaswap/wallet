@@ -419,6 +419,7 @@ export default {
       }
 
       const fees = this.suggestedFeePrices(this.assetChain)
+      console.log('TACA ===> Send.vue, this.assetChain = ', this.assetChain, ', fees = ', fees)
       if (fees) {
         Object.assign(assetFees, fees)
       }

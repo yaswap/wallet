@@ -151,6 +151,13 @@ const routes = [
     meta: { protect: true }
   },
   {
+    path: '/details/create-token-transaction/:id',
+    component: () => import('@/views/Details/CreateTokenTransactionDetails.vue'),
+    name: 'CreateTokenTransactionDetails',
+    props: true,
+    meta: { protect: true }
+  },
+  {
     path: '/details/nft-collection/:id',
     component: () => import('@/views/Details/NFTCollectionList.vue'),
     name: 'NFTCollectionList',

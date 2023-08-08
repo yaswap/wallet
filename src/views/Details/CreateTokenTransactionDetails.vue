@@ -1,8 +1,8 @@
 <template>
   <div class="details-wrapper">
     <NavBar :showBackButton="true" :backClick="goBack" :backLabel="$t('common.back')">
-      <img :src="getAssetIcon(item.from)" class="asset-icon mr-2" />
-      <span class="mr-2">{{ item.from }}</span>
+      <img :src="getAssetIcon(item.tokenName)" class="asset-icon mr-2" />
+      <span :class="item.tokenName.length > getAssetLengthLimitDisplay() ? 'asset-name-small' : 'asset-name'">{{ item.tokenName }}</span>
       <img :src="typeIcon" />
     </NavBar>
     <div class="tx-details">
@@ -34,18 +34,14 @@
         </div>
         <div class="row">
           <div class="col">
-            <h2>{{ $t('pages.details.sent') }}</h2>
-            <p id="transaction_detail_sent_amount" class="font-bold mb-1">
-              {{ prettyBalance(item.amount, item.from) }} {{ item.from }}
+            <h2> IMPORTANT INFO </h2>
+            <p id="address_info">
+              1) Address {{ item.toAddress }} contains:
             </p>
-            <p id="transaction_detail_sent_amount_today">
-              ${{
-                prettyFiatBalance(prettyBalance(item.amount, item.from), fiatRates[item.from])
-              }}
-              / {{ $t('pages.details.today') }}
-            </p>
-            <p id="transaction_detail_sent_amount_then" v-if="item.fiatRate">
-              ${{ prettyFiatBalance(prettyBalance(item.amount, item.from), item.fiatRate) }} / then
+            <p>+ {{ tokenInfo }}</p>
+            <p>+ {{ timelockFeeAmount }} timelocked {{ item.from }}</p>
+            <p v-if="item.status === 'SUCCESS' && tx && tx.confirmations > 0">
+              2) The timelocked YAC will be unlocked at block {{ tx.blockNumber + timelockFeeDuration }}
             </p>
           </div>
         </div>
@@ -110,7 +106,7 @@
             </p>
           </div>
         </div>
-        <Timeline :id="id" :tx="tx" />
+        <CreateTokenTimeline :id="id" :tx="tx" />
       </div>
     </div>
   </div>
@@ -137,7 +133,7 @@ import {
   getTransactionExplorerLink,
   getAddressExplorerLink
 } from '@yaswap/wallet-core/dist/src/utils/asset'
-import { getAssetIcon } from '@/utils/asset'
+import { getAssetIcon, getAssetLengthLimitDisplay, timelockFeeDuration, timelockFeeAmount } from '@/utils/asset'
 
 import FeeSelector from '@/components/FeeSelector'
 import CompletedIcon from '@/assets/icons/completed.svg'
@@ -147,7 +143,7 @@ import CopyIcon from '@/assets/icons/copy.svg'
 import NavBar from '@/components/NavBar.vue'
 import { isObject } from 'lodash-es'
 import { shortenAddress } from '@yaswap/wallet-core/dist/src/utils/address'
-import Timeline from '@/transactions/views/Timeline.vue'
+import CreateTokenTimeline from '@/transactions/views/CreateTokenTimeline.vue'
 
 export default {
   components: {
@@ -157,7 +153,7 @@ export default {
     SpinnerIcon,
     CopyIcon,
     NavBar,
-    Timeline
+    CreateTokenTimeline
   },
   data() {
     return {
@@ -172,6 +168,8 @@ export default {
   computed: {
     ...mapGetters(['client', 'suggestedFeePrices']),
     ...mapState(['activeWalletId', 'activeNetwork', 'history', 'fees', 'fiatRates']),
+    timelockFeeDuration,
+    timelockFeeAmount,
     assetChain() {
       return getNativeAsset(this.item.from)
     },
@@ -217,7 +215,14 @@ export default {
     typeIcon() {
       const filter = ACTIVITY_FILTER_TYPES[this.item.type]
       return this.getItemIcon(filter?.icon)
-    }
+    },
+    tokenInfo() {
+      if (this.item.tokenType === 'YA-NFT') {
+        return `YA-NFT ${this.item.tokenName}`
+      } else {
+        return `${this.item.tokenAmount} ${this.item.tokenName}`
+      }
+    },
   },
   methods: {
     ...mapActions(['updateTransactionFee', 'updateFees']),
@@ -225,6 +230,7 @@ export default {
     prettyBalance,
     shortenAddress,
     getAssetIcon,
+    getAssetLengthLimitDisplay,
     prettyFiatBalance,
     getItemIcon,
     prettyTime(timestamp) {
@@ -300,6 +306,22 @@ export default {
 </script>
 
 <style lang="scss">
+.asset-name {
+  margin-left: 5px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.asset-name-small {
+  margin-left: 5px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 24px;
+}
+
 .details-wrapper {
   display: flex;
   flex-direction: column;

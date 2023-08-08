@@ -13,7 +13,11 @@
       <template #icon>
         <img :src="getTypeIcon(item.type)" />
       </template>
-      {{ getTitle(item) }}
+      <template>
+        <span :class=" getTitle(item).length >= 35 ? 'font-size-small' : ''">
+          {{ getTitle(item) }}
+        </span>
+      </template>
       <template #sub-title>
         {{ getSubTitle(item) }}
       </template>
@@ -59,6 +63,7 @@ import {
 import moment from '@yaswap/wallet-core/dist/src/utils/moment'
 import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
 import { mapState } from 'vuex'
+import { getAssetLengthLimitDisplay } from '@/utils/asset'
 
 export default {
   components: {
@@ -75,6 +80,7 @@ export default {
     prettyBalance,
     prettyFiatBalance,
     formatFiatUI,
+    getAssetLengthLimitDisplay,
     getTitle(item) {
       const status = item.status === 'SUCCESS' ? `Sent` : `Send`
       switch (item.type) {
@@ -86,6 +92,8 @@ export default {
           return item.from === 'YAC' ? `${status} ${item.nft.token_id}`: `${status} ${item.nft.name}`
         case 'RECEIVE':
           return `Receive ${item.from}`
+        case 'CREATE':
+          return `Create ${item.tokenName}`
         default:
           return ''
       }
@@ -94,17 +102,25 @@ export default {
       return moment(item.startTime).format('L, LT')
     },
     getDetail(item) {
-      let assetName = item.from
-      const amount = item.type === 'SWAP' ? item.fromAmount : item.amount
-
+      let amount = item.amount
+      if (item.type === 'SWAP') {
+        amount = item.fromAmount
+      } else if (item.type === 'CREATE') {
+        amount = item.tokenAmount
+      }
       if (!amount) return ``
 
-      const chain = cryptoassets[assetName]?.chain
-      if (chain === 'yacoin' && assetName !== 'YAC') {
-        assetName = 'Token'
+      let assetName = item.from
+      if (item.type === 'CREATE') {
+        assetName = item.tokenType === 'YA-Token' ? 'Token' : 'NFT'
+        return `${amount} ${assetName}`
+      } else {
+        const chain = cryptoassets[assetName]?.chain
+        if (chain === 'yacoin' && assetName !== 'YAC') {
+          assetName = 'Token'
+        }
+        return `${this.prettyBalance(amount, item.from)} ${assetName}`
       }
-
-      return `${this.prettyBalance(amount, item.from)} ${assetName}`
     },
     getDetailSub(item) {
       const status = this.getUIStatus(item)
@@ -126,13 +142,16 @@ export default {
       } else if (item.type === 'SWAP') {
         const swapProvider = getSwapProvider(item.network, item.provider)
         return swapProvider.statuses[item.status].filterStatus
+      } else if (item.type === 'CREATE') {
+        return SEND_STATUS_FILTER_MAP[item.status]
       }
     },
     getDetailsUrl(item) {
       return {
         NFT: `/details/nft-transaction/${item.id}`,
         SEND: `/details/transaction/${item.id}`,
-        SWAP: `/details/swap/${item.id}`
+        SWAP: `/details/swap/${item.id}`,
+        CREATE: `/details/create-token-transaction/${item.id}`
       }[item.type]
     },
     getTypeIcon(type) {
@@ -150,14 +169,19 @@ export default {
           const swapProvider = getSwapProvider(item.network, item.provider)
           return swapProvider.totalSteps
         }
+        case 'CREATE':
+          return 2
         default:
           return 0
       }
     },
     getCompletedAmount(item) {
-      const amount = item.type === 'SWAP' ? item.fromAmount : item.amount
+      let amount = item.amount
+      if (item.type === 'SWAP') {
+        amount = item.fromAmount
+      }
 
-      if (!amount) return ''
+      if (!amount || item.type === 'CREATE') return ''
 
       return !this.fiatRates[item.from]
         ? ''
@@ -169,4 +193,8 @@ export default {
 }
 </script>
 
-<style lang="sss"></style>
+<style lang="scss">
+.font-size-small {
+  font-size: 0.65rem;
+}
+</style>
