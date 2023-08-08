@@ -305,6 +305,9 @@ export default {
 
       return assetFees
     },
+    fee() {
+      return this.assetFees['average'].fee
+    },
     balance() {
       return this.account?.balances[this.asset] || 0
     },
@@ -350,6 +353,7 @@ export default {
           walletId: this.activeWalletId,
           accountId: this.account.id,
           asset: this.asset,
+          fee: this.fee,
           tokenType: this.tokenType,
           tokenName: this.tokenName,
           tokenAmount: this.tokenAmount,
