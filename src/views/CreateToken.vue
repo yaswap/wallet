@@ -338,10 +338,15 @@ export default {
       return true
     }
   },
+  async created() {
+    console.log('TACA ===> CreateToken.vue created, this.assetChain = ', this.assetChain)
+    await this.updateFees({ asset: this.assetChain })
+  },
   methods: {
     ...mapActions([
       'createToken',
-      'fetchTokenDetails'
+      'fetchTokenDetails',
+      'updateFees'
     ]),
     async addToken() {
       try {
