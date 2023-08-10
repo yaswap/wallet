@@ -524,9 +524,12 @@ export default {
     },
     isOwnerTokenExist(ownerTokenName) {
       // Verify if the wallet has the Owner token to create corresponding YA-NFT
-      console.log('TACA ===> isOwnerTokenExist, ownerTokenName = ', ownerTokenName)
+      // Workaround for displaying sub YA-token
+      const modifiedOwnerTokenName = ownerTokenName.split('/').join('|')
       const parentToken = ownerTokenName.slice(0, -1)
-      if (this.accountAssets.includes(ownerTokenName)) {
+      console.log('TACA ===> ownerTokenName = ', ownerTokenName, ', parentToken = ', parentToken)
+      console.log('TACA ===> this.accountAssets = ', this.accountAssets)
+      if (this.accountAssets.includes(modifiedOwnerTokenName)) {
         this.tokenNameError = null
       } else {
         this.tokenNameError = this.tokenType === 'YA-NFT' ?
