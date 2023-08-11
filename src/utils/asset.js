@@ -1,5 +1,5 @@
 import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
-
+import { timelockFeeDuration, timelockFeeAmountInSatoshis, timelockFeeAmount } from '@yaswap/wallet-core/dist/src/utils/asset'
 const TIMELOCK_FEE_DURATION = 10; // 21000 blocks
 const TIMELOCK_FEE_AMOUNT = 10 * 1e6; // 2100 YAC
 
@@ -34,14 +34,4 @@ export const getAssetLengthLimitDisplay = () => {
   return 12
 }
 
-export const timelockFeeDuration = () => {
-  return TIMELOCK_FEE_DURATION
-}
-
-export const timelockFeeAmountInSatoshis = () => {
-  return TIMELOCK_FEE_AMOUNT
-}
-
-export const timelockFeeAmount = () => {
-  return TIMELOCK_FEE_AMOUNT/1e6
-}
+export { timelockFeeDuration, timelockFeeAmountInSatoshis, timelockFeeAmount }
