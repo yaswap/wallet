@@ -1,6 +1,6 @@
 {
   "name": "yaswap-wallet",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "private": true,
   "author": "Yaswap <yaswap2022@gmail.com>",
   "scripts": {
