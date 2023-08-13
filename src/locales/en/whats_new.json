@@ -3,7 +3,8 @@
     "page": "1",
     "title": "What's New?",
     "content": [
-      "Support YA-token and YA-NFT"
+      "Support to create YA-Token and YA-NFT",
+      "Fix issue which fail to display sub YA-Token"
     ]
   }
 ]
