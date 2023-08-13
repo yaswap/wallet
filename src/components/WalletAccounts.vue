@@ -274,7 +274,6 @@ export default {
           ...account,
           assets: account.assets.filter(assetComparator)
         }))
-      console.log('TACA ===> WalletAccounts.vue, filterItems = ', filterItems)
       return filterItems
     }
   },
@@ -294,10 +293,8 @@ export default {
       } else {
         this.expandedAccounts.push(id)
       }
-      console.log('TACA ===> WalletAccounts.vue, toggleExpandedAccounts, this.expandedAccounts = ', this.expandedAccounts)
     },
     selectItem(account, asset) {
-      console.log('TACA ===> WalletAccounts.vue, selectItem, account = ', account, ', asset = ', asset)
       this.$emit('item-selected', { account, asset })
     },
     shouldExpandAccount(account) {

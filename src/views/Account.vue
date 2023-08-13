@@ -465,14 +465,12 @@ export default {
     }
   },
   async created() {
-    console.log('TACA ===> Account.vue, created(), asset = ', this.asset)
     const addresses = await this.getUnusedAddresses({
       network: this.activeNetwork,
       walletId: this.activeWalletId,
       assets: [this.asset],
       accountId: this.accountId
     })
-    console.log('TACA ===> Account.vue, created(), addresses = ', this.addresses)
     const chainId = cryptoassets[this.asset]?.chain
     this.address = getChain(this.activeNetwork, chainId).formatAddressUI(addresses[0])
 

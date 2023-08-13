@@ -307,15 +307,12 @@ export default {
       return assetFees
     },
     fee() {
-      console.log('TACA ===> CreateToken.vue, this.assetChain = ', this.assetChain)
-      console.log('TACA ===> CreateToken.vue, this.assetFees = ', this.assetFees)
       return this.assetFees['average'].fee
     },
     balance() {
       return this.account?.balances[this.asset] || 0
     },
     balanceError() {
-      console.log('TACA ===> this.timelockFeeAmountInSatoshis = ', this.timelockFeeAmountInSatoshis, ', this.balance = ', this.balance)
       if (Number(this.balance) < this.timelockFeeAmountInSatoshis) {
         return `You don't have enough ${this.asset} in wallet to create ${this.tokenType} (need at least ${this.timelockFeeAmountInSatoshis/1e6} ${this.asset} for the timelock fee)`
       }
@@ -339,7 +336,6 @@ export default {
     }
   },
   async created() {
-    console.log('TACA ===> CreateToken.vue created, this.assetChain = ', this.assetChain)
     await this.updateFees({ asset: this.assetChain })
   },
   methods: {
@@ -448,7 +444,6 @@ export default {
       // Check if the name contains invalid characters
       const tokenNameParts = tokenName.split(SUB_NAME_DELIMITER)
       for (const index in tokenNameParts) {
-        console.log('TACA ===> isTokenNameFollowSpec, tokenNameParts[', index, '] = ', tokenNameParts[index])
         if (
             (index == 0 && !this.isYatokenNameValid(tokenNameParts[index])) ||
             (index > 0 && !this.isSubNameValid(tokenNameParts[index]))
@@ -506,7 +501,6 @@ export default {
     },
     async isTokenNameUnique() {
       // Verify if the token name is unique
-      console.log('TACA ===> isTokenNameUnique, this.tokenName = ', this.tokenName)
       if (
         (Object.keys(cryptoassets).includes(this.tokenName)) ||
         this.isExistingAsset ||
@@ -527,8 +521,6 @@ export default {
       // Workaround for displaying sub YA-token
       const modifiedOwnerTokenName = ownerTokenName.split('/').join('|')
       const parentToken = ownerTokenName.slice(0, -1)
-      console.log('TACA ===> ownerTokenName = ', ownerTokenName, ', parentToken = ', parentToken)
-      console.log('TACA ===> this.accountAssets = ', this.accountAssets)
       if (this.accountAssets.includes(modifiedOwnerTokenName)) {
         this.tokenNameError = null
       } else {
@@ -554,7 +546,6 @@ export default {
       } else {
         this.tokenAmountError = null
       }
-      console.log('TACA ===> this.tokenAmount = ', this.tokenAmount)
     },
     verifyDecimals(e) {
       // The Decimals field can only have 2 digits (0 - 6) and must be a number
@@ -563,11 +554,9 @@ export default {
       } else {
         this.decimalsError = null
       }
-      console.log('TACA ===> this.decimals = ', this.decimals)
     },
     verifyIPFSHash(e) {
       // Verify IPFS Hash
-      console.log('TACA ===> this.ipfsHash = ', this.ipfsHash)
       if (!this.ipfsHash) {
         this.ipfsHashError = null
       } else {
@@ -575,8 +564,6 @@ export default {
         this.ipfsHashError = error
         this.rawIpfsHash = rawIpfsHash
       }
-      console.log('TACA ===> this.ipfsHashError = ', this.ipfsHashError)
-      console.log('TACA ===> this.rawIpfsHash = ', this.rawIpfsHash)
     }
   }
 }
