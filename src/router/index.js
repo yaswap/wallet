@@ -89,6 +89,12 @@ const routes = [
     name: 'CreateToken',
     meta: { protect: true }
   },
+  {
+    path: '/settings/create-metadata-file',
+    component: () => import('@/views/CreateMetadataFile'),
+    name: 'CreateMetadataFile',
+    meta: { protect: true }
+  },
   // Settings
 
   // Wallet

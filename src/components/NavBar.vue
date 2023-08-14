@@ -51,6 +51,10 @@
           <CreateIcon />
           Create YA-token/YA-NFT
         </li>
+        <li id="create_metadata_file" @click="createMetadataFile">
+          <CreateIcon />
+          Create metadata JSON file
+        </li>
         <li id="ledger" @click="ledger">
           <LedgerIcon />
           Ledger
@@ -242,6 +246,19 @@ export default {
       })
       this.showMenuList = false
       this.$router.replace({ name: 'CreateToken', params: { from: this.currentRoutePath } })
+    },
+    createMetadataFile() {
+      this.trackAnalytics({
+        event: 'User clicked on Create metadata JSON file option in navbar',
+        properties: {
+          walletVersion,
+          category: 'HamburgerIcon',
+          action: 'Click on Create metadata JSON file',
+          label: 'User clicked on Create metadata JSON file from menu option'
+        }
+      })
+      this.showMenuList = false
+      this.$router.replace({ name: 'CreateMetadataFile', params: { from: this.currentRoutePath } })
     },
     ledger() {
       this.trackAnalytics({
