@@ -57,7 +57,23 @@
         <!-- YA-Token -->
         <fieldset v-if="tokenType === 'YA-Token'">
           <div class="form-group">
-            <label for="token_name">Token name</label>
+            <label class="field-label" for="token_name">Token name
+              <v-popover
+                trigger="click"
+                :hideOnTargetClick="false"
+                placement="top"
+                offset="0"
+                popoverClass="vue-tooltip-theme"
+                popoverBaseClass="tooltip open-top-info"
+              >
+                <InfoIcon v-tooltip="{ content: 'Click for more info', placement: 'right', trigger: 'hover focus' }"/>
+                <template slot="popover">
+                  <span style="white-space: pre-line;">
+                    <p>{{ tokenNameInfo }}</p>
+                  </span>
+                </template>
+              </v-popover>
+            </label>
             <input
               type="text"
               v-model="tokenName"
@@ -78,7 +94,23 @@
             </small>
           </div>
           <div class="form-group">
-            <label for="token_amount">Token amount</label>
+            <label class="field-label" for="token_amount">Token amount
+              <v-popover
+                trigger="click"
+                :hideOnTargetClick="false"
+                placement="top"
+                offset="0"
+                popoverClass="vue-tooltip-theme"
+                popoverBaseClass="tooltip"
+              >
+                <InfoIcon v-tooltip="{ content: 'Click for more info', placement: 'right', trigger: 'hover focus' }"/>
+                <template slot="popover">
+                  <span style="white-space: pre-line;">
+                    <p>{{ tokenAmountInfo }}</p>
+                  </span>
+                </template>
+              </v-popover>
+            </label>
             <input
               type="number"
               v-model.trim="tokenAmount"
@@ -97,7 +129,23 @@
             </small>
           </div>
           <div class="form-group">
-            <label for="decimals">{{ $t('pages.customToken.decimals') }}</label>
+            <label class="field-label" for="decimals">{{ $t('pages.customToken.decimals') }}
+              <v-popover
+                trigger="click"
+                :hideOnTargetClick="false"
+                placement="top"
+                offset="0"
+                popoverClass="vue-tooltip-theme"
+                popoverBaseClass="tooltip"
+              >
+                <InfoIcon v-tooltip="{ content: 'Click for more info', placement: 'right', trigger: 'hover focus' }"/>
+                <template slot="popover">
+                  <span style="white-space: pre-line;">
+                    <p>{{ tokenDecimalsInfo }}</p>
+                  </span>
+                </template>
+              </v-popover>
+            </label>
             <input
               type="number"
               v-model.trim="decimals"
@@ -116,7 +164,23 @@
             </small>
           </div>
           <div class="form-group">
-            <label for="reissuable">Reissuable</label> <input
+            <label class="field-label" for="reissuable">Reissuable
+              <v-popover
+                trigger="click"
+                :hideOnTargetClick="false"
+                placement="top"
+                offset="0"
+                popoverClass="vue-tooltip-theme"
+                popoverBaseClass="tooltip"
+              >
+                <InfoIcon v-tooltip="{ content: 'Click for more info', placement: 'right', trigger: 'hover focus' }"/>
+                <template slot="popover">
+                  <span style="white-space: pre-line;">
+                    <p>{{ reissuableInfo }}</p>
+                  </span>
+                </template>
+              </v-popover>
+            </label> <input
               type="checkbox"
               value=""
               v-model="reissuable"
@@ -124,7 +188,24 @@
             />
           </div>
           <div class="form-group">
-            <label for="ipfs_hash">IPFS Hash</label>
+            <label class="field-label" for="ipfs_hash">IPFS Hash
+              <v-popover
+                trigger="click"
+                :hideOnTargetClick="false"
+                placement="top"
+                offset="0"
+                popoverClass="vue-tooltip-theme"
+                popoverBaseClass="tooltip open-top-info"
+              >
+                <InfoIcon v-tooltip="{ content: 'Click for more info', placement: 'right', trigger: 'hover focus' }"/>
+                <template slot="popover">
+                  <span style="white-space: pre-line;">
+                    <p>{{ ipfsHashInfo }}</p>
+                    <p>The standard metadata JSON file can be created <router-link :to="{ name: 'CreateMetadataFile', params: { from: currentRoutePath } }">here</router-link>. After having the metadata JSON file, you upload it to IPFS services such as <a href="https://ravencoinipfs.com/" target="_blank">ravencoinipfs</a> to get the IPFS Hash.</p>
+                  </span>
+                </template>
+              </v-popover>
+            </label>
             <input
               type="text"
               v-model="ipfsHash"
@@ -145,7 +226,23 @@
         <!-- YA-NFT -->
         <fieldset v-else>
           <div class="form-group">
-            <label for="token_name">NFT name</label>
+            <label class="field-label" for="token_name">NFT name
+              <v-popover
+                trigger="click"
+                :hideOnTargetClick="false"
+                placement="bottom"
+                offset="0"
+                popoverClass="vue-tooltip-theme"
+                popoverBaseClass="tooltip"
+              >
+                <InfoIcon v-tooltip="{ content: 'Click for more info', placement: 'right', trigger: 'hover focus' }"/>
+                <template slot="popover">
+                  <span style="white-space: pre-line;">
+                    <p>{{ nftNameInfo }}</p>
+                  </span>
+                </template>
+              </v-popover>
+            </label>
             <input
               type="text"
               v-model="tokenName"
@@ -166,7 +263,24 @@
             </small>
           </div>
           <div class="form-group">
-            <label for="ipfs_hash">IPFS Hash</label>
+            <label class="field-label" for="ipfs_hash">IPFS Hash
+              <v-popover
+                trigger="click"
+                :hideOnTargetClick="false"
+                placement="top"
+                offset="0"
+                popoverClass="vue-tooltip-theme"
+                popoverBaseClass="tooltip open-top-info"
+              >
+                <InfoIcon v-tooltip="{ content: 'Click for more info', placement: 'right', trigger: 'hover focus' }"/>
+                <template slot="popover">
+                  <span style="white-space: pre-line;">
+                    <p>{{ ipfsHashInfo }}</p>
+                    <p>The standard metadata JSON file can be created <router-link :to="{ name: 'CreateMetadataFile', params: { from: currentRoutePath } }">here</router-link>. After having the metadata JSON file, you upload it to IPFS services such as <a href="https://ravencoinipfs.com/" target="_blank">ravencoinipfs</a> to get the IPFS Hash.</p>
+                  </span>
+                </template>
+              </v-popover>
+            </label>
             <input
               type="text"
               v-model="ipfsHash"
@@ -215,6 +329,7 @@ import { unitToCurrency, ChainId } from '@yaswap/cryptoassets'
 import NavBar from '@/components/NavBar.vue'
 import ChevronDownIcon from '@/assets/icons/chevron_down.svg'
 import ChevronUpIcon from '@/assets/icons/chevron_up.svg'
+import InfoIcon from '@/assets/icons/info.svg'
 import { DuplicateTokenSymbolError } from '@yaswap/error-parser/dist/src/YaswapErrors/DuplicateTokenSymbolError'
 import { errorToYaswapErrorString } from '@yaswap/error-parser/dist/src/utils'
 import { reportYaswapError } from '@yaswap/error-parser'
@@ -243,7 +358,8 @@ export default {
   components: {
     NavBar,
     ChevronDownIcon,
-    ChevronUpIcon
+    ChevronUpIcon,
+    InfoIcon,
   },
   data() {
     return {
@@ -265,6 +381,9 @@ export default {
       decimalsError: null,
       ipfsHashError: null,
 
+      // ENABLE
+      enableIPFSHashInfo: false,
+
       // OLD
       contractAddress: '',
       name: null,
@@ -277,6 +396,9 @@ export default {
     ...mapGetters(['accountsData', 'suggestedFeePrices']),
     timelockFeeDuration,
     timelockFeeAmountInSatoshis,
+    currentRoutePath() {
+      return this.$route.path
+    },
     account() {
       // TODO: Support other chains
       return this.accounts[this.activeWalletId][this.activeNetwork].find((acc) => acc.chain === ChainId.Yacoin)
@@ -333,7 +455,25 @@ export default {
         return false
 
       return true
-    }
+    },
+    tokenNameInfo() {
+      return `1) You need to input a valid YA-Token name which follows below specification:\n+ YA-Token name must have at least 3 characters and maximum name length is 30 characters.\n+ Valid characters are: A-Z 0-9 _ . /\n+ Special characters (_ . /) can't be the first or last characters. More than one of these special characters also cannot be next to one another.\n2) The YA-Token name must be unique.\n3) Each YA-Token has a corresponding owner token. The owner token is created at the same time with YA-Token. The owner token name is in the form of an exclamation point (!) coming after whatever you named your YA-Token.\n4) If the name has character '/', it means that you are creating sub YA-Token and there are some special notes:\n+ The sub YA-Token name is in the form of [YA-Token name]/[sub-portion]\n+ The [sub-portion] must be at least 1 letter\n+ Valid characters in [sub-portion] follow the same specification as above.\n+ In order to create sub YA-Token, you must have the owner token of the YA-Token which this sub YA-Token belongs to.\n+ Sub YA-Token also has a corresponding owner token.`
+    },
+    tokenAmountInfo() {
+      return `Token Amount must be in range of 1->2000000000.`
+    },
+    tokenDecimalsInfo() {
+      return `Decimals must be in range of 0->6.`
+    },
+    reissuableInfo() {
+      return `Reissuable YA-Token means that you can change the decimals, IPFS Hash or create more token in the future.`
+    },
+    ipfsHashInfo() {
+      return `1) The IPFS Hash CAN point to any resource (image, video, pdf file, JSON file,...)\n\n2) It is a recommendation that the IPFS Hash SHOULD point to a JSON file containing metadata for the ${this.tokenType} is being created. The metadata JSON file can contain any info about the ${this.tokenType}. There are some token info which Yaswap wallet get from the JSON file and display:\n+ name: This is different with ${this.tokenType} name. This name can be used to give full idea about the ${this.tokenType} is being created in case the ${this.tokenType} name is too short\n+ description: This info can be used to describe the usage of the ${this.tokenType} is being created.\n+ image: A URI or an IPFS Hash pointing to an image (images are resource with mime type image/*). If it is IPFS Hash, use the format ipfs://<IPFS_HASH>"`
+    },
+    nftNameInfo() {
+      return `1) You need to input a valid YA-NFT name which follows below specification:\n+ The full YA-NFT name must have at least ${MIN_TOKEN_NAME_LENGTH} characters and maximum name length is ${MAX_TOKEN_NAME_LENGTH} characters.\n+ The full YA-NFT name is in the form of [YA-Token name or sub YA-Token name]#[YA-NFT portion].\n+ The [YA-NFT portion] must be at least 1 letter.\n+ Valid characters for [YA-Token name or sub YA-Token name] are: A-Z 0-9 _ . /\n+ Valid characters for [YA-NFT portion] are: A-Z a-z 0-9 @ $ % & * ( ) [ ] { } _ . ? : -\n+ Special characters (_ . /) in [YA-Token name or sub YA-Token name] can't be the first or last characters. More than one of these special characters also cannot be next to one another.\n2) The YA-NFT name must be unique.\n3) In order to create YA-NFT, you must have the owner token of the YA-Token or the sub YA-Token which this YA-NFT belongs to.`
+    },
   },
   async created() {
     await this.updateFees({ asset: this.assetChain })
@@ -344,6 +484,9 @@ export default {
       'fetchTokenDetails',
       'updateFees'
     ]),
+    displayIPFSHashInfo() {
+      this.enableIPFSHashInfo = !this.enableIPFSHashInfo
+    },
     async addToken() {
       try {
         this.creatingToken = true
@@ -421,23 +564,21 @@ export default {
         && !name.match(LEADING_PUNCTUATION)
         && !name.match(TRAILING_PUNCTUATION)
     },
-    isTokenNameFollowSpec(tokenName, nameSpec) {
+    isTokenNameFollowSpec(tokenName) {
       // Sanity check if it isn't a YA-Token name
       if (tokenName.indexOf(UNIQUE_TAG_DELIMITER) !== -1) {
         this.tokenNameError = 'You are creating YA-NFT (having # in the token name). Please select token type = YA-NFT to create it.'
         return false
       }
 
-      const fullNameSpec = nameSpec || `\n\nFull name specification\n1) Name must have at least ${MIN_TOKEN_NAME_LENGTH} characters and maximum name length is ${MAX_TOKEN_NAME_LENGTH} characters.\n2) Valid characters are: A-Z 0-9 _ . /\n3) Special characters (_ . /) can't be the first or last characters. More than one of these special characters also cannot be next to one another.`
-
       // Check name length
       if (tokenName.length < MIN_TOKEN_NAME_LENGTH) {
-        this.tokenNameError = `Name must have at least ${MIN_TOKEN_NAME_LENGTH} characters.` + fullNameSpec
+        this.tokenNameError = `Name must have at least ${MIN_TOKEN_NAME_LENGTH} characters.`
         return false
       }
 
       if (tokenName.length > MAX_TOKEN_NAME_LENGTH) {
-        this.tokenNameError = `Name is greater than max length of ${MAX_TOKEN_NAME_LENGTH}.` + fullNameSpec
+        this.tokenNameError = `Name is greater than max length of ${MAX_TOKEN_NAME_LENGTH}.`
         return false
       }
 
@@ -448,12 +589,12 @@ export default {
             (index == 0 && !this.isYatokenNameValid(tokenNameParts[index])) ||
             (index > 0 && !this.isSubNameValid(tokenNameParts[index]))
           ) {
-            this.tokenNameError = `Name contains invalid characters.` + fullNameSpec
+            this.tokenNameError = `Name contains invalid characters.`
             return false
           }
 
           if (!this.isSpecialCharacterValid(tokenNameParts[index])) {
-            this.tokenNameError = `Special characters (_ . /) can't be the first or last characters. More than one of these special characters also cannot be next to one another.` + fullNameSpec
+            this.tokenNameError = `Special characters (_ . /) can't be the first or last characters. More than one of these special characters also cannot be next to one another.`
             return false
           }
       }
@@ -470,30 +611,28 @@ export default {
         return false
       }
 
-      const fullNameSpec = `\n\nFull name specification\n1) Name must have at least ${MIN_TOKEN_NAME_LENGTH} characters and maximum name length is ${MAX_TOKEN_NAME_LENGTH} characters.\n2) The full YA-NFT name takes the form [YA-Token name]#[YA-NFT portion].\n3) Valid characters for YA-Token name are: A-Z 0-9 _ . /\n4) Valid characters for YA-NFT portion are: A-Z a-z 0-9 @ $ % & * ( ) [ ] { } _ . ? : -\n5) Special characters for YA-Token name (_ . /) can't be the first or last characters. More than one of these special characters also cannot be next to one another.`
-
       // Check name length
       if (this.tokenName.length < MIN_NFT_NAME_LENGTH) {
-        this.tokenNameError = `Name must have at least ${MIN_NFT_NAME_LENGTH} characters.` + fullNameSpec
+        this.tokenNameError = `Name must have at least ${MIN_NFT_NAME_LENGTH} characters.`
         return false
       }
 
       if (this.tokenName.length > MAX_NFT_NAME_LENGTH) {
-        this.tokenNameError = `Name is greater than max length of ${MAX_NFT_NAME_LENGTH}.` + fullNameSpec
+        this.tokenNameError = `Name is greater than max length of ${MAX_NFT_NAME_LENGTH}.`
         return false
       }
 
       // Check if the name contains invalid characters
       const tokenNameParts = this.tokenName.split(UNIQUE_TAG_DELIMITER)
       if (tokenNameParts.length >= 3) {
-        this.tokenNameError = `Name can only have one charater ${UNIQUE_TAG_DELIMITER}.` + fullNameSpec
+        this.tokenNameError = `Name can only have one charater ${UNIQUE_TAG_DELIMITER}.`
         return false
       }
 
-      if (!this.isTokenNameFollowSpec(tokenNameParts[0], fullNameSpec)) {
+      if (!this.isTokenNameFollowSpec(tokenNameParts[0])) {
         return false
       } else if (!this.isNFTNameValid(tokenNameParts[1])) {
-        this.tokenNameError = `YA-NFT portion contains invalid characters.` + fullNameSpec
+        this.tokenNameError = `YA-NFT portion contains invalid characters.`
         return false
       }
 
@@ -542,7 +681,7 @@ export default {
     verifyTokenAmount(e) {
       // The Token Amount field can only have 10 digits (1 - 2,000,000,000) and must be a number
       if (isNaN(this.tokenAmount) || this.tokenAmount < 1 || this.tokenAmount > 2000000000) {
-        this.tokenAmountError = "Token Amount must be in range of 1->2000000000"
+        this.tokenAmountError = this.tokenAmountInfo
       } else {
         this.tokenAmountError = null
       }
@@ -550,7 +689,7 @@ export default {
     verifyDecimals(e) {
       // The Decimals field can only have 2 digits (0 - 6) and must be a number
       if (isNaN(this.decimals) || this.decimals < 0 || this.decimals > 6) {
-        this.decimalsError = "Decimals must be in range of 0->6"
+        this.decimalsError = this.tokenDecimalsInfo
       } else {
         this.decimalsError = null
       }
@@ -577,7 +716,7 @@ export default {
   line-height: 1; // FIXME: This is just a workaround for overflow text warning area
 
   .form-group {
-    margin-bottom: 20px; // FIXME: This is just a workaround for overflow text warning area
+    margin-bottom: 5%; // FIXME: This is just a workaround for overflow text warning area
   }
 
   .dropdown {
@@ -623,5 +762,34 @@ export default {
       margin-left: 2px;
     }
   }
+
+  .field-label {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    svg {
+      height: 18px;
+      width: $wrapper-padding;
+      object-fit: cover;
+      margin-right: 10px;
+    }
+  }
+}
+.tooltip-inner {
+  max-width: 100%;
+  text-align: left;
+  line-height: 1.3;
+  justify-content: flex-start;
+}
+.tooltip-arrow {
+  z-index: 0;
+}
+.open-top-info {
+  position: absolute !important;
+  will-change: transform !important;
+  top: 0px !important;
+  left: 0px !important;
+  transform: translate3d(0px, 0px, 0px) !important;
+
 }
 </style>
