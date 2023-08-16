@@ -301,11 +301,13 @@
       </div>
       <div class="wrapper_bottom">
         <div class="button-group">
-          <router-link :to="`/settings/manage-assets`"
-            ><button id="cancel_add_token_button" class="btn btn-light btn-outline-primary btn-lg">
-              {{ $t('common.cancel') }}
-            </button></router-link
+          <button
+            id="cancel_add_token_button"
+            class="btn btn-light btn-outline-primary btn-lg"
+            @click="cancelCreate"
           >
+            {{ $t('common.cancel') }}
+          </button>
           <button
             id="add_token_button"
             class="btn btn-primary btn-lg"
@@ -477,6 +479,17 @@ export default {
   },
   async created() {
     await this.updateFees({ asset: this.assetChain })
+    const storageData = localStorage.getItem('createTokenData')
+    console.log('TACA ===> created(), storageData = ', storageData)
+    if (storageData) {
+      this.initFormDataState(storageData)
+      await this.verifyAll();
+    }
+  },
+  beforeRouteLeave(to, from, next) {
+    console.log('beforeRouteLeave()');
+    this.saveFormDataState()
+    next();
   },
   methods: {
     ...mapActions([
@@ -484,8 +497,37 @@ export default {
       'fetchTokenDetails',
       'updateFees'
     ]),
+    initFormDataState(storageData){
+      const formData = JSON.parse(storageData || '');
+      console.log('TACA ===> initFormDataState, formData = ', formData)
+      if(formData){
+        this.tokenType = formData.tokenType;
+        this.tokenName = formData.tokenName;
+        this.tokenAmount = formData.tokenAmount;
+        this.decimals = formData.decimals;
+        this.reissuable = formData.reissuable;
+        this.ipfsHash = formData.ipfsHash;
+      }
+    },
+    saveFormDataState(){
+      const createTokenData = {
+        tokenType: this.tokenType,
+        tokenName: this.tokenName,
+        tokenAmount: this.tokenAmount,
+        decimals: this.decimals,
+        reissuable: this.reissuable,
+        ipfsHash: this.ipfsHash
+      }
+      console.log('TACA ===> saveFormDataState, createTokenData = ', createTokenData)
+      const formData = JSON.stringify(createTokenData);
+      localStorage.setItem('createTokenData', formData);
+    },
     displayIPFSHashInfo() {
       this.enableIPFSHashInfo = !this.enableIPFSHashInfo
+    },
+    cancelCreate() {
+      this.resetFields()
+      this.$router.replace('/wallet')
     },
     async addToken() {
       try {
@@ -534,8 +576,20 @@ export default {
       this.decimalsError = null
       this.ipfsHashError = null
     },
+    async verifyAll() {
+      console.log('TACA ===> verifyAll')
+      await this.tokenNameChange();
+      this.verifyTokenAmount();
+      this.verifyDecimals();
+      this.verifyIPFSHash();
+    },
     async tokenNameChange(e) {
       this.tokenNameError = null
+      this.saveFormDataState()
+      if (!this.tokenName) {
+        return
+      }
+
       if (this.tokenType === 'YA-Token') {
         const subDeliLastIndex = this.tokenName.lastIndexOf(SUB_NAME_DELIMITER)
         if (subDeliLastIndex === -1) { // YA-Token
@@ -679,6 +733,7 @@ export default {
       this.resetFields()
     },
     verifyTokenAmount(e) {
+      this.saveFormDataState()
       // The Token Amount field can only have 10 digits (1 - 2,000,000,000) and must be a number
       if (isNaN(this.tokenAmount) || this.tokenAmount < 1 || this.tokenAmount > 2000000000) {
         this.tokenAmountError = this.tokenAmountInfo
@@ -687,6 +742,7 @@ export default {
       }
     },
     verifyDecimals(e) {
+      this.saveFormDataState()
       // The Decimals field can only have 2 digits (0 - 6) and must be a number
       if (isNaN(this.decimals) || this.decimals < 0 || this.decimals > 6) {
         this.decimalsError = this.tokenDecimalsInfo
@@ -695,6 +751,7 @@ export default {
       }
     },
     verifyIPFSHash(e) {
+      this.saveFormDataState()
       // Verify IPFS Hash
       if (!this.ipfsHash) {
         this.ipfsHashError = null
