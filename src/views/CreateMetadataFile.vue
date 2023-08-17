@@ -104,6 +104,11 @@
               >{{ imageURLError }}
             </small>
           </div>
+          <div class="form-group">
+            <label for="note">Note</label>
+            <p class="note-paragraph">When you press on <b>Download JSON file</b> button, the browser will download a JSON file with name <b>token_metadata.json</b></p>
+            <p class="note-paragraph">You should rename this file with your YA-Token/YA-NFT name (or you can leave it like that) and upload to IPFS services such as <b>ravencoinipfs</b> to get IPFS Hash</p>
+          </div>
       </div>
       <div class="wrapper_bottom">
         <div class="button-group">
@@ -306,6 +311,14 @@ export default {
       object-fit: cover;
       margin-right: 10px;
     }
+  }
+
+  .note-paragraph {
+    text-align: left;
+    line-height: 1.4;
+    font-size: small;
+    margin-top: 10px;
+    margin-bottom: 0;
   }
 }
 .tooltip-inner {
