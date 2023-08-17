@@ -24,7 +24,7 @@
                 popoverClass="vue-tooltip-theme"
                 popoverBaseClass="tooltip"
               >
-                <InfoIcon v-tooltip="{ content: 'Click for more info', placement: 'left', trigger: 'hover focus' }"/>
+              <InfoIcon v-tooltip="{ content: '<p><b>Optional field</b><br><i>Click for more info</i></p>', placement: 'bottom', trigger: 'hover focus' }"/>
                 <template slot="popover">
                   <span style="white-space: pre-line;">
                     <p>{{ nameInfo }}</p>
@@ -52,7 +52,7 @@
                 popoverClass="vue-tooltip-theme"
                 popoverBaseClass="tooltip"
               >
-                <InfoIcon v-tooltip="{ content: 'Click for more info', placement: 'right', trigger: 'hover focus' }"/>
+              <InfoIcon v-tooltip="{ content: '<p><b>Optional field</b><br><i>Click for more info</i></p>', placement: 'bottom', trigger: 'hover focus' }"/>
                 <template slot="popover">
                   <span style="white-space: pre-line;">
                     <p>{{ descriptionInfo }}</p>
@@ -80,7 +80,7 @@
                 popoverClass="vue-tooltip-theme"
                 popoverBaseClass="tooltip"
               >
-                <InfoIcon v-tooltip="{ content: 'Click for more info', placement: 'right', trigger: 'hover focus' }"/>
+              <InfoIcon v-tooltip="{ content: '<p><b>Optional field</b><br><i>Click for more info</i></p>', placement: 'bottom', trigger: 'hover focus' }"/>
                 <template slot="popover">
                   <span style="white-space: pre-line;">
                     <p>{{ imageURLInfo }}</p>

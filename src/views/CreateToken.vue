@@ -66,7 +66,7 @@
                 popoverClass="vue-tooltip-theme"
                 popoverBaseClass="tooltip open-top-info"
               >
-                <InfoIcon v-tooltip="{ content: 'Click for more info', placement: 'right', trigger: 'hover focus' }"/>
+                <InfoIcon v-tooltip="{ content: '<p><b>Mandatory field</b><br><i>Click for more info</i></p>', placement: 'bottom', trigger: 'hover focus' }"/>
                 <template slot="popover">
                   <span style="white-space: pre-line;">
                     <p>{{ tokenNameInfo }}</p>
@@ -103,7 +103,7 @@
                 popoverClass="vue-tooltip-theme"
                 popoverBaseClass="tooltip"
               >
-                <InfoIcon v-tooltip="{ content: 'Click for more info', placement: 'right', trigger: 'hover focus' }"/>
+                <InfoIcon v-tooltip="{ content: '<p><b>Mandatory field (default=1)</b><br><i>Click for more info</i></p>', placement: 'bottom', trigger: 'hover focus' }"/>
                 <template slot="popover">
                   <span style="white-space: pre-line;">
                     <p>{{ tokenAmountInfo }}</p>
@@ -138,7 +138,7 @@
                 popoverClass="vue-tooltip-theme"
                 popoverBaseClass="tooltip"
               >
-                <InfoIcon v-tooltip="{ content: 'Click for more info', placement: 'right', trigger: 'hover focus' }"/>
+                <InfoIcon v-tooltip="{ content: '<p><b>Mandatory field (default=0)</b><br><i>Click for more info</i></p>', placement: 'bottom', trigger: 'hover focus' }"/>
                 <template slot="popover">
                   <span style="white-space: pre-line;">
                     <p>{{ tokenDecimalsInfo }}</p>
@@ -173,7 +173,7 @@
                 popoverClass="vue-tooltip-theme"
                 popoverBaseClass="tooltip"
               >
-                <InfoIcon v-tooltip="{ content: 'Click for more info', placement: 'right', trigger: 'hover focus' }"/>
+                <InfoIcon v-tooltip="{ content: '<p><b>Mandatory field (default=true)</b><br><i>Click for more info</i></p>', placement: 'bottom', trigger: 'hover focus' }"/>
                 <template slot="popover">
                   <span style="white-space: pre-line;">
                     <p>{{ reissuableInfo }}</p>
@@ -197,7 +197,7 @@
                 popoverClass="vue-tooltip-theme"
                 popoverBaseClass="tooltip open-top-info"
               >
-                <InfoIcon v-tooltip="{ content: 'Click for more info', placement: 'right', trigger: 'hover focus' }"/>
+                <InfoIcon v-tooltip="{ content: '<p><b>Optional field (empty by default)</b><br><i>Click for more info</i></p>', placement: 'bottom', trigger: 'hover focus' }"/>
                 <template slot="popover">
                   <span style="white-space: pre-line;">
                     <p>{{ ipfsHashInfo }}</p>
@@ -235,7 +235,7 @@
                 popoverClass="vue-tooltip-theme"
                 popoverBaseClass="tooltip"
               >
-                <InfoIcon v-tooltip="{ content: 'Click for more info', placement: 'right', trigger: 'hover focus' }"/>
+              <InfoIcon v-tooltip="{ content: '<p><b>Mandatory field</b><br><i>Click for more info</i></p>', placement: 'bottom', trigger: 'hover focus' }"/>
                 <template slot="popover">
                   <span style="white-space: pre-line;">
                     <p>{{ nftNameInfo }}</p>
@@ -272,7 +272,7 @@
                 popoverClass="vue-tooltip-theme"
                 popoverBaseClass="tooltip open-top-info"
               >
-                <InfoIcon v-tooltip="{ content: 'Click for more info', placement: 'right', trigger: 'hover focus' }"/>
+              <InfoIcon v-tooltip="{ content: '<p><b>Optional field (empty by default)</b><br><i>Click for more info</i></p>', placement: 'bottom', trigger: 'hover focus' }"/>
                 <template slot="popover">
                   <span style="white-space: pre-line;">
                     <p>{{ ipfsHashInfo }}</p>
