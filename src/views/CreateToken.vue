@@ -406,8 +406,8 @@ export default {
       return this.accounts[this.activeWalletId][this.activeNetwork].find((acc) => acc.chain === ChainId.Yacoin)
     },
     accountAssets() {
-      console.log('yacoinAccount = ', this.account)
-      console.log('yacoinAccount.assets = ', this.account.assets)
+      console.log('TACA ===> yacoinAccount = ', this.account)
+      console.log('TACA ===> yacoinAccount.assets = ', this.account.assets)
       return this.account.assets
     },
     isExistingAsset() {
@@ -487,7 +487,7 @@ export default {
     }
   },
   beforeRouteLeave(to, from, next) {
-    console.log('beforeRouteLeave()');
+    console.log('TACA ===> beforeRouteLeave()');
     this.saveFormDataState()
     next();
   },

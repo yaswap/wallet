@@ -35,6 +35,7 @@
             <input
               type="text"
               v-model="fullName"
+              @change="saveFormDataState"
               class="form-control form-control-sm"
               id="name"
               :placeholder="`YA-Token/YA-NFT fullname`"
@@ -62,6 +63,7 @@
             <input
               type="text"
               v-model="description"
+              @change="saveFormDataState"
               class="form-control form-control-sm"
               id="description"
               :placeholder="`Description`"
@@ -105,11 +107,13 @@
       </div>
       <div class="wrapper_bottom">
         <div class="button-group">
-          <router-link :to="backPath"
-            ><button id="cancel_create_button" class="btn btn-light btn-outline-primary btn-lg">
-              {{ $t('common.cancel') }}
-            </button></router-link
+          <button
+            id="cancel_create_button"
+            class="btn btn-light btn-outline-primary btn-lg"
+            @click="cancelCreate"
           >
+            {{ $t('common.cancel') }}
+          </button>
           <button
             id="download_button"
             class="btn btn-primary btn-lg"
@@ -162,7 +166,43 @@ export default {
       return true
     }
   },
+  async created() {
+    const storageData = localStorage.getItem('createMetadataData')
+    console.log('TACA ===> created(), storageData = ', storageData)
+    if (storageData) {
+      this.initFormDataState(storageData)
+      await this.verifyImageURL();
+    }
+  },
+  beforeRouteLeave(to, from, next) {
+    console.log('TACA ===> beforeRouteLeave()');
+    this.saveFormDataState()
+    next();
+  },
   methods: {
+    initFormDataState(storageData){
+      const formData = JSON.parse(storageData || '');
+      console.log('TACA ===> initFormDataState, formData = ', formData)
+      if(formData){
+        this.fullName = formData.fullName;
+        this.description = formData.description;
+        this.imageURL = formData.imageURL;
+      }
+    },
+    saveFormDataState(){
+      const createMetadataData = {
+        fullName: this.fullName,
+        description: this.description,
+        imageURL: this.imageURL,
+      }
+      console.log('TACA ===> saveFormDataState, createMetadataData = ', createMetadataData)
+      const formData = JSON.stringify(createMetadataData);
+      localStorage.setItem('createMetadataData', formData);
+    },
+    cancelCreate() {
+      this.resetFields()
+      this.$router.back()
+    },
     resetFields() {
       // Reset Fields
       this.fullName = null
@@ -176,6 +216,7 @@ export default {
     async verifyImageURL(e) {
       this.imageURLError = null
       this.ipfsImageURL = null
+      this.saveFormDataState()
 
       // Empty Image URL
       if (!this.imageURL) {
