@@ -159,7 +159,7 @@ export default {
     },
     canDownload() {
       if (
-        this.imageURLError
+        this.imageURLError || (!this.fullName && !this.description && !this.imageURL)
       )
         return false
 
