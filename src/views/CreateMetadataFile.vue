@@ -156,7 +156,6 @@ export default {
   },
   computed: {
     backPath() {
-      console.log('TACA ===> this.$route = ', this.$route)
       return this.$route.params.from
     },
     backLabel() {
@@ -182,21 +181,18 @@ export default {
   },
   async created() {
     const storageData = localStorage.getItem('createMetadataData')
-    console.log('TACA ===> created(), storageData = ', storageData)
     if (storageData) {
       this.initFormDataState(storageData)
       await this.verifyImageURL();
     }
   },
   beforeRouteLeave(to, from, next) {
-    console.log('TACA ===> beforeRouteLeave()');
     this.saveFormDataState()
     next();
   },
   methods: {
     initFormDataState(storageData){
       const formData = JSON.parse(storageData || '');
-      console.log('TACA ===> initFormDataState, formData = ', formData)
       if(formData){
         this.fullName = formData.fullName;
         this.description = formData.description;
@@ -209,7 +205,6 @@ export default {
         description: this.description,
         imageURL: this.imageURL,
       }
-      console.log('TACA ===> saveFormDataState, createMetadataData = ', createMetadataData)
       const formData = JSON.stringify(createMetadataData);
       localStorage.setItem('createMetadataData', formData);
     },
@@ -240,12 +235,10 @@ export default {
       // Verify URI
       if (this.imageURL.includes("://") && !this.imageURL.startsWith("ipfs://")) {
         if (! await isImageURL(this.imageURL)) {
-          console.log("TACA ===> Invalid Image URI")
           this.imageURLError = "This URI doesn't point to a resource with mime type image/*"
         }
       } else {
         const ipfsHash = this.imageURL.startsWith("ipfs://") ? this.imageURL.replace("ipfs://", ""): this.imageURL
-        console.log("TACA ===> ipfsHash = ", ipfsHash)
         // Verify IPFS Hash
         const [rawIpfsHash, error] = verifyIPFSHash(ipfsHash)
 
@@ -256,7 +249,6 @@ export default {
 
         const ipfsHashUrl = `https://ipfs.io/ipfs/${ipfsHash}`
         if (! await isImageURL(ipfsHashUrl)) {
-          console.log("TACA ===> Invalid Image IPFS Hash")
           this.imageURLError = "This IPFS Hash doesn't point to a resource with mime type image/*"
         }
         this.ipfsImageURL = "ipfs://" + ipfsHash

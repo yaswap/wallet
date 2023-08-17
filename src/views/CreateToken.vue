@@ -406,8 +406,6 @@ export default {
       return this.accounts[this.activeWalletId][this.activeNetwork].find((acc) => acc.chain === ChainId.Yacoin)
     },
     accountAssets() {
-      console.log('TACA ===> yacoinAccount = ', this.account)
-      console.log('TACA ===> yacoinAccount.assets = ', this.account.assets)
       return this.account.assets
     },
     isExistingAsset() {
@@ -480,14 +478,12 @@ export default {
   async created() {
     await this.updateFees({ asset: this.assetChain })
     const storageData = localStorage.getItem('createTokenData')
-    console.log('TACA ===> created(), storageData = ', storageData)
     if (storageData) {
       this.initFormDataState(storageData)
       await this.verifyAll();
     }
   },
   beforeRouteLeave(to, from, next) {
-    console.log('TACA ===> beforeRouteLeave()');
     this.saveFormDataState()
     next();
   },
@@ -499,7 +495,6 @@ export default {
     ]),
     initFormDataState(storageData){
       const formData = JSON.parse(storageData || '');
-      console.log('TACA ===> initFormDataState, formData = ', formData)
       if(formData){
         this.tokenType = formData.tokenType;
         this.tokenName = formData.tokenName;
@@ -518,7 +513,6 @@ export default {
         reissuable: this.reissuable,
         ipfsHash: this.ipfsHash
       }
-      console.log('TACA ===> saveFormDataState, createTokenData = ', createTokenData)
       const formData = JSON.stringify(createTokenData);
       localStorage.setItem('createTokenData', formData);
     },
@@ -577,7 +571,6 @@ export default {
       this.ipfsHashError = null
     },
     async verifyAll() {
-      console.log('TACA ===> verifyAll')
       await this.tokenNameChange();
       this.verifyTokenAmount();
       this.verifyDecimals();
