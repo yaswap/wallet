@@ -27,7 +27,7 @@
                 <InfoIcon v-tooltip="{ content: 'Click for more info', placement: 'left', trigger: 'hover focus' }"/>
                 <template slot="popover">
                   <span style="white-space: pre-line;">
-                    <p>This is different with YA-Token/YA-NFT name. This name can be used to give full idea about the YA-Token/YA-NFT in case the YA-Token/YA-NFT name is too short</p>
+                    <p>{{ nameInfo }}</p>
                   </span>
                 </template>
               </v-popover>
@@ -55,7 +55,7 @@
                 <InfoIcon v-tooltip="{ content: 'Click for more info', placement: 'right', trigger: 'hover focus' }"/>
                 <template slot="popover">
                   <span style="white-space: pre-line;">
-                    <p>This info can be used to describe the usage of the YA-Token/YA-NFT.</p>
+                    <p>{{ descriptionInfo }}</p>
                   </span>
                 </template>
               </v-popover>
@@ -83,7 +83,7 @@
                 <InfoIcon v-tooltip="{ content: 'Click for more info', placement: 'right', trigger: 'hover focus' }"/>
                 <template slot="popover">
                   <span style="white-space: pre-line;">
-                    <p>A URI or an IPFS Hash pointing to an image (images are resource with mime type image/*)</p>
+                    <p>{{ imageURLInfo }}</p>
                   </span>
                 </template>
               </v-popover>
@@ -164,6 +164,15 @@ export default {
         return false
 
       return true
+    },
+    nameInfo() {
+      return `This is different from the YA-Token/YA-NFT name. This name can be used to give full idea about the YA-Token/YA-NFT in case the YA-Token/YA-NFT name is too short.`
+    },
+    descriptionInfo() {
+      return `This info can be used to describe the usage of the YA-Token/YA-NFT.`
+    },
+    imageURLInfo() {
+      return `A URI or an IPFS Hash pointing to an image (images are resource with mime type image/*)`
     }
   },
   async created() {
