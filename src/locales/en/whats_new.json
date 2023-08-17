@@ -4,6 +4,7 @@
     "title": "What's New?",
     "content": [
       "Support to create YA-Token and YA-NFT",
+      "Support to create metadata JSON file for YA-Token/YA-NFT",
       "Fix issue which fail to display sub YA-Token"
     ]
   }
