@@ -107,7 +107,7 @@
           <div class="form-group">
             <label for="note">Note</label>
             <p class="note-paragraph">When you press on <b>Download JSON file</b> button, the browser will download a JSON file with name <b>token_metadata.json</b></p>
-            <p class="note-paragraph">You should rename this file with your YA-Token/YA-NFT name (or you can leave it like that) and upload to IPFS services such as <b>ravencoinipfs</b> to get IPFS Hash</p>
+            <p class="note-paragraph">You should rename this file with your YA-Token/YA-NFT name (or you can leave it like that) and upload to IPFS services such as <a href="https://ravencoinipfs.com/" target="_blank">ravencoinipfs</a> to get IPFS Hash</p>
           </div>
       </div>
       <div class="wrapper_bottom">
