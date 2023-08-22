@@ -3,9 +3,10 @@
     "page": "1",
     "title": "What's New?",
     "content": [
-      "Support to create YA-Token and YA-NFT",
-      "Support to create metadata JSON file for YA-Token/YA-NFT",
-      "Fix issue which fail to display sub YA-Token"
+      "Handle image url without ipfs:// prefix",
+      "Fix issue which YA-Token/YA-NFT isn't displayed if the wallet fails to get token metadata",
+      "Support to break line in places which character '\\n' appearing in YA-Token/YA-NFT description",
+      "Output character '\\n' correctly in metadata JSON file"
     ]
   }
 ]
