@@ -200,7 +200,6 @@ export default {
       }
     },
     saveFormDataState(){
-      console.log('TACA ===> CreateMetadataFile.vue ', this.fullName, this.description, this.imageURL)
       const createMetadataData = {
         fullName: this.fullName,
         description: this.description,
