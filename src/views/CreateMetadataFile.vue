@@ -200,6 +200,7 @@ export default {
       }
     },
     saveFormDataState(){
+      console.log('TACA ===> CreateMetadataFile.vue ', this.fullName, this.description, this.imageURL)
       const createMetadataData = {
         fullName: this.fullName,
         description: this.description,
@@ -267,6 +268,7 @@ export default {
       }
 
       const jsonData = JSON.stringify(data);
+      console.log('TACA ===> CreateMetadataFile.vue, data = ', data, ', jsonData = ', jsonData)
       const blob = new Blob([jsonData], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
 
@@ -277,6 +279,7 @@ export default {
       link.click();
 
       URL.revokeObjectURL(url);
+      this.resetFields();
     }
   }
 }

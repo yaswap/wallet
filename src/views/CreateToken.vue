@@ -545,6 +545,7 @@ export default {
           ipfsHash: this.rawIpfsHash,
         })
 
+        this.resetFields()
         this.$router.replace('/wallet')
       } catch (error) {
         const yaswapErrorString = errorToYaswapErrorString(error)
