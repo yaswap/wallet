@@ -267,8 +267,7 @@ export default {
         data.image = this.ipfsImageURL !== null ? this.ipfsImageURL : this.imageURL
       }
 
-      const jsonData = JSON.stringify(data);
-      console.log('TACA ===> CreateMetadataFile.vue, data = ', data, ', jsonData = ', jsonData)
+      const jsonData = JSON.stringify(data).split('\\\\n').join('\\n');
       const blob = new Blob([jsonData], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
 
@@ -280,6 +279,7 @@ export default {
 
       URL.revokeObjectURL(url);
       this.resetFields();
+      this.saveFormDataState();
     }
   }
 }
