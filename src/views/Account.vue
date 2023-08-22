@@ -160,7 +160,7 @@
                     <td class="text-muted text-left small-12">
                       Description
                     </td>
-                    <td class="text-break" >
+                    <td class="text-break" style="white-space: pre-line;">
                       {{ getAssetDescription(asset) ?? '-' }}
                     </td>
                   </tr>
