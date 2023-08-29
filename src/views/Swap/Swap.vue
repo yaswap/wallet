@@ -658,7 +658,7 @@ export default {
       }
       this.sendAmount = dpUI(this.defaultAmount)
       // Try to use the same account for (from and to) if it has more than one asset
-      if (this.account?.assets.length > 1) {
+      if (this.account?.assets.length > 1 && this.account?.chain !== 'yacoin') {
         this.toAccountId = this.accountId
         this.toAsset = this.account?.assets.find((a) => a !== this.asset)
       } else {
