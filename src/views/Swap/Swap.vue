@@ -625,6 +625,7 @@ export default {
     this.asset = this.routeAsset
     this.fromAccountId = this.accountId
 
+    console.log('TACA ===> Swap.vue, created(), this.asset = ', this.asset, ', this.fromAccountId = ', this.fromAccountId, ', this.$route = ', this.$route)
     if (this.$route.query.mode === 'tab') {
       const swapParams = qs.parse(qs.stringify(this.$route.query))
       const {
@@ -748,6 +749,11 @@ export default {
           this.stateSendAmount = 0.0
         }
 
+        // Workaround to force update quotes
+        if (BN(this.stateSendAmount).eq(0)) {
+          this.stateSendAmount = 1.0
+        }
+
         this.stateSendAmountFiat = prettyFiatBalance(
           this.stateSendAmount,
           this.fiatRates[this.asset]
@@ -801,6 +807,7 @@ export default {
     },
     bestQuote() {
       const sortedQuotes = sortQuotes(this.quotes, this.activeNetwork)
+      console.log('TACA ===> Swap.vue, bestQuote(), sortedQuotes = ', sortedQuotes)
       return sortedQuotes
     },
     selectedQuoteProvider() {
@@ -808,6 +815,10 @@ export default {
       return getSwapProvider(this.activeNetwork, this.selectedQuote.provider)
     },
     defaultAmount() {
+      // Workaround to force update quotes
+      if (BN(this.max).eq(0)) {
+        return 1.0
+      }
       return this.max
     },
     isPairAvailable() {
@@ -1251,6 +1262,9 @@ export default {
       await this._updateQuotes()
     }, 1000),
     setQuotes(quotes, shouldReselect) {
+      console.log('TACA ===> Swap.vue, setQuotes(), quotes = ', quotes)
+      console.log('TACA ===> Swap.vue, setQuotes(), default selectedQuote = ', this.selectedQuote)
+      console.log('TACA ===> Swap.vue, setQuotes(), shouldReselect = ', shouldReselect, ', this.userSelectedQuote = ', this.userSelectedQuote)
       let shouldChooseNewQuote = false
       if (
         quotes &&
@@ -1262,39 +1276,48 @@ export default {
         if (this.selectedQuote) {
           // Preserve selected provider
           if (this.userSelectedQuote) {
+            console.log('TACA ===> Swap.vue, setQuotes(), case 1')
             const matchingQuote = this.quotes.find(
               (q) => q.provider === this.selectedQuote.provider
             )
             this.selectedQuote = matchingQuote || this.bestQuote[0]
           } else {
             this.userSelectedQuote = false
-            if (!this.canSwap) {
-              for (const quoteIndex in this.bestQuote) {
-                if (parseInt(quoteIndex) + 1 === this.bestQuote.length) {
-                  this.selectedQuote = this.bestQuote[quoteIndex]
-                  shouldChooseNewQuote = false
-                  break
-                }
-                if (this.bestQuote[quoteIndex].provider === this.selectedQuote.provider) {
-                  shouldChooseNewQuote = true
-                  continue
-                }
-                if (shouldChooseNewQuote) {
-                  this.selectedQuote = this.bestQuote[quoteIndex]
-                  break
-                }
-              }
-            } else {
-              this.selectedQuote = this.bestQuote[0]
-            }
+            // Should always choose best quote
+            this.selectedQuote = this.bestQuote[0]
+            // if (!this.canSwap) {
+            //   for (const quoteIndex in this.bestQuote) {
+            //     if (parseInt(quoteIndex) + 1 === this.bestQuote.length) {
+            //       console.log('TACA ===> Swap.vue, setQuotes(), case 2')
+            //       this.selectedQuote = this.bestQuote[quoteIndex]
+            //       shouldChooseNewQuote = false
+            //       break
+            //     }
+            //     if (this.bestQuote[quoteIndex].provider === this.selectedQuote.provider) {
+            //       console.log('TACA ===> Swap.vue, setQuotes(), case 3')
+            //       shouldChooseNewQuote = true
+            //       continue
+            //     }
+            //     if (shouldChooseNewQuote) {
+            //       console.log('TACA ===> Swap.vue, setQuotes(), case 4')
+            //       this.selectedQuote = this.bestQuote[quoteIndex]
+            //       break
+            //     }
+            //   }
+            // } else {
+            //   console.log('TACA ===> Swap.vue, setQuotes(), case 5')
+            //   this.selectedQuote = this.bestQuote[0]
+            // }
           }
         } else {
           this.selectedQuote = this.bestQuote[0]
+          console.log('TACA ===> Swap.vue, setQuotes(), Choose best quote = ', this.selectedQuote)
         }
       } else {
         this.selectedQuote = null
       }
 
+      console.log('TACA ===> Swap.vue, setQuotes(), Selected quote = ', this.selectedQuote)
       // this.cannotCoverMinimum =
       //   !this.canSwap &&
       //   !shouldChooseNewQuote &&
@@ -1314,7 +1337,34 @@ export default {
         walletId: this.activeWalletId,
         slowQuoteThreshold: 5000
       })
-
+      console.log('TACA ===> Swap.vue, _updateQuotes(), from = ', this.asset, ', to = ', this.toAsset, ', amount = ', this.sendAmount, ', result = ', result)
+      /*
+        result contains SwapQuote ???
+        export interface SwapQuote extends GetQuoteResult {
+          from: Asset;
+          to: Asset;
+          provider: string;
+          fromAccountId: AccountId;
+          toAccountId: AccountId;
+          path?: string[] | null;
+          slippage?: number;
+        }
+        export interface GetQuoteResult {
+          fromAmount: string;
+          toAmount: string;
+        }
+        {
+          fromAmount: fromAmount.toFixed(),
+          toAmount: toAmount.toFixed(),
+          min: new BN(market.min),
+          max: new BN(market.max),
+          from,
+          to,
+          provider,
+          fromAccountId,
+          toAccountId
+        };
+      */
       const quotes = result.quotes
       if (result.hasSlowQuotes) {
         this.getSlowQuotes({ requestId: result.requestId }).then((slowQuotes) => {
@@ -1325,7 +1375,6 @@ export default {
       } else {
         this.updatingQuotes = false
       }
-
       this.setQuotes(quotes, true)
     },
     updateQuotes() {
@@ -1410,10 +1459,12 @@ export default {
       this.currentStep = 'inputs'
     },
     toAssetClick() {
+      console.log('TACA ===> Swap.vue, toAssetClick')
       this.assetSelection = 'to'
       this.currentStep = 'accounts'
     },
     fromAssetClick() {
+      console.log('TACA ===> Swap.vue, fromAssetClick')
       this.assetSelection = 'from'
       this.currentStep = 'accounts'
     },
@@ -1569,6 +1620,7 @@ export default {
       this.updateMaxSwapFees()
     },
     currentStep: function (val) {
+      console.log('TACA ===> Swap.vue, currentStep, val = ', val)
       if (val === 'inputs') this.updateQuotes()
     }
   }

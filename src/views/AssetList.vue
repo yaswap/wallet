@@ -89,6 +89,7 @@ export default {
     }
   },
   created() {
+    console.log('TACA ===> AssetList.vue, created()')
     this.$nextTick(() => this.$refs.search?.focus())
   }
 }

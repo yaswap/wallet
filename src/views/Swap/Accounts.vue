@@ -86,6 +86,7 @@ export default {
     }
   },
   created() {
+    console.log('TACA ===> Swap/Accounts.vue, created()')
     this.$nextTick(() => this.$refs.search.focus())
   }
 }
