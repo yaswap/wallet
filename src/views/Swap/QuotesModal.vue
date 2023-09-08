@@ -16,12 +16,12 @@
           <div
             class="row quote-list_quote"
             v-for="quote in sortedQuotes"
-            :key="quote.provider"
-            :id="`${quote.provider}_rate_provider`"
+            :key="quote.agentName"
+            :id="`${quote.agentName}_rate_provider`"
             :class="{
-              'quote-list_quote_active': quote.provider === selectedProvider
+              'quote-list_quote_active': quote.provider === selectedProvider && quote.agentName === selectedAgent
             }"
-            @click="setSelectedProvider(quote.provider)"
+            @click="setSelectedProviderAndAgent(quote.provider, quote.agentName)"
           >
             <div class="col-5 quote-list_quote_rate d-flex align-items-center">
               {{ getProviderRate(quote) }}
@@ -31,7 +31,7 @@
               {{ getProviderName(quote) }}
             </div>
             <div class="col-2 d-flex align-items-center">
-              <TickBlue v-if="quote.provider === selectedProvider" class="quote-list_tick" />
+              <TickBlue v-if="quote.provider === selectedProvider && quote.agentName === selectedAgent" class="quote-list_tick" />
             </div>
           </div>
         </div>
@@ -64,6 +64,7 @@ import { getSwapProviderConfig } from '@yaswap/wallet-core/dist/src/swaps/utils'
 import { getSwapProviderIcon } from '@/utils/swaps'
 import { calculateQuoteRate, sortQuotes } from '@yaswap/wallet-core/dist/src/utils/quotes'
 import { dpUI } from '@yaswap/wallet-core/dist/src/utils/coinFormatter'
+import { SwapProviderType } from '@yaswap/wallet-core/dist/src/store/types'
 
 export default {
   components: {
@@ -72,10 +73,11 @@ export default {
   },
   data() {
     return {
-      selectedProvider: null
+      selectedProvider: null,
+      selectedAgent: null
     }
   },
-  props: ['quotes', 'presetProvider'],
+  props: ['quotes', 'presetProvider', 'presetAgent'],
   computed: {
     ...mapState(['activeNetwork']),
     sortedQuotes() {
@@ -85,6 +87,9 @@ export default {
   methods: {
     getProviderName(quote) {
       const config = getSwapProviderConfig(this.activeNetwork, quote.provider)
+      if (quote.provider === SwapProviderType.Yaswap) {
+        return config.name + ` (${quote.agentName})`
+      }
       return config.name
     },
     getProviderIcon(quote) {
@@ -93,15 +98,17 @@ export default {
     getProviderRate(quote) {
       return dpUI(calculateQuoteRate(quote))
     },
-    setSelectedProvider(provider) {
+    setSelectedProviderAndAgent(provider, agentName) {
       this.selectedProvider = provider
+      this.selectedAgent = agentName
     },
     selectQuote() {
-      this.$emit('select-quote', this.selectedProvider)
+      this.$emit('select-quote', this.selectedProvider, this.selectedAgent)
     }
   },
   created() {
     this.selectedProvider = this.presetProvider
+    this.selectedAgent = this.presetAgent
   }
 }
 </script>

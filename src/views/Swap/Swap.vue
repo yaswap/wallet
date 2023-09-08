@@ -111,6 +111,7 @@
               v-if="selectedQuote"
               class="ml-2"
               :provider="selectedQuote.provider"
+              :agent="selectedQuote.agentName"
               :network="activeNetwork"
             />
             <a
@@ -476,6 +477,7 @@
       v-if="showQuotesModal && selectedQuote"
       :quotes="quotes"
       :preset-provider="selectedQuote.provider"
+      :preset-agent="selectedQuote.agentName"
       @select-quote="selectQuote"
       @close="showQuotesModal = false"
       @click-learn-more="
@@ -587,34 +589,45 @@ export default {
   },
   data() {
     return {
-      stateSendAmount: 0.0,
-      stateSendAmountFiat: 0.0,
-      amountOption: null,
-      asset: null,
-      toAsset: null,
-      showQuotesModal: false,
-      showSwapProvidersInfoModal: false,
-      cannotCoverMinimum: false,
-      minSwapAmount: 0,
-      quotes: [],
-      updatingQuotes: false,
-      selectedQuote: null,
-      userSelectedQuote: false,
+      // Asset
+      asset: null, // From asset
+      toAsset: null, // To asset
+      fromAccountId: null,
+      toAccountId: null,
+
+      // Quotes
+      quotes: [], // Contain quotes for a trading pair from all providers
+      updatingQuotes: false, // Display Spinning Icon and prevent swapping if quote is being updated
+      selectedQuote: null, // The current selected quote
+      userSelectedQuote: false, // Is the selected quote selected by the user or it was selected automatically ?
+
+      // Swap amount
+      stateSendAmount: 0.0, // This stores input send amount
+      stateSendAmountFiat: 0.0, // This stores input send amount in fiat
+      amountOption: null, // Amount option "min", "max"
+      minSwapAmount: 0, // Min swap amount for a trading pair from a particular provider
+      cannotCoverMinimum: false, // Seems DEPRECATED
+
+      // Fees
       swapFees: {},
       maxSwapFees: {},
       selectedFee: {},
       selectedFromFee: 'fast',
       selectedToFee: 'fast',
+      customFeeAssetSelected: null,
+      customFees: {},
+
+      // Modal
+      showQuotesModal: false, // Show modal which display quote info (provider, rate, min, max)
+      showSwapProvidersInfoModal: false, // Show modal which display provider info
+      swapErrorModalOpen: false, // Show modal which display swap error
+      signRequestModalOpen: false,  // Show modal for user to sign request (ledger)
+
+      // Status tracking
       currentStep: 'inputs',
       assetSelection: 'from',
       loading: false,
-      fromAccountId: null,
-      toAccountId: null,
-      swapErrorModalOpen: false,
-      signRequestModalOpen: false,
-      swapErrorMessage: '',
-      customFeeAssetSelected: null,
-      customFees: {}
+      swapErrorMessage: ''
     }
   },
   props: {
@@ -811,8 +824,13 @@ export default {
       return sortedQuotes
     },
     selectedQuoteProvider() {
+      console.log('TACA ===> Swap.vue, recalculate selectedQuoteProvider()')
       if (!this.selectedQuote) return null
       return getSwapProvider(this.activeNetwork, this.selectedQuote.provider)
+    },
+    selectedAgentName() {
+      if (!this.selectedQuote || !this.selectedQuote.agentName) return null
+      return this.selectedQuote.agentName
     },
     defaultAmount() {
       // Workaround to force update quotes
@@ -832,6 +850,7 @@ export default {
       return !!yaswapMarket
     },
     min() {
+      console.log('TACA ===> Swap.vue, computed min(), this.minSwapAmount = ', this.minSwapAmount)
       return Math.ceil(this.minSwapAmount * Math.pow(10, 6)) / Math.pow(10, 6)
     },
     max() {
@@ -1207,6 +1226,7 @@ export default {
         await addFees(this.toAsset, this.toAssetChain, toTxType)
       }
 
+      console.log('TACA ===> Swap.vue, _updateSwapFees, fees = ', fees, ', max = ', max)
       if (max) {
         this.maxSwapFees = fees
       } else {
@@ -1218,8 +1238,10 @@ export default {
           network: this.activeNetwork,
           from: this.asset,
           to: this.toAsset,
-          amount: BN(this.sendAmount)
+          amount: BN(this.sendAmount),
+          agentName: this.selectedAgentName
         })
+        console.log('TACA ===> Swap.vue, _updateSwapFees, this.minSwapAmount = ', this.minSwapAmount)
       }
     },
     updateSwapFees: _.debounce(async function () {
@@ -1278,7 +1300,7 @@ export default {
           if (this.userSelectedQuote) {
             console.log('TACA ===> Swap.vue, setQuotes(), case 1')
             const matchingQuote = this.quotes.find(
-              (q) => q.provider === this.selectedQuote.provider
+              (q) => q.provider === this.selectedQuote.provider && q.agentName === this.selectedQuote.agentName
             )
             this.selectedQuote = matchingQuote || this.bestQuote[0]
           } else {
@@ -1384,12 +1406,12 @@ export default {
       this.updatingQuotes = true
       this.debounceUpdateQuotes()
     },
-    setQuoteProvider(provider) {
-      const matchingQuote = this.quotes.find((q) => q.provider === provider)
+    setQuoteProvider(provider, agentName) {
+      const matchingQuote = this.quotes.find((q) => q.provider === provider && q.agentName === agentName)
       this.selectedQuote = matchingQuote
     },
-    selectQuote(provider) {
-      this.setQuoteProvider(provider)
+    selectQuote(provider, agentName) {
+      this.setQuoteProvider(provider, agentName)
       this.userSelectedQuote = true
       this.showQuotesModal = false
     },
@@ -1580,6 +1602,7 @@ export default {
   },
   watch: {
     selectedFee: {
+      // Update sendAmount
       handler() {
         if (this.amountOption === 'max') {
           this.sendAmount = dpUI(this.max)
@@ -1588,6 +1611,7 @@ export default {
       deep: true
     },
     stateSendAmount: function (val, oldVal) {
+      // Update amountOption and updateQuotes
       if (BN(val).eq(oldVal)) return
       if (BN(val).eq(0)) {
         this.quotes = []
@@ -1609,6 +1633,7 @@ export default {
       this.updateQuotes()
     },
     max: function (val, oldVal) {
+      // Update sendAmount
       if (BN(val).eq(oldVal)) return
 
       if (this.amountOption === 'max') {
@@ -1616,10 +1641,13 @@ export default {
       }
     },
     selectedQuote: function () {
+      // Update swapFees, maxSwapFees and update quotes
+      console.log('TACA ===> Swap.vue, watcher selectedQuote')
       this._updateSwapFees() // Skip debounce
       this.updateMaxSwapFees()
     },
     currentStep: function (val) {
+      // Update quotes
       console.log('TACA ===> Swap.vue, currentStep, val = ', val)
       if (val === 'inputs') this.updateQuotes()
     }

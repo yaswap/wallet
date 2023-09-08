@@ -1,8 +1,9 @@
 <template>
   <v-popover offset="1" trigger="hover focus" placement="top">
     <div class="btn btn-option swap-provider-label" @click="$emit('click')">
-      <span class="d-flex align-items-center">
+      <span class="d-flex align-content-center flex-wrap">
         <img :src="icon" class="mr-1" /><span id="selectedQuote_provider">{{ label }}</span>
+        <span id="selectedQuote_agent" v-if="agentName">{{ agentName }}</span>
       </span>
     </div>
     <template slot="popover">
@@ -20,12 +21,22 @@ import {
   getSwapProviderInfo
 } from '@yaswap/wallet-core/dist/src/swaps/utils'
 import { getSwapProviderIcon } from '@/utils/swaps'
+import { SwapProviderType } from '@yaswap/wallet-core/dist/src/store/types'
 
 export default {
-  props: ['provider', 'network'],
+  props: ['provider', 'agent', 'network'],
   computed: {
     label() {
+      // if (this.provider === SwapProviderType.Yaswap) {
+      //   return getSwapProviderConfig(this.network, this.provider).name + ` (${this.agent})`
+      // }
       return getSwapProviderConfig(this.network, this.provider).name
+    },
+    agentName() {
+      if (this.provider === SwapProviderType.Yaswap) {
+        return this.agent
+      }
+      return null
     },
     icon() {
       return getSwapProviderIcon(this.network, this.provider)
@@ -41,10 +52,13 @@ export default {
 .swap-provider-label {
   display: inline-block;
   text-transform: none;
+  height: 100%;
+  max-height: 60px;
+  max-width: 180px;
   img {
     height: 15px;
     width: auto;
-    max-width: 14px;
+    // max-width: 14px;
   }
 }
 </style>
