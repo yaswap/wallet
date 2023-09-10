@@ -29,10 +29,10 @@
               {{ getProviderRate(quote) }}
             </div>
             <div class="col-2 quote-list_quote_min d-flex align-items-center">
-              {{ 1 }}
+              {{ getProviderMin(quote) }}
             </div>
             <div class="col-2 quote-list_quote_max d-flex align-items-center">
-              {{ 10 }}
+              {{ getProviderMax(quote) }}
             </div>
             <div class="col-4 quote-list_quote_provider d-flex align-items-center flex-wrap">
               <div style="white-space: nowrap">
@@ -113,6 +113,18 @@ export default {
     getProviderRate(quote) {
       return dpUI(calculateQuoteRate(quote))
     },
+    getProviderMin(quote) {
+      if (quote.min) {
+        return dpUI(quote.min)
+      }
+      return "N/A"
+    },
+    getProviderMax(quote) {
+      if (quote.max) {
+        return dpUI(quote.max)
+      }
+      return "N/A"
+    },
     setSelectedProviderAndAgent(provider, agentName) {
       this.selectedProvider = provider
       this.selectedAgent = agentName
@@ -145,7 +157,7 @@ export default {
     &_min,
     &_max {
       font-weight: 500;
-      font-size: 0.65rem;
+      font-size: 0.7rem;
     }
 
     &_active,
