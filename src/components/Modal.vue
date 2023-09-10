@@ -9,7 +9,7 @@
     >
       <div
         :class="{
-          'modal-dialog': true,
+          [modalDialog]: true,
           [dialog]: true,
           [type]: true,
           'full-height': isFullHeight
@@ -48,6 +48,10 @@ export default {
     type: {
       type: String,
       default: 'modal-sm'
+    },
+    modalDialog: {
+      type: String,
+      default: 'modal-dialog'
     },
     dialog: {
       type: String,
@@ -92,6 +96,11 @@ export default {
 
 .modal-dialog {
   margin: $wrapper-padding !important;
+}
+
+.modal-dialog-quotes {
+  margin: $wrapper-padding !important;
+  min-width: 97% !important;
 }
 
 .modal-dialog-centered {

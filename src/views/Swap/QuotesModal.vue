@@ -1,5 +1,5 @@
 <template>
-  <Modal @close="$emit('close')">
+  <Modal @close="$emit('close')" modal-dialog="modal-dialog-quotes">
     <template #header>
       <h5 id="available_quotes_header">
         {{ quotes.length }} {{ $t('pages.swap.availableQuotes') }}
@@ -10,8 +10,10 @@
         <p>{{ $t('pages.swap.providersDescription') }}</p>
         <div class="quote-list">
           <div class="row quote-list_header pb-2">
-            <div class="col-5">{{ $t('common.rate') }}</div>
-            <div class="col-7">{{ $t('common.provider') }}</div>
+            <div class="col-2">{{ $t('common.rate') }}</div>
+            <div class="col-2">{{ 'Min' }}</div>
+            <div class="col-2">{{ 'Max' }}</div>
+            <div class="col-6">{{ $t('common.provider') }}</div>
           </div>
           <div
             class="row quote-list_quote"
@@ -23,12 +25,21 @@
             }"
             @click="setSelectedProviderAndAgent(quote.provider, quote.agentName)"
           >
-            <div class="col-5 quote-list_quote_rate d-flex align-items-center">
+            <div class="col-2 quote-list_quote_rate d-flex align-items-center">
               {{ getProviderRate(quote) }}
             </div>
-            <div class="col-5 quote-list_quote_provider d-flex align-items-center">
-              <img :src="getProviderIcon(quote)" class="mr-2" />
-              {{ getProviderName(quote) }}
+            <div class="col-2 quote-list_quote_min d-flex align-items-center">
+              {{ 1 }}
+            </div>
+            <div class="col-2 quote-list_quote_max d-flex align-items-center">
+              {{ 10 }}
+            </div>
+            <div class="col-4 quote-list_quote_provider d-flex align-items-center flex-wrap">
+              <div style="white-space: nowrap">
+                <img :src="getProviderIcon(quote)" class="mr-2" />
+                {{ getProviderName(quote) }}
+              </div>
+              <span v-if="getAgentName(quote)">{{ getAgentName(quote) }}</span>
             </div>
             <div class="col-2 d-flex align-items-center">
               <TickBlue v-if="quote.provider === selectedProvider && quote.agentName === selectedAgent" class="quote-list_tick" />
@@ -87,10 +98,14 @@ export default {
   methods: {
     getProviderName(quote) {
       const config = getSwapProviderConfig(this.activeNetwork, quote.provider)
-      if (quote.provider === SwapProviderType.Yaswap) {
-        return config.name + ` (${quote.agentName})`
-      }
       return config.name
+    },
+    getAgentName(quote) {
+      const config = getSwapProviderConfig(this.activeNetwork, quote.provider)
+      if (quote.provider === SwapProviderType.Yaswap) {
+        return quote.agentName
+      }
+      return null
     },
     getProviderIcon(quote) {
       return getSwapProviderIcon(this.activeNetwork, quote.provider)
@@ -126,9 +141,11 @@ export default {
     height: 58px;
     border-bottom: 1px solid $hr-border-color;
 
-    &_rate {
-      font-weight: 600;
-      font-size: $font-size-head-title;
+    &_rate,
+    &_min,
+    &_max {
+      font-weight: 500;
+      font-size: 0.65rem;
     }
 
     &_active,
