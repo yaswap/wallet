@@ -415,6 +415,7 @@
                 v-if="selectedQuote"
                 class="ml-2"
                 :provider="selectedQuote.provider"
+                :agent="selectedQuote.agentName"
                 :network="activeNetwork"
               />
               <a href="#" @click="showSwapProvidersInfoModal = true" class="ml-auto">
@@ -763,9 +764,9 @@ export default {
         }
 
         // Workaround to force update quotes
-        if (BN(this.stateSendAmount).eq(0)) {
-          this.stateSendAmount = 1.0
-        }
+        // if (BN(this.stateSendAmount).eq(0)) {
+        //   this.stateSendAmount = this.min
+        // }
 
         this.stateSendAmountFiat = prettyFiatBalance(
           this.stateSendAmount,
@@ -833,10 +834,10 @@ export default {
       return this.selectedQuote.agentName
     },
     defaultAmount() {
-      // Workaround to force update quotes
-      if (BN(this.max).eq(0)) {
-        return 1.0
-      }
+      // // Workaround to force update quotes
+      // if (BN(this.max).eq(0)) {
+      //   return 1.0
+      // }
       return this.max
     },
     isPairAvailable() {

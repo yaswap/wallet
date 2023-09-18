@@ -48,7 +48,7 @@
           <div class="col">
             <h2 class="d-flex align-items-center">
               {{ $t('common.rate') }}
-              <SwapProviderLabel class="ml-2" :provider="item.provider" :network="activeNetwork" />
+              <SwapProviderLabel class="ml-2" :provider="item.provider" :agent="item.agentName" :network="activeNetwork" />
             </h2>
             <p>
               1 {{ item.from }} = <span class="swap-details_rate">{{ rate }}</span> {{ item.to }}
