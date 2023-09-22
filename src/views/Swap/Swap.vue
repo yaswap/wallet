@@ -1235,7 +1235,7 @@ export default {
       }
 
       if (this.activeNetwork && this.asset && this.toAsset && this.sendAmount) {
-        this.minSwapAmount = await selectedQuoteProvider.getMin({
+        this.minSwapAmount = this.selectedQuote.provider === SwapProviderType.Yaswap ? this.selectedQuote.min : await selectedQuoteProvider.getMin({
           network: this.activeNetwork,
           from: this.asset,
           to: this.toAsset,
