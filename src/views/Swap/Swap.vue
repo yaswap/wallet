@@ -13,22 +13,6 @@
       >
         <NoLiquidityMessage :isPairAvailable="isPairAvailable" :asset="toAsset" />
       </InfoNotification>
-      <InfoNotification v-else-if="showBridgeAssetDisabledMessage">
-        <BoostActivateBridgeAsset
-          :network="activeNetwork"
-          :walletId="activeWalletId"
-          :asset="selectedQuote.bridgeAsset"
-          :updateQuotes="updateQuotes"
-        />
-      </InfoNotification>
-      <InfoNotification v-else-if="showNativeAssetDisabledMessage">
-        <BoostActivateBridgeAsset
-          :network="activeNetwork"
-          :walletId="activeWalletId"
-          :asset="assetChain"
-          :updateQuotes="updateQuotes"
-        />
-      </InfoNotification>
       <InfoNotification
         v-else-if="
           cannotCoverNetworkFee && sendAmount >= min && sendAmount > 0 && !insufficientFundsError
@@ -61,9 +45,6 @@
       </InfoNotification>
       <InfoNotification v-else-if="ethRequired && !insufficientFundsError">
         <EthRequiredMessage :account-id="account.id" :action="'swap'" />
-      </InfoNotification>
-      <InfoNotification v-else-if="cannotCoverMinimum && !insufficientFundsError">
-        <CannotCoverMinimumMessage :asset="asset" :account-id="account.id" />
       </InfoNotification>
       <div class="wrapper form">
         <div class="wrapper_top">
@@ -214,11 +195,13 @@
               @click="review"
               :disabled="!canSwap || cannotCoverNetworkFee"
             >
-              {{
+              <!-- insufficientFunds is not clear enough in some cases, so comment it out -->
+              <!-- {{
                 !canSwap || cannotCoverNetworkFee
                   ? $t('pages.swap.insufficientFunds')
                   : $t('common.review')
-              }}
+              }} -->
+              {{ $t('common.review') }}
             </button>
           </div>
         </div>
@@ -508,9 +491,7 @@ import NavBar from '@/components/NavBar'
 import InfoNotification from '@/components/InfoNotification'
 import EthRequiredMessage from '@/components/EthRequiredMessage'
 import BridgeAssetRequiredMessage from '@/components/BridgeAssetRequiredMessage'
-import CannotCoverMinimumMessage from '@/components/CannotCoverMinimumMessage'
 import NoFundsForNetworkFee from '@/components/NoFundsForNetworkFee'
-import BoostActivateBridgeAsset from '@/components/BoostActivateBridgeAsset'
 import NoLiquidityMessage from '@/components/NoLiquidityMessage'
 import {
   cryptoToFiat,
@@ -567,8 +548,6 @@ export default {
     InfoNotification,
     EthRequiredMessage,
     BridgeAssetRequiredMessage,
-    BoostActivateBridgeAsset,
-    CannotCoverMinimumMessage,
     NoFundsForNetworkFee,
     NoLiquidityMessage,
     FeeSelector,
@@ -607,7 +586,6 @@ export default {
       stateSendAmountFiat: 0.0, // This stores input send amount in fiat
       amountOption: null, // Amount option "min", "max"
       minSwapAmount: 0, // Min swap amount for a trading pair from a particular provider
-      cannotCoverMinimum: false, // Seems DEPRECATED
 
       // Fees
       swapFees: {},
@@ -735,22 +713,6 @@ export default {
     },
     showNoLiquidityMessage() {
       return !this.selectedQuote && !this.updatingQuotes
-    },
-    showBridgeAssetDisabledMessage() {
-      const provider = this.selectedQuote?.provider
-      const bridgeAsset = this.selectedQuote?.bridgeAsset
-      const enabledAssets = this.enabledAssets[this.activeNetwork][this.activeWalletId]
-
-      return (
-        (provider === SwapProviderType.YaswapBoostNativeToERC20 ||
-          provider === SwapProviderType.YaswapBoostERC20ToNative) &&
-        !enabledAssets.includes(bridgeAsset)
-      )
-    },
-    showNativeAssetDisabledMessage() {
-      const isSameChain = this.assetChain === this.toAssetChain
-      const enabledAssets = this.enabledAssets[this.activeNetwork][this.activeWalletId]
-      return isSameChain && !enabledAssets.includes(getNativeAsset(this.asset))
     },
     sendAmount: {
       get() {
@@ -1027,7 +989,6 @@ export default {
         this.updatingQuotes ||
         this.ethRequired ||
         //!this.canCoverAmmFee ||
-        this.showBridgeAssetDisabledMessage ||
         this.showNoLiquidityMessage ||
         this.amountError ||
         this.nativeAssetRequired ||
@@ -1345,12 +1306,6 @@ export default {
       }
 
       console.log('TACA ===> Swap.vue, setQuotes(), Selected quote = ', this.selectedQuote)
-      // this.cannotCoverMinimum =
-      //   !this.canSwap &&
-      //   !shouldChooseNewQuote &&
-      //   !BN(this.sendAmount).eq(this.defaultAmount) &&
-      //   BN(this.sendAmount).lt(this.max)
-      // if(this.cannotCoverMinimum) this.sendAmount = 1
       this.resetQuoteTimer(!this.canSwap && shouldChooseNewQuote ? 10000 : QUOTE_TIMER_MS)
     },
     async _updateQuotes() {
