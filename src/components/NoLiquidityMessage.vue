@@ -2,7 +2,7 @@
   <div v-if="isPairAvailable" class="notification-content">
     <div>
       {{ $t('components.noLiquidityMessage.noLiquidity', { asset }) }}
-      <a href="https://discord.com/invite/5mgYtuArkh" target="_blank"> discord </a>
+      <a href="https://discord.gg/YywrvSW9" target="_blank"> discord </a>
       {{ $t('components.noLiquidityMessage.tryAgainLater') }}
     </div>
   </div>

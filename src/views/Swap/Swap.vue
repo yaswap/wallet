@@ -821,8 +821,18 @@ export default {
     },
     bestQuote() {
       const sortedQuotes = sortQuotes(this.quotes, this.activeNetwork)
-      console.log('TACA ===> Swap.vue, bestQuote(), sortedQuotes = ', sortedQuotes)
-      return sortedQuotes
+      const inputAmount = BN(this.safeAmount)
+      const bestQuote = sortedQuotes.find((quote) => {
+        if (quote.min && inputAmount.lt(quote.min)) {
+          return false
+        }
+        if (quote.max && inputAmount.gt(quote.max)) {
+          return false
+        }
+        return true
+      })
+      console.log('TACA ===> Swap.vue, bestQuote(), sortedQuotes = ', sortedQuotes, ', inputAmount = ', inputAmount, ', bestQuote = ', bestQuote)
+      return bestQuote
     },
     selectedQuoteProvider() {
       console.log('TACA ===> Swap.vue, recalculate selectedQuoteProvider()')
@@ -1235,13 +1245,7 @@ export default {
       }
 
       if (this.activeNetwork && this.asset && this.toAsset && this.sendAmount) {
-        this.minSwapAmount = this.selectedQuote.provider === SwapProviderType.Yaswap ? this.selectedQuote.min : await selectedQuoteProvider.getMin({
-          network: this.activeNetwork,
-          from: this.asset,
-          to: this.toAsset,
-          amount: BN(this.sendAmount),
-          agentName: this.selectedAgentName
-        })
+        this.minSwapAmount = this.selectedQuote.min
         console.log('TACA ===> Swap.vue, _updateSwapFees, this.minSwapAmount = ', this.minSwapAmount)
       }
     },
@@ -1303,11 +1307,11 @@ export default {
             const matchingQuote = this.quotes.find(
               (q) => q.provider === this.selectedQuote.provider && q.agentName === this.selectedQuote.agentName
             )
-            this.selectedQuote = matchingQuote || this.bestQuote[0]
+            this.selectedQuote = matchingQuote || this.bestQuote
           } else {
             this.userSelectedQuote = false
             // Should always choose best quote
-            this.selectedQuote = this.bestQuote[0]
+            this.selectedQuote = this.bestQuote
             // if (!this.canSwap) {
             //   for (const quoteIndex in this.bestQuote) {
             //     if (parseInt(quoteIndex) + 1 === this.bestQuote.length) {
@@ -1333,7 +1337,7 @@ export default {
             // }
           }
         } else {
-          this.selectedQuote = this.bestQuote[0]
+          this.selectedQuote = this.bestQuote
           console.log('TACA ===> Swap.vue, setQuotes(), Choose best quote = ', this.selectedQuote)
         }
       } else {
