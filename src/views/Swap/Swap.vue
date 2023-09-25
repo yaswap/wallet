@@ -60,7 +60,7 @@
             :available="dpUI(available)"
             :max-fiat="prettyFiatBalance(max, fiatRates[asset])"
             :min-fiat="prettyFiatBalance(min, fiatRates[asset])"
-            :show-errors="showErrors"
+            :show-errors="true"
             :amount-error="amountError"
             @from-asset-click="fromAssetClick"
             :amount-option="amountOption"
@@ -806,10 +806,6 @@ export default {
       return this.selectedQuote.agentName
     },
     defaultAmount() {
-      // // Workaround to force update quotes
-      // if (BN(this.max).eq(0)) {
-      //   return 1.0
-      // }
       return this.max
     },
     isPairAvailable() {
@@ -830,7 +826,7 @@ export default {
       return this.available && !isNaN(this.available) ? BN.min(BN(this.available)) : BN(0)
     },
     nativeAssetRequired() {
-      if (!this.networkWalletBalances || !isERC20(this.asset) || this.asset === 'ARBETH') return 0
+      if (!this.networkWalletBalances || !isERC20(this.asset) || this.asset === 'ARBETH') return false
       const nativeAssetBalance = this.networkWalletBalances[getNativeAsset(this.asset)]
       if (
         !nativeAssetBalance ||
@@ -906,11 +902,6 @@ export default {
 
       return unitToCurrency(cryptoassets[this.asset], available)
     },
-    availableBeforeFees() {
-      if (!this.networkWalletBalances) return BN(0)
-      const balance = this.networkWalletBalances[this.asset]
-      return unitToCurrency(cryptoassets[this.asset], BN(balance))
-    },
     canCoverAmmFee() {
       if (!this.selectedQuote?.bridgeAsset) return true
 
@@ -925,9 +916,6 @@ export default {
       )
 
       return BN(balance).gt(SwapFeeInUnits)
-    },
-    availableAmount() {
-      return dpUI(this.available, VALUE_DECIMALS)
     },
     ethRequired() {
       if (this.assetChain === 'ETH') {
@@ -946,12 +934,9 @@ export default {
 
       return false
     },
-    showErrors() {
-      return true
-    },
     insufficientFundsError() {
       const amount = BN(this.safeAmount)
-      if (amount.gt(this.max)) {
+      if (amount.gt(this.available)) {
         return true
       }
       return false
@@ -1434,9 +1419,6 @@ export default {
         this.swapErrorModalOpen = true
       }
     },
-    getSelectedFeeLabel(fee) {
-      return fee ? getFeeLabel(fee) : ''
-    },
     back() {
       this.currentStep = 'inputs'
     },
@@ -1594,6 +1576,7 @@ export default {
     },
     max: function (val, oldVal) {
       // Update sendAmount
+      console.log('TACA ===> calling watcher max with val = ', val, ' and oldVal = ', oldVal)
       if (BN(val).eq(oldVal)) return
 
       if (this.amountOption === 'max') {
