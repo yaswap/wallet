@@ -87,7 +87,7 @@
           <v-popover offset="1" trigger="hover focus">
             <button
               :class="{
-                active: amountOption === 'max' && !disabled
+                active: amountOption === 'maxAvailableBalance' && !disabled
               }"
               :disabled="disabled"
               class="btn btn-option tooltip-target"
