@@ -947,7 +947,7 @@ export default {
       return false
     },
     showErrors() {
-      return false
+      return true
     },
     insufficientFundsError() {
       const amount = BN(this.safeAmount)
