@@ -1,5 +1,5 @@
 <template>
-  <Modal @close="$emit('close')" modal-dialog="modal-dialog-quotes">
+  <Modal @close="$emit('close')" modal-dialog="modal-dialog-quotes" body-class="modal-body-quotes">
     <template #header>
       <h5 id="available_quotes_header">
         {{ quotes.length }} {{ $t('pages.swap.availableQuotes') }}
@@ -10,10 +10,9 @@
         <p>{{ $t('pages.swap.providersDescription') }}</p>
         <div class="quote-list">
           <div class="row quote-list_header pb-2">
-            <div class="col-2">{{ $t('common.rate') }}</div>
-            <div class="col-2">{{ 'Min' }}</div>
-            <div class="col-2">{{ 'Max' }}</div>
-            <div class="col-6">{{ $t('common.provider') }}</div>
+            <div class="col-3 pr-2">{{ $t('common.rate') }}</div>
+            <div class="col-4 px-2">{{ 'Min/Max' }}</div>
+            <div class="col-5 px-2">{{ $t('common.provider') }}</div>
           </div>
           <div
             class="row quote-list_quote"
@@ -25,24 +24,22 @@
             }"
             @click="setSelectedProviderAndAgent(quote.provider, quote.agentName)"
           >
-            <div class="col-2 quote-list_quote_rate d-flex align-items-center">
+            <div class="col-3 pr-2 quote-list_quote_rate d-flex align-items-center">
               {{ getProviderRate(quote) }}
             </div>
-            <div class="col-2 quote-list_quote_min d-flex align-items-center">
-              {{ getProviderMin(quote) }}
+            <div class="col-4 px-2 quote-list_quote_min_max d-flex justify-content-around align-items-flex-start flex-column">
+              <span>Min: {{ getProviderMin(quote) }}</span>
+              <span>Max: {{ getProviderMax(quote) }}</span>
             </div>
-            <div class="col-2 quote-list_quote_max d-flex align-items-center">
-              {{ getProviderMax(quote) }}
-            </div>
-            <div class="col-4 quote-list_quote_provider d-flex align-items-center flex-wrap">
+            <div class="col-4 px-2 quote-list_quote_provider d-flex justify-content-center align-items-flex-start flex-column">
               <div style="white-space: nowrap">
                 <img :src="getProviderIcon(quote)" class="mr-2" />
                 {{ getProviderName(quote) }}
               </div>
               <span v-if="getAgentName(quote)">{{ getAgentName(quote) }}</span>
             </div>
-            <div class="col-2 d-flex align-items-center">
-              <TickBlue v-if="quote.provider === selectedProvider && quote.agentName === selectedAgent" class="quote-list_tick" />
+            <div class="col-1 px-0 d-flex align-items-center">
+              <TickBlue class="quote-list_tick" v-if="quote.provider === selectedProvider && quote.agentName === selectedAgent"/>
             </div>
           </div>
         </div>
@@ -111,7 +108,11 @@ export default {
       return getSwapProviderIcon(this.activeNetwork, quote.provider)
     },
     getProviderRate(quote) {
-      return dpUI(calculateQuoteRate(quote))
+      const rate = calculateQuoteRate(quote)
+      if (rate.lt(1e-6)) {
+        return dpUI(rate, 10) // decimals = 10 to display very small rate (for trading pairs like YAC/BTC)
+      }
+      return dpUI(rate)
     },
     getProviderMin(quote) {
       if (quote.min) {
@@ -174,7 +175,8 @@ export default {
   }
 
   &_tick {
-    height: 13px;
+    width: 45%;
+    height: 45%;
   }
 }
 

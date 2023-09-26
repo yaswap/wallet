@@ -843,7 +843,10 @@ export default {
     quoteRate() {
       if (!this.selectedQuote) return null
       const rate = calculateQuoteRate(this.selectedQuote)
-      return dpUI(rate, 10) // decimals = 10 to display very small rate (for trading pairs like YAC/BTC)
+      if (rate.lt(1e-6)) {
+        return dpUI(rate, 10) // decimals = 10 to display very small rate (for trading pairs like YAC/BTC)
+      }
+      return dpUI(rate)
     },
     bestQuote() {
       const sortedQuotes = sortQuotes(this.quotes, this.activeNetwork)

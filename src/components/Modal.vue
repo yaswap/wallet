@@ -139,6 +139,9 @@ export default {
   .modal-body {
     padding: 5px 20px 0 20px;
   }
+  .modal-body-quotes {
+    padding: 5px 5px 0 5px;
+  }
 }
 
 .modal-header-container {
