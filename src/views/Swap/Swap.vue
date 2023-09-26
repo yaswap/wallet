@@ -96,7 +96,20 @@
             @to-asset-click="toAssetClick"
           />
         </div>
-        <div class="mt-30 form-group swap-rate" id="rate_block">
+        <div class="mt-20 form-group">
+          <label class="field-label" for="userSelectedQuote">Auto-select swap provider
+            <InfoIcon v-tooltip="{ content: 'Auto-select swap provider with best rate according to your input swap amount.', placement: 'bottom', trigger: 'hover focus' }"/>
+          </label>
+          <input
+            type="checkbox"
+            value=""
+            v-model="userSelectedQuote"
+            id="userSelectedQuote"
+            :true-value="false"
+            :false-value="true"
+          />
+        </div>
+        <div class="mt-10 form-group swap-rate" id="rate_block">
           <label class="d-flex align-items-center">
             {{ $t('common.rate') }}
             <SwapProviderLabel
@@ -532,6 +545,7 @@ import {
 import SwapIcon from '@/assets/icons/arrow_swap.svg'
 import SpinnerIcon from '@/assets/icons/spinner.svg'
 import ArrowDown from '@/assets/icons/arrow-down.svg'
+import InfoIcon from '@/assets/icons/info.svg'
 import DetailsContainer from '@/components/DetailsContainer'
 import SendInput from './SendInput'
 import ReceiveInput from './ReceiveInput'
@@ -568,6 +582,7 @@ export default {
     SwapIcon,
     SpinnerIcon,
     ArrowDown,
+    InfoIcon,
     DetailsContainer,
     SendInput,
     ReceiveInput,
@@ -729,7 +744,7 @@ export default {
       return this.$route.query.source || null
     },
     showNoSelectedQuoteMessage() {
-      return !this.userSelectedQuote && !this.selectedQuote && !this.updatingQuotes
+      return !this.selectedQuote && !this.updatingQuotes
     },
     showInvalidInputAmountMessage() {
       console.log('TACA ===> showInvalidInputAmountMessage(), this.selectedQuote = ', this.selectedQuote, ', this.updatingQuotes = ', this.updatingQuotes, ', this.invalidInputAmountError = ', this.invalidInputAmountError)
@@ -753,7 +768,7 @@ export default {
         return `The input swap amount is too small. Please increase the amount to at least ${dpUI(this.minSwapAmountAllProvider)} ${this.asset}.`
       }
 
-      return `Your input swap amount isn't in the range which support by any swap provider.`
+      return `Your input swap amount isn't in the range of min/max swap amount which support by any swap provider.`
     },
     invalidInputAmountError() {
       console.log('TACA ===> invalidInputAmountError, this.sendAmount = ', BN(this.sendAmount).toString(), ', this.maxSwapAmountCurProvider = ', this.maxSwapAmountCurProvider, ', this.minSwapAmountCurProvider = ', this.minSwapAmountCurProvider)
@@ -1166,6 +1181,7 @@ export default {
       } else if (!this.amountOption && !this.sendAmount) {
         this.sendAmount = dpUI(this.defaultAmount)
       }
+      this.userSelectedQuote = false
       this.resetFees()
       this.updateQuotes()
       this.updateFiatRates({ assets: [toAsset] })
@@ -1185,6 +1201,7 @@ export default {
         amount = unitToCurrency(cryptoassets[asset], amount).toFixed()
       }
       this.sendAmount = dpUI(amount ?? this.defaultAmount)
+      this.userSelectedQuote = false
       this.resetFees()
       this.updateQuotes()
       this.updateFiatRates({ assets: [asset] })
@@ -1806,6 +1823,18 @@ export default {
     width: 20px;
     height: 18px;
     fill: #a8aeb7;
+  }
+}
+
+.field-label {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  svg {
+    height: 18px;
+    width: $wrapper-padding;
+    object-fit: cover;
+    margin-right: 10px;
   }
 }
 
