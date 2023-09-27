@@ -1,8 +1,10 @@
 <template>
   <v-popover offset="1" trigger="hover focus" placement="top">
     <div class="btn btn-option swap-provider-label" @click="$emit('click')">
-      <span class="d-flex align-content-center flex-wrap">
-        <img :src="icon" class="mr-1" /><span id="selectedQuote_provider">{{ label }}</span>
+      <span class="d-flex justify-content-center align-items-flex-start flex-column p-1">
+        <div>
+          <img :src="icon" class="mr-1" /><span id="selectedQuote_provider">{{ label }}</span>
+        </div>
         <span id="selectedQuote_agent" v-if="agentName">{{ agentName }}</span>
       </span>
     </div>
