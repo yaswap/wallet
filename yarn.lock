@@ -8862,10 +8862,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bufio@npm:^1.0.7":
-  version: 1.2.1
-  resolution: "bufio@npm:1.2.1"
-  checksum: b6e1216f4a5877617a3580b83807d8b96c794c015bc2d5eb9e70e152dc79fe923517472bd96df3d5b8feb59a0e25e2aa3cd8a70b8f90905b92d86f2e5719ed68
+"bufio@npm:1.2.0":
+  version: 1.2.0
+  resolution: "bufio@npm:1.2.0"
+  checksum: c5cc0009990ed62634ea7f8c07dcf92f1075231d3a34c4cdd2a3d0cfadef45f49b4277f4e41ce4eb0d2aecd9796c98ca034ca7c5fcb07a94469d8866c0da8e92
   languageName: node
   linkType: hard
 
