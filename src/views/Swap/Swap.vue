@@ -723,6 +723,8 @@ export default {
     this.trackNoLiquidity()
   },
   beforeDestroy() {
+    console.log('TACA ===> Swap.vue, beforeDestroy()')
+    clearTimeout(this.quoteTimer)
     clearInterval(this.interval)
   },
   computed: {
