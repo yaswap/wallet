@@ -649,7 +649,6 @@ export default {
     this.asset = this.routeAsset
     this.fromAccountId = this.accountId
 
-    console.log('TACA ===> Swap.vue, created(), this.asset = ', this.asset, ', this.fromAccountId = ', this.fromAccountId, ', this.$route = ', this.$route)
     if (this.$route.query.mode === 'tab') {
       const swapParams = qs.parse(qs.stringify(this.$route.query))
       const {
@@ -723,7 +722,6 @@ export default {
     this.trackNoLiquidity()
   },
   beforeDestroy() {
-    console.log('TACA ===> Swap.vue, beforeDestroy()')
     clearTimeout(this.quoteTimer)
     clearInterval(this.interval)
   },
@@ -749,38 +747,30 @@ export default {
       return !this.selectedQuote && !this.updatingQuotes
     },
     showInvalidInputAmountMessage() {
-      console.log('TACA ===> showInvalidInputAmountMessage(), this.selectedQuote = ', this.selectedQuote, ', this.updatingQuotes = ', this.updatingQuotes, ', this.invalidInputAmountError = ', this.invalidInputAmountError)
       return this.selectedQuote && !this.updatingQuotes && this.invalidInputAmountError
     },
     noSelectedQuoteError() {
-      console.log('TACA ===> noSelectedQuoteError this.userSelectedQuote = ', this.userSelectedQuote, ', this.isPairAvailable = ', this.isPairAvailable, ', this.sendAmount = ', this.sendAmount, ', this.maxSwapAmountAllProvider = ', this.maxSwapAmountAllProvider, ', this.minSwapAmountAllProvider = ', this.minSwapAmountAllProvider)
       if (!this.isPairAvailable) {
-        console.log('TACA ===> noSelectedQuoteError case 1')
         return `This pair isn't traded yet or there's a problem trading it at the moment. Maybe there is a way to do multiple swaps to get that desired token.`
       }
 
       const maxAmount = this.maxSwapAmountAllProvider
       if ((maxAmount || maxAmount === 0) && BN(this.sendAmount).gt(maxAmount)) {
-        console.log('TACA ===> noSelectedQuoteError case 2')
         return `Not enough liquidity for this trade, maximum input swap amount is ${dpUI(maxAmount)} ${this.asset}. Please lower the amount or request liquidity for ${this.asset}-${this.toAsset} in discord or try again later.`
       }
 
       if (BN(this.sendAmount).lt(this.minSwapAmountAllProvider)) {
-        console.log('TACA ===> noSelectedQuoteError case 3')
         return `The input swap amount is too small. Please increase the amount to at least ${dpUI(this.minSwapAmountAllProvider)} ${this.asset}.`
       }
 
       return `Your input swap amount isn't in the range of min/max swap amount which support by any swap provider.`
     },
     invalidInputAmountError() {
-      console.log('TACA ===> invalidInputAmountError, this.sendAmount = ', BN(this.sendAmount).toString(), ', this.maxSwapAmountCurProvider = ', this.maxSwapAmountCurProvider, ', this.minSwapAmountCurProvider = ', this.minSwapAmountCurProvider)
       const maxAmount = this.maxSwapAmountCurProvider
       if ((maxAmount || maxAmount === 0) && BN(this.sendAmount).gt(maxAmount)) {
-        console.log('TACA ===> noSelectedQuoteError case 4')
         return `Not enough liquidity for this trade, the swap provider you selected supports maximum input swap amount = ${dpUI(maxAmount)} ${this.asset}. Please lower the amount or select another swap provider.`
       }
       if (BN(this.sendAmount).lt(this.minSwapAmountCurProvider)) {
-        console.log('TACA ===> noSelectedQuoteError case 5')
         return `The input swap amount is too small, the swap provider you selected supports minimum swap amount = ${dpUI(this.minSwapAmountCurProvider)} ${this.asset}. Please increase the amount or select another swap provider.`
       }
       return ''
@@ -861,11 +851,9 @@ export default {
         }
         return true
       })
-      console.log('TACA ===> Swap.vue, bestQuote(), sortedQuotes = ', sortedQuotes, ', this.safeAmount = ', this.safeAmount, ', bestQuote = ', bestQuote)
       return bestQuote
     },
     selectedQuoteProvider() {
-      console.log('TACA ===> Swap.vue, recalculate selectedQuoteProvider()')
       if (!this.selectedQuote) return null
       return getSwapProvider(this.activeNetwork, this.selectedQuote.provider)
     },
@@ -895,7 +883,6 @@ export default {
     },
     min() {
       const min = this.userSelectedQuote ? this.minSwapAmountCurProvider : this.minSwapAmountAllProvider
-      console.log('TACA ===> Swap.vue, computed min(), this.userSelectedQuote = ', this.userSelectedQuote, ', min = ', min)
       return Math.ceil(min * Math.pow(10, 6)) / Math.pow(10, 6)
     },
     maxAvailableBalance() {
@@ -1261,7 +1248,6 @@ export default {
         await addFees(this.toAsset, this.toAssetChain, toTxType)
       }
 
-      console.log('TACA ===> Swap.vue, _updateSwapFees, fees = ', fees, ', max = ', max)
       if (max) {
         this.maxSwapFees = fees
       } else {
@@ -1308,9 +1294,6 @@ export default {
       await this._updateQuotes()
     }, 1000),
     setQuotes(quotes, shouldReselect) {
-      console.log('TACA ===> Swap.vue, setQuotes(), quotes = ', quotes)
-      console.log('TACA ===> Swap.vue, setQuotes(), default selectedQuote = ', this.selectedQuote)
-      console.log('TACA ===> Swap.vue, setQuotes(), shouldReselect = ', shouldReselect, ', this.userSelectedQuote = ', this.userSelectedQuote)
       if (
         quotes &&
         quotes.length &&
@@ -1321,7 +1304,6 @@ export default {
         if (this.selectedQuote) {
           // Preserve selected provider
           if (this.userSelectedQuote) {
-            console.log('TACA ===> Swap.vue, setQuotes(), case 1')
             const matchingQuote = this.quotes.find(
               (q) => q.provider === this.selectedQuote.provider && q.agentName === this.selectedQuote.agentName
             )
@@ -1332,13 +1314,11 @@ export default {
           }
         } else {
           this.selectedQuote = this.bestQuote
-          console.log('TACA ===> Swap.vue, setQuotes(), Choose best quote = ', this.selectedQuote)
         }
       } else {
         this.selectedQuote = null
       }
 
-      console.log('TACA ===> Swap.vue, setQuotes(), Selected quote = ', this.selectedQuote)
       this.resetQuoteTimer(!this.canSwap ? 10000 : QUOTE_TIMER_MS)
     },
     async _updateQuotes() {
@@ -1352,7 +1332,6 @@ export default {
         walletId: this.activeWalletId,
         slowQuoteThreshold: 5000
       })
-      console.log('TACA ===> Swap.vue, _updateQuotes(), from = ', this.asset, ', to = ', this.toAsset, ', amount = ', this.sendAmount, ', result = ', result)
       /*
         result contains SwapQuote ???
         export interface SwapQuote extends GetQuoteResult {
@@ -1472,12 +1451,10 @@ export default {
       this.currentStep = 'inputs'
     },
     toAssetClick() {
-      console.log('TACA ===> Swap.vue, toAssetClick')
       this.assetSelection = 'to'
       this.currentStep = 'accounts'
     },
     fromAssetClick() {
-      console.log('TACA ===> Swap.vue, fromAssetClick')
       this.assetSelection = 'from'
       this.currentStep = 'accounts'
     },
@@ -1625,7 +1602,6 @@ export default {
     },
     maxAvailableBalance: function (val, oldVal) {
       // Update sendAmount
-      console.log('TACA ===> calling watcher maxAvailableBalance with val = ', val, ' and oldVal = ', oldVal)
       if (BN(val).eq(oldVal)) return
 
       if (this.amountOption === 'maxAvailableBalance') {
@@ -1633,7 +1609,6 @@ export default {
       }
     },
     quotes: function (val) {
-      console.log('TACA ===> Swap.vue, watcher quotes, val = ', val)
       if (!val) return
 
       // Update min swap amount of all providers
@@ -1665,22 +1640,12 @@ export default {
         }, val[0].max)
       }
 
-      console.log('TACA ===> Swap.vue, watcher quotes, this.minSwapAmountAllProvider = ', this.minSwapAmountAllProvider, ' this.maxSwapAmountAllProvider = ', this.maxSwapAmountAllProvider)
     },
     selectedQuote: function (val) {
-      console.log('TACA ===> Swap.vue, watcher selectedQuote')
-
       if (!val) return
-      // Update min swap amount for the selected quote
-      // if (this.activeNetwork && this.asset && this.toAsset && this.sendAmount) {
-      //   this.minSwapAmountCurProvider = val.min
-      //   console.log('TACA ===> Swap.vue, watcher selectedQuote, this.minSwapAmountCurProvider = ', this.minSwapAmountCurProvider)
-      // }
-
       // Update min/max swap amount for the selected quote
       this.minSwapAmountCurProvider = val.min
       this.maxSwapAmountCurProvider = val.max
-      console.log('TACA ===> Swap.vue, watcher selectedQuote, this.minSwapAmountCurProvider = ', this.minSwapAmountCurProvider, ', this.maxSwapAmountCurProvider = ', this.maxSwapAmountCurProvider)
 
       // Update swapFees, maxSwapFees and update quotes
       this._updateSwapFees() // Skip debounce
@@ -1691,7 +1656,6 @@ export default {
     },
     currentStep: function (val) {
       // Update quotes
-      console.log('TACA ===> Swap.vue, currentStep, val = ', val)
       if (val === 'inputs') this.updateQuotes()
     }
   }
