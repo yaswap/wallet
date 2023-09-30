@@ -5,7 +5,7 @@
         <div>
           <img :src="icon" class="mr-1" /><span id="selectedQuote_provider">{{ label }}</span>
         </div>
-        <span id="selectedQuote_agent" v-if="agentName">{{ agentName }}</span>
+        <span id="selectedQuote_agent" v-if="agentName">Agent: {{ agentName }}</span>
       </span>
     </div>
     <template slot="popover">

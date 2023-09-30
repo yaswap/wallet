@@ -32,11 +32,11 @@
               <span>Max: {{ getProviderMax(quote) }}</span>
             </div>
             <div class="col-4 px-2 quote-list_quote_provider d-flex justify-content-center align-items-flex-start flex-column">
-              <div style="white-space: nowrap">
-                <img :src="getProviderIcon(quote)" class="mr-2" />
+              <div>
+                <img :src="getProviderIcon(quote)" class="mr-1" />
                 {{ getProviderName(quote) }}
               </div>
-              <span v-if="getAgentName(quote)">{{ getAgentName(quote) }}</span>
+              <span v-if="getAgentName(quote)">Agent: {{ getAgentName(quote) }}</span>
             </div>
             <div class="col-1 px-0 d-flex align-items-center">
               <TickBlue class="quote-list_tick" v-if="quote.provider === selectedProvider && quote.agentName === selectedAgent"/>
