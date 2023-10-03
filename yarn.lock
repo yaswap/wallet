@@ -6421,9 +6421,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yaswap/cryptoassets@npm:2.5.2, @yaswap/cryptoassets@npm:^2.5.2":
-  version: 2.5.2
-  resolution: "@yaswap/cryptoassets@npm:2.5.2"
+"@yaswap/cryptoassets@npm:2.5.4, @yaswap/cryptoassets@npm:^2.5.4":
+  version: 2.5.4
+  resolution: "@yaswap/cryptoassets@npm:2.5.4"
   dependencies:
     "@ethersproject/address": 5.7.0
     "@types/bs58": 4.0.1
@@ -6434,19 +6434,19 @@ __metadata:
     ethereumjs-util: 7.1.5
     lodash: 4.17.21
     sha256-uint8array: ^0.10.3
-  checksum: 517f21290a8ee8e6e5aa6027d605d5c080c06b8536d44c4d1b4a912f8a79567f9f682b30ec48454f0bc3e71d8480e1d79bbcd1762be891a3d0b521aaa2ce78ea
+  checksum: 953d3da53657c36eaf5494039cbfd4b7bf5f33bfa057852e686984859cee753cdaa31f122b66eae4a44fd9b1349ca60621cfbc8f05e539117dbab889c38a4bdc
   languageName: node
   linkType: hard
 
-"@yaswap/error-parser@npm:2.5.2, @yaswap/error-parser@npm:^2.5.2":
-  version: 2.5.2
-  resolution: "@yaswap/error-parser@npm:2.5.2"
+"@yaswap/error-parser@npm:2.5.4, @yaswap/error-parser@npm:^2.5.4":
+  version: 2.5.4
+  resolution: "@yaswap/error-parser@npm:2.5.4"
   dependencies:
     "@yaswap/client": 2.4.0
-    "@yaswap/cryptoassets": 2.5.2
+    "@yaswap/cryptoassets": 2.5.4
     "@yaswap/errors": 2.4.0
     randombytes: ^2.1.0
-  checksum: 026bafb31fdcef84bd27dff785603afb076e95cb726effab77fbce414bd37ec3d6b5419cb8ba30465f73bb361e12f3d3cf025fd615db79c3da32f7282580ac64
+  checksum: 2bbad3b7be8559700cb22d14d52f62b199ec799a3979c6d101b27fdbd9cef17c3eff5bf29d212198dd8829c094fcf538ee5fb8cf78d671167ec011aa0a2394da
   languageName: node
   linkType: hard
 
@@ -6607,9 +6607,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@yaswap/wallet-core@npm:^2.5.2":
-  version: 2.5.2
-  resolution: "@yaswap/wallet-core@npm:2.5.2"
+"@yaswap/wallet-core@npm:^2.5.4":
+  version: 2.5.4
+  resolution: "@yaswap/wallet-core@npm:2.5.4"
   dependencies:
     "@blobfishkate/sovryncontracts": 1.3.27
     "@eth-optimism/sdk": 1.1.5
@@ -6636,8 +6636,8 @@ __metadata:
     "@yaswap/bitcoin": 2.4.0
     "@yaswap/bitcoin-ledger": 2.4.0
     "@yaswap/client": 2.4.0
-    "@yaswap/cryptoassets": 2.5.2
-    "@yaswap/error-parser": 2.5.2
+    "@yaswap/cryptoassets": 2.5.4
+    "@yaswap/error-parser": 2.5.4
     "@yaswap/errors": 2.4.0
     "@yaswap/evm": 2.4.0
     "@yaswap/evm-ledger": 2.4.0
@@ -6665,7 +6665,7 @@ __metadata:
     urql: ^2.2.0
     vue: ^2.6.11
     vuex: ^3.1.3
-  checksum: 99df567059b8108e47486876eb7269f5acb86ff5949130412bef6c7d9c4031b2b99bb327c479b6e1a83b6bb03439d244a0e19b89155cbab45690eb0cd91f8c69
+  checksum: aa4550c89f8606450018ce9dee625401cc0b3356fca6cdfe2ef3ea70ff13cc5f4242aaab95c8f81571c38428b5f7858b9d796e916d2cc408601aacd78277c839
   languageName: node
   linkType: hard
 
@@ -29646,10 +29646,10 @@ __metadata:
     "@vue/devtools": ^6.4.5
     "@vue/eslint-config-prettier": ^6.0.0
     "@vue/test-utils": 1.3.4
-    "@yaswap/cryptoassets": ^2.5.2
-    "@yaswap/error-parser": ^2.5.2
+    "@yaswap/cryptoassets": ^2.5.4
+    "@yaswap/error-parser": ^2.5.4
     "@yaswap/hw-ledger": ^2.4.0
-    "@yaswap/wallet-core": ^2.5.2
+    "@yaswap/wallet-core": ^2.5.4
     "@yaswap/yacoinjs-lib": ^1.3.0
     amplitude-js: 8.18.2
     babel-eslint: ^10.1.0
