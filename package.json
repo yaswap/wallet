@@ -133,6 +133,9 @@
     "@ledgerhq/hw-app-eth": "6.30.5",
     "@ledgerhq/hw-app-btc": "9.1.2",
     "@solana/web3.js": "1.50.1",
-    "bufio": "1.2.0"
+    "bufio": "1.2.0",
+    "@yaswap/cryptoassets": "link:/home/chaunguyen/projects/yacoin/yaswap/wallet-core/packages/cryptoassets",
+    "@yaswap/error-parser": "link:/home/chaunguyen/projects/yacoin/yaswap/wallet-core/packages/error-parser",
+    "@yaswap/wallet-core": "link:/home/chaunguyen/projects/yacoin/yaswap/wallet-core/packages/wallet-core"
   }
 }
