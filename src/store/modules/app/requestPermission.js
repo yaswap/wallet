@@ -24,7 +24,7 @@ const CONFIRM_REQUIRED = [
   /^swap.refundSwap$/,
   /^swap.updateTransactionFee$/,
 
-  // Bitcoin
+  // Bitcoin, Litecoin
   /^wallet.signPSBT$/,
   // Yacoin
   /^wallet.signTx$/
