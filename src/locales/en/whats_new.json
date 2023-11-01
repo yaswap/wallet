@@ -3,7 +3,8 @@
     "page": "1",
     "title": "What's New?",
     "content": [
-      "Support litecoin"
+      "Support multiple Yaswap atomic agents",
+      "Integrate BTC explorer mempool.space"
     ]
   }
 ]
