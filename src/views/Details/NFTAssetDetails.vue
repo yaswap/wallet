@@ -156,6 +156,32 @@
                           {{ nftAsset.description || defaultDescription }}
                         </td>
                       </tr>
+                      <!-- Documents -->
+                      <tr>
+                        <td class="text-muted text-left small-12">
+                          Documents
+                        </td>
+                        <td class="text-break">
+                          <span v-if="!nftAsset.documents">
+                            -
+                          </span>
+                          <a v-else-if="nftAsset.documents.length === 1"
+                            class="text-primary"
+                            :href="nftAsset.documents[0]"
+                            target="_blank"
+                          >
+                            {{ nftAsset.documents[0] }}
+                          </a>
+                          <ol v-else>
+                            <li v-for="document in nftAsset.documents"
+                                :id="document"
+                                :key="document"
+                            >
+                            <a class="text-primary" :href="document" target="_blank">{{ document }}</a>
+                            </li>
+                          </ol>
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>

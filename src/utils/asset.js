@@ -30,6 +30,10 @@ export const getAssetDescription = (asset) => {
   return cryptoassets[asset]?.tokenMetadata?.description
 }
 
+export const getAssetDocuments = (asset) => {
+  return cryptoassets[asset]?.tokenMetadata?.documents
+}
+
 export const getAssetLengthLimitDisplay = () => {
   return 12
 }

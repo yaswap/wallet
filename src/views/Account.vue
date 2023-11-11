@@ -180,6 +180,32 @@
                       />
                     </td>
                   </tr>
+                  <!-- Documents -->
+                  <tr>
+                    <td class="text-muted text-left small-12">
+                      Documents
+                    </td>
+                    <td class="text-break">
+                      <span v-if="!documents">
+                        -
+                      </span>
+                      <a v-else-if="documents.length === 1"
+                         class="text-primary"
+                         :href="documents[0]"
+                         target="_blank"
+                      >
+                          {{ documents[0] }}
+                      </a>
+                      <ol v-else>
+                        <li v-for="document in documents"
+                            :id="document"
+                            :key="document"
+                         >
+                         <a class="text-primary" :href="document" target="_blank">{{ document }}</a>
+                        </li>
+                      </ol>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -314,7 +340,7 @@ import {
 import { shortenAddress } from '@yaswap/wallet-core/dist/src/utils/address'
 import { getAddressExplorerLink } from '@yaswap/wallet-core/dist/src/utils/asset'
 import { getAccountIcon } from '@/utils/accounts'
-import { getAssetIcon, getAssetFullName, getAssetDescription } from '@/utils/asset'
+import { getAssetIcon, getAssetFullName, getAssetDescription, getAssetDocuments } from '@/utils/asset'
 import TransactionList from '@/components/TransactionList'
 import ActivityFilter from '@/components/ActivityFilter'
 import { applyActivityFilters } from '@yaswap/wallet-core/dist/src/utils/history'
@@ -369,6 +395,9 @@ export default {
     },
     account() {
       return this.accountItem(this.accountId)
+    },
+    documents() {
+      return getAssetDocuments(this.asset)
     },
     fiat() {
       return this.account?.fiatBalances?.[this.asset] || BN(0)
