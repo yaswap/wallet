@@ -4,6 +4,7 @@ export const getAccountIcon = (chain) => {
   return {
     bitcoin: getAssetIcon('BTC'),
     litecoin: getAssetIcon('LTC'),
+    dogecoin: getAssetIcon('DOGE'),
     yacoin: getAssetIcon('YAC'),
     ethereum: getAssetIcon('eth_account'),
     bsc: getAssetIcon('bnb_account', 'png'),
@@ -23,6 +24,7 @@ export const getChainIcon = (chainId) => {
   return {
     bitcoin: getAssetIcon(`${chainId}_chain`),
     litecoin: getAssetIcon('LTC'),
+    dogecoin: getAssetIcon('DOGE'),
     yacoin: getAssetIcon('YAC'),
     ethereum: getAssetIcon(`${chainId}_chain`),
     bsc: getAssetIcon(`${chainId}_chain`),

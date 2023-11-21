@@ -130,6 +130,7 @@ export default {
         return {
           bitcoin: 'bitcoin',
           litecoin: 'litecoin',
+          dogecoin: 'dogecoin',
           yacoin: 'yacoin',
           near: 'near',
           solana: 'solana',

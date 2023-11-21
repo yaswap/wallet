@@ -26,7 +26,7 @@ const CONFIRM_REQUIRED = [
 
   // Bitcoin, Litecoin
   /^wallet.signPSBT$/,
-  // Yacoin
+  // Yacoin, Dogecoin
   /^wallet.signTx$/
 ]
 

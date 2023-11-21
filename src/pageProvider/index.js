@@ -4,6 +4,7 @@ import { GlobalEthereumPageProvider } from './globalEthereumProvider'
 import { BitcoinPageProvider } from './bitcoinProvider'
 import { YacoinPageProvider } from './yacoinProvider'
 import { LitecoinPageProvider } from './litecoinProvider'
+import { DogecoinPageProvider } from './dogecoinProvider'
 import { PagementURIPageProvivder } from './paymentUri'
 import { TerraPageProvider } from './terraProvider'
 import { NearPageProvider } from './nearProvider'
@@ -22,6 +23,7 @@ const providers = [
   new BitcoinPageProvider(window),
   new YacoinPageProvider(window),
   new LitecoinPageProvider(window),
+  new DogecoinPageProvider(window),
   new NearPageProvider(window),
   new SolanaPageProvider(window),
   new TerraPageProvider(window),
