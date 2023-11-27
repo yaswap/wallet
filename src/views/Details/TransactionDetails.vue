@@ -280,9 +280,17 @@ export default {
         chainId: cryptoassets[this.item.from].chain,
         accountId: this.item.accountId
       })
-      const transaction =
-        (await client.chain.getTransactionByHash(this.item.txHash)) || this.item.tx
-      this.tx = transaction
+
+      try {
+        const transaction =
+          (await client.chain.getTransactionByHash(this.item.txHash)) || this.item.tx
+        this.tx = transaction
+      } catch (e) {
+        if (e.name === 'TxNotFoundError') {
+          console.warn(e);
+          this.tx = this.item.tx
+        } else throw e;
+      }
     },
     goBack() {
       this.$router.go(-1)
