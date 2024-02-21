@@ -1,9 +1,9 @@
-const path = require('path')
-const AssetReplacePlugin = require('./plugins/AssetReplacePlugin')
-const CopyPlugin = require('copy-webpack-plugin')
-const webpack = require('webpack')
+const path = require('path');
+const AssetReplacePlugin = require('./plugins/AssetReplacePlugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 
-const isDevelopment = process.env.NODE_ENV === 'development'
+const isDevelopment = process.env.NODE_ENV === 'development';
 
 module.exports = {
   lintOnSave: false,
@@ -12,38 +12,35 @@ module.exports = {
   css: {
     loaderOptions: {
       sass: {
-        prependData: '@import "@/assets/scss/_vars.scss";'
-      }
-    }
+        prependData: '@import "@/assets/scss/_vars.scss";',
+      },
+    },
   },
 
   configureWebpack: (config) => {
-    config.entry.pageProvider = path.resolve('./src/pageProvider/index.js')
+    config.entry.pageProvider = path.resolve('./src/pageProvider/index.js');
     config.plugins.push(
       new webpack.NormalModuleReplacementPlugin(
         /@ledgerhq\/cryptoassets\/data\/erc20-signatures/,
         '@ledgerhq/cryptoassets/lib/data/erc20-signatures'
       )
-    )
+    );
     config.plugins.push(
       new webpack.NormalModuleReplacementPlugin(
         /@ledgerhq\/cryptoassets\/data\/eip712/,
         '@ledgerhq/cryptoassets/lib/data/eip712'
       )
-    )
+    );
     config.plugins.push(
-      new webpack.NormalModuleReplacementPlugin(
-        /@ledgerhq\/devices\/hid-framing/,
-        '@ledgerhq/devices/lib/hid-framing'
-      )
-    )
+      new webpack.NormalModuleReplacementPlugin(/@ledgerhq\/devices\/hid-framing/, '@ledgerhq/devices/lib/hid-framing')
+    );
 
     config.plugins.push(
       new AssetReplacePlugin({
         name: '#PAGEPROVIDER#',
-        entry: 'pageProvider'
+        entry: 'pageProvider',
       })
-    )
+    );
 
     config.plugins.push(
       new CopyPlugin({
@@ -52,34 +49,34 @@ module.exports = {
             context: './src/locales',
             from: '**/messages.json',
             to({ context, absoluteFilename }) {
-              return `_locales/${path.relative(context, absoluteFilename)}`
-            }
-          }
-        ]
+              return `_locales/${path.relative(context, absoluteFilename)}`;
+            },
+          },
+        ],
       })
-    )
+    );
 
     config.optimization.splitChunks = {
       cacheGroups: {
-        default: false
-      }
-    }
+        default: false,
+      },
+    };
     if (isDevelopment) {
-      config.devtool = 'cheap-source-map'
+      config.devtool = 'cheap-source-map';
     }
   },
 
   chainWebpack: (config) => {
-    config.resolve.alias.set('vue', path.resolve('./node_modules/vue'))
-    config.resolve.alias.set('vuex', path.resolve('./node_modules/vuex'))
+    config.resolve.alias.set('vue', path.resolve('./node_modules/vue'));
+    config.resolve.alias.set('vuex', path.resolve('./node_modules/vuex'));
     config.resolve.alias.set(
       '@ledgerhq/devices/hid-framing',
       path.resolve('./node_modules/@ledgerhq/devices/lib-es/hid-framing')
-    )
+    );
 
-    const svgRule = config.module.rule('svg')
+    const svgRule = config.module.rule('svg');
 
-    svgRule.uses.clear()
+    svgRule.uses.clear();
 
     svgRule
       .oneOf('inline')
@@ -96,54 +93,65 @@ module.exports = {
       .loader('vue-svg-loader')
       .options({
         svgo: {
-          plugins: [{ removeViewBox: false }, { removeDimensions: true }]
-        }
-      })
+          plugins: [{ removeViewBox: false }, { removeDimensions: true }],
+        },
+      });
 
     config.module
       .rule('html')
       .test(/\.html$/)
       .use('raw-loader')
-      .loader('raw-loader')
+      .loader('raw-loader');
+
+    config.module
+      .rule('supportChaining')
+      .test(/\.js$/)
+      //.include.add(path.resolve('/home/chaunguyen/projects/yacoin/yaswap/wallet-core/node_modules/bitcoinselect'))
+      .include.add(path.resolve('node_modules/bitcoinselect'))
+      .end()
+      .use('babel-loader')
+      .loader('babel-loader')
+      .tap((options) => ({ ...options, plugins: ['@babel/plugin-proposal-optional-chaining'] }))
+      .end();
   },
 
   pluginOptions: {
     browserExtension: {
       componentOptions: {
         background: {
-          entry: 'src/background.js'
+          entry: 'src/background.js',
         },
         contentScripts: {
           entries: {
-            'content-script': ['src/contentScript.js']
-          }
-        }
+            'content-script': ['src/contentScript.js'],
+          },
+        },
       },
       extensionReloaderOptions: {
         entries: {
           contentScript: ['pageProvider', 'content-script'],
-          background: 'background'
-        }
+          background: 'background',
+        },
       },
       manifestTransformer: (manifest) => {
         manifest.content_security_policy =
-          "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdn.segment.com 'sha256-ZgDy59Dh4jH9g/vcPYFpoQ1wumB4IdPEOS1BJc08i+Y='; object-src 'self';"
-        return manifest
-      }
-    }
+          "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdn.segment.com 'sha256-ZgDy59Dh4jH9g/vcPYFpoQ1wumB4IdPEOS1BJc08i+Y='; object-src 'self';";
+        return manifest;
+      },
+    },
   },
 
   pages: {
     popup: {
       template: 'public/index.html',
       entry: './src/main.js',
-      title: 'Yaswap Wallet'
+      title: 'Yaswap Wallet',
     },
     standalone: {
       template: 'public/index.html',
       entry: './src/main.js',
       title: 'Yaswap Wallet',
-      filename: 'index.html'
-    }
-  }
-}
+      filename: 'index.html',
+    },
+  },
+};
