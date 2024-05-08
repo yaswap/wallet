@@ -1,3 +1,4 @@
+import axios from 'axios'
 import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
@@ -11,6 +12,7 @@ Vue.use(ToggleButton)
 Vue.use(VTooltip)
 Vue.config.productionTip = false
 Vue.use(Localization)
+Vue.prototype.$axios = axios
 
 new Vue({
   name: 'Yaswap Wallet',

@@ -3,7 +3,8 @@
     "page": "1",
     "title": "What's New?",
     "content": [
-      "Support dogecoin"
+      "Integrate with self-hosted IPFS node",
+      "Support to add and pin IPFS content"
     ]
   }
 ]

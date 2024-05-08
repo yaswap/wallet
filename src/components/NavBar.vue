@@ -55,6 +55,10 @@
           <CreateIcon />
           Create metadata JSON file
         </li>
+        <li id="add_ipfs_content" @click="addIPFSContent">
+          <CreateIcon />
+          Add and pin IPFS content
+        </li>
         <li id="ledger" @click="ledger">
           <LedgerIcon />
           Ledger
@@ -259,6 +263,19 @@ export default {
       })
       this.showMenuList = false
       this.$router.replace({ name: 'CreateMetadataFile', params: { from: this.currentRoutePath } })
+    },
+    addIPFSContent() {
+      this.trackAnalytics({
+        event: 'User clicked on Add and pin IPFS content option in navbar',
+        properties: {
+          walletVersion,
+          category: 'HamburgerIcon',
+          action: 'Click on Add and pin IPFS content',
+          label: 'User clicked on Add and pin IPFS content from menu option'
+        }
+      })
+      this.showMenuList = false
+      this.$router.replace({ name: 'AddIPFSContent', params: { from: this.currentRoutePath } })
     },
     ledger() {
       this.trackAnalytics({
