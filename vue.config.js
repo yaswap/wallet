@@ -106,8 +106,8 @@ module.exports = {
     config.module
       .rule('supportChaining')
       .test(/\.js$/)
-      //.include.add(path.resolve('/home/chaunguyen/projects/yacoin/yaswap/wallet-core/node_modules/bitcoinselect'))
-      .include.add(path.resolve('node_modules/bitcoinselect'))
+      .include.add(path.resolve('/home/chaunguyen/projects/yacoin/yaswap/wallet-core/node_modules/bitcoinselect'))
+      //.include.add(path.resolve('node_modules/bitcoinselect'))
       .end()
       .use('babel-loader')
       .loader('babel-loader')
