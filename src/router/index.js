@@ -96,9 +96,9 @@ const routes = [
     meta: { protect: true },
   },
   {
-    path: '/settings/add-IPFS-content',
-    component: () => import('@/views/AddIPFSContent'),
-    name: 'AddIPFSContent',
+    path: '/settings/upload-IPFS-content',
+    component: () => import('@/views/UploadIPFSContent'),
+    name: 'UploadIPFSContent',
     meta: { protect: true },
   },
   // Settings
