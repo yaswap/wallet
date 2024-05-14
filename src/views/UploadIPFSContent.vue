@@ -48,12 +48,16 @@
             </p>
             <img v-if="imageFile" :src="imageFile.url" class="img-responsive img-thumbnail" :alt="imageFile.originalName">
             <p v-else>
-              Selected file {{ uploadedFile.name}}
+              Selected file {{ uploadedFile.name }}
             </p>
+          </div>
+          <!--SUCCESS-->
+          <div v-if="isSuccess">
+            <p>Uploaded {{ uploadedFile.name }} file successfully.</p>
           </div>
           <!--FAILED-->
           <div v-if="isFailed">
-            <h2>Uploaded failed.</h2>
+            <p>Uploaded failed.</p>
             <p>
               <a href="javascript:void(0)" @click="resetFields()">Try again</a>
             </p>
@@ -118,9 +122,6 @@ export default {
     ...mapGetters(['accountsData', 'suggestedFeePrices']),
     timelockFeeDuration,
     timelockFeeAmountInSatoshis,
-    currentRoutePath() {
-      return this.$route.path
-    },
     account() {
       // TODO: Support other chains
       return this.accounts[this.activeWalletId][this.activeNetwork].find((acc) => acc.chain === ChainId.Yacoin)
@@ -158,11 +159,11 @@ export default {
       return `Warning: In order to upload IPFS content, ${this.timelockFeeAmountInSatoshis/1e6} ${this.asset} will be locked during ${this.timelockFeeDuration} blocks`
     },
     canUpload() {
-      if (
-        !this.uploadedFile ||
-        this.balanceError
-      )
-        return false
+      // if (
+      //   !this.uploadedFile ||
+      //   this.balanceError
+      // )
+      //   return false
 
       return true
     },
@@ -252,8 +253,8 @@ export default {
       try {
         const result = await this.$axios.post('http://127.0.0.1:3000/api/ipfsdata', formData, { headers })
         console.log("TACA ===> submitFile, result = ", result);
-        this.resetFields();
         this.currentStatus = STATUS_SUCCESS;
+        // this.resetFields();
       } catch (error) {
         this.uploadError = err.response;
         this.currentStatus = STATUS_FAILED;
