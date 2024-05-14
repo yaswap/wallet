@@ -46,10 +46,16 @@
             <p>
               <a href="javascript:void(0)" @click="resetFields()">Upload again</a>
             </p>
-            <img v-if="imageFile" :src="imageFile.url" class="img-responsive img-thumbnail" :alt="imageFile.originalName">
-            <p v-else>
+            <p>
               Selected file {{ uploadedFile.name }}
             </p>
+            <small
+              v-if="fileSizeError"
+              class="text-danger form-text"
+              id="file_size_error"
+              >{{ fileSizeError }}
+            </small>
+            <img v-if="imageFile" :src="imageFile.url" class="img-responsive img-thumbnail" :alt="imageFile.originalName">
           </div>
           <!--SUCCESS-->
           <div v-if="isSuccess">
@@ -100,6 +106,7 @@ import { timelockFeeDuration, timelockFeeAmountInSatoshis } from '@/utils/asset'
 import { getImageInfo } from '@/utils/image'
 
 const STATUS_INITIAL = 0, STATUS_SELECTED = 1, STATUS_SUCCESS = 2, STATUS_FAILED = 3;
+const FILE_SIZE_LIMIT = 5242880 // 5MB = 5242880 bytes
 
 export default {
   components: {
@@ -155,15 +162,22 @@ export default {
       }
       return null
     },
+    fileSizeError() {
+      if (this.uploadedFile.size > FILE_SIZE_LIMIT) {
+        return `The maximum allowable file size is ${FILE_SIZE_LIMIT} bytes. You selected a file with size = ${this.uploadedFile.size} bytes. Please upload another file to proceed.`;
+      }
+      return null;
+    },
     warningMessage() {
       return `Warning: In order to upload IPFS content, ${this.timelockFeeAmountInSatoshis/1e6} ${this.asset} will be locked during ${this.timelockFeeDuration} blocks`
     },
     canUpload() {
-      // if (
-      //   !this.uploadedFile ||
-      //   this.balanceError
-      // )
-      //   return false
+      if (
+        !this.uploadedFile ||
+        this.balanceError ||
+        this.fileSizeError
+      )
+        return false
 
       return true
     },
