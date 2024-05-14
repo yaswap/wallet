@@ -275,7 +275,9 @@ export default {
         }
       })
       this.showMenuList = false
-      this.$router.replace({ name: 'UploadIPFSContent', params: { from: this.currentRoutePath } })
+      browser.tabs.create({
+        url: browser.runtime.getURL('popup.html#/settings/upload-IPFS-content')
+      })
     },
     ledger() {
       this.trackAnalytics({
