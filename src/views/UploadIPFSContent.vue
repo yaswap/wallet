@@ -184,16 +184,15 @@ export default {
   },
   async created() {
     await this.updateFees({ asset: this.assetChain })
-    // const storageData = localStorage.getItem('uploadIPFSContent')
-    // if (storageData) {
-    //   this.initFormDataState(storageData)
-    //   await this.verifyAll();
-    // }
+    const storageData = localStorage.getItem('uploadIPFSContent')
+    if (storageData) {
+      this.initDataState(storageData)
+    }
   },
-  // beforeRouteLeave(to, from, next) {
-  //   this.saveFormDataState()
-  //   next();
-  // },
+  beforeRouteLeave(to, from, next) {
+    this.saveDataState()
+    next();
+  },
   methods: {
     ...mapActions([
       'updateFees'
@@ -212,6 +211,7 @@ export default {
 
         img.onload = () => {
           console.log("TACA ===> isImage, img.onload is called");
+          // This function is only called if the file is a valid image
           clearTimer();
           resolve(true);
         };
@@ -259,18 +259,31 @@ export default {
         this.currentStatus = STATUS_FAILED;
       }
     },
-    initFormDataState(storageData){
-      const formData = JSON.parse(storageData || '');
-      if(formData){
-        this.uploadedFile = formData.uploadedFile;
+    initDataState(storageData){
+      const data = JSON.parse(storageData || '');
+      if(data){
+        this.uploadedFile = data.uploadedFile;
+        this.imageFile = data.imageFile;
+        this.uploadError = data.uploadError;
+        this.currentStatus = data.currentStatus;
       }
+      console.log("TACA ===> initDataState, data = ", data)
+      console.log("TACA ===> initDataState, this.uploadedFile = ", this.uploadedFile)
+      console.log("TACA ===> initDataState, this.imageFile = ", this.imageFile)
+      console.log("TACA ===> initDataState, this.uploadError = ", this.uploadError)
+      console.log("TACA ===> initDataState, this.currentStatus = ", this.currentStatus)
     },
-    saveFormDataState(){
+    saveDataState(){
       const uploadIPFSContent = {
-        uploadedFile: this.uploadedFile
+        uploadedFile: this.uploadedFile,
+        imageFile: this.imageFile,
+        uploadError: this.uploadError,
+        currentStatus: this.currentStatus
       }
-      const formData = JSON.stringify(uploadIPFSContent);
-      localStorage.setItem('uploadIPFSContent', formData);
+      const data = JSON.stringify(uploadIPFSContent);
+      console.log("TACA ===> saveDataState, uploadIPFSContent = ", uploadIPFSContent)
+      console.log("TACA ===> saveDataState, data = ", data)
+      localStorage.setItem('uploadIPFSContent', data);
     },
     cancelUpload() {
       this.resetFields()
