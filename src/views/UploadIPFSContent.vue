@@ -31,11 +31,11 @@
 
         <!-- Box to upload file -->
         <div class="form-group">
-          <!-- <input type="file" @change="uploadFile" ref="file"> -->
+          <!-- <input type="file" @change="selectFile" ref="file"> -->
           <!--UPLOAD-->
           <form enctype="multipart/form-data" novalidate v-if="isInitial">
             <div class="dropbox">
-              <input type="file" :disabled="!isInitial" @change="uploadFile" ref="inputFile" class="input-file">
+              <input type="file" :disabled="!isInitial" @change="selectFile" ref="inputFile" class="input-file">
                 <p v-if="isInitial">
                   Drag your file(s) here to begin<br> or click to browse
                 </p>
@@ -59,7 +59,10 @@
           </div>
           <!--SUCCESS-->
           <div v-if="isSuccess">
-            <p>Uploaded {{ uploadedFile.name }} file successfully.</p>
+            <p>Uploaded successfully.</p>
+            <p>
+              <a href="javascript:void(0)" @click="resetFields()">Upload another file</a>
+            </p>
           </div>
           <!--FAILED-->
           <div v-if="isFailed">
@@ -67,7 +70,12 @@
             <p>
               <a href="javascript:void(0)" @click="resetFields()">Try again</a>
             </p>
-            <pre>{{ uploadError }}</pre>
+            <small
+              v-if="uploadError"
+              class="text-danger form-text"
+              id="upload_error"
+              >{{ uploadError }}
+            </small>
           </div>
         </div>
       </div>
@@ -83,7 +91,7 @@
           <button
             id="upload_ipfs_button"
             class="btn btn-primary btn-lg"
-            @click="submitFile"
+            @click="uploadFile"
             :disabled="!canUpload"
           >
             Upload IPFS content
@@ -106,7 +114,7 @@ import { timelockFeeDuration, timelockFeeAmountInSatoshis } from '@/utils/asset'
 import { getImageInfo } from '@/utils/image'
 
 const STATUS_INITIAL = 0, STATUS_SELECTED = 1, STATUS_SUCCESS = 2, STATUS_FAILED = 3;
-const FILE_SIZE_LIMIT = 5242880 // 5MB = 5242880 bytes
+const FILE_SIZE_LIMIT = 5 * 1024 * 1024 // 5MB = 5242880 bytes
 
 export default {
   components: {
@@ -172,12 +180,12 @@ export default {
       return `Warning: In order to upload IPFS content, ${this.timelockFeeAmountInSatoshis/1e6} ${this.asset} will be locked during ${this.timelockFeeDuration} blocks`
     },
     canUpload() {
-      if (
-        !this.uploadedFile ||
-        this.balanceError ||
-        this.fileSizeError
-      )
-        return false
+      // if (
+      //   !this.uploadedFile ||
+      //   this.balanceError ||
+      //   this.fileSizeError
+      // )
+      //   return false
 
       return true
     },
@@ -241,7 +249,7 @@ export default {
         console.log("TACA ===> img.src = ", img.src)
       });
     },
-    async uploadFile() {
+    async selectFile() {
       this.uploadedFile = this.$refs.inputFile.files[0];
       
       // Check if the uploaded file is image
@@ -249,30 +257,75 @@ export default {
         await this.isImage(this.uploadedFile);
         this.imageFile = await getImageInfo(this.uploadedFile);
       } catch (e) {
-        console.log("TACA ===> uploadFile, e = ", e)
+        console.log("TACA ===> selectFile, e = ", e)
         this.imageFile = null;
       };
 
       // Read the file, draw it in canvas, and save it as data url with the canvas toDataURL function
-      console.log("TACA ===> uploadFile, this.$refs = ", this.$refs)
-      console.log("TACA ===> uploadFile, this.uploadedFile = ", this.uploadedFile)
-      console.log("TACA ===> uploadFile, this.imageFile = ", this.imageFile)
+      console.log("TACA ===> selectFile, this.$refs = ", this.$refs)
+      console.log("TACA ===> selectFile, this.uploadedFile = ", this.uploadedFile)
+      console.log("TACA ===> selectFile, this.imageFile = ", this.imageFile)
       this.currentStatus = STATUS_SELECTED;
     },
-    async submitFile() {
+    async isFileExisted() {
+      // Check if the file is already existed on our server
       const formData = new FormData();
       formData.append('file', this.uploadedFile);
       const headers = { 'Content-Type': 'multipart/form-data' };
+      let isExisted = false;
 
+      console.log("TACA ===> isFileExisted, formData = ", formData)
       try {
-        const result = await this.$axios.post('http://127.0.0.1:3000/api/ipfsdata', formData, { headers })
-        console.log("TACA ===> submitFile, result = ", result);
-        this.currentStatus = STATUS_SUCCESS;
+        const res = await this.$axios.post('http://127.0.0.1:3000/api/is_content_existed', formData, { headers })
+        console.log("TACA ===> isFileExisted, res = ", res);
+        if (res.data.status) {
+          console.log("TACA ===> isFileExisted, Your selected file was already existed on the system. Please upload another file.");
+          this.uploadError = `Your selected file was already existed on the system. Please upload another file.`;
+          this.currentStatus = STATUS_FAILED;
+          isExisted = true
+        }
         // this.resetFields();
       } catch (error) {
-        this.uploadError = err.response;
+        console.log("TACA ===> isFileExisted, error = ", error);
+        // PAYLOAD TOO LARGE ERROR !!!
+        if (error.response.status === 413) {
+          this.uploadError = error.response.data;
+        } else {
+          this.uploadError = error.response;
+        }
         this.currentStatus = STATUS_FAILED;
+        isExisted = true
       }
+
+      return isExisted
+    },
+    async uploadFile() {
+      // Check if the file is already existed on our server
+      console.log("TACA ===> uploadFile 1");
+      if (await this.isFileExisted()) {
+        return
+      }
+      console.log("TACA ===> uploadFile 2");
+      // // Create and broadcast timelock transaction
+      // const tx = "f9ccee5accbd49ecfdef4bf3d5b191d96c73ba89b5623ab1cd73f44c9d1ac1db"
+
+      // // Upload the file
+      // const formData = new FormData();
+      // formData.append('file', this.uploadedFile);
+      // formData.append('timelocktx', tx);
+      // const headers = { 'Content-Type': 'multipart/form-data' };
+
+      // console.log("TACA ===> uploadFile, formData = ", formData)
+      // try {
+      //   const result = await this.$axios.post('http://127.0.0.1:3000/api/add_ipfs_content', formData, { headers })
+      //   console.log("TACA ===> uploadFile, result = ", result);
+      //   this.currentStatus = STATUS_SUCCESS;
+      //   // this.resetFields();
+      // } catch (error) {
+      //   this.uploadError = err.response;
+      //   this.currentStatus = STATUS_FAILED;
+      // }
+      this.currentStatus = STATUS_SUCCESS;
     },
     initDataState(storageData){
       const data = JSON.parse(storageData || '');
