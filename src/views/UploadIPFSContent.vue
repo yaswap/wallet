@@ -59,7 +59,13 @@
           </div>
           <!--SUCCESS-->
           <div v-if="isSuccess">
-            <p>Uploaded successfully.</p>
+            <p>Uploaded successfully. Your file CIDs:</p>
+            <p>
+              CIDv0: <a :href="`${ipfsGateway}/ipfs/${cidv0}`" @click="resetFields()"> {{ cidv0 }}</a>
+            </p>
+            <p>
+              CIDv1: <a :href="`${ipfsGateway}/ipfs/${cidv1}`" @click="resetFields()"> {{ cidv1 }}</a>
+            </p>
             <p>
               <a href="javascript:void(0)" @click="resetFields()">Upload another file</a>
             </p>
@@ -129,7 +135,11 @@ export default {
       uploadedFile: null,
       imageFile: null,
       uploadError: null,
-      currentStatus: null
+      currentStatus: null,
+      cidv0: null,
+      cidv1: null,
+      ipfsEndPoint: 'http://127.0.0.1:3000',
+      ipfsGateway: 'http://127.0.0.1:8080',
     }
   },
   computed: {
@@ -276,7 +286,7 @@ export default {
 
       console.log("TACA ===> isFileExisted, formData = ", formData)
       try {
-        const res = await this.$axios.post('http://127.0.0.1:3000/api/is_content_existed', formData, { headers })
+        const res = await this.$axios.post(`${this.ipfsEndPoint}/api/is_content_existed`, formData, { headers })
         console.log("TACA ===> isFileExisted, res = ", res);
         if (res.data.status) {
           console.log("TACA ===> isFileExisted, Your selected file was already existed on the system. Please upload another file.");
@@ -306,26 +316,28 @@ export default {
         return
       }
       console.log("TACA ===> uploadFile 2");
-      // // Create and broadcast timelock transaction
-      // const tx = "f9ccee5accbd49ecfdef4bf3d5b191d96c73ba89b5623ab1cd73f44c9d1ac1db"
+      // Create and broadcast timelock transaction
+      const tx = "f9ccee5accbd49ecfdef4bf3d5b191d96c73ba89b5623ab1cd73f44c9d1ac1db"
 
-      // // Upload the file
-      // const formData = new FormData();
-      // formData.append('file', this.uploadedFile);
-      // formData.append('timelocktx', tx);
-      // const headers = { 'Content-Type': 'multipart/form-data' };
+      // Upload the file
+      const formData = new FormData();
+      formData.append('file', this.uploadedFile);
+      formData.append('timelocktx', tx);
+      const headers = { 'Content-Type': 'multipart/form-data' };
 
-      // console.log("TACA ===> uploadFile, formData = ", formData)
-      // try {
-      //   const result = await this.$axios.post('http://127.0.0.1:3000/api/add_ipfs_content', formData, { headers })
-      //   console.log("TACA ===> uploadFile, result = ", result);
-      //   this.currentStatus = STATUS_SUCCESS;
-      //   // this.resetFields();
-      // } catch (error) {
-      //   this.uploadError = err.response;
-      //   this.currentStatus = STATUS_FAILED;
-      // }
-      this.currentStatus = STATUS_SUCCESS;
+      console.log("TACA ===> uploadFile, formData = ", formData)
+      try {
+        const res = await this.$axios.post(`${this.ipfsEndPoint}/api/add_ipfs_content`, formData, { headers })
+        console.log("TACA ===> uploadFile, res = ", res);
+        this.cidv0 = res.data.cidv0;
+        this.cidv1 = res.data.cidv1;
+        this.currentStatus = STATUS_SUCCESS;
+        // this.resetFields();
+      } catch (error) {
+        console.log("TACA ===> uploadFile, error = ", error);
+        this.uploadError = error.response;
+        this.currentStatus = STATUS_FAILED;
+      }
     },
     initDataState(storageData){
       const data = JSON.parse(storageData || '');
@@ -335,11 +347,6 @@ export default {
         this.uploadError = data.uploadError;
         this.currentStatus = data.currentStatus;
       }
-      console.log("TACA ===> initDataState, data = ", data)
-      console.log("TACA ===> initDataState, this.uploadedFile = ", this.uploadedFile)
-      console.log("TACA ===> initDataState, this.imageFile = ", this.imageFile)
-      console.log("TACA ===> initDataState, this.uploadError = ", this.uploadError)
-      console.log("TACA ===> initDataState, this.currentStatus = ", this.currentStatus)
     },
     saveDataState(){
       const uploadIPFSContent = {
@@ -349,8 +356,6 @@ export default {
         currentStatus: this.currentStatus
       }
       const data = JSON.stringify(uploadIPFSContent);
-      console.log("TACA ===> saveDataState, uploadIPFSContent = ", uploadIPFSContent)
-      console.log("TACA ===> saveDataState, data = ", data)
       localStorage.setItem('uploadIPFSContent', data);
     },
     cancelUpload() {
