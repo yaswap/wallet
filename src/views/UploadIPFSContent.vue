@@ -36,51 +36,52 @@
           <form enctype="multipart/form-data" novalidate v-if="isInitial">
             <div class="dropbox">
               <input type="file" :disabled="!isInitial" @change="selectFile" ref="inputFile" class="input-file">
-                <p v-if="isInitial">
+                <p v-if="isInitial" class="form-text">
                   Drag your file(s) here to begin<br> or click to browse
                 </p>
             </div>
           </form>
           <!--SELECTED-->
           <div v-if="isSelected">
-            <p>
-              <a href="javascript:void(0)" @click="resetFields()">Upload again</a>
-            </p>
-            <p>
+            <small class="form-text mt-3">
               Selected file {{ uploadedFile.name }}
-            </p>
+            </small>
             <small
               v-if="fileSizeError"
-              class="text-danger form-text"
+              class="text-danger form-text mt-3"
               id="file_size_error"
               >{{ fileSizeError }}
             </small>
             <img v-if="imageFile" :src="imageFile.url" class="img-responsive img-thumbnail" :alt="imageFile.originalName">
+            <small class="form-text mt-3">
+              <a href="#!" @click="resetFields()">Upload again</a>
+            </small>
           </div>
           <!--SUCCESS-->
           <div v-if="isSuccess">
-            <p>Uploaded successfully. Your file CIDs:</p>
-            <p>
-              CIDv0: <a :href="`${ipfsGateway}/ipfs/${cidv0}`" @click="resetFields()"> {{ cidv0 }}</a>
-            </p>
-            <p>
-              CIDv1: <a :href="`${ipfsGateway}/ipfs/${cidv1}`" @click="resetFields()"> {{ cidv1 }}</a>
-            </p>
-            <p>
-              <a href="javascript:void(0)" @click="resetFields()">Upload another file</a>
-            </p>
+            <small class="form-text mt-3">Uploaded successfully. Below are your file CIDs.</small>
+            <small class="form-text">
+              CID version 0: <a :href="`${ipfsGateway}/ipfs/${cidv0}`" target="_blank"> {{ cidv0 }}</a>
+            </small>
+            <small class="form-text">
+              CID version 1: <a :href="`${ipfsGateway}/ipfs/${cidv1}`" target="_blank"> {{ cidv1 }}</a>
+            </small>
+            <small class="form-text mt-3">
+              <a href="#!" @click="resetFields()">Upload another file</a>
+            </small>
           </div>
           <!--FAILED-->
           <div v-if="isFailed">
-            <p>Uploaded failed.</p>
-            <p>
-              <a href="javascript:void(0)" @click="resetFields()">Try again</a>
-            </p>
+            <small class="text-danger form-text mt-3">Uploaded failed.</small>
             <small
               v-if="uploadError"
               class="text-danger form-text"
               id="upload_error"
-              >{{ uploadError }}
+              >
+              {{ uploadError }}
+            </small>
+            <small class="form-text mt-3">
+              <a href="#!" @click="resetFields()">Try again</a>
             </small>
           </div>
         </div>
@@ -294,7 +295,6 @@ export default {
           this.currentStatus = STATUS_FAILED;
           isExisted = true
         }
-        // this.resetFields();
       } catch (error) {
         console.log("TACA ===> isFileExisted, error = ", error);
         // PAYLOAD TOO LARGE ERROR !!!
@@ -332,7 +332,6 @@ export default {
         this.cidv0 = res.data.cidv0;
         this.cidv1 = res.data.cidv1;
         this.currentStatus = STATUS_SUCCESS;
-        // this.resetFields();
       } catch (error) {
         console.log("TACA ===> uploadFile, error = ", error);
         this.uploadError = error.response;
@@ -376,8 +375,9 @@ export default {
 .upload-ipfs-content {
   display: flex;
   flex-direction: column;
+  overflow: auto; // Display the scrollbar if the content is overflow
   min-height: 0;
-  line-height: 1; // FIXME: This is just a workaround for overflow text warning area
+  line-height: 1.4; // FIXME: This is just a workaround for overflow text warning area
 
   .form-group {
     margin-bottom: 5%; // FIXME: This is just a workaround for overflow text warning area
