@@ -207,15 +207,15 @@ export default {
   },
   async created() {
     await this.updateFees({ asset: this.assetChain })
-    const storageData = localStorage.getItem('uploadIPFSContent')
-    if (storageData) {
-      this.initDataState(storageData)
-    }
+    // const storageData = localStorage.getItem('uploadIPFSContent')
+    // if (storageData) {
+    //   this.initDataState(storageData)
+    // }
   },
-  beforeRouteLeave(to, from, next) {
-    this.saveDataState()
-    next();
-  },
+  // beforeRouteLeave(to, from, next) {
+  //   this.saveDataState()
+  //   next();
+  // },
   methods: {
     ...mapActions([
       'updateFees'
