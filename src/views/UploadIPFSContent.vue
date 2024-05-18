@@ -111,17 +111,27 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
-import { ChainId } from '@yaswap/cryptoassets'
 import NavBar from '@/components/NavBar.vue'
 import ChevronDownIcon from '@/assets/icons/chevron_down.svg'
 import ChevronUpIcon from '@/assets/icons/chevron_up.svg'
 import InfoIcon from '@/assets/icons/info.svg'
-import { getFeeAsset, getNativeAsset, verifyIPFSHash, isAvailableTokenName } from '@yaswap/wallet-core/dist/src/utils/asset'
-import { timelockFeeDuration, timelockFeeAmountInSatoshis } from '@/utils/asset'
+import { getFeeAsset, getNativeAsset } from '@yaswap/wallet-core/dist/src/utils/asset'
 import { getImageInfo } from '@/utils/image'
+import { errorToYaswapErrorString } from '@yaswap/error-parser/dist/src/utils'
+import { reportYaswapError } from '@yaswap/error-parser'
+import { getChain, ChainId } from '@yaswap/cryptoassets'
+import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
 
+// USED FOR TESTING
+// const FILE_SIZE_LIMIT = 1 * 1024 * 1024 // 1MB
+const TIMELOCK_DURATION = 20; // 20 blocks
+const TIMELOCK_AMOUNT = 10 * 1e6; // 10 YAC
+
+// USED FOR PRODUCTION
 const STATUS_INITIAL = 0, STATUS_SELECTED = 1, STATUS_SUCCESS = 2, STATUS_FAILED = 3;
 const FILE_SIZE_LIMIT = 5 * 1024 * 1024 // 5MB = 5242880 bytes
+// const TIMELOCK_DURATION = 21000; // 21000 blocks
+// const TIMELOCK_AMOUNT = 2100 * 1e6; // 2100 YAC
 
 export default {
   components: {
@@ -137,17 +147,22 @@ export default {
       imageFile: null,
       uploadError: null,
       currentStatus: null,
+      address: null,
       cidv0: null,
       cidv1: null,
+
+      // USED FOR PRODUCTION
+      // ipfsUploadEndpoint: 'http://73.43.63.213:3000/ipfs_upload_service',
+      // ipfsGateway: 'http://73.43.63.213:3000/ipfs',
+
+      // USED FOR TESTING
       ipfsUploadEndpoint: 'http://127.0.0.1:3000/ipfs_upload_service',
       ipfsGateway: 'http://127.0.0.1:3000/ipfs',
     }
   },
   computed: {
-    ...mapState(['activeNetwork', 'accounts', 'activeWalletId', 'enabledAssets']),
+    ...mapState(['activeNetwork', 'accounts', 'activeWalletId', 'fiatRates']),
     ...mapGetters(['accountsData', 'suggestedFeePrices']),
-    timelockFeeDuration,
-    timelockFeeAmountInSatoshis,
     account() {
       // TODO: Support other chains
       return this.accounts[this.activeWalletId][this.activeNetwork].find((acc) => acc.chain === ChainId.Yacoin)
@@ -176,8 +191,8 @@ export default {
       return this.account?.balances[this.asset] || 0
     },
     balanceError() {
-      if (Number(this.balance) < this.timelockFeeAmountInSatoshis) {
-        return `You don't have enough ${this.asset} in wallet to Upload IPFS content (need at least ${this.timelockFeeAmountInSatoshis/1e6} ${this.asset} for the timelock fee)`
+      if (Number(this.balance) < TIMELOCK_AMOUNT) {
+        return `You don't have enough ${this.asset} in wallet to Upload IPFS content (need at least ${TIMELOCK_AMOUNT/1e6} ${this.asset} for the timelock fee)`
       }
       return null
     },
@@ -188,7 +203,7 @@ export default {
       return null;
     },
     warningMessage() {
-      return `Warning: In order to upload IPFS content, ${this.timelockFeeAmountInSatoshis/1e6} ${this.asset} will be locked during ${this.timelockFeeDuration} blocks`
+      return `Warning: In order to upload IPFS content, ${TIMELOCK_AMOUNT/1e6} ${this.asset} will be locked during ${TIMELOCK_DURATION} blocks`
     },
     canUpload() {
       // if (
@@ -217,6 +232,17 @@ export default {
     this.resetFields();
   },
   async created() {
+    const addresses = await this.getUnusedAddresses({
+      network: this.activeNetwork,
+      walletId: this.activeWalletId,
+      assets: [this.asset],
+      accountId: this.account.id
+    })
+    console.log("TACA ===> created(), addresses = ", addresses);
+    const chainId = cryptoassets[this.asset]?.chain
+    console.log("TACA ===> created(), chainId = ", chainId);
+    this.address = getChain(this.activeNetwork, chainId).formatAddressUI(addresses[0])
+    console.log("TACA ===> created(), this.address = ", this.address);
     await this.updateFees({ asset: this.assetChain })
     // const storageData = localStorage.getItem('uploadIPFSContent')
     // if (storageData) {
@@ -229,7 +255,9 @@ export default {
   // },
   methods: {
     ...mapActions([
-      'updateFees'
+      'updateFees',
+      'getUnusedAddresses',
+      'sendTransaction'
     ]),
     async isImage(file) {
       return new Promise((resolve, reject) => {
@@ -309,20 +337,57 @@ export default {
 
       return isExisted
     },
+    async timelockYAC() {
+      let txHash = null;
+      try {
+        const argObj = {
+          network: this.activeNetwork,
+          walletId: this.activeWalletId,
+          accountId: this.account.id,
+          asset: this.asset,
+          to: this.address,
+          amount: TIMELOCK_AMOUNT,
+          data: null,
+          fee: this.fee,
+          feeAsset: this.asset,
+          gas: cryptoassets[this.asset].sendGasLimit,
+          feeLabel: 'average',
+          fiatRate: this.fiatRates[this.asset],
+          timelockDuration: TIMELOCK_DURATION
+        }
+        console.log("TACA ===> timelockYAC, argObj = ", argObj);
+        const transaction = await this.sendTransaction(argObj)
+        console.log("TACA ===> timelockYAC, transaction = ", transaction);
+        txHash = transaction.tx.hash
+      } catch (error) {
+        console.log("TACA ===> timelockYAC, error = ", error);
+        const yaswapErrorString = errorToYaswapErrorString(error)
+        console.log("TACA ===> timelockYAC, yaswapErrorString = ", yaswapErrorString);
+        reportYaswapError(error)
+        this.uploadError = yaswapErrorString
+      }
+      return txHash
+    },
     async uploadFile() {
       // Check if the file is already existed on our server
-      console.log("TACA ===> uploadFile 1");
+      console.log("TACA ===> uploadFile, BEGIN");
+      console.log("TACA ===> uploadFile, check if file was already existed");
       if (await this.isFileExisted()) {
         return
       }
-      console.log("TACA ===> uploadFile 2");
+
+      console.log("TACA ===> uploadFile, file isn't existed, create and broadcast timelock tx");
       // Create and broadcast timelock transaction
-      const tx = "f9ccee5accbd49ecfdef4bf3d5b191d96c73ba89b5623ab1cd73f44c9d1ac1db"
+      const timelockTx = await this.timelockYAC()
+      if (timelockTx == null) {
+        return
+      }
+      console.log("TACA ===> uploadFile, timelockTx = ", timelockTx);
 
       // Upload the file
       const formData = new FormData();
       formData.append('file', this.uploadedFile);
-      formData.append('timelocktx', tx);
+      formData.append('timelocktx', timelockTx);
       const headers = { 'Content-Type': 'multipart/form-data' };
 
       console.log("TACA ===> uploadFile, formData = ", formData)
