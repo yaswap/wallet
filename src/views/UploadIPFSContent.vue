@@ -139,8 +139,8 @@ export default {
       currentStatus: null,
       cidv0: null,
       cidv1: null,
-      ipfsEndPoint: 'http://127.0.0.1:3000',
-      ipfsGateway: 'http://127.0.0.1:8080',
+      ipfsUploadEndpoint: 'http://127.0.0.1:3000/ipfs_upload_service',
+      ipfsGateway: 'http://127.0.0.1:3000/ipfs',
     }
   },
   computed: {
@@ -287,7 +287,7 @@ export default {
 
       console.log("TACA ===> isFileExisted, formData = ", formData)
       try {
-        const res = await this.$axios.post(`${this.ipfsEndPoint}/api/is_content_existed`, formData, { headers })
+        const res = await this.$axios.post(`${this.ipfsUploadEndpoint}/api/is_content_existed`, formData, { headers })
         console.log("TACA ===> isFileExisted, res = ", res);
         if (res.data.status) {
           console.log("TACA ===> isFileExisted, Your selected file was already existed on the system. Please upload another file.");
@@ -327,7 +327,7 @@ export default {
 
       console.log("TACA ===> uploadFile, formData = ", formData)
       try {
-        const res = await this.$axios.post(`${this.ipfsEndPoint}/api/add_ipfs_content`, formData, { headers })
+        const res = await this.$axios.post(`${this.ipfsUploadEndpoint}/api/add_ipfs_content`, formData, { headers })
         console.log("TACA ===> uploadFile, res = ", res);
         this.cidv0 = res.data.cidv0;
         this.cidv1 = res.data.cidv1;
