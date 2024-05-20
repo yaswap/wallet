@@ -66,9 +66,6 @@
             <small class="form-text">
               CID version 1: <a :href="`${ipfsGateway}/ipfs/${cidv1}`" target="_blank"> {{ cidv1 }}</a>
             </small>
-            <small class="form-text mt-3">
-              <a href="#!" @click="resetFields()">Upload another file</a>
-            </small>
           </div>
           <!--FAILED-->
           <div v-if="isFailed">
@@ -79,9 +76,6 @@
               id="upload_error"
               >
               {{ uploadError }}
-            </small>
-            <small class="form-text mt-3">
-              <a href="#!" @click="resetFields()">Try again</a>
             </small>
           </div>
         </div>
@@ -96,12 +90,22 @@
             {{ $t('common.cancel') }}
           </button>
           <button
+            v-if="isSuccess || isFailed"
+            id="upload_ipfs_button"
+            class="btn btn-primary btn-lg"
+            @click="resetFields"
+          >
+            Upload another file
+          </button>
+          <button
+            v-else
             id="upload_ipfs_button"
             class="btn btn-primary btn-lg"
             @click="uploadFile"
-            :disabled="!canUpload"
+            :disabled="!canUpload || loading"
           >
-            Upload IPFS content
+            <SpinnerIcon class="btn-loading" v-if="loading" />
+            <template v-else>Upload IPFS content</template>
           </button>
         </div>
       </div>
@@ -110,6 +114,7 @@
 </template>
 
 <script>
+import SpinnerIcon from '@/assets/icons/spinner.svg'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import NavBar from '@/components/NavBar.vue'
 import ChevronDownIcon from '@/assets/icons/chevron_down.svg'
@@ -139,6 +144,7 @@ export default {
     ChevronDownIcon,
     ChevronUpIcon,
     InfoIcon,
+    SpinnerIcon,
   },
   data() {
     return {
@@ -150,7 +156,7 @@ export default {
       address: null,
       cidv0: null,
       cidv1: null,
-
+      loading: false,
       // USED FOR PRODUCTION
       // ipfsUploadEndpoint: 'http://73.43.63.213:3000/ipfs_upload_service',
       // ipfsGateway: 'http://73.43.63.213:3000/ipfs',
@@ -370,9 +376,11 @@ export default {
     },
     async uploadFile() {
       // Check if the file is already existed on our server
+      this.loading = true
       console.log("TACA ===> uploadFile, BEGIN");
       console.log("TACA ===> uploadFile, check if file was already existed");
       if (await this.isFileExisted()) {
+        this.loading = false;
         return
       }
 
@@ -380,6 +388,7 @@ export default {
       // Create and broadcast timelock transaction
       const timelockTx = await this.timelockYAC()
       if (timelockTx == null) {
+        this.loading = false;
         return
       }
       console.log("TACA ===> uploadFile, timelockTx = ", timelockTx);
@@ -401,6 +410,8 @@ export default {
         console.log("TACA ===> uploadFile, error = ", error);
         this.uploadError = error.response;
         this.currentStatus = STATUS_FAILED;
+      } finally {
+        this.loading = false;
       }
     },
     initDataState(storageData){
