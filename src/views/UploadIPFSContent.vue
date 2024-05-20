@@ -206,12 +206,12 @@ export default {
       return `Warning: In order to upload IPFS content, ${TIMELOCK_AMOUNT/1e6} ${this.asset} will be locked during ${TIMELOCK_DURATION} blocks`
     },
     canUpload() {
-      // if (
-      //   !this.uploadedFile ||
-      //   this.balanceError ||
-      //   this.fileSizeError
-      // )
-      //   return false
+      if (
+        !this.uploadedFile ||
+        this.balanceError ||
+        this.fileSizeError
+      )
+        return false
 
       return true
     },
