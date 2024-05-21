@@ -568,13 +568,10 @@ export default {
       this.stateAmountFiat = prettyFiatBalance(this.stateAmount, this.fiatRates[this.asset])
     },
     async _updateSendFees(amount) {
-      console.log("TACA ===> Send.vue, _updateSendFees, this.asset = ", this.asset, ", amount = ", amount, ", this.customFee = ", this.customFee)
       const sendFees = await getSendTxFees(this.account.id, this.asset, amount, this.customFee)
       if (amount === undefined) {
         this.maxSendFees = sendFees
-        console.log("TACA ===> Send.vue, _updateSendFees, this.maxSendFees = ", this.maxSendFees)
       } else {
-        console.log("TACA ===> Send.vue, _updateSendFees, this.sendFees = ", this.sendFees)
         this.sendFees = sendFees
       }
     },

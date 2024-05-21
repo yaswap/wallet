@@ -244,11 +244,8 @@ export default {
       assets: [this.asset],
       accountId: this.account.id
     })
-    console.log("TACA ===> created(), addresses = ", addresses);
     const chainId = cryptoassets[this.asset]?.chain
-    console.log("TACA ===> created(), chainId = ", chainId);
     this.address = getChain(this.activeNetwork, chainId).formatAddressUI(addresses[0])
-    console.log("TACA ===> created(), this.address = ", this.address);
     await this.updateFees({ asset: this.assetChain })
     // const storageData = localStorage.getItem('uploadIPFSContent')
     // if (storageData) {
@@ -278,7 +275,6 @@ export default {
         }
 
         img.onload = () => {
-          console.log("TACA ===> isImage, img.onload is called");
           // This function is only called if the file is a valid image
           clearTimer();
           resolve(true);
@@ -291,7 +287,6 @@ export default {
         }, 3000);
 
         img.src = URL.createObjectURL(file);
-        console.log("TACA ===> img.src = ", img.src)
       });
     },
     async selectFile() {
@@ -302,14 +297,10 @@ export default {
         await this.isImage(this.uploadedFile);
         this.imageFile = await getImageInfo(this.uploadedFile);
       } catch (e) {
-        console.log("TACA ===> selectFile, e = ", e)
         this.imageFile = null;
       };
 
       // Read the file, draw it in canvas, and save it as data url with the canvas toDataURL function
-      console.log("TACA ===> selectFile, this.$refs = ", this.$refs)
-      console.log("TACA ===> selectFile, this.uploadedFile = ", this.uploadedFile)
-      console.log("TACA ===> selectFile, this.imageFile = ", this.imageFile)
       this.currentStatus = STATUS_SELECTED;
     },
     async isFileExisted() {
@@ -320,19 +311,15 @@ export default {
       let isExisted = false;
       let cidv0 = null;
 
-      console.log("TACA ===> isFileExisted, formData = ", formData)
       try {
         const res = await this.$axios.post(`${this.ipfsUploadEndpoint}/api/is_content_existed`, formData, { headers })
-        console.log("TACA ===> isFileExisted, res = ", res);
         if (res.data.status) {
-          console.log("TACA ===> isFileExisted, Your selected file was already existed on the system. Please upload another file.");
           this.uploadError = `Your selected file was already existed on the system. Its CID is ${res.data.cidv0}. Please upload another file.`;
           this.currentStatus = STATUS_FAILED;
           isExisted = true
         }
         cidv0 = res.data.cidv0
       } catch (error) {
-        console.log("TACA ===> isFileExisted, error = ", error);
         if (error.response.data == null) {
           this.uploadError = error.response;
         } else {
@@ -363,14 +350,10 @@ export default {
           timelockDuration: TIMELOCK_DURATION,
           timelockReason: `They are timelocked to upload file having IPFS CID ${cidv0}`
         }
-        console.log("TACA ===> timelockYAC, argObj = ", argObj);
         const transaction = await this.sendTransaction(argObj)
-        console.log("TACA ===> timelockYAC, transaction = ", transaction);
         txHash = transaction.tx.hash
       } catch (error) {
-        console.log("TACA ===> timelockYAC, error = ", error);
         const yaswapErrorString = errorToYaswapErrorString(error)
-        console.log("TACA ===> timelockYAC, yaswapErrorString = ", yaswapErrorString);
         reportYaswapError(error)
         this.uploadError = yaswapErrorString
       }
@@ -379,22 +362,18 @@ export default {
     async uploadFile() {
       // Check if the file is already existed on our server
       this.loading = true
-      console.log("TACA ===> uploadFile, BEGIN");
-      console.log("TACA ===> uploadFile, check if file was already existed");
       const { isExisted, cidv0 } = await this.isFileExisted()
       if (isExisted) {
         this.loading = false;
         return
       }
 
-      console.log("TACA ===> uploadFile, file isn't existed, create and broadcast timelock tx");
       // Create and broadcast timelock transaction
       const timelockTx = await this.timelockYAC(cidv0)
       if (timelockTx == null) {
         this.loading = false;
         return
       }
-      console.log("TACA ===> uploadFile, timelockTx = ", timelockTx);
 
       // Upload the file
       const formData = new FormData();
@@ -402,15 +381,12 @@ export default {
       formData.append('timelocktx', timelockTx);
       const headers = { 'Content-Type': 'multipart/form-data' };
 
-      console.log("TACA ===> uploadFile, formData = ", formData)
       try {
         const res = await this.$axios.post(`${this.ipfsUploadEndpoint}/api/add_ipfs_content`, formData, { headers })
-        console.log("TACA ===> uploadFile, res = ", res);
         this.cidv0 = res.data.cidv0;
         this.cidv1 = res.data.cidv1;
         this.currentStatus = STATUS_SUCCESS;
       } catch (error) {
-        console.log("TACA ===> uploadFile, error = ", error);
         if (error.response.data == null) {
           this.uploadError = error.response;
         } else {
