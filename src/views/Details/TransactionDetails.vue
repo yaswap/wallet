@@ -36,10 +36,10 @@
           <div class="col">
             <h2>{{ item.type === 'TIMELOCK' ? 'TIMELOCKED' : $t('pages.details.sent') }}</h2>
             <p id="transaction_detail_sent_amount" class="font-bold mb-1" v-if="item.type === 'TIMELOCK' && item.status !== 'SUCCESS'">
-              {{ prettyBalance(item.amount, item.from) }} {{ item.from }} are timelocked in {{item.timelockDuration}} blocks.
+              {{ prettyBalance(item.amount, item.from) }} {{ item.from }} are timelocked in {{item.timelockDuration}} blocks. {{ item.timelockReason }}
             </p>
             <p id="transaction_detail_sent_amount" class="font-bold mb-1" v-else-if="item.type === 'TIMELOCK' && item.status === 'SUCCESS' && tx && tx.confirmations > 0">
-              {{ prettyBalance(item.amount, item.from) }} {{ item.from }} are timelocked in {{item.timelockDuration}} blocks. The timelocked YAC will be unlocked at block {{ tx.blockNumber + item.timelockDuration }}.
+              {{ prettyBalance(item.amount, item.from) }} {{ item.from }} are timelocked in {{item.timelockDuration}} blocks. {{ item.timelockReason }}. The timelocked YAC will be unlocked at block {{ tx.blockNumber + item.timelockDuration }}.
             </p>
             <p id="transaction_detail_sent_amount" class="font-bold mb-1" v-else>
               {{ prettyBalance(item.amount, item.from) }} {{ item.from }}

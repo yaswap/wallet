@@ -318,6 +318,7 @@ export default {
       formData.append('file', this.uploadedFile);
       const headers = { 'Content-Type': 'multipart/form-data' };
       let isExisted = false;
+      let cidv0 = null;
 
       console.log("TACA ===> isFileExisted, formData = ", formData)
       try {
@@ -325,10 +326,11 @@ export default {
         console.log("TACA ===> isFileExisted, res = ", res);
         if (res.data.status) {
           console.log("TACA ===> isFileExisted, Your selected file was already existed on the system. Please upload another file.");
-          this.uploadError = `Your selected file was already existed on the system. Please upload another file.`;
+          this.uploadError = `Your selected file was already existed on the system. Its CID is ${res.data.cidv0}. Please upload another file.`;
           this.currentStatus = STATUS_FAILED;
           isExisted = true
         }
+        cidv0 = res.data.cidv0
       } catch (error) {
         console.log("TACA ===> isFileExisted, error = ", error);
         if (error.response.data == null) {
@@ -340,9 +342,9 @@ export default {
         isExisted = true
       }
 
-      return isExisted
+      return { isExisted, cidv0 }
     },
-    async timelockYAC() {
+    async timelockYAC(cidv0) {
       let txHash = null;
       try {
         const argObj = {
@@ -358,7 +360,8 @@ export default {
           gas: cryptoassets[this.asset].sendGasLimit,
           feeLabel: 'average',
           fiatRate: this.fiatRates[this.asset],
-          timelockDuration: TIMELOCK_DURATION
+          timelockDuration: TIMELOCK_DURATION,
+          timelockReason: `They are timelocked to upload file having IPFS CID ${cidv0}`
         }
         console.log("TACA ===> timelockYAC, argObj = ", argObj);
         const transaction = await this.sendTransaction(argObj)
@@ -378,14 +381,15 @@ export default {
       this.loading = true
       console.log("TACA ===> uploadFile, BEGIN");
       console.log("TACA ===> uploadFile, check if file was already existed");
-      if (await this.isFileExisted()) {
+      const { isExisted, cidv0 } = await this.isFileExisted()
+      if (isExisted) {
         this.loading = false;
         return
       }
 
       console.log("TACA ===> uploadFile, file isn't existed, create and broadcast timelock tx");
       // Create and broadcast timelock transaction
-      const timelockTx = await this.timelockYAC()
+      const timelockTx = await this.timelockYAC(cidv0)
       if (timelockTx == null) {
         this.loading = false;
         return
