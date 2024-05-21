@@ -54,7 +54,7 @@
             </small>
             <img v-if="imageFile" :src="imageFile.url" class="img-responsive img-thumbnail" :alt="imageFile.originalName">
             <small class="form-text mt-3">
-              <a href="#!" @click="resetFields()">Upload again</a>
+              <a href="#!" @click="resetFields()">Select again</a>
             </small>
           </div>
           <!--SUCCESS-->
@@ -204,7 +204,7 @@ export default {
     },
     fileSizeError() {
       if (this.uploadedFile.size > FILE_SIZE_LIMIT) {
-        return `The maximum allowable file size is ${FILE_SIZE_LIMIT} bytes. You selected a file with size = ${this.uploadedFile.size} bytes. Please upload another file to proceed.`;
+        return `The maximum allowable file size is ${FILE_SIZE_LIMIT} bytes. You selected a file with size = ${this.uploadedFile.size} bytes. Please select another file to proceed.`;
       }
       return null;
     },
