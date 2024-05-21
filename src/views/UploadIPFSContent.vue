@@ -331,11 +331,10 @@ export default {
         }
       } catch (error) {
         console.log("TACA ===> isFileExisted, error = ", error);
-        // PAYLOAD TOO LARGE ERROR !!!
-        if (error.response.status === 413) {
-          this.uploadError = error.response.data;
-        } else {
+        if (error.response.data == null) {
           this.uploadError = error.response;
+        } else {
+          this.uploadError = error.response.data;
         }
         this.currentStatus = STATUS_FAILED;
         isExisted = true
@@ -408,7 +407,11 @@ export default {
         this.currentStatus = STATUS_SUCCESS;
       } catch (error) {
         console.log("TACA ===> uploadFile, error = ", error);
-        this.uploadError = error.response;
+        if (error.response.data == null) {
+          this.uploadError = error.response;
+        } else {
+          this.uploadError = error.response.data;
+        }
         this.currentStatus = STATUS_FAILED;
       } finally {
         this.loading = false;
@@ -440,8 +443,12 @@ export default {
     resetFields() {
       // Reset Fields
       this.uploadedFile = null;
+      this.imageFile = null;
       this.uploadError = null;
       this.currentStatus = STATUS_INITIAL;
+      this.cidv0 = null;
+      this.cidv1 = null;
+      this.loading = false;
     },
   }
 }
