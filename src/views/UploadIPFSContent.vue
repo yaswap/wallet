@@ -128,13 +128,13 @@ import { getChain, ChainId } from '@yaswap/cryptoassets'
 import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
 
 // USED FOR TESTING
-// const FILE_SIZE_LIMIT = 1 * 1024 * 1024 // 1MB
-const TIMELOCK_DURATION = 20; // 20 blocks
-const TIMELOCK_AMOUNT = 10 * 1e6; // 10 YAC
+const FILE_SIZE_LIMIT = 5 * 1024 * 1024 // 1MB
+const TIMELOCK_DURATION = 10; // 20 blocks
+const TIMELOCK_AMOUNT = 5 * 1e6; // 10 YAC
 
 // USED FOR PRODUCTION
 const STATUS_INITIAL = 0, STATUS_SELECTED = 1, STATUS_SUCCESS = 2, STATUS_FAILED = 3;
-const FILE_SIZE_LIMIT = 5 * 1024 * 1024 // 5MB = 5242880 bytes
+// const FILE_SIZE_LIMIT = 5 * 1024 * 1024 // 5MB = 5242880 bytes
 // const TIMELOCK_DURATION = 21000; // 21000 blocks
 // const TIMELOCK_AMOUNT = 2100 * 1e6; // 2100 YAC
 
@@ -158,12 +158,12 @@ export default {
       cidv1: null,
       loading: false,
       // USED FOR PRODUCTION
-      // ipfsUploadEndpoint: 'http://73.43.63.213:3000/ipfs_upload_service',
-      // ipfsGateway: 'http://73.43.63.213:3000/ipfs',
+      ipfsUploadEndpoint: 'http://73.43.63.213:3000/ipfs_upload_service',
+      ipfsGateway: 'http://73.43.63.213:3000/ipfs',
 
       // USED FOR TESTING
-      ipfsUploadEndpoint: 'http://127.0.0.1:3000/ipfs_upload_service',
-      ipfsGateway: 'http://127.0.0.1:3000/ipfs',
+      // ipfsUploadEndpoint: 'http://127.0.0.1:3000/ipfs_upload_service',
+      // ipfsGateway: 'http://127.0.0.1:3000/ipfs',
     }
   },
   computed: {
