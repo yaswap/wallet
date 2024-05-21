@@ -137,9 +137,6 @@
     "@teleportdao/bitcoin": "1.4.3",
     "@teleportdao/configs": "1.4.3",
     "@teleportdao/contracts-helper": "1.4.3",
-    "@teleportdao/scripts": "1.4.3",
-    "@yaswap/cryptoassets": "link:/home/chaunguyen/projects/yacoin/yaswap/wallet-core/packages/cryptoassets",
-    "@yaswap/error-parser": "link:/home/chaunguyen/projects/yacoin/yaswap/wallet-core/packages/error-parser",
-    "@yaswap/wallet-core": "link:/home/chaunguyen/projects/yacoin/yaswap/wallet-core/packages/wallet-core"
+    "@teleportdao/scripts": "1.4.3"
   }
 }
