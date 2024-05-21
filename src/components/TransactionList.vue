@@ -11,7 +11,7 @@
       :item-class="'h-padding'"
     >
       <template #icon>
-        <img :src="getTypeIcon(item.type)" />
+        <img :src="getTypeIcon(item.type)" class="asset-icon" />
       </template>
       <template>
         <span :class=" getTitle(item).length >= 35 ? 'font-size-small' : ''">
@@ -83,11 +83,14 @@ export default {
     getAssetLengthLimitDisplay,
     getTitle(item) {
       const status = item.status === 'SUCCESS' ? `Sent` : `Send`
+      const lockStatus = item.status === 'SUCCESS' ? `Timelocked` : `Timelock`
       switch (item.type) {
         case 'SWAP':
           return `${item.from} to ${item.to}`
         case 'SEND':
           return `${status} ${item.from}`
+        case 'TIMELOCK':
+          return `${lockStatus} ${item.from}`
         case 'NFT':
           return item.from === 'YAC' ? `${status} ${item.nft.token_id}`: `${status} ${item.nft.name}`
         case 'RECEIVE':
@@ -137,7 +140,7 @@ export default {
     getUIStatus(item) {
       if (item.type === 'NFT') {
         return SEND_STATUS_FILTER_MAP[item.status]
-      } else if (item.type === 'SEND') {
+      } else if (item.type === 'SEND' || item.type === 'TIMELOCK') {
         return SEND_STATUS_FILTER_MAP[item.status]
       } else if (item.type === 'SWAP') {
         const swapProvider = getSwapProvider(item.network, item.provider)
@@ -150,6 +153,7 @@ export default {
       return {
         NFT: `/details/nft-transaction/${item.id}`,
         SEND: `/details/transaction/${item.id}`,
+        TIMELOCK: `/details/transaction/${item.id}`,
         SWAP: `/details/swap/${item.id}`,
         CREATE: `/details/create-token-transaction/${item.id}`
       }[item.type]
@@ -164,6 +168,7 @@ export default {
     getTotalSteps(item) {
       switch (item.type) {
         case 'SEND':
+        case 'TIMELOCK':
           return 2
         case 'SWAP': {
           const swapProvider = getSwapProvider(item.network, item.provider)

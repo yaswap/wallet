@@ -3,7 +3,7 @@
     <NavBar :showBackButton="true" :backClick="goBack" :backLabel="$t('common.back')">
       <img :src="getAssetIcon(item.from)" class="asset-icon mr-2" />
       <span class="mr-2">{{ item.from }}</span>
-      <img :src="typeIcon" />
+      <img :src="typeIcon" class="asset-icon"/>
     </NavBar>
     <div class="tx-details">
       <div class="tx-details_info">
@@ -34,8 +34,14 @@
         </div>
         <div class="row">
           <div class="col">
-            <h2>{{ $t('pages.details.sent') }}</h2>
-            <p id="transaction_detail_sent_amount" class="font-bold mb-1">
+            <h2>{{ item.type === 'TIMELOCK' ? 'TIMELOCKED' : $t('pages.details.sent') }}</h2>
+            <p id="transaction_detail_sent_amount" class="font-bold mb-1" v-if="item.type === 'TIMELOCK' && item.status !== 'SUCCESS'">
+              {{ prettyBalance(item.amount, item.from) }} {{ item.from }} are timelocked in {{item.timelockDuration}} blocks.
+            </p>
+            <p id="transaction_detail_sent_amount" class="font-bold mb-1" v-else-if="item.type === 'TIMELOCK' && item.status === 'SUCCESS' && tx && tx.confirmations > 0">
+              {{ prettyBalance(item.amount, item.from) }} {{ item.from }} are timelocked in {{item.timelockDuration}} blocks. The timelocked YAC will be unlocked at block {{ tx.blockNumber + item.timelockDuration }}.
+            </p>
+            <p id="transaction_detail_sent_amount" class="font-bold mb-1" v-else>
               {{ prettyBalance(item.amount, item.from) }} {{ item.from }}
             </p>
             <p id="transaction_detail_sent_amount_today">
