@@ -158,8 +158,8 @@ export default {
       cidv1: null,
       loading: false,
       // USED FOR PRODUCTION
-      ipfsUploadEndpoint: 'http://73.43.63.213:3000/ipfs_upload_service',
-      ipfsGateway: 'http://73.43.63.213:3000/ipfs',
+      ipfsUploadEndpoint: 'https://cb.yacoin.org/ipfs_upload_service',
+      ipfsGateway: 'https://cb.yacoin.org/ipfs',
 
       // USED FOR TESTING
       // ipfsUploadEndpoint: 'http://127.0.0.1:3000/ipfs_upload_service',
