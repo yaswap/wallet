@@ -61,12 +61,13 @@ export default {
   data() {
     return {
       mnemonic: null,
+      derivation: undefined,
       currentStep: '',
       password: null,
       imported: false
     }
   },
-  props: ['seedphrase'],
+  props: ['seedphrase', 'derivationPath'],
   components: {
     ConfirmSeed,
     Congratulations,
@@ -75,10 +76,12 @@ export default {
   created() {
     if (this.seedphrase) {
       this.mnemonic = this.seedphrase
+      this.derivation = this.derivationPath
       this.imported = true
       this.currentStep = 'password'
     } else {
       this.mnemonic = generateMnemonic()
+      this.derivation = undefined
       this.currentStep = 'backup'
     }
   },
@@ -94,10 +97,12 @@ export default {
     ...mapActions(['createWallet', 'unlockWallet']),
     async confirmMnemonic() {
       this.currentStep = 'congrats'
+      console.log("TACA ===> confirmMnemonic, this.mnemonic = ", this.mnemonic, ", this.derivation = ", this.derivation)
       await this.createWallet({
         key: this.password,
         mnemonic: this.mnemonic,
-        imported: this.imported
+        imported: this.imported,
+        derivationPath: this.derivation
       }) // mnemonic prop can be null to generate new seed
       // Show confetti for a while
       setTimeout(async () => {
