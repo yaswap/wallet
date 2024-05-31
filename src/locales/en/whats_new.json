@@ -3,8 +3,7 @@
     "page": "1",
     "title": "What's New?",
     "content": [
-      "Integrate with self-hosted IPFS node",
-      "Support to upload IPFS content"
+      "Support custom derivation path"
     ]
   }
 ]
