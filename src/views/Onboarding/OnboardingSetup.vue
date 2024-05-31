@@ -97,7 +97,6 @@ export default {
     ...mapActions(['createWallet', 'unlockWallet']),
     async confirmMnemonic() {
       this.currentStep = 'congrats'
-      console.log("TACA ===> confirmMnemonic, this.mnemonic = ", this.mnemonic, ", this.derivation = ", this.derivation)
       await this.createWallet({
         key: this.password,
         mnemonic: this.mnemonic,
