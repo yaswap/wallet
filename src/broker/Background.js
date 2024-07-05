@@ -9,6 +9,7 @@ import {
 } from '@yaswap/error-parser'
 import { connectRemote } from './terra-injection'
 import { errorToYaswapErrorString } from '@yaswap/error-parser/dist/src/utils'
+const browser = require("webextension-polyfill");
 
 function attemptOrWarn(func, message) {
   try {
@@ -23,6 +24,7 @@ class Background {
     this.store = store
     this.internalConnections = []
     this.externalConnections = []
+    this.keepAliveConnectionInterval = null
 
     this.subscribeToMutations()
     this.subscribeToWalletChanges()
@@ -93,7 +95,25 @@ class Background {
     })
   }
 
+  enableKeepAlive() {
+    if (this.keepAliveConnectionInterval === null) {
+      console.log("TACA ===> Background.js, enableKeepAlive")
+      this.keepAliveConnectionInterval = setInterval(async () => {
+        browser.runtime.getPlatformInfo();
+      }, 25000);
+    }
+  }
+
+  disableKeepAlive() {
+    if (this.keepAliveConnectionInterval && this.internalConnections.length === 0 && this.externalConnections.length === 0) {
+      console.log("TACA ===> Background.js, disableKeepAlive")
+      clearInterval(this.keepAliveConnectionInterval)
+      this.keepAliveConnectionInterval = null
+    }
+  }
+
   onInternalConnection(connection) {
+    this.enableKeepAlive()
     this.internalConnections.push(connection)
 
     connection.onMessage.addListener((message) => this.onInternalMessage(connection, message))
@@ -101,6 +121,7 @@ class Background {
     connection.onDisconnect.addListener(() => {
       this.onInternalDisconnect(connection)
       this.unbindMutation(connection)
+      this.disableKeepAlive()
     })
 
     this.bindMutation(connection)
@@ -120,6 +141,7 @@ class Background {
 
     connection.onDisconnect.addListener(() => {
       this.onExternalDisconnect(connection)
+      this.disableKeepAlive()
     })
   }
 
