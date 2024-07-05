@@ -52,6 +52,13 @@ module.exports = {
               return `_locales/${path.relative(context, absoluteFilename)}`;
             },
           },
+          {
+            context: './src',
+            from: 'manifest.json',
+            to({ context, absoluteFilename }) {
+              return `./${path.relative(context, absoluteFilename)}`
+            }
+          },
         ],
       })
     );
@@ -113,6 +120,11 @@ module.exports = {
       .loader('babel-loader')
       .tap((options) => ({ ...options, plugins: ['@babel/plugin-proposal-optional-chaining'] }))
       .end();
+
+    // An entry point indicates which module webpack should use to begin building out its internal dependency graph.
+    // TODO: Add entry for inject-script
+    config.entry('background').add(path.resolve('./src/background.js')).end()
+    config.entry('content-script').add(path.resolve('./src/contentScript.js')).end()
   },
 
   pages: {
