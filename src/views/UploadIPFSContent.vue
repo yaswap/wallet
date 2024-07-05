@@ -129,8 +129,8 @@ import cryptoassets from '@yaswap/wallet-core/dist/src/utils/cryptoassets'
 
 // USED FOR TESTING
 // const FILE_SIZE_LIMIT = 5 * 1024 * 1024 // 1MB
-// const TIMELOCK_DURATION = 20; // 20 blocks
-// const TIMELOCK_AMOUNT = 10 * 1e6; // 10 YAC
+// const TIMELOCK_DURATION = 10; // 10 blocks
+// const TIMELOCK_AMOUNT = 5 * 1e6; // 5 YAC
 
 // USED FOR PRODUCTION
 const STATUS_INITIAL = 0, STATUS_SELECTED = 1, STATUS_SUCCESS = 2, STATUS_FAILED = 3;
