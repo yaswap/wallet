@@ -26,6 +26,7 @@
   "content_scripts": [
     {
       "matches": [
+        "http://*:*/*",
         "https://yaswap.yacoin.org/*"
       ],
       "js": [
@@ -42,6 +43,7 @@
         "js/inject-script.js"
       ],
       "matches": [
+        "http://*:*/*",
         "https://yaswap.yacoin.org/*"
       ]
     }
