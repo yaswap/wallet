@@ -63,12 +63,6 @@ module.exports = {
             to({ context, absoluteFilename }) {
               return `./${path.relative(context, absoluteFilename)}`
             }
-          },
-          {
-            from: 'node_modules/webextension-polyfill/dist/browser-polyfill.js',
-            to({ context, absoluteFilename }) {
-              return `./js/${path.relative(context, absoluteFilename)}`
-            }
           }
         ],
       })

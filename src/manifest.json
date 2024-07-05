@@ -30,7 +30,6 @@
         "https://yaswap.yacoin.org/*"
       ],
       "js": [
-        "js/browser-polyfill.js",
         "js/content-script.js"
       ],
       "run_at": "document_start",
