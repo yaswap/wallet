@@ -9,6 +9,7 @@ import {
   WalletLockedError,
   UserDeclinedError
 } from '@yaswap/error-parser'
+const browser = require("webextension-polyfill");
 
 const CONFIRM_REQUIRED = [
   /^wallet.buildTransaction$/,

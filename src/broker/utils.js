@@ -1,3 +1,5 @@
+const browser = require("webextension-polyfill");
+
 let isBgScr
 
 export const BG_PREFIX = '##BACKGROUND##'

@@ -1,3 +1,5 @@
+const browser = require("webextension-polyfill");
+
 export const createNotification = (config) =>
   browser.notifications.create({
     type: 'basic',
