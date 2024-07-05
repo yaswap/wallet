@@ -18,11 +18,12 @@ module.exports = {
   },
 
   configureWebpack: (config) => {
-    config.entry.pageProvider = path.resolve('./src/pageProvider/index.js');
-        // An entry point indicates which module webpack should use to begin building out its internal dependency graph.
-    // TODO: Add entry for inject-script
+    // config.entry.pageProvider = path.resolve('./src/pageProvider/index.js');
+    // An entry point indicates which module webpack should use to begin building out its internal dependency graph.
     config.entry.background = path.resolve('./src/background.js')
     config.entry['content-script'] = path.resolve('./src/contentScript.js')
+    config.entry['inject-script'] = path.resolve('./src/pageProvider/index.js');
+    // config.entry['inject-script'] = path.resolve('./src/inject-script.js')
     config.plugins.push(
       new webpack.NormalModuleReplacementPlugin(
         /@ledgerhq\/cryptoassets\/data\/erc20-signatures/,

@@ -57,16 +57,14 @@ export const checkConnectId = (id) => /^##[0-9a-zA-Z]+##/.test(id)
 
 export const removeConnectId = (id) => id.replace(/^##[0-9a-zA-Z]+##/, '')
 
-export const inject = (content) => {
+export const inject = (path) => {
   const container = document.head || document.documentElement
   const scriptTag = document.createElement('script')
-  scriptTag.setAttribute('async', 'false')
-  scriptTag.textContent = `;(() => {
-
-  ${content}
-
-})()` // Space is important in order to prevent comments at the end of content breaking the code such as for sourcemaps
+  console.log("TACA ===> broker/utils.js, inject container before = ", container)
+  scriptTag.setAttribute('src', chrome.runtime.getURL(path));
+  console.log("TACA ===> broker/utils.js, inject scriptTag = ", scriptTag)
   container.insertBefore(scriptTag, container.children[0])
+  console.log("TACA ===> broker/utils.js, inject container after = ", container)
 }
 
 export class Deferred {

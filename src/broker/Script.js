@@ -8,7 +8,7 @@ class Script {
     this.background.onMessage.addListener((message) => this.onMessage(message))
   }
 
-  start() {
+  startListen() {
     window.addEventListener(
       'message',
       (event) => {
@@ -26,6 +26,13 @@ class Script {
       },
       false
     )
+  }
+
+  setupInject(config) {
+    window.postMessage({
+      type: 'setup',
+      data: config
+    });
   }
 
   onMessage({ id, data }) {
