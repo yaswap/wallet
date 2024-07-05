@@ -26,9 +26,8 @@
   "content_scripts": [
     {
       "matches": [
-        "file://*/*",
-        "http://*/*",
-        "https://*/*"
+        "http://*:*/*",
+        "https://yaswap.yacoin.org/*"
       ],
       "js": [
         "js/browser-polyfill.js",
@@ -44,7 +43,8 @@
         "js/inject-script.js"
       ],
       "matches": [
-        "<all_urls>"
+        "http://*:*/*",
+        "https://yaswap.yacoin.org/*"
       ]
     }
   ],
