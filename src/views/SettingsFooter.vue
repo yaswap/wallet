@@ -1,9 +1,9 @@
 <template>
   <div class="settings-footer">
     <div id="settings_app_version">
-      <router-link to="/settings/experiments">
+      <!-- <router-link to="/settings/experiments"> -->
         <span class="text-muted"> {{ $t('pages.settings.version') }} {{ appVersion }} </span>
-      </router-link>
+      <!-- </router-link> -->
     </div>
   </div>
 </template>

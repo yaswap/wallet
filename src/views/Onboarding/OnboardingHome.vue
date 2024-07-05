@@ -59,10 +59,11 @@ export default {
     ...mapActions(['acceptTermsAndConditions', 'initializeAnalytics']),
     async acceptTnC() {
       await this.acceptTermsAndConditions({
-        analyticsAccepted: this.analyticsAccepted
+        analyticsAccepted: false,
       })
-      this.$store.dispatch('app/setAnalyticsOptInModalOpen', { open: true })
-      await this.initializeAnalytics()
+      this.goToSetup();
+      // this.$store.dispatch('app/setAnalyticsOptInModalOpen', { open: true })
+      // await this.initializeAnalytics()
     },
     goToSetup() {
       this.$router.push(`/onboarding/${this.$route.query?.isImport ? 'import' : 'setup'}`)
