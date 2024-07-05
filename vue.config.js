@@ -115,32 +115,6 @@ module.exports = {
       .end();
   },
 
-  pluginOptions: {
-    browserExtension: {
-      componentOptions: {
-        background: {
-          entry: 'src/background.js',
-        },
-        contentScripts: {
-          entries: {
-            'content-script': ['src/contentScript.js'],
-          },
-        },
-      },
-      extensionReloaderOptions: {
-        entries: {
-          contentScript: ['pageProvider', 'content-script'],
-          background: 'background',
-        },
-      },
-      manifestTransformer: (manifest) => {
-        manifest.content_security_policy =
-          "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdn.segment.com 'sha256-ZgDy59Dh4jH9g/vcPYFpoQ1wumB4IdPEOS1BJc08i+Y='; object-src 'self';";
-        return manifest;
-      },
-    },
-  },
-
   pages: {
     popup: {
       template: 'public/index.html',
