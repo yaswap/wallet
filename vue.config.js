@@ -77,6 +77,7 @@ module.exports = {
     if (isDevelopment) {
       config.devtool = 'cheap-source-map';
     }
+    config.output.filename = 'js/[name].js'
   },
 
   chainWebpack: (config) => {
