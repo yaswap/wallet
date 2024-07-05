@@ -17,7 +17,6 @@ export const isBackgroundScript = () => {
     isBgScr = true;
   }
 
-  console.log("TACA ===> isBgScr = ", isBgScr);
   return isBgScr
 }
 
@@ -60,11 +59,8 @@ export const removeConnectId = (id) => id.replace(/^##[0-9a-zA-Z]+##/, '')
 export const inject = (path) => {
   const container = document.head || document.documentElement
   const scriptTag = document.createElement('script')
-  console.log("TACA ===> broker/utils.js, inject container before = ", container)
   scriptTag.setAttribute('src', chrome.runtime.getURL(path));
-  console.log("TACA ===> broker/utils.js, inject scriptTag = ", scriptTag)
   container.insertBefore(scriptTag, container.children[0])
-  console.log("TACA ===> broker/utils.js, inject container after = ", container)
 }
 
 export class Deferred {

@@ -97,7 +97,6 @@ class Background {
 
   enableKeepAlive() {
     if (this.keepAliveConnectionInterval === null) {
-      console.log("TACA ===> Background.js, enableKeepAlive")
       this.keepAliveConnectionInterval = setInterval(async () => {
         browser.runtime.getPlatformInfo();
       }, 25000);
@@ -106,7 +105,6 @@ class Background {
 
   disableKeepAlive() {
     if (this.keepAliveConnectionInterval && this.internalConnections.length === 0 && this.externalConnections.length === 0) {
-      console.log("TACA ===> Background.js, disableKeepAlive")
       clearInterval(this.keepAliveConnectionInterval)
       this.keepAliveConnectionInterval = null
     }

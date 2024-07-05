@@ -9,13 +9,11 @@ import { PagementURIPageProvivder } from './paymentUri'
 import { TerraPageProvider } from './terraProvider'
 import { NearPageProvider } from './nearProvider'
 import { SolanaPageProvider } from './solanaProvider'
-console.log("TACA ===> start inject-script.js")
 
 // Setup providers
 window.addEventListener(
   'message',
   (event) => {
-    console.log("TACA ===> inject-script.js, event = ", event)
     if (event.source !== window) return
     if (!event.data) return
 
@@ -23,7 +21,6 @@ window.addEventListener(
     if (type !== 'setup' || !data) return
 
     window.yaswap = data;
-    console.log("TACA ===> inject-script.js, window.yaswap = ", window.yaswap)
 
     const { override, ethereumChain } = window.yaswap.globalEthereum
 
