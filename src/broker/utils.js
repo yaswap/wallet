@@ -4,15 +4,20 @@ let isBgScr
 
 export const BG_PREFIX = '##BACKGROUND##'
 
-export const isBackgroundScript = (context) => {
+export const isBackgroundScript = () => {
   if (isBgScr !== undefined) return isBgScr
 
   try {
-    isBgScr = context === browser.extension.getBackgroundPage()
-  } catch (e) {
-    isBgScr = false
+    if (typeof window !== "undefined") {
+      isBgScr = false;
+    } else {
+      isBgScr = true;
+    }
+  } catch (error) {
+    isBgScr = true;
   }
 
+  console.log("TACA ===> isBgScr = ", isBgScr);
   return isBgScr
 }
 

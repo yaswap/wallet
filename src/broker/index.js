@@ -11,7 +11,7 @@ import { updateErrorReporterConfig } from '@yaswap/error-parser'
 const { isMigrationNeeded, processMigrations } = migrations
 
 const Broker = (state) => {
-  if (isBackgroundScript(window)) {
+  if (isBackgroundScript()) {
     const locale = state.app?.locale
     const vuexPersist = new VuexPersist({
       key: 'yaswap-wallet',
