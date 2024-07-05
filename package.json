@@ -133,6 +133,7 @@
     "@ledgerhq/hw-app-eth": "6.30.5",
     "@ledgerhq/hw-app-btc": "9.1.2",
     "@solana/web3.js": "1.50.1",
-    "bufio": "1.2.0"
+    "bufio": "1.2.0",
+    "rpc-websockets:": "7.9.0"
   }
 }

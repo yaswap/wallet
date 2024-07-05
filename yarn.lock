@@ -24857,8 +24857,8 @@ __metadata:
   linkType: hard
 
 "rpc-websockets@npm:^7.5.0":
-  version: 7.11.2
-  resolution: "rpc-websockets@npm:7.11.2"
+  version: 7.9.0
+  resolution: "rpc-websockets@npm:7.9.0"
   dependencies:
     bufferutil: ^4.0.1
     eventemitter3: ^4.0.7
@@ -24870,7 +24870,7 @@ __metadata:
       optional: true
     utf-8-validate:
       optional: true
-  checksum: 25311bfc25384132ca8fb8cc1d15b1982661e032b2e8566bc911c1632ced7622fca1eb4cda369b0a548c37a7f61b30e2d9f7ae9cb38f563bb076e4ee5a7a5f01
+  checksum: c3ddd79ea7cf63b7a6a8d32356c7f9b363e41f26a6a8bbe889f9d2c5267811d492e194340fbad1a21ecfa457d5d1f253af3357a94d0118f66fcdea1fd9236adc
   languageName: node
   linkType: hard
 
