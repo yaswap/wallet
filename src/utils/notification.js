@@ -3,6 +3,6 @@ const browser = require("webextension-polyfill");
 export const createNotification = (config) =>
   browser.notifications.create({
     type: 'basic',
-    iconUrl: './icons/512x512.png',
+    iconUrl: browser.runtime.getURL('icons/512x512.png'),
     ...config
   })
