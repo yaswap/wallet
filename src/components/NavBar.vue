@@ -92,6 +92,7 @@ import KeyIcon from '@/assets/icons/key.svg'
 import CreateIcon from '@/assets/icons/create_icon.svg'
 import { ChainId } from '@yaswap/cryptoassets'
 import { version as walletVersion } from '../../package.json'
+const browser = require("webextension-polyfill");
 
 export default {
   directives: {

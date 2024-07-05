@@ -566,6 +566,7 @@ import { getSwapProvider } from '@yaswap/wallet-core/dist/src/factory'
 import qs from 'qs'
 import { errorToYaswapErrorString } from '@yaswap/error-parser/dist/src/utils'
 import { reportYaswapError } from '@yaswap/error-parser/dist/src/reporters/index'
+const browser = require("webextension-polyfill");
 
 const QUOTE_TIMER_MS = 30000
 

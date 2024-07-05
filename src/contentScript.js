@@ -2,25 +2,7 @@ import { inject } from './broker/utils'
 import Script from './broker/Script'
 import { buildConfig } from '@yaswap/wallet-core'
 import { getChain, getNativeAssetCode, isEvmChain } from '@yaswap/cryptoassets'
-import PortStream from 'extension-port-stream'
-import LocalMessageDuplexStream from 'post-message-stream'
 const contentScript = new Script()
-
-async function setupTerraStreams() {
-  const pageStream = new LocalMessageDuplexStream({
-    name: 'station:content',
-    target: 'station:inpage'
-  })
-
-  const extensionPort = browser.extension.connect({
-    name: 'TerraStationExtension'
-  })
-
-  const extensionStream = new PortStream(extensionPort)
-
-  extensionStream.pipe(pageStream)
-  pageStream.pipe(extensionStream)
-}
 
 function injectProviders(state) {
   const { injectEthereum, activeNetwork } = state
@@ -42,16 +24,11 @@ function injectProviders(state) {
     globalEthereum
   }
 
-  // setupTerraStreams()
-
   inject('js/inject-script.js')
   setTimeout(() => {
     contentScript.setupInject(injectConfig)
     contentScript.startListen()
   }, 500)
-
-  // inject(`window.yaswap = ${JSON.stringify(injectConfig)};`)
-  // inject('#PAGEPROVIDER#')
 }
 
 function getGlobalEthereumChain(state) {

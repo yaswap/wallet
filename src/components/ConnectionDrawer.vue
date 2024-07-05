@@ -59,6 +59,7 @@ import { buildConfig } from '@yaswap/wallet-core'
 import clickAway from '@/directives/clickAway'
 import TickBlue from '@/assets/icons/tick_blue.svg'
 import ChainDropdown from '@/components/ChainDropdown.vue'
+const browser = require("webextension-polyfill");
 
 export default {
   directives: {

@@ -293,6 +293,7 @@ import { UNSResolver } from '@yaswap/wallet-core/dist/src/nameResolvers/uns'
 import { errorToYaswapErrorString } from '@yaswap/error-parser/dist/src/utils'
 import { reportYaswapError } from '@yaswap/error-parser/dist/src/reporters/index'
 import InfoNotification from '@/components/InfoNotification'
+const browser = require("webextension-polyfill");
 
 export default {
   components: {
