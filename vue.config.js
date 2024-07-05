@@ -127,6 +127,16 @@ module.exports = {
       .tap((options) => ({ ...options, plugins: ['@babel/plugin-proposal-optional-chaining'] }))
       .end();
 
+    config.module
+      .rule('supportClassProperties')
+      .test(/\.js$/)
+      .include.add(path.resolve('node_modules/ecpair'))
+      .end()
+      .use('babel-loader')
+      .loader('babel-loader')
+      .tap((options) => ({ ...options, plugins: ['@babel/plugin-proposal-class-properties'] }))
+      .end();
+
     // An entry point indicates which module webpack should use to begin building out its internal dependency graph.
     // TODO: Add entry for inject-script
     config.entry('background').add(path.resolve('./src/background.js')).end()

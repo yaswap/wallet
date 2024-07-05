@@ -133,10 +133,6 @@
     "@ledgerhq/hw-app-eth": "6.30.5",
     "@ledgerhq/hw-app-btc": "9.1.2",
     "@solana/web3.js": "1.50.1",
-    "bufio": "1.2.0",
-    "@teleportdao/bitcoin": "1.4.3",
-    "@teleportdao/configs": "1.4.3",
-    "@teleportdao/contracts-helper": "1.4.3",
-    "@teleportdao/scripts": "1.4.3"
+    "bufio": "1.2.0"
   }
 }
