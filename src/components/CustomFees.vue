@@ -204,7 +204,7 @@ export default {
           ? `${BN(this.fee).dp(6)} ${this.gasUnit} ${this.nativeAsset}`
           : `${totalFee} ${this.nativeAsset}`
       } else {
-        const unit = this.gasUnit()
+        const unit = this.gasUnit
         return `${this.fee || 0} ${unit}`
       }
     },
