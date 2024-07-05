@@ -19,6 +19,10 @@ module.exports = {
 
   configureWebpack: (config) => {
     config.entry.pageProvider = path.resolve('./src/pageProvider/index.js');
+        // An entry point indicates which module webpack should use to begin building out its internal dependency graph.
+    // TODO: Add entry for inject-script
+    config.entry.background = path.resolve('./src/background.js')
+    config.entry['content-script'] = path.resolve('./src/contentScript.js')
     config.plugins.push(
       new webpack.NormalModuleReplacementPlugin(
         /@ledgerhq\/cryptoassets\/data\/erc20-signatures/,
@@ -137,11 +141,6 @@ module.exports = {
       .loader('babel-loader')
       .tap((options) => ({ ...options, plugins: ['@babel/plugin-proposal-class-properties'] }))
       .end();
-
-    // An entry point indicates which module webpack should use to begin building out its internal dependency graph.
-    // TODO: Add entry for inject-script
-    config.entry('background').add(path.resolve('./src/background.js')).end()
-    config.entry('content-script').add(path.resolve('./src/contentScript.js')).end()
   },
 
   pages: {
