@@ -1,9 +1,15 @@
 import EventEmitter from 'events'
 import { connectToBackground } from './utils'
 
+const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
 class Script {
   constructor() {
     this.emitter = new EventEmitter()
+    this.connectToBackground()
+  }
+
+  connectToBackground() {
     this.background = connectToBackground(`injection|${window.location.href}`)
     this.background.onMessage.addListener((message) => this.onMessage(message))
   }
@@ -11,18 +17,29 @@ class Script {
   startListen() {
     window.addEventListener(
       'message',
-      (event) => {
+      async (event) => {
         if (event.source !== window) return
         if (!event.data) return
 
         const { id, type, data } = event.data
         if (!id || !type) return
 
-        this.background.postMessage({
-          id,
-          type,
-          data
-        })
+        // Reconnect in case the connection was aborted due to service worker terminated
+        for (let retry = 0; retry < 5; retry++) {
+          try {
+            this.background.postMessage({
+              id,
+              type,
+              data
+            })
+            break
+          } catch (error) {
+            console.error(error)
+            this.connectToBackground()
+            console.warn(`Retry connecting to background. ${retry+1} times.`)
+            await delay(1000)
+          }
+        }
       },
       false
     )
