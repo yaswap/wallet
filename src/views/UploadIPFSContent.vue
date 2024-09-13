@@ -313,20 +313,17 @@ export default {
 
       try {
         const res = await this.$axios.post(`${this.ipfsUploadEndpoint}/api/is_content_existed`, formData, { headers })
-        if (res.data.status) {
-          this.uploadError = `Your selected file was already existed on the system. Its CID is ${res.data.cidv0}. Please upload another file.`;
+        this.uploadError = `Your selected file was already existed on the system. Its CID is ${res.data.cidv0}. Please upload another file.`;
+        this.currentStatus = STATUS_FAILED;
+        isExisted = true
+        cidv0 = res.data.cidv0
+      } catch (error) {
+        if (error.response?.status !== 404) {
+          this.uploadError = error.response.data ? error.response.data.message : error.response;
           this.currentStatus = STATUS_FAILED;
           isExisted = true
         }
-        cidv0 = res.data.cidv0
-      } catch (error) {
-        if (error.response.data == null) {
-          this.uploadError = error.response;
-        } else {
-          this.uploadError = error.response.data;
-        }
-        this.currentStatus = STATUS_FAILED;
-        isExisted = true
+        cidv0 = error.response?.data?.cidv0
       }
 
       return { isExisted, cidv0 }
@@ -387,11 +384,7 @@ export default {
         this.cidv1 = res.data.cidv1;
         this.currentStatus = STATUS_SUCCESS;
       } catch (error) {
-        if (error.response.data == null) {
-          this.uploadError = error.response;
-        } else {
-          this.uploadError = error.response.data;
-        }
+        this.uploadError = error.response.data ? error.response.data.message : error.response;
         this.currentStatus = STATUS_FAILED;
       } finally {
         this.loading = false;
